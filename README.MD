@@ -1,0 +1,1 @@
+sprite hero size 32x32
