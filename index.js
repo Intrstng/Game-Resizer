@@ -188,6 +188,10 @@ function animate() {
         //   ) {
         //     player.velocity.y = 0;
         // }
+        // platforms.forEach(platform => {
+        //   if (player.position.y + player.height == platform.position.y) console.log('23')/* player.currentSprite = player.sprites.idle.right */
+        // });
+        
 }
 animate();
 
@@ -196,7 +200,18 @@ window.addEventListener('keydown', (event) => {
   if (event.repeat == false) {
   console.log(event.code)
     switch (event.code) {
-      case 'ArrowUp':  (player.velocity.y === 0) && (player.velocity.y -= 10); // только один прыжок при нескольких нажатиях на UP
+      case 'ArrowUp':  
+      if (player.velocity.y === 0 && event.code === 'ArrowRight') {
+        player.velocity.y -= 10;
+        player.currentSprite = player.sprites.jump.right;
+      } else if (player.velocity.y === 0 && event.code === 'ArrowLeft') {
+        player.velocity.y -= 10;
+        player.currentSprite = player.sprites.jump.left;
+      };
+        if (player.velocity.y === 0) {
+          player.velocity.y -= 10;
+          player.currentSprite = player.sprites.jump.right;
+        }; // только один прыжок при нескольких нажатиях на UP
         break;
       // case 'ArrowDown': player.velocity.y += 10;
       //   break;
@@ -218,10 +233,13 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('keyup', (event) => {
   if (event.repeat == false) {
     switch (event.code) {
-      case 'ArrowUp': {
+      case 'ArrowUp': 
         // player.velocity.y = 0;
         keys.up.pressed = true;
-      }
+        if (player.velocity.y !== 0) {
+          player.currentSprite = player.sprites.jump.right;
+        }
+      
         break;
       // case 'ArrowDown': player.velocity.y = 0
       //   break;
