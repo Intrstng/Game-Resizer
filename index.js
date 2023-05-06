@@ -20,7 +20,7 @@ const backgroundImg = './assets/img/bg_2.jpg';
 // imagePlatform.onload = function getSizes () {
 //   imagePlatform.width = imagePlatform.naturalWidth;
 //   imagePlatform.height = imagePlatform.naturalHeight;
-// }
+//}
 
 const canvas = document.getElementById('canvas');
 const c = canvas.getContext("2d");
@@ -85,11 +85,13 @@ class Player {
     this.draw();
     this.position.y += this.velocity.y;
     this.position.x += this.velocity.x;
+    
     if (this.position.y + this.height + this.velocity.y <= canvas.height) {
       this.velocity.y += gravity;
-    } else {
-      this.velocity.y = 0;
-    }
+    } 
+    // else { // если это оставить персонаж не покинет экран при касании нижней границы экрана
+    //   this.velocity.y = 0;
+    // }
   }
 }
 
@@ -101,9 +103,7 @@ class Platform {
     }
     this.image = image;
     this.width = image.width;
-    this.height = image.height;
-console.log(image.width)
-   
+    this.height = image.height;  
   }
   draw() {
     c.drawImage(this.image, this.position.x, this.position.y)
@@ -129,11 +129,13 @@ class AdditionalElements {
   }
 }
 
-const additionalElements = [
+
+let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ]
+let platforms = [new Platform(10, 525, createImage(platformImgSrc, 300, 54)), new Platform(350, 480, createImage(platformImgSrc, 300, 54)), new Platform(600, 400, createImage(platformImgSrc, 300, 54)), new Platform(400, 200, createImage(platformImgSrc, 300, 54))]; // создаем платформы
 
-const player = new Player();
+let player = new Player();
 const keys = {
   right: {
     pressed: false
@@ -143,10 +145,16 @@ const keys = {
   },
   up: {
     pressed: false
-  }
+  },
+  lastPressed: 'right'
 }
 
-const platforms = [new Platform(10, 525, createImage(platformImgSrc, 300, 54)), new Platform(350, 480, createImage(platformImgSrc, 300, 54)), new Platform(600, 400, createImage(platformImgSrc, 300, 54)), new Platform(400, 200, createImage(platformImgSrc, 300, 54))]; // создаем платформы
+function init() {
+  additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
+];
+  platforms = [new Platform(10, 525, createImage(platformImgSrc, 300, 54)), new Platform(350, 480, createImage(platformImgSrc, 300, 54)), new Platform(600, 400, createImage(platformImgSrc, 300, 54)), new Platform(400, 200, createImage(platformImgSrc, 300, 54))]; // создаем платформы
+  player = new Player();
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -192,36 +200,53 @@ function animate() {
         //   if (player.position.y + player.height == platform.position.y) console.log('23')/* player.currentSprite = player.sprites.idle.right */
         // });
         
+if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
+  player.currentSprite = player.sprites.idle.right;
+} else if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'left') { // 10 - когда персонаж на земле
+  player.currentSprite = player.sprites.idle.left;
 }
+
+
+    // Падение в пропасть (см. комментарии в player.update())
+      if (player.position.y > canvas.height) {
+        init();
+        console.log('you lose')
+        // сюда вставить звук проигрыша
+      }
+
+}
+init();
 animate();
 
 
 window.addEventListener('keydown', (event) => {
   if (event.repeat == false) {
-  console.log(event.code)
     switch (event.code) {
       case 'ArrowUp':  
-      if (player.velocity.y === 0 && event.code === 'ArrowRight') {
-        player.velocity.y -= 10;
-        player.currentSprite = player.sprites.jump.right;
-      } else if (player.velocity.y === 0 && event.code === 'ArrowLeft') {
-        player.velocity.y -= 10;
-        player.currentSprite = player.sprites.jump.left;
-      };
-        if (player.velocity.y === 0) {
+        if (player.velocity.y === 0 && keys.lastPressed === 'right') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           player.velocity.y -= 10;
           player.currentSprite = player.sprites.jump.right;
-        }; // только один прыжок при нескольких нажатиях на UP
+        } else if (player.velocity.y === 0 && keys.lastPressed === 'left') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
+          player.velocity.y -= 10;
+          player.currentSprite = player.sprites.jump.left;
+        }
         break;
-      // case 'ArrowDown': player.velocity.y += 10;
-      //   break;
+
+      // case 'Space': {
+      //   console.log('dd')
+      //   platforms.splice(1,1);
+      // }
+        break;
+
       case 'ArrowRight': {
         keys.right.pressed = true;
+        keys.lastPressed = 'right';
         player.currentSprite = player.sprites.run.right;
       }
         break;
       case 'ArrowLeft': {
         keys.left.pressed = true;
+        keys.lastPressed = 'left';
         player.currentSprite = player.sprites.run.left;
       }
         break;
@@ -236,8 +261,10 @@ window.addEventListener('keyup', (event) => {
       case 'ArrowUp': 
         // player.velocity.y = 0;
         keys.up.pressed = true;
-        if (player.velocity.y !== 0) {
-          player.currentSprite = player.sprites.jump.right;
+        if (player.velocity.y !== 0 && keys.lastPressed === 'right') {
+          player.currentSprite = player.sprites.fall.right;
+        } else if (player.velocity.y !== 0 && keys.lastPressed === 'left') {
+          player.currentSprite = player.sprites.fall.left;
         }
       
         break;
