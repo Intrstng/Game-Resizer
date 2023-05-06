@@ -1,4 +1,4 @@
-const platformImgSrc = './assets/img/platform.png';
+const platformImgSrc300 = './assets/img/platform.png';
 
 const heroIdleR = './assets/img/Idle_right.png';
 
@@ -133,7 +133,10 @@ class AdditionalElements {
 let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ]
-let platforms = [new Platform(10, 525, createImage(platformImgSrc, 300, 54)), new Platform(350, 480, createImage(platformImgSrc, 300, 54)), new Platform(600, 400, createImage(platformImgSrc, 300, 54)), new Platform(400, 200, createImage(platformImgSrc, 300, 54))]; // создаем платформы
+let platforms = [new Platform(10, 525, createImage(platformImgSrc300, 300, 54)),
+                new Platform(350, 480, createImage(platformImgSrc300, 300, 54)),
+                new Platform(250, 400, createImage(platformImgSrc300, 300, 54)),
+                new Platform(400, 200, createImage(platformImgSrc300, 300, 54))]; // создаем платформы
 
 let player = new Player();
 const keys = {
@@ -152,7 +155,11 @@ const keys = {
 function init() {
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
-  platforms = [new Platform(10, 525, createImage(platformImgSrc, 300, 54)), new Platform(350, 480, createImage(platformImgSrc, 300, 54)), new Platform(600, 400, createImage(platformImgSrc, 300, 54)), new Platform(400, 200, createImage(platformImgSrc, 300, 54))]; // создаем платформы
+
+  platforms = [new Platform(10, 525, createImage(platformImgSrc300, 300, 54)),
+              new Platform(350, 480, createImage(platformImgSrc300, 300, 54)),
+              new Platform(250, 350, createImage(platformImgSrc300, 300, 54)),
+              new Platform(400, 200, createImage(platformImgSrc300, 300, 54))]; // создаем платформы
   player = new Player();
 }
 
@@ -183,8 +190,8 @@ function animate() {
     if (player.position.y + player.height <= platform.position.y &&
         player.position.y + player.height + player.velocity.y >= platform.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
         // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-        player.position.x + player.width >= platform.position.x &&
-        player.position.x <= platform.position.x + platform.width
+        player.position.x + player.width >= platform.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+        player.position.x <= platform.position.x + platform.width - player.width / 3
         ) { 
             player.velocity.y = 0; // если касается земли
     }
@@ -196,9 +203,15 @@ function animate() {
         //   ) {
         //     player.velocity.y = 0;
         // }
-        // platforms.forEach(platform => {
-        //   if (player.position.y + player.height == platform.position.y) console.log('23')/* player.currentSprite = player.sprites.idle.right */
-        // });
+        platforms.forEach(platform => {
+          if ((player.position.y <= platform.position.y + platform.height) &&
+          player.position.y + player.height + player.velocity.y >= platform.position.y &&
+          player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
+          player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
+     
+            player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+          }
+        });
         
 if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
   player.currentSprite = player.sprites.idle.right;
@@ -217,7 +230,6 @@ if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && key
 }
 init();
 animate();
-
 
 window.addEventListener('keydown', (event) => {
   if (event.repeat == false) {
