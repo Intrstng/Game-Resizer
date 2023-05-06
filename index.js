@@ -134,7 +134,7 @@ let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ]
 let platforms = [new Platform(10, 525, createImage(platformImgSrc300, 300, 54)),
-                new Platform(350, 480, createImage(platformImgSrc300, 300, 54)),
+                new Platform(300, 455, createImage(platformImgSrc300, 300, 54)),
                 new Platform(250, 400, createImage(platformImgSrc300, 300, 54)),
                 new Platform(400, 200, createImage(platformImgSrc300, 300, 54))]; // создаем платформы
 
@@ -157,8 +157,8 @@ function init() {
 ];
 
   platforms = [new Platform(10, 525, createImage(platformImgSrc300, 300, 54)),
-              new Platform(350, 480, createImage(platformImgSrc300, 300, 54)),
-              new Platform(250, 350, createImage(platformImgSrc300, 300, 54)),
+              new Platform(300, 455, createImage(platformImgSrc300, 300, 54)),
+              new Platform(250, 400, createImage(platformImgSrc300, 300, 54)),
               new Platform(400, 200, createImage(platformImgSrc300, 300, 54))]; // создаем платформы
   player = new Player();
 }
@@ -185,33 +185,55 @@ function animate() {
     player.velocity.x = 0;
   }
 
-  // Player - platform collision (player above the platform)
+  
   platforms.forEach(platform => {
+    // Player - platform collision (player is above the platform)
     if (player.position.y + player.height <= platform.position.y &&
         player.position.y + player.height + player.velocity.y >= platform.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
         // Player - platform collision (player on the platform - inside of left and right platform boundaries)
         player.position.x + player.width >= platform.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-        player.position.x <= platform.position.x + platform.width - player.width / 3
-        ) { 
-            player.velocity.y = 0; // если касается земли
+        player.position.x <= platform.position.x + platform.width - player.width / 3) { 
+          player.velocity.y = 0; // если касается земли
     }
+    // Player - platform collision (player is under the platform)
+    if (player.position.y <= platform.position.y + platform.height &&
+        player.position.y + player.height + player.velocity.y >= platform.position.y &&
+        player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
+        player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
+          player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+    }
+    // Player - platform collision (player is left from the platform and moves right)
+    if (keys.right.pressed &&
+        player.position.y + player.height >= platform.position.y && 
+        player.position.y <= platform.position.y + platform.height &&
+        player.position.x + player.width >= platform.position.x) {
+          player.velocity.x = 0;
+          console.log('hit!');
+    } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
+      if (keys.right.pressed &&
+        player.position.y + player.height >= platform.position.y && 
+        player.position.y <= platform.position.y + platform.height &&
+        player.position.x + player.width >= platform.position.x + platform.width) {
+          player.velocity.x = 2;
+          console.log('free!');
+      }
+    // Player - platform collision (player is right from the platform and moves left)
+    if (keys.left.pressed &&
+      player.position.y + player.height >= platform.position.y && 
+      player.position.y <= platform.position.y + platform.height &&
+      player.position.x <= platform.position.x + platform.width) {
+        player.velocity.x = 0;
+        console.log('hit!');
+    } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+      if (keys.left.pressed &&
+        player.position.y + player.height >= platform.position.y && 
+        player.position.y <= platform.position.y + platform.height &&
+        player.position.x + player.width <= platform.position.x) { // или "-" player.width ???
+          player.velocity.x = -2;
+          console.log('free!');
+      }
   })
-        // // Player - platform collision (player under the platform)
-        // if (player.position.y <= platform.position.y + platform.height &&
-        //   player.position.x + player.width >= platform.position.x &&
-        //   player.position.x <= platform.position.x + platform.width
-        //   ) {
-        //     player.velocity.y = 0;
-        // }
-        platforms.forEach(platform => {
-          if ((player.position.y <= platform.position.y + platform.height) &&
-          player.position.y + player.height + player.velocity.y >= platform.position.y &&
-          player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
-          player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
-     
-            player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-          }
-        });
+        
         
 if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
   player.currentSprite = player.sprites.idle.right;
