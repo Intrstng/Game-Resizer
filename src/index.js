@@ -1,3 +1,4 @@
+// import './sass/styles.scss';
 
 // imagePlatform.onload = function getSizes () {
 //   imagePlatform.width = imagePlatform.naturalWidth;
@@ -8,28 +9,20 @@ import { createImage } from './js/CreateImage';
 import { Player } from './js/Player';
 import { Platform } from './js/Platform';
 import { platformImgSrc300,
-  heroIdleR,
-  heroIdleL,
-  heroRunR,
-  heroRunL,
-  heroJumpR,
-  heroJumpL,
-  heroFallR,
-  heroFallL,
-  backgroundImg,
-} from './js/Assets';
-
-// const Player = require('./js/Player');
-// const Platform = require('./js/Platform');
-
-
-
-
+          heroIdleR,
+          heroIdleL,
+          heroRunR,
+          heroRunL,
+          heroJumpR,
+          heroJumpL,
+          heroFallR,
+          heroFallL,
+          backgroundImg,
+        } from './js/Assets';
+import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 
 canvas.width = 1024 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 //window.innerHeight;
-
-
 
 class AdditionalElements {
   constructor (posX, posY, image) {
@@ -57,19 +50,8 @@ let platforms = [new Platform(10, 525, createImage(platformImgSrc300, 300, 54)),
                 new Platform(250, 400, createImage(platformImgSrc300, 300, 54)),
                 new Platform(400, 200, createImage(platformImgSrc300, 300, 54))]; // создаем платформы
 
-let player = new Player();
-const keys = {
-  right: {
-    pressed: false
-  },
-  left: {
-    pressed: false
-  },
-  up: {
-    pressed: false
-  },
-  lastPressed: 'right'
-}
+export let player = new Player();
+
 
 function init() {
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
@@ -172,67 +154,5 @@ if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && key
 init();
 animate();
 
-window.addEventListener('keydown', (event) => {
-  if (event.repeat == false) {
-    switch (event.code) {
-      case 'ArrowUp':  
-        if (player.velocity.y === 0 && keys.lastPressed === 'right') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
-          player.velocity.y -= 10;
-          player.currentSprite = player.sprites.jump.right;
-        } else if (player.velocity.y === 0 && keys.lastPressed === 'left') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
-          player.velocity.y -= 10;
-          player.currentSprite = player.sprites.jump.left;
-        }
-        break;
-
-      // case 'Space': {
-      //   console.log('dd')
-      //   platforms.splice(1,1);
-      // }
-        break;
-
-      case 'ArrowRight': {
-        keys.right.pressed = true;
-        keys.lastPressed = 'right';
-        player.currentSprite = player.sprites.run.right;
-      }
-        break;
-      case 'ArrowLeft': {
-        keys.left.pressed = true;
-        keys.lastPressed = 'left';
-        player.currentSprite = player.sprites.run.left;
-      }
-        break;
-    }
-  }
-})
-
-
-window.addEventListener('keyup', (event) => {
-  if (event.repeat == false) {
-    switch (event.code) {
-      case 'ArrowUp': 
-        // player.velocity.y = 0;
-        keys.up.pressed = true;
-        if (player.velocity.y !== 0 && keys.lastPressed === 'right') {
-          player.currentSprite = player.sprites.fall.right;
-        } else if (player.velocity.y !== 0 && keys.lastPressed === 'left') {
-          player.currentSprite = player.sprites.fall.left;
-        }
-      
-        break;
-      // case 'ArrowDown': player.velocity.y = 0
-      //   break;
-      case 'ArrowRight': {
-        keys.right.pressed = false;
-        player.currentSprite = player.sprites.idle.right;
-      }
-        break;
-      case 'ArrowLeft': {
-        keys.left.pressed = false;
-        player.currentSprite = player.sprites.idle.left;
-      }
-        break;
-    }
-  }
-})
+window.addEventListener('keydown', keyDownHandler);
+window.addEventListener('keyup', keyUpHandler);
