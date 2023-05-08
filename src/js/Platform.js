@@ -148,4 +148,24 @@ class Saw extends PlatformSpikes {
   }
 }
 
-export { Platform, PlatformSpikes, Saw }
+
+class OneStep extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'oneStep';
+    this.temporaryPosX = posX;
+  }
+  update() {
+    this.frames++;
+    if (this.frames > 23) this.frames = 0;
+    this.draw();
+  }
+  destroy() {
+    this.position.x = -9999;
+  } 
+  restore() {
+    this.position.x = this.temporaryPosX;
+  }
+}
+
+export { Platform, PlatformSpikes, Saw, OneStep }

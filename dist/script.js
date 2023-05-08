@@ -13,7 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "additionalElements": () => (/* binding */ additionalElements),
 /* harmony export */   "init": () => (/* binding */ init),
 /* harmony export */   "platforms": () => (/* binding */ platforms),
-/* harmony export */   "player": () => (/* binding */ player)
+/* harmony export */   "player": () => (/* binding */ player),
+/* harmony export */   "sawTrap": () => (/* binding */ sawTrap)
 /* harmony export */ });
 /* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/CreateImage */ "./src/js/CreateImage.js");
@@ -45,7 +46,8 @@ let platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 525
 
 let player = new _js_Player__WEBPACK_IMPORTED_MODULE_2__.Player();
 let spikes = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(300, 415, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSpikes, 36, 36));
-let sawTrap = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Saw(400, 415, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36));
+// let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
+let sawTrap = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(400, 415, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36));
 function init() {
   additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_6__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height))];
   platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 525, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(330, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(365, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap]; // создаем платформы !!!!!!!!!!!!!
@@ -128,6 +130,7 @@ function animate() {
 
   // Падение в пропасть (см. комментарии в player.update())
   if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height) {
+    sawTrap.restore();
     init();
     console.log('you lose');
     // сюда вставить звук проигрыша
@@ -280,6 +283,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 
 
+
 const keys = {
   right: {
     pressed: false
@@ -308,14 +312,15 @@ const keyDownHandler = e => {
           _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.jump.left;
         }
         break;
+      case 'Space':
+        {
+          _index__WEBPACK_IMPORTED_MODULE_0__.sawTrap.destroy();
+          // console.log('dd')
+          // arr = [...arr, ...platforms.splice(1,1)];
+          // console.log(arr)
+        }
 
-      // case 'Space': {
-      //   console.log('dd')
-      //   arr = [...arr, ...platforms.splice(1,1)];
-      //   console.log(arr)
-      // }
-      // break;
-
+        break;
       case 'ArrowRight':
         {
           keys.right.pressed = true;
@@ -374,6 +379,7 @@ const keyUpHandler = e => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OneStep": () => (/* binding */ OneStep),
 /* harmony export */   "Platform": () => (/* binding */ Platform),
 /* harmony export */   "PlatformSpikes": () => (/* binding */ PlatformSpikes),
 /* harmony export */   "Saw": () => (/* binding */ Saw)
@@ -504,6 +510,24 @@ class Saw extends PlatformSpikes {
     this.frames++;
     if (this.frames > 23) this.frames = 0;
     this.draw();
+  }
+}
+class OneStep extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'oneStep';
+    this.temporaryPosX = posX;
+  }
+  update() {
+    this.frames++;
+    if (this.frames > 23) this.frames = 0;
+    this.draw();
+  }
+  destroy() {
+    this.position.x = -9999;
+  }
+  restore() {
+    this.position.x = this.temporaryPosX;
   }
 }
 

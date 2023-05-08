@@ -1,5 +1,6 @@
 import { player } from '../index';
 import { platforms } from '../index';
+import { sawTrap } from '../index';
 
 const keys = {
   right: {
@@ -28,12 +29,13 @@ const keyDownHandler = (e) => {
         }
         break;
 
-      // case 'Space': {
-      //   console.log('dd')
-      //   arr = [...arr, ...platforms.splice(1,1)];
-      //   console.log(arr)
-      // }
-        // break;
+      case 'Space': {
+        sawTrap.destroy();
+        // console.log('dd')
+        // arr = [...arr, ...platforms.splice(1,1)];
+        // console.log(arr)
+      }
+        break;
 
       case 'ArrowRight': {
         keys.right.pressed = true;
