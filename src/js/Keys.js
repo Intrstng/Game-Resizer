@@ -1,4 +1,5 @@
 import { player } from '../index';
+import { platforms } from '../index';
 
 const keys = {
   right: {
@@ -12,8 +13,9 @@ const keys = {
   },
   lastPressed: 'right',
 };
-
+                                                // let hiddenPlatformsArr = []
 const keyDownHandler = (e) => {
+  console.log(e.code)
   if (e.repeat == false) {
     switch (e.code) {
       case 'ArrowUp':  
@@ -28,9 +30,10 @@ const keyDownHandler = (e) => {
 
       // case 'Space': {
       //   console.log('dd')
-      //   platforms.splice(1,1);
+      //   arr = [...arr, ...platforms.splice(1,1)];
+      //   console.log(arr)
       // }
-        break;
+        // break;
 
       case 'ArrowRight': {
         keys.right.pressed = true;
@@ -59,7 +62,6 @@ const keyUpHandler = (e) => {
         } else if (player.velocity.y !== 0 && keys.lastPressed === 'left') {
           player.currentSprite = player.sprites.fall.left;
         }
-      
         break;
       // case 'ArrowDown': player.velocity.y = 0
       //   break;

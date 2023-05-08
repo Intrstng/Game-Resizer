@@ -16,7 +16,7 @@ module.exports = (env, options) => {
       assetModuleFilename: 'assets/[hash][ext]'
     },
     mode: isProduction ? 'production' : 'development',
-    devtool: /* isProduction ? 'none' :  */'source-map',
+    devtool: /* isProduction ? 'none' :  */'source-map', // BREAKING CHANGE since webpack 5: The devtool option is more strict.
     watch: !isProduction,
     plugins:  [
       new CleanWebpackPlugin(),

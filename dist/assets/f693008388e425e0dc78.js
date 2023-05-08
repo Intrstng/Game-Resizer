@@ -1,9 +1,6 @@
 /******/(() => {
   // webpackBootstrap
   /******/
-  "use strict";
-
-  /******/
   var __webpack_modules__ = {
     /***/"./src/index.js":
     /*!**********************!*\
@@ -11,9 +8,12 @@
       \**********************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"platforms": () => /* binding */platforms,
         /* harmony export */"player": () => /* binding */player
         /* harmony export */
       });
@@ -36,8 +36,8 @@
       //   imagePlatform.height = imagePlatform.naturalHeight;
       //}
 
-      _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width = 1024; //window.innerWidth; // canvas.width = innerWidth;
-      _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height = 576; //window.innerHeight;
+      _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width = 1280; //1024 //window.innerWidth; // canvas.width = innerWidth;
+      _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height = 720; //576 //window.innerHeight;
 
       class AdditionalElements {
         constructor(posX, posY, image) {
@@ -55,6 +55,23 @@
           // c.fillRect(this.position.x, this.position.y, this.width, this.height);
         }
       }
+
+      // class PlatformNumber {
+      //   constructor (posX, posY, image) {
+      //     this.position = {
+      //       x: posX,
+      //       y: posY
+      //     }
+      //     this.image = image;
+      //     this.width = image.width;
+      //     this.height = image.height;  
+      //   }
+      //   draw() {
+      //     c.drawImage(this.image, this.position.x, this.position.y)
+      //     // c.fillStyle = ('green');
+      //     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      //   }
+      // }
 
       let additionalElements = [new AdditionalElements(0, 0, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height))];
       let platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(10, 525, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformImgSrc300, 300, 54)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(300, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformImgSrc300, 300, 54)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(250, 400, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformImgSrc300, 300, 54)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformImgSrc300, 300, 54))]; // создаем платформы
@@ -149,6 +166,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -161,7 +180,8 @@
         /* harmony export */"heroJumpR": () => /* binding */heroJumpR,
         /* harmony export */"heroRunL": () => /* binding */heroRunL,
         /* harmony export */"heroRunR": () => /* binding */heroRunR,
-        /* harmony export */"platformImgSrc300": () => /* binding */platformImgSrc300
+        /* harmony export */"platformImgSrc300": () => /* binding */platformImgSrc300,
+        /* harmony export */"platformSolid": () => /* binding */platformSolid
         /* harmony export */
       });
       const platformImgSrc300 = '../assets/img/platform.png';
@@ -174,6 +194,7 @@
       const heroFallR = '../assets/img/Fall_right.png';
       const heroFallL = '../assets/img/Fall_left.png';
       const backgroundImg = '../assets/img/bg_2.jpg';
+      const platformSolid = '../assets/img/Platform_solid.png';
 
       // import platformImgSrc300 from '/assets/img/platform.png';
       // import heroIdleR from '/assets/img/Idle_right.png';
@@ -195,6 +216,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -216,6 +239,8 @@
       \*******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -239,6 +264,8 @@
       \************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -261,7 +288,9 @@
         },
         lastPressed: 'right'
       };
+      // let hiddenPlatformsArr = []
       const keyDownHandler = e => {
+        console.log(e.code);
         if (e.repeat == false) {
           switch (e.code) {
             case 'ArrowUp':
@@ -276,11 +305,13 @@
               }
               break;
 
-              // case 'Space': {
-              //   console.log('dd')
-              //   platforms.splice(1,1);
-              // }
-              break;
+            // case 'Space': {
+            //   console.log('dd')
+            //   arr = [...arr, ...platforms.splice(1,1)];
+            //   console.log(arr)
+            // }
+            // break;
+
             case 'ArrowRight':
               {
                 keys.right.pressed = true;
@@ -336,31 +367,8 @@
       !*** ./src/js/Platform.js ***!
       \****************************/
     /***/
-    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export */
-      __webpack_require__.d(__webpack_exports__, {
-        /* harmony export */"Platform": () => /* binding */Platform
-        /* harmony export */
-      });
-      /* harmony import */
-      var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
-      class Platform {
-        constructor(posX, posY, image) {
-          this.position = {
-            x: posX,
-            y: posY
-          };
-          this.image = image;
-          this.width = image.width;
-          this.height = image.height;
-        }
-        draw() {
-          _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.image, this.position.x, this.position.y);
-          // c.fillStyle = ('green');
-          // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-        }
-      }
+    () => {
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Platform.js: Missing semicolon. (43:6)\n\n\u001b[0m \u001b[90m 41 |\u001b[39m }\u001b[0m\n\u001b[0m \u001b[90m 42 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 43 |\u001b[39m draw() {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 44 |\u001b[39m   \u001b[90m// c.fillStyle = ('red');\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 45 |\u001b[39m   \u001b[90m// c.fillRect(this.position.x, this.position.y, this.width, this.height);\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 46 |\u001b[39m   c\u001b[33m.\u001b[39mdrawImage(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcurrentSprite\u001b[33m,\u001b[39m \u001b[35m32\u001b[39m \u001b[33m*\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mframes\u001b[33m,\u001b[39m \u001b[35m0\u001b[39m\u001b[33m,\u001b[39m \u001b[35m32\u001b[39m\u001b[33m,\u001b[39m \u001b[35m32\u001b[39m\u001b[33m,\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mposition\u001b[33m.\u001b[39mx\u001b[33m,\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mposition\u001b[33m.\u001b[39my\u001b[33m,\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mwidth\u001b[33m,\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mheight) \u001b[90m// 32, 0, 32, 32 - player sprite crop (x, y, w, h)\u001b[39m\u001b[0m\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.semicolon (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3637:10)\n    at Parser.parseExpressionStatement (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13090:10)\n    at Parser.parseStatementContent (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12687:19)\n    at Parser.parseStatementLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },
@@ -371,6 +379,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -421,7 +431,7 @@
         draw() {
           // c.fillStyle = ('red');
           // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-          _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height); // 0, 0, 32, 32 - player sprite crop (x, y, w, h)
+          _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height); // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
         }
 
         update() {
@@ -448,6 +458,8 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       // extracted by mini-css-extract-plugin
 

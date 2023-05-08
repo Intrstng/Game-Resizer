@@ -10,6 +10,9 @@ import { platformImgSrc300,
         heroFallR,
         heroFallL,
         backgroundImg,
+        platformSolid,
+        platformSpikes,
+        saw,
       } from '../js/Assets';
 
 export class Player {
@@ -51,7 +54,7 @@ export class Player {
   draw() {
     // c.fillStyle = ('red');
     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-    c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height) // 0, 0, 32, 32 - player sprite crop (x, y, w, h)
+    c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height) // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
   }
 
   update() {
