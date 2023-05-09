@@ -154,6 +154,7 @@ class OneStep extends Platform {
     super(posX, posY, image);
     this.type = 'oneStep';
     this.temporaryPosX = posX;
+    this.hits = 0;
   }
   update() {
     this.frames++;
@@ -162,9 +163,64 @@ class OneStep extends Platform {
   }
   destroy() {
     this.position.x = -9999;
+    this.hits = 0;
   } 
   restore() {
     this.position.x = this.temporaryPosX;
+  }
+  collision() {
+
+     // Player - platform collision (player is above the platform)
+     if (keys.up.pressed &&
+      player.position.y + player.height <= this.position.y &&
+      player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+      player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+      player.position.x <= this.position.x + this.width - player.width / 3) { 
+        player.velocity.y = 0; // если касается земли
+console.log('keys.up.pressed')
+this.destroy();
+  } else if (!keys.up.pressed &&
+    player.position.y + player.height <= this.position.y &&
+    player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+    player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+    player.position.x <= this.position.x + this.width - player.width / 3) { 
+      player.velocity.y = 0; // если касается земли
+console.log('keys.up.pressed')
+}
+  // Player - platform collision (player is under the platform)
+  if (player.position.y <= this.position.y + this.height &&
+      player.position.y + player.height + player.velocity.y >= this.position.y &&
+      player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
+      player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+        player.velocity.y = 1;
+        this.destroy();
+  }
+  // Player - platform collision (player is left from the platform)
+  if (keys.right.pressed &&
+      player.position.y + player.height >= this.position.y && 
+      player.position.y <= this.position.y + this.height &&
+      player.position.x + player.width >= this.position.x &&
+      !(player.position.x >= this.position.x)) { // player is left from the platform and moves right
+        this.hits++;
+        keys.right.pressed = false;
+        player.currentSprite = player.sprites.fall.right;
+        player.velocity.x -= 15;
+        this.hits === 1 && this.destroy();
+  }
+  // Player - platform collision (player is right from the platform)
+  if (keys.left.pressed &&
+      player.position.y + player.height >= this.position.y && 
+      player.position.y <= this.position.y + this.height &&
+      player.position.x <= this.position.x + this.width &&
+      !(player.position.x + player.width <= this.position.x)) { // player is right from the platform and moves left
+        this.hits++;
+        keys.left.pressed = false;
+        player.currentSprite = player.sprites.fall.left;
+        player.velocity.x += 15;
+        this.hits === 1 && this.destroy();
+  } 
   }
 }
 

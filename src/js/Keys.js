@@ -19,7 +19,8 @@ const keyDownHandler = (e) => {
   console.log(e.code)
   if (e.repeat == false) {
     switch (e.code) {
-      case 'ArrowUp':  
+      case 'ArrowUp':
+        keys.up.pressed = true;
         if (player.velocity.y === 0 && keys.lastPressed === 'right') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           player.velocity.y -= 10;
           player.currentSprite = player.sprites.jump.right;
@@ -58,7 +59,8 @@ const keyUpHandler = (e) => {
     switch (e.code) {
       case 'ArrowUp': 
         // player.velocity.y = 0;
-        keys.up.pressed = true;
+        keys.up.pressed = false;
+        // keys.up.pressed = true;
         if (player.velocity.y !== 0 && keys.lastPressed === 'right') {
           player.currentSprite = player.sprites.fall.right;
         } else if (player.velocity.y !== 0 && keys.lastPressed === 'left') {
