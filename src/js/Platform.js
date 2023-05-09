@@ -106,7 +106,7 @@ class Platform {
     if (keys.left.pressed &&
       player.position.y + player.height >= this.position.y && 
       player.position.y <= this.position.y + this.height &&
-      player.position.x + player.width <= this.position.x) { // или "-" player.width ???
+      player.position.x /* + player.width */ <= this.position.x) { // или "-" player.width ???
         player.velocity.x = -2;
         console.log('free!');
     }
