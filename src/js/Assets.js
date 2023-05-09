@@ -10,7 +10,10 @@ const heroFallL = '../assets/img/Fall_left.png';
 const backgroundImg = '../assets/img/bg_2.jpg';
 const platformSolid = '../assets/img/Platform_solid.png';
 const platformSpikes = '../assets/img/Platform_spikes.png';
+const platformOneStep = '../assets/img/Platform_oneStep_B_L.png';
+
 const saw = '../assets/img/saw.png';
+
 
 // import platformImgSrc300 from '/assets/img/platform.png';
 // import heroIdleR from '/assets/img/Idle_right.png';
@@ -35,5 +38,6 @@ export { platformImgSrc300,
         backgroundImg,
         platformSolid,
         platformSpikes,
+        platformOneStep,
         saw,
       }

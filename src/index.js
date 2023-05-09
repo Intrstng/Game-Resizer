@@ -20,6 +20,7 @@ import { platformImgSrc300,
           backgroundImg,
           platformSolid,
           platformSpikes,
+          platformOneStep,
           saw,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
@@ -47,23 +48,23 @@ export let platforms = [new Platform(210, 525, createImage(platformSolid, 36, 36
 
 export let player = new Player();
 
-              let spikes = new PlatformSpikes(300, 415, createImage(platformSpikes, 36, 36))
+              let spikes = new PlatformSpikes(100, 415, createImage(platformSpikes, 36, 36))
               // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
-              export let sawTrap = new OneStep(365, 315, createImage(saw, 36, 36))
-
+              export let sawTrap = new OneStep(360, 315, createImage(platformOneStep, 36, 36))
+              let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
 export function init() {
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
 
-  platforms = [new Platform(210, 525, createImage(platformSolid, 36, 36)),
-              new Platform(330, 455, createImage(platformSolid, 36, 36)),
-              new Platform(365, 455, createImage(platformSolid, 36, 36)),
+  platforms = [new Platform(210, 455, createImage(platformSolid, 36, 36)),
+          new Platform(265, 420, createImage(platformSolid, 36, 36)),
+              new Platform(302, 455, createImage(platformSolid, 36, 36)),
               new Platform(210, 280, createImage(platformSolid, 36, 36)),
               new Platform(400, 200, createImage(platformSolid, 36, 36)),
 
               new Platform(472, 455, createImage(platformSolid, 36, 36)),
               new Platform(436, 455, createImage(platformSolid, 36, 36)), 
-    spikes, sawTrap      ]; // создаем платформы !!!!!!!!!!!!!
+    spikes, sawTrap, sawTrap2      ]; // создаем платформы !!!!!!!!!!!!!
   player = new Player();
 }                      
 
@@ -153,6 +154,7 @@ if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && key
     // Падение в пропасть (см. комментарии в player.update())
       if (player.position.y > canvas.height) {
 sawTrap.restore();
+sawTrap2.restore();
         init();
         console.log('you lose')
         // сюда вставить звук проигрыша
@@ -169,4 +171,5 @@ window.addEventListener('keyup', keyUpHandler);
 
 window.addEventListener('click', (e) => {
   console.log(e.clientX, e.clientY)
+   debugger
 })

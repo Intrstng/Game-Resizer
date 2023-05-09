@@ -50,12 +50,13 @@
       let platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 525, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(330, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(250, 400, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 100, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36))]; // создаем платформы
 
       let player = new _js_Player__WEBPACK_IMPORTED_MODULE_2__.Player();
-      let spikes = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(300, 415, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSpikes, 36, 36));
+      let spikes = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(100, 415, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSpikes, 36, 36));
       // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
-      let sawTrap = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(400, 415, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36));
+      let sawTrap = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(360, 315, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36));
+      let sawTrap2 = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(400, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36));
       function init() {
         additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_6__.AdditionalElements(0, 0, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height))];
-        platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 525, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(330, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(365, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap]; // создаем платформы !!!!!!!!!!!!!
+        platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 525, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(265, 420, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(302, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(472, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(436, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap, sawTrap2]; // создаем платформы !!!!!!!!!!!!!
         player = new _js_Player__WEBPACK_IMPORTED_MODULE_2__.Player();
       }
       function animate() {
@@ -136,6 +137,7 @@
         // Падение в пропасть (см. комментарии в player.update())
         if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height) {
           sawTrap.restore();
+          sawTrap2.restore();
           init();
           console.log('you lose');
           // сюда вставить звук проигрыша
@@ -148,6 +150,7 @@
       window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_5__.keyUpHandler);
       window.addEventListener('click', e => {
         console.log(e.clientX, e.clientY);
+        debugger;
       });
 
       /***/
@@ -210,6 +213,7 @@
         /* harmony export */"heroRunL": () => /* binding */heroRunL,
         /* harmony export */"heroRunR": () => /* binding */heroRunR,
         /* harmony export */"platformImgSrc300": () => /* binding */platformImgSrc300,
+        /* harmony export */"platformOneStep": () => /* binding */platformOneStep,
         /* harmony export */"platformSolid": () => /* binding */platformSolid,
         /* harmony export */"platformSpikes": () => /* binding */platformSpikes,
         /* harmony export */"saw": () => /* binding */saw
@@ -227,6 +231,7 @@
       const backgroundImg = '../assets/img/bg_2.jpg';
       const platformSolid = '../assets/img/Platform_solid.png';
       const platformSpikes = '../assets/img/Platform_spikes.png';
+      const platformOneStep = '../assets/img/Platform_oneStep_B_L.png';
       const saw = '../assets/img/saw.png';
 
       // import platformImgSrc300 from '/assets/img/platform.png';
@@ -327,6 +332,7 @@
         if (e.repeat == false) {
           switch (e.code) {
             case 'ArrowUp':
+              keys.up.pressed = true;
               if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0 && keys.lastPressed === 'right') {
                 // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
                 _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y -= 10;
@@ -368,7 +374,8 @@
           switch (e.code) {
             case 'ArrowUp':
               // player.velocity.y = 0;
-              keys.up.pressed = true;
+              keys.up.pressed = false;
+              // keys.up.pressed = true;
               if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y !== 0 && keys.lastPressed === 'right') {
                 _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.fall.right;
               } else if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y !== 0 && keys.lastPressed === 'left') {
@@ -402,7 +409,7 @@
       \****************************/
     /***/
     () => {
-      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Platform.js: Unexpected token (228:7)\n\n  226 | }\n  227 |\n> 228 | export { Platform, PlatformSpikes, Saw, OneStep }\n      |        ^\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.unexpected (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3300:16)\n    at Parser.parseClassMemberWithIsStatic (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13485:12)\n    at Parser.parseClassMember (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13373:10)\n    at D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13323:14\n    at Parser.withSmartMixTopicForbiddingContext (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12234:14)\n    at Parser.parseClassBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13303:10)\n    at Parser.parseClass (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13281:22)\n    at Parser.parseStatementContent (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12578:21)\n    at Parser.parseStatementLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Platform.js: Unexpected token (114:6)\n\n  112 | }\n  113 |\n> 114 | class PlatformSpikes extends Platform {\n      |       ^\n  115 |   constructor(posX, posY, image) {\n  116 |     super(posX, posY, image);\n  117 |     this.type = 'spikes';\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.unexpected (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3300:16)\n    at Parser.parseClassMemberWithIsStatic (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13485:12)\n    at Parser.parseClassMember (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13373:10)\n    at D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13323:14\n    at Parser.withSmartMixTopicForbiddingContext (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12234:14)\n    at Parser.parseClassBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13303:10)\n    at Parser.parseClass (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13281:22)\n    at Parser.parseStatementContent (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12578:21)\n    at Parser.parseStatementLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },

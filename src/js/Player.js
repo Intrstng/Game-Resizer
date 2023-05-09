@@ -12,6 +12,7 @@ import { platformImgSrc300,
         backgroundImg,
         platformSolid,
         platformSpikes,
+        platformOneStep,
         saw,
       } from '../js/Assets';
 
