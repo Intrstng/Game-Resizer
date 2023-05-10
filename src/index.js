@@ -7,7 +7,7 @@
 import { canvas, c, gravity } from './js/Canvas';
 import { createImage } from './js/CreateImage';
 import { Player } from './js/Player';
-import { Platform, PlatformSpikes, Saw, OneStep } from './js/Platform';
+import { Platform, PlatformSpikes, Saw, OneStep, Fan, JumpToggle } from './js/Platform';
 import { platformImgSrc300,
           heroIdleR,
           heroIdleL,
@@ -21,7 +21,10 @@ import { platformImgSrc300,
           platformSolid,
           platformSpikes,
           platformOneStep,
+          platformOneStepExplosion,
+          platformJump,
           saw,
+          fan,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
@@ -50,8 +53,9 @@ export let player = new Player();
 
               let spikes = new PlatformSpikes(100, 415, createImage(platformSpikes, 36, 36))
               // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
-              export let sawTrap = new OneStep(360, 315, createImage(platformOneStep, 36, 36))
+              export let sawTrap = new Saw(360, 315, createImage(saw, 36, 36))
               let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
+              export let jump = new JumpToggle(170, 355, createImage(platformJump, 36, 36))
 export function init() {
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
@@ -61,10 +65,10 @@ export function init() {
               new Platform(302, 455, createImage(platformSolid, 36, 36)),
               new Platform(210, 280, createImage(platformSolid, 36, 36)),
               new Platform(400, 200, createImage(platformSolid, 36, 36)),
-
+ 
               new Platform(472, 455, createImage(platformSolid, 36, 36)),
               new Platform(436, 455, createImage(platformSolid, 36, 36)), 
-    spikes, sawTrap, sawTrap2      ]; // создаем платформы !!!!!!!!!!!!!
+    spikes, sawTrap, sawTrap2, jump      ]; // создаем платформы !!!!!!!!!!!!!
   player = new Player();
 }                      
 
@@ -78,8 +82,8 @@ function animate() {
 
   additionalElements.forEach(element => element.draw());
 
-                                    
-                                 
+ // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
+jump.toggle()                    
 
   platforms.forEach(platform => platform.update()); // рисуем платформы
   player.update();
@@ -153,8 +157,9 @@ if (player.velocity.y === 10 && !keys.right.pressed && !keys.left.pressed && key
 
     // Падение в пропасть (см. комментарии в player.update())
       if (player.position.y > canvas.height) {
-sawTrap.restore();
+// sawTrap.restore();
 sawTrap2.restore();
+keys.jumpToggleActive = !keys.jumpToggleActive;
         init();
         console.log('you lose')
         // сюда вставить звук проигрыша
@@ -171,5 +176,5 @@ window.addEventListener('keyup', keyUpHandler);
 
 window.addEventListener('click', (e) => {
   console.log(e.clientX, e.clientY)
-   debugger
+  //  debugger
 })

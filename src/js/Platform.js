@@ -13,7 +13,10 @@ import { platformImgSrc300,
   platformSolid,
   platformSpikes,
   platformOneStep,
+  platformOneStepExplosion,
+  platformJump,
   saw,
+  fan,
 } from './Assets';
 import { keys } from './Keys';
 import { player } from '../index';
@@ -45,6 +48,7 @@ class Platform {
     this.width = image.width;
     this.height = image.height;
     this.frames = 0;
+    this.frequency = 28;
     this.sprites = {
       idle: this.image,
     }
@@ -59,7 +63,7 @@ class Platform {
   }
   update() {
     this.frames++;
-    if (this.frames > 28) this.frames = 0;
+    if (this.frames > this.frequency) this.frames = 0;
     this.draw();
   }
   collision() {
@@ -113,6 +117,7 @@ class Platform {
   }
 }
 
+
 class PlatformSpikes extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
@@ -142,39 +147,114 @@ class Saw extends PlatformSpikes {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'saw';
-  }
-  update() {
-    this.frames++;
-    if (this.frames > 23) this.frames = 0;
-    this.draw();
+    this.frequency = 23;
   }
 }
 
+class Fan extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'fan';
+    this.sprites = {
+      idle: createImage(fan, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 23;
+  }
+}
+
+class JumpToggle extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'jumpToggle';
+    this.sprites = {
+      idle: createImage(platformJump, 36, 36),
+      disabled: createImage(platformOneStepExplosion, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+  }
+  toggle() {
+    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
+  }
+  collision() {
+    if (keys.jumpToggleActive) {
+    // Player - platform collision (player is above the platform)
+    if (player.position.y + player.height <= this.position.y &&
+     player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+     player.position.x + player.width - player.width / 4 > this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+     player.position.x <= this.position.x + this.width - player.width / 4) { 
+       player.velocity.y = 0; // если касается земли
+ }
+ // Player - platform collision (player is under the platform)
+ if (player.position.y <= this.position.y + this.height &&
+     player.position.y + player.height + player.velocity.y >= this.position.y &&
+     player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
+     player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+       player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+ }
+
+ 
+ // Player - platform collision (player is left from the platform and moves right)
+ if (keys.right.pressed &&
+     player.position.y + player.height >= this.position.y && 
+     player.position.y <= this.position.y + this.height &&
+     player.position.x + player.width >= this.position.x) {
+       player.velocity.x = 0;
+       console.log('hit!');
+ } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
+   if (keys.right.pressed &&
+     player.position.y + player.height >= this.position.y && 
+     player.position.y <= this.position.y + this.height &&
+     player.position.x + player.width >= this.position.x + this.width) {
+       player.velocity.x = 2;
+       console.log('free!');
+   }
+ // Player - platform collision (player is right from the platform and moves left)
+ if (keys.left.pressed &&
+   player.position.y + player.height >= this.position.y && 
+   player.position.y <= this.position.y + this.height &&
+   player.position.x <= this.position.x + this.width) {
+     player.velocity.x = 0;
+     console.log('hit!');
+ } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+   if (keys.left.pressed &&
+     player.position.y + player.height >= this.position.y && 
+     player.position.y <= this.position.y + this.height &&
+     player.position.x /* + player.width */ <= this.position.x) { // или "-" player.width ???
+       player.velocity.x = -2;
+       console.log('free!');
+   }
+ }
+} return;
+}
 
 class OneStep extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
-    this.type = 'oneStep';
     this.temporaryPosX = posX;
     this.hits = 0;
-  }
-  update() {
-    this.frames++;
-    if (this.frames > 23) this.frames = 0;
-    this.draw();
+    this.sprites = {
+      idle: createImage(platformOneStep, 36, 36),
+      explosion: createImage(platformOneStepExplosion, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 28;
+    this.type = 'oneStep';
   }
   destroy() {
-    setTimeout(() => this.position.x = -9999, 550);
+    this.currentSprite = this.sprites.explosion;
+    setTimeout(() => {
+      this.position.x = -9999;
+      this.currentSprite = this.sprites.idle;
+  }, 550);
     this.hits = 0;
   } 
   restore() {
     this.position.x = this.temporaryPosX;
   }
   collision() {
-    console.log(player.velocity.y)
-    console.log(this.position.y)
-    console.log(this.position.y)
-    console.log(player.width)
 // Player - platform collision (player is above the platform)
 // And moves right and leaves the platform
 if ((!keys.up.pressed && player.velocity.y === 0 || !keys.up.pressed && player.velocity.y === gravity) &&
@@ -241,4 +321,4 @@ console.log('keys.up.pressed');
   }
 }
 
-export { Platform, PlatformSpikes, Saw, OneStep }
+export { Platform, PlatformSpikes, Saw, OneStep, Fan, JumpToggle }

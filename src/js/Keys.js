@@ -1,6 +1,7 @@
 import { player } from '../index';
 import { platforms } from '../index';
 import { sawTrap } from '../index';
+import { jump } from '../index';
 
 const keys = {
   right: {
@@ -13,6 +14,7 @@ const keys = {
     pressed: false
   },
   lastPressed: 'right',
+  jumpToggleActive: true,
 };
                                                 // let hiddenPlatformsArr = []
 const keyDownHandler = (e) => {
@@ -20,6 +22,9 @@ const keyDownHandler = (e) => {
   if (e.repeat == false) {
     switch (e.code) {
       case 'ArrowUp':
+        if (player.velocity.y === 0) {
+          keys.jumpToggleActive ? keys.jumpToggleActive = false : keys.jumpToggleActive = true;
+        }
         keys.up.pressed = true;
         if (player.velocity.y === 0 && keys.lastPressed === 'right') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           player.velocity.y -= 10;

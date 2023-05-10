@@ -13,7 +13,10 @@ import { platformImgSrc300,
         platformSolid,
         platformSpikes,
         platformOneStep,
+        platformOneStepExplosion,
+        platformJump,
         saw,
+        fan,
       } from '../js/Assets';
 
 export class Player {

@@ -10,9 +10,11 @@ const heroFallL = '../assets/img/Fall_left.png';
 const backgroundImg = '../assets/img/bg_2.jpg';
 const platformSolid = '../assets/img/Platform_solid.png';
 const platformSpikes = '../assets/img/Platform_spikes.png';
-const platformOneStep = '../assets/img/Platform_oneStep_B_L.png';
-
-const saw = '../assets/img/saw.png';
+const platformOneStep = '../assets/img/Platform_oneStep.png';
+const platformOneStepExplosion = '../assets/img/Platform_oneStep_Explosion.png';
+const platformJump = '../assets/img/Platform_jump.png';
+const saw = '../assets/img/Saw.png';
+const fan = '../assets/img/Fan.png';
 
 
 // import platformImgSrc300 from '/assets/img/platform.png';
@@ -39,5 +41,8 @@ export { platformImgSrc300,
         platformSolid,
         platformSpikes,
         platformOneStep,
+        platformOneStepExplosion,
+        platformJump,
         saw,
+        fan,
       }
