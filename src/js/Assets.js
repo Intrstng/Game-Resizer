@@ -13,6 +13,8 @@ const platformSpikes = '../assets/img/Platform_spikes.png';
 const platformOneStep = '../assets/img/Platform_oneStep.png';
 const platformOneStepExplosion = '../assets/img/Platform_oneStep_Explosion.png';
 const platformJump = '../assets/img/Platform_jump.png';
+const platformJumpDisabled = '../assets/img/Platform_jump_disabled.png';
+const platformOne = '../assets/img/Platform_one.png';
 const saw = '../assets/img/Saw.png';
 const fan = '../assets/img/Fan.png';
 
@@ -43,6 +45,8 @@ export { platformImgSrc300,
         platformOneStep,
         platformOneStepExplosion,
         platformJump,
+        platformJumpDisabled,
+        platformOne,
         saw,
         fan,
       }

@@ -50,10 +50,10 @@ let spikes = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(100, 4
 // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
 let sawTrap = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Saw(360, 315, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36));
 let sawTrap2 = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(400, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36));
-let jump = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.JumpToggle(170, 355, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36));
+let jump = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.JumpToggle(170, 355, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOne, 36, 36));
 function init() {
   additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_6__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height))];
-  platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(265, 420, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(302, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(472, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(436, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap, sawTrap2, jump]; // создаем платформы !!!!!!!!!!!!!
+  platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(265, 420, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(302, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OnePlatform(470, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(472, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(436, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap, sawTrap2, jump]; // создаем платформы !!!!!!!!!!!!!
   player = new _js_Player__WEBPACK_IMPORTED_MODULE_2__.Player();
 }
 function animate() {
@@ -207,6 +207,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "heroRunR": () => (/* binding */ heroRunR),
 /* harmony export */   "platformImgSrc300": () => (/* binding */ platformImgSrc300),
 /* harmony export */   "platformJump": () => (/* binding */ platformJump),
+/* harmony export */   "platformJumpDisabled": () => (/* binding */ platformJumpDisabled),
+/* harmony export */   "platformOne": () => (/* binding */ platformOne),
 /* harmony export */   "platformOneStep": () => (/* binding */ platformOneStep),
 /* harmony export */   "platformOneStepExplosion": () => (/* binding */ platformOneStepExplosion),
 /* harmony export */   "platformSolid": () => (/* binding */ platformSolid),
@@ -228,6 +230,8 @@ const platformSpikes = '../assets/img/Platform_spikes.png';
 const platformOneStep = '../assets/img/Platform_oneStep.png';
 const platformOneStepExplosion = '../assets/img/Platform_oneStep_Explosion.png';
 const platformJump = '../assets/img/Platform_jump.png';
+const platformJumpDisabled = '../assets/img/Platform_jump_disabled.png';
+const platformOne = '../assets/img/Platform_one.png';
 const saw = '../assets/img/Saw.png';
 const fan = '../assets/img/Fan.png';
 
@@ -405,6 +409,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Fan": () => (/* binding */ Fan),
 /* harmony export */   "JumpToggle": () => (/* binding */ JumpToggle),
+/* harmony export */   "OnePlatform": () => (/* binding */ OnePlatform),
 /* harmony export */   "OneStep": () => (/* binding */ OneStep),
 /* harmony export */   "Platform": () => (/* binding */ Platform),
 /* harmony export */   "PlatformSpikes": () => (/* binding */ PlatformSpikes),
@@ -420,23 +425,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// export class Platform {
-//   constructor (posX, posY, image) {
-//     this.position = {
-//       x: posX,
-//       y: posY
-//     }
-//     this.image = image;
-//     this.width = image.width;
-//     this.height = image.height;  
-//   }
-//   draw() {
-//     c.drawImage(this.image, this.position.x, this.position.y)
-//     // c.fillStyle = ('green');
-//     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-//   }
-// }
 
 class Platform {
   constructor(posX, posY, image) {
@@ -467,7 +455,7 @@ class Platform {
     if (this.frames > this.frequency) this.frames = 0;
     this.draw();
   }
-  collision() {
+  collisionAbove() {
     // Player - platform collision (player is above the platform)
     if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
     // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
@@ -477,13 +465,18 @@ class Platform {
     _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 4) {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
     }
+  }
+
+  collisionUnder() {
     // Player - platform collision (player is under the platform)
     if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2 &&
     // можно сделать 1.75
     _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2) {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
     }
+  }
 
+  collisionLeftSide() {
     // Player - platform collision (player is left from the platform and moves right)
     if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x) {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 0;
@@ -493,6 +486,8 @@ class Platform {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 2;
       console.log('free!');
     }
+  }
+  collisionRightSide() {
     // Player - platform collision (player is right from the platform and moves left)
     if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width) {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 0;
@@ -503,6 +498,13 @@ class Platform {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = -2;
       console.log('free!');
     }
+  }
+  collision() {
+    // разбито на отдельные методы, для частичного наследования (если понадобится)
+    this.collisionAbove();
+    this.collisionUnder();
+    this.collisionLeftSide();
+    this.collisionRightSide();
   }
 }
 class PlatformSpikes extends Platform {
@@ -518,7 +520,6 @@ class PlatformSpikes extends Platform {
     _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3 &&
     // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
     _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
-      // player.velocity.y = 0; // если касается шипов сверху
       (0,_index__WEBPACK_IMPORTED_MODULE_4__.init)();
     }
     // Player - platform collision (player is under the platform)
@@ -553,7 +554,7 @@ class JumpToggle extends Platform {
     this.type = 'jumpToggle';
     this.sprites = {
       idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformJump, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneStepExplosion, 36, 36)
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformJumpDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
@@ -563,44 +564,29 @@ class JumpToggle extends Platform {
   }
   collision() {
     if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive) {
-      // Player - platform collision (player is above the platform)
-      if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
-      // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 4 > this.position.x &&
-      // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 4) {
-        _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
-      }
-      // Player - platform collision (player is under the platform)
-      if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2 &&
-      // можно сделать 1.75
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2) {
-        _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
-      }
-
-      // Player - platform collision (player is left from the platform and moves right)
-      if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x) {
-        _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 0;
-        console.log('hit!');
-      } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-      if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + this.width) {
-        _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 2;
-        console.log('free!');
-      }
-      // Player - platform collision (player is right from the platform and moves left)
-      if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width) {
-        _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 0;
-        console.log('hit!');
-      } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-      if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x /* + player.width */ <= this.position.x) {
-        // или "-" player.width ???
-        _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = -2;
-        console.log('free!');
-      }
+      super.collision();
     }
   }
-  return;
+}
+class OnePlatform extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'onePlatform';
+    this.sprites = {
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOne, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformJumpDisabled, 36, 36)
+    };
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+  }
+  toggle() {
+    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
+  }
+  collision() {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive) {
+      super.collision();
+    }
+  }
 }
 class OneStep extends Platform {
   constructor(posX, posY, image) {
@@ -640,7 +626,6 @@ class OneStep extends Platform {
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
     _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
-      console.log('player.position.y', _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y);
       this.destroy();
     } else if (!_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
     // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
@@ -649,9 +634,7 @@ class OneStep extends Platform {
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
     _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
-      console.log('keys.up.pressed');
     }
-
     // Player - platform collision (player is under the platform)
     if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2 &&
     // можно сделать 1.75

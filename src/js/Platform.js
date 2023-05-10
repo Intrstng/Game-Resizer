@@ -15,29 +15,14 @@ import { platformImgSrc300,
   platformOneStep,
   platformOneStepExplosion,
   platformJump,
+  platformJumpDisabled,
+  platformOne,
   saw,
   fan,
 } from './Assets';
 import { keys } from './Keys';
 import { player } from '../index';
 import { init } from '../index';
-// export class Platform {
-//   constructor (posX, posY, image) {
-//     this.position = {
-//       x: posX,
-//       y: posY
-//     }
-//     this.image = image;
-//     this.width = image.width;
-//     this.height = image.height;  
-//   }
-//   draw() {
-//     c.drawImage(this.image, this.position.x, this.position.y)
-//     // c.fillStyle = ('green');
-//     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-//   }
-// }
-
 class Platform {
   constructor (posX, posY, image) {
     this.position = {
@@ -119,7 +104,7 @@ class Platform {
         console.log('free!');
     }
   }
-  collision() {
+  collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
     this.collisionAbove();
     this.collisionUnder();
     this.collisionLeftSide();
@@ -134,22 +119,21 @@ class PlatformSpikes extends Platform {
     this.type = 'spikes';
   }
   collision() {
-         // Player - platform collision (player is above the spike platform)
-         if (player.position.y + player.height <= this.position.y &&
-          player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-          player.position.x <= this.position.x + this.width - player.width / 3) { 
-            // player.velocity.y = 0; // если касается шипов сверху
-init();
-      }
-      // Player - platform collision (player is under the platform)
-      if (player.position.y <= this.position.y + this.height &&
-          player.position.y + player.height + player.velocity.y >= this.position.y &&
-          player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-          player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
-init();
-      }
+  // Player - platform collision (player is above the spike platform)
+    if (player.position.y + player.height <= this.position.y &&
+    player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+    player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
+    player.position.x <= this.position.x + this.width - player.width / 3) { 
+      init();
+    }
+    // Player - platform collision (player is under the platform)
+    if (player.position.y <= this.position.y + this.height &&
+      player.position.y + player.height + player.velocity.y >= this.position.y &&
+      player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
+      player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+      init();
+    }
   }
 }
 
@@ -179,7 +163,28 @@ class JumpToggle extends Platform {
     this.type = 'jumpToggle';
     this.sprites = {
       idle: createImage(platformJump, 36, 36),
-      disabled: createImage(platformOneStepExplosion, 36, 36),
+      disabled: createImage(platformJumpDisabled, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+  }
+  toggle() {
+    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
+  }
+  collision() {
+    if (keys.jumpToggleActive) {
+      super.collision();
+    }
+  }
+}
+
+class OnePlatform extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'onePlatform';
+    this.sprites = {
+      idle: createImage(platformOne, 36, 36),
+      disabled: createImage(platformJumpDisabled, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
@@ -219,47 +224,41 @@ class OneStep extends Platform {
     this.position.x = this.temporaryPosX;
   }
   collision() {
-// Player - platform collision (player is above the platform)
-// And moves right and leaves the platform
-if ((!keys.up.pressed && player.velocity.y === 0 || !keys.up.pressed && player.velocity.y === gravity) &&
-      player.position.y + player.height <= this.position.y &&
-      player.position.y + player.height + player.velocity.y >= this.position.y &&
-      (player.position.x + player.width * 2 >= this.position.x && player.position.x <= this.position.x + this.width)
-) {
-  this.destroy(); 
-}
-// Не нужен но надо оставить, иначе блок пропадает сразу же
-     if (keys.up.pressed && player.velocity.y != 0 &&
-      player.position.y + player.height <= this.position.y &&
-      player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-      player.position.x <= this.position.x + this.width - player.width / 3) { 
-        player.velocity.y = 0; // если касается земли
-console.log('player.position.y', player.position.y);
-  this.destroy();
-  } else if (!keys.up.pressed &&
+  // Player - platform collision (player is above the platform)
+    // And moves right and leaves the platform
+    if ((!keys.up.pressed && player.velocity.y === 0 || !keys.up.pressed && player.velocity.y === gravity) &&
+        player.position.y + player.height <= this.position.y &&
+        player.position.y + player.height + player.velocity.y >= this.position.y &&
+        (player.position.x + player.width * 2 >= this.position.x && player.position.x <= this.position.x + this.width)) {
+          this.destroy(); 
+    }
+  // Не нужен но надо оставить, иначе блок пропадает сразу же
+    if (keys.up.pressed && player.velocity.y != 0 &&
     player.position.y + player.height <= this.position.y &&
     player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
     player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
     player.position.x <= this.position.x + this.width - player.width / 3) { 
       player.velocity.y = 0; // если касается земли
-console.log('keys.up.pressed');
-}
-
-
-
-  // Player - platform collision (player is under the platform)
-  if (player.position.y <= this.position.y + this.height &&
+      this.destroy();
+    } else if (!keys.up.pressed &&
+      player.position.y + player.height <= this.position.y &&
+      player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+      player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+      player.position.x <= this.position.x + this.width - player.width / 3) { 
+        player.velocity.y = 0; // если касается земли
+    }
+    // Player - platform collision (player is under the platform)
+    if (player.position.y <= this.position.y + this.height &&
       player.position.y + player.height + player.velocity.y >= this.position.y &&
       player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
       player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
         player.velocity.y = 1;
         this.destroy();
-  }
-  // Player - platform collision (player is left from the platform)
-  if (keys.right.pressed &&
+    }
+    // Player - platform collision (player is left from the platform)
+    if (keys.right.pressed &&
       player.position.y + player.height >= this.position.y && 
       player.position.y <= this.position.y + this.height &&
       player.position.x + player.width >= this.position.x &&
@@ -269,9 +268,9 @@ console.log('keys.up.pressed');
         player.currentSprite = player.sprites.fall.right;
         player.velocity.x -= 15;
         this.hits === 1 && this.destroy();
-  }
-  // Player - platform collision (player is right from the platform)
-  if (keys.left.pressed &&
+    }
+    // Player - platform collision (player is right from the platform)
+    if (keys.left.pressed &&
       player.position.y + player.height >= this.position.y && 
       player.position.y <= this.position.y + this.height &&
       player.position.x <= this.position.x + this.width &&
@@ -281,8 +280,15 @@ console.log('keys.up.pressed');
         player.currentSprite = player.sprites.fall.left;
         player.velocity.x += 15;
         this.hits === 1 && this.destroy();
-  } 
+    }
   }
 }
 
-export { Platform, PlatformSpikes, Saw, OneStep, Fan, JumpToggle }
+export { Platform,
+        PlatformSpikes,
+        Saw,
+        OneStep,
+        Fan,
+        JumpToggle,
+        OnePlatform,
+      }

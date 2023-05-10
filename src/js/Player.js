@@ -15,6 +15,8 @@ import { platformImgSrc300,
         platformOneStep,
         platformOneStepExplosion,
         platformJump,
+        platformJumpDisabled,
+        platformOne,
         saw,
         fan,
       } from '../js/Assets';
