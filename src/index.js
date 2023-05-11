@@ -68,23 +68,29 @@ export let platforms = [new Platform(210, 525, createImage(platformSolid, 36, 36
 
 export let player = new Player();
 
-              let spikes = new PlatformSpikes(270, 205, createImage(spike, 36, 36))
+              let spikes = new PlatformSpikes(150, 205, createImage(spike, 36, 36))
               // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
               export let sawTrap = new Saw(360, 315, createImage(saw, 36, 36))
     export let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
-              export let jump = new JumpToggle(170, 355, createImage(platformOne, 36, 36))
+              export let jump = new JumpToggle(100, 355, createImage(platformOne, 36, 36))
+
+
 export function init() {
-  player.velocity.y = 1;
+  player.velocity.y = 1; 
+  keys.spaceToggleCounter = 1;
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
 
   platforms = [new Platform(210, 455, createImage(platformSolid, 36, 36)),
           new Platform(265, 420, createImage(platformSolid, 36, 36)),
               new Platform(302, 455, createImage(platformSolid, 36, 36)),
-              new Platform(210, 280, createImage(platformSolid, 36, 36)),
+              new Platform(170, 455, createImage(platformSolid, 36, 36)),
+              new Platform(200, 280, createImage(platformSolid, 36, 36)),
               new Platform(370, 200, createImage(platformSolid, 36, 36)),
-              new PlatformOne(470, 200, createImage(platformSolid, 36, 36)),
-              new PlatformTwo(570, 200, createImage(platformSolid, 36, 36)),
+              //265 204
+          new PlatformTwo(160, 244, createImage(platformSolid, 36, 36)),
+          new PlatformTwo(266, 383, createImage(platformSolid, 36, 36)),
+              new PlatformOne(570, 200, createImage(platformSolid, 36, 36)),
               new PlatformThree(670, 200, createImage(platformSolid, 36, 36)),
               new Platform(472, 455, createImage(platformSolid, 36, 36)),
               new Platform(436, 455, createImage(platformSolid, 36, 36)), 
@@ -182,8 +188,10 @@ sawTrap2.restore();
 keys.jumpToggleActive = !keys.jumpToggleActive;
         init();
         console.log('you lose')
+
         // сюда вставить звук проигрыша
       }
+
 
 }
 init();

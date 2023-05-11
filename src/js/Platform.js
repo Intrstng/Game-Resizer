@@ -29,6 +29,7 @@ import { platformImgSrc300,
 import { keys } from './Keys';
 import { player } from '../index';
 import { init } from '../index';
+
 class Platform {
   constructor (posX, posY, image) {
     this.position = {
@@ -62,17 +63,17 @@ class Platform {
     if (player.position.y + player.height <= this.position.y &&
       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      player.position.x + player.width - player.width / 4 > this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+      player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
       player.position.x <= this.position.x + this.width - player.width / 4) { 
         player.velocity.y = 0; // если касается земли
     }
   }
   collisionUnder() {
   // Player - platform collision (player is under the platform)
-    if (player.position.y <= this.position.y + this.height &&
+    if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
       player.position.y + player.height + player.velocity.y >= this.position.y &&
-      player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-      player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+      player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
+      player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
       }
   }
@@ -115,6 +116,25 @@ class Platform {
     this.collisionUnder();
     this.collisionLeftSide();
     this.collisionRightSide();
+
+
+
+
+  //       // Player - platform collision (player is above the platform)
+  // if (player.position.y >= this.position.y &&
+  //   player.position.y + player.height <= this.position.y + this.height + player.velocity.y  && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+  //   // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+  //   player.position.x >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+  //   player.position.x <= this.position.x + this.width) { 
+  //     //player.velocity.y = 0; // если касается земли
+  //     keys.deadSignalZone = true;
+  //     console.log(keys.deadSignalZone)
+  //     console.log('!!!!!!!!!!')
+  //     //debugger
+  // } else keys.deadSignalZone = false;
+  // console.log(keys.deadSignalZone)
+
+    
   }
 }
 
@@ -232,7 +252,8 @@ class OneStep extends Platform {
     if ((!keys.up.pressed && player.velocity.y === 0 || !keys.up.pressed && player.velocity.y === gravity) &&
         player.position.y + player.height <= this.position.y &&
         player.position.y + player.height + player.velocity.y >= this.position.y &&
-        (player.position.x + player.width * 2 >= this.position.x && player.position.x <= this.position.x + this.width)) {
+        (player.position.x + player.width * 2 >= this.position.x &&
+        player.position.x <= this.position.x + this.width)) {
           this.destroy(); 
     }
   // Не нужен но надо оставить, иначе блок пропадает сразу же
@@ -300,7 +321,7 @@ class SpaceToggledPlatform extends Platform {
     this.setCount = 1;
   }
   checkSpaceToggleCounter() {
-   keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter = 1 : keys.spaceToggleCounter; 
+   keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter =  1 : keys.spaceToggleCounter; 
   }
   collision() {
     if (keys.spaceToggleCounter === this.setCount) {
@@ -310,8 +331,48 @@ class SpaceToggledPlatform extends Platform {
     } else {
       this.currentSprite = this.sprites.disabled;
       this.checkSpaceToggleCounter();
-    }
+
+
+
+  // Player - platform collision (player is above the platform)
+  if (player.position.y + player.height * 0.75 >= this.position.y &&
+    player.position.y + player.height * 0.5 <= this.position.y + this.height && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+    player.position.x + player.width * 0.25 >= this.position.x && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+    player.position.x + player.width * 0.25 <= this.position.x + this.width) { 
+      //player.velocity.y = 0; // если касается земли
+keys.deadSignalZone = true;
+console.log(keys.deadSignalZone)
+console.log('inside')
+     // debugger
   }
+  
+  
+  else if (((player.position.y + player.height * 0.75 <= this.position.y || 
+    player.position.y + player.height * 0.5 >= this.position.y + this.height) && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+    player.position.x + player.width * 0.25 >= this.position.x && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+    player.position.x + player.width * 0.25 <= this.position.x + this.width) ||
+    (player.position.y + player.height * 0.75 >= this.position.y &&  
+      player.position.y + player.height * 0.5 <= this.position.y + this.height) || // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+      (player.position.x + player.width * 0.25 <= this.position.x && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+      player.position.x + player.width * 0.25 >= this.position.x + this.width)) { 
+console.log('outside')   
+keys.deadSignalZone = false;
+//debugger
+  }
+  
+  
+  
+  
+    }
+
+
+  }
+
+
+  
 }
 
 class PlatformOne extends SpaceToggledPlatform {

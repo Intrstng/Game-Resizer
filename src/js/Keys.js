@@ -16,6 +16,7 @@ const keys = {
   lastPressed: 'right',
   jumpToggleActive: true,
   spaceToggleCounter: 1, // Platform One type is active
+  deadSignalZone: false,
 };
                                                 // let hiddenPlatformsArr = []
 const keyDownHandler = (e) => {
@@ -37,7 +38,7 @@ const keyDownHandler = (e) => {
         break;
 
       case 'Space': {
-        keys.spaceToggleCounter++;
+        !keys.deadSignalZone && keys.spaceToggleCounter++;
         // arr = [...arr, ...platforms.splice(1,1)];
         // console.log(arr)
       }
