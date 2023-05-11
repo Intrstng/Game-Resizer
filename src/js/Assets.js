@@ -17,6 +17,9 @@ const platformJumpDisabled = '../assets/img/Platforms/Platform_jump_disabled.png
 const platformOne = '../assets/img/Platforms/Platform_one.png';
 const platformTwo = '../assets/img/Platforms/Platform_two.png';
 const platformThree = '../assets/img/Platforms/Platform_three.png';
+const platformOneDisabled = '../assets/img/Platforms/Platform_one_disabled.png';
+const platformTwoDisabled = '../assets/img/Platforms/Platform_two_disabled.png';
+const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.png';
 const saw = '../assets/img/Traps/Saw.png';
 const fan = '../assets/img/Traps/Fan.png';
 const spike = '../assets/img/Traps/Platform_spikes.png';
@@ -52,6 +55,9 @@ export { platformImgSrc300,
         platformOne,
         platformTwo,
         platformThree,
+        platformOneDisabled,
+        platformTwoDisabled,
+        platformThreeDisabled,
         saw,
         fan,
         spike,

@@ -1,27 +1,30 @@
 import { canvas, c, gravity } from './Canvas';
 import { createImage } from './CreateImage';
 import { platformImgSrc300,
-        heroIdleR,
-        heroIdleL,
-        heroRunR,
-        heroRunL,
-        heroJumpR,
-        heroJumpL,
-        heroFallR,
-        heroFallL,
-        heroDeath,
-        backgroundImg,
-        platformSolid,
-        platformOneStep,
-        platformOneStepExplosion,
-        platformJump,
-        platformJumpDisabled,
-        platformOne,
-        platformTwo,
-        platformThree,
-        saw,
-        fan,
-        spike,
+  heroIdleR,
+  heroIdleL,
+  heroRunR,
+  heroRunL,
+  heroJumpR,
+  heroJumpL,
+  heroFallR,
+  heroFallL,
+  heroDeath,
+  backgroundImg,
+  platformSolid,
+  platformOneStep,
+  platformOneStepExplosion,
+  platformJump,
+  platformJumpDisabled,
+  platformOne,
+  platformTwo,
+  platformThree,
+  platformOneDisabled,
+  platformTwoDisabled,
+  platformThreeDisabled,
+  saw,
+  fan,
+  spike,
       } from './Assets';
 import { keys } from './Keys';
 import { player } from '../index';
@@ -199,13 +202,55 @@ class JumpToggle extends Platform {
   }
 }
 
-class OnePlatform extends Platform {
+class PlatformOne extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'onePlatform';
     this.sprites = {
       idle: createImage(platformOne, 36, 36),
-      disabled: createImage(platformJumpDisabled, 36, 36),
+      disabled: createImage(platformOneDisabled, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+  }
+  toggle() {
+    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
+  }
+  collision() {
+    if (keys.jumpToggleActive) {
+      super.collision();
+    }
+  }
+}
+
+class PlatformTwo extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'onePlatform';
+    this.sprites = {
+      idle: createImage(platformTwo, 36, 36),
+      disabled: createImage(platformTwoDisabled, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+  }
+  toggle() {
+    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
+  }
+  collision() {
+    if (keys.jumpToggleActive) {
+      super.collision();
+    }
+  }
+}
+
+class PlatformThree extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'onePlatform';
+    this.sprites = {
+      idle: createImage(platformThree, 36, 36),
+      disabled: createImage(platformThreeDisabled, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
@@ -311,5 +356,7 @@ export { Platform,
         OneStep,
         Fan,
         JumpToggle,
-        OnePlatform,
+        PlatformOne,
+        PlatformTwo,
+        PlatformThree,
       }
