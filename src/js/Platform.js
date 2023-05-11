@@ -202,69 +202,6 @@ class JumpToggle extends Platform {
   }
 }
 
-class PlatformOne extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'onePlatform';
-    this.sprites = {
-      idle: createImage(platformOne, 36, 36),
-      disabled: createImage(platformOneDisabled, 36, 36),
-    }
-    this.currentSprite = this.sprites.idle;
-    this.frequency = 63;
-  }
-  toggle() {
-    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (keys.jumpToggleActive) {
-      super.collision();
-    }
-  }
-}
-
-class PlatformTwo extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'onePlatform';
-    this.sprites = {
-      idle: createImage(platformTwo, 36, 36),
-      disabled: createImage(platformTwoDisabled, 36, 36),
-    }
-    this.currentSprite = this.sprites.idle;
-    this.frequency = 63;
-  }
-  toggle() {
-    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (keys.jumpToggleActive) {
-      super.collision();
-    }
-  }
-}
-
-class PlatformThree extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'onePlatform';
-    this.sprites = {
-      idle: createImage(platformThree, 36, 36),
-      disabled: createImage(platformThreeDisabled, 36, 36),
-    }
-    this.currentSprite = this.sprites.idle;
-    this.frequency = 63;
-  }
-  toggle() {
-    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (keys.jumpToggleActive) {
-      super.collision();
-    }
-  }
-}
-
 class OneStep extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
@@ -346,6 +283,70 @@ class OneStep extends Platform {
         player.currentSprite = player.sprites.fall.left;
         player.velocity.x += 15;
         this.hits === 1 && this.destroy();
+    }
+  }
+}
+
+class SpaceToggledPlatform extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'toggledBySpacePlatform';
+    // this.sprites = {
+    //   idle: createImage(platformOne, 36, 36),
+    //   disabled: createImage(platformOneDisabled, 36, 36),
+    // }
+    // this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+    this.setCount = 1;
+  }
+  checkSpaceToggleCounter() {
+   keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter = 1 : keys.spaceToggleCounter; 
+  }
+  collision() {
+    if (keys.spaceToggleCounter === this.setCount) {
+      this.currentSprite = this.sprites.idle;
+      super.collision();
+      this.checkSpaceToggleCounter();
+    } else {
+      this.currentSprite = this.sprites.disabled;
+      this.checkSpaceToggleCounter();
+    }
+  }
+}
+
+class PlatformOne extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'platformOne';
+    this.setCount = 1;
+    this.sprites = {
+      idle: createImage(platformOne, 36, 36),
+      disabled: createImage(platformOneDisabled, 36, 36),
+    }
+  }
+  
+}
+
+class PlatformTwo extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'platformTwo';
+    this.setCount = 2;
+    this.sprites = {
+      idle: createImage(platformTwo, 36, 36),
+      disabled: createImage(platformTwoDisabled, 36, 36),
+    }
+  }
+}
+
+class PlatformThree extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'platformThree';
+    this.setCount = 3;
+    this.sprites = {
+      idle: createImage(platformThree, 36, 36),
+      disabled: createImage(platformThreeDisabled, 36, 36),
     }
   }
 }

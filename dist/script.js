@@ -15,7 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "jump": () => (/* binding */ jump),
 /* harmony export */   "platforms": () => (/* binding */ platforms),
 /* harmony export */   "player": () => (/* binding */ player),
-/* harmony export */   "sawTrap": () => (/* binding */ sawTrap)
+/* harmony export */   "sawTrap": () => (/* binding */ sawTrap),
+/* harmony export */   "sawTrap2": () => (/* binding */ sawTrap2)
 /* harmony export */ });
 /* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/CreateImage */ "./src/js/CreateImage.js");
@@ -54,7 +55,7 @@ let jump = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.JumpToggle(170, 355, (0
 function init() {
   player.velocity.y = 1;
   additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_6__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height))];
-  platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(265, 420, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(302, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new OnePlatform(470, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(472, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(436, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap, sawTrap2, jump]; // создаем платформы !!!!!!!!!!!!!
+  platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(265, 420, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(302, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 280, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(370, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformOne(470, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformTwo(570, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformThree(670, 200, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(472, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(436, 455, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), spikes, sawTrap, sawTrap2, jump]; // создаем платформы !!!!!!!!!!!!!
   player = new _js_Player__WEBPACK_IMPORTED_MODULE_2__.Player();
 }
 function animate() {
@@ -330,7 +331,8 @@ const keys = {
     pressed: false
   },
   lastPressed: 'right',
-  jumpToggleActive: true
+  jumpToggleActive: true,
+  spaceToggleCounter: 1 // Platform One type is active
 };
 // let hiddenPlatformsArr = []
 const keyDownHandler = e => {
@@ -354,8 +356,7 @@ const keyDownHandler = e => {
         break;
       case 'Space':
         {
-          _index__WEBPACK_IMPORTED_MODULE_0__.sawTrap.destroy();
-          // console.log('dd')
+          keys.spaceToggleCounter++;
           // arr = [...arr, ...platforms.splice(1,1)];
           // console.log(arr)
         }
@@ -601,66 +602,6 @@ class JumpToggle extends Platform {
     }
   }
 }
-class PlatformOne extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'onePlatform';
-    this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOne, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneDisabled, 36, 36)
-    };
-    this.currentSprite = this.sprites.idle;
-    this.frequency = 63;
-  }
-  toggle() {
-    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive) {
-      super.collision();
-    }
-  }
-}
-class PlatformTwo extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'onePlatform';
-    this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformTwo, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformTwoDisabled, 36, 36)
-    };
-    this.currentSprite = this.sprites.idle;
-    this.frequency = 63;
-  }
-  toggle() {
-    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive) {
-      super.collision();
-    }
-  }
-}
-class PlatformThree extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'onePlatform';
-    this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformThree, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformThreeDisabled, 36, 36)
-    };
-    this.currentSprite = this.sprites.idle;
-    this.frequency = 63;
-  }
-  toggle() {
-    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive) {
-      super.collision();
-    }
-  }
-}
 class OneStep extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
@@ -733,6 +674,65 @@ class OneStep extends Platform {
       _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x += 15;
       this.hits === 1 && this.destroy();
     }
+  }
+}
+class SpaceToggledPlatform extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'toggledBySpacePlatform';
+    // this.sprites = {
+    //   idle: createImage(platformOne, 36, 36),
+    //   disabled: createImage(platformOneDisabled, 36, 36),
+    // }
+    // this.currentSprite = this.sprites.idle;
+    this.frequency = 63;
+    this.setCount = 1;
+  }
+  checkSpaceToggleCounter() {
+    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter;
+  }
+  collision() {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter === this.setCount) {
+      this.currentSprite = this.sprites.idle;
+      super.collision();
+      this.checkSpaceToggleCounter();
+    } else {
+      this.currentSprite = this.sprites.disabled;
+      this.checkSpaceToggleCounter();
+    }
+  }
+}
+class PlatformOne extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'platformOne';
+    this.setCount = 1;
+    this.sprites = {
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOne, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneDisabled, 36, 36)
+    };
+  }
+}
+class PlatformTwo extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'platformTwo';
+    this.setCount = 2;
+    this.sprites = {
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformTwo, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformTwoDisabled, 36, 36)
+    };
+  }
+}
+class PlatformThree extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'platformThree';
+    this.setCount = 3;
+    this.sprites = {
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformThree, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformThreeDisabled, 36, 36)
+    };
   }
 }
 

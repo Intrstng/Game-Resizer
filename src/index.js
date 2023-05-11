@@ -71,7 +71,7 @@ export let player = new Player();
               let spikes = new PlatformSpikes(270, 205, createImage(spike, 36, 36))
               // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
               export let sawTrap = new Saw(360, 315, createImage(saw, 36, 36))
-              let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
+    export let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
               export let jump = new JumpToggle(170, 355, createImage(platformOne, 36, 36))
 export function init() {
   player.velocity.y = 1;
@@ -82,9 +82,10 @@ export function init() {
           new Platform(265, 420, createImage(platformSolid, 36, 36)),
               new Platform(302, 455, createImage(platformSolid, 36, 36)),
               new Platform(210, 280, createImage(platformSolid, 36, 36)),
-              new Platform(400, 200, createImage(platformSolid, 36, 36)),
-              new OnePlatform(470, 200, createImage(platformSolid, 36, 36)),
-              
+              new Platform(370, 200, createImage(platformSolid, 36, 36)),
+              new PlatformOne(470, 200, createImage(platformSolid, 36, 36)),
+              new PlatformTwo(570, 200, createImage(platformSolid, 36, 36)),
+              new PlatformThree(670, 200, createImage(platformSolid, 36, 36)),
               new Platform(472, 455, createImage(platformSolid, 36, 36)),
               new Platform(436, 455, createImage(platformSolid, 36, 36)), 
     spikes, sawTrap, sawTrap2, jump      ]; // создаем платформы !!!!!!!!!!!!!

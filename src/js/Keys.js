@@ -1,6 +1,6 @@
 import { player } from '../index';
 import { platforms } from '../index';
-import { sawTrap } from '../index';
+import { sawTrap, sawTrap2 } from '../index';
 import { jump } from '../index';
 
 const keys = {
@@ -15,6 +15,7 @@ const keys = {
   },
   lastPressed: 'right',
   jumpToggleActive: true,
+  spaceToggleCounter: 1, // Platform One type is active
 };
                                                 // let hiddenPlatformsArr = []
 const keyDownHandler = (e) => {
@@ -36,8 +37,7 @@ const keyDownHandler = (e) => {
         break;
 
       case 'Space': {
-        sawTrap.destroy();
-        // console.log('dd')
+        keys.spaceToggleCounter++;
         // arr = [...arr, ...platforms.splice(1,1)];
         // console.log(arr)
       }
