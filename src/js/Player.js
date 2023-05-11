@@ -1,5 +1,6 @@
 import { canvas, c, gravity } from './Canvas';
 import { createImage } from './CreateImage';
+import { init } from '../index';
 import { platformImgSrc300,
         heroIdleR,
         heroIdleL,
@@ -9,16 +10,19 @@ import { platformImgSrc300,
         heroJumpL,
         heroFallR,
         heroFallL,
+        heroDeath,
         backgroundImg,
         platformSolid,
-        platformSpikes,
         platformOneStep,
         platformOneStepExplosion,
         platformJump,
         platformJumpDisabled,
         platformOne,
+        platformTwo,
+        platformThree,
         saw,
         fan,
+        spike,
       } from '../js/Assets';
 
 export class Player {
@@ -33,6 +37,7 @@ export class Player {
     }
     this.width = 32;
     this.height = 32;
+    this.frequency = 21;
 
     //this.image = createImage(heroIdleR, 32, 32);
     this.frames = 0;
@@ -53,6 +58,7 @@ export class Player {
         right: createImage(heroFallR, 32, 32),
         left: createImage(heroFallL, 32, 32),
       },
+      death: createImage(heroDeath, 32, 32),
     }
     this.currentSprite = this.sprites.idle.right;
   }
@@ -63,9 +69,15 @@ export class Player {
     c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height) // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
   }
 
+  die() {
+    this.velocity.x = 0;
+    this.velocity.y = 0;
+    this.currentSprite = this.sprites.death;
+    setTimeout(init, 550);
+  }
   update() {
     this.frames++;
-    if (this.frames > 21) this.frames = 0;
+    if (this.frames > this.frequency) this.frames = 0;
     this.draw();
     this.position.y += this.velocity.y;
     this.position.x += this.velocity.x;

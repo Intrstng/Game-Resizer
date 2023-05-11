@@ -52,7 +52,7 @@
       let platforms = [new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(210, 525, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(330, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(250, 400, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36)), new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(400, 100, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36))]; // создаем платформы
 
       let player = new _js_Player__WEBPACK_IMPORTED_MODULE_2__.Player();
-      let spikes = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(100, 415, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSpikes, 36, 36));
+      let spikes = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.spikes(270, 205, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.spikes, 36, 36));
       // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
       let sawTrap = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.Saw(360, 315, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36));
       let sawTrap2 = new _js_Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(400, 455, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36));
@@ -208,6 +208,7 @@
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */"backgroundImg": () => /* binding */backgroundImg,
         /* harmony export */"fan": () => /* binding */fan,
+        /* harmony export */"heroDeath": () => /* binding */heroDeath,
         /* harmony export */"heroFallL": () => /* binding */heroFallL,
         /* harmony export */"heroFallR": () => /* binding */heroFallR,
         /* harmony export */"heroIdleL": () => /* binding */heroIdleL,
@@ -223,29 +224,30 @@
         /* harmony export */"platformOneStep": () => /* binding */platformOneStep,
         /* harmony export */"platformOneStepExplosion": () => /* binding */platformOneStepExplosion,
         /* harmony export */"platformSolid": () => /* binding */platformSolid,
-        /* harmony export */"platformSpikes": () => /* binding */platformSpikes,
+        /* harmony export */"spikes": () => /* binding */spikes,
         /* harmony export */"saw": () => /* binding */saw
         /* harmony export */
       });
-      const platformImgSrc300 = '../assets/img/platform.png';
-      const heroIdleR = '../assets/img/Idle_right.png';
-      const heroIdleL = '../assets/img/Idle_left.png';
-      const heroRunR = '../assets/img/Run_right.png';
-      const heroRunL = '../assets/img/Run_left.png';
-      const heroJumpR = '../assets/img/Jump_right.png';
-      const heroJumpL = '../assets/img/Jump_left.png';
-      const heroFallR = '../assets/img/Fall_right.png';
-      const heroFallL = '../assets/img/Fall_left.png';
-      const backgroundImg = '../assets/img/bg_2.jpg';
-      const platformSolid = '../assets/img/Platform_solid.png';
-      const platformSpikes = '../assets/img/Platform_spikes.png';
-      const platformOneStep = '../assets/img/Platform_oneStep.png';
-      const platformOneStepExplosion = '../assets/img/Platform_oneStep_Explosion.png';
-      const platformJump = '../assets/img/Platform_jump.png';
-      const platformJumpDisabled = '../assets/img/Platform_jump_disabled.png';
-      const platformOne = '../assets/img/Platform_one.png';
-      const saw = '../assets/img/Saw.png';
-      const fan = '../assets/img/Fan.png';
+      const platformImgSrc300 = '../assets/img/Platforms/platform.png';
+      const heroIdleR = '../assets/img/Hero/Idle_right.png';
+      const heroIdleL = '../assets/img/Hero/Idle_left.png';
+      const heroRunR = '../assets/img/Hero/Run_right.png';
+      const heroRunL = '../assets/img/Hero/Run_left.png';
+      const heroJumpR = '../assets/img/Hero/Jump_right.png';
+      const heroJumpL = '../assets/img/Hero/Jump_left.png';
+      const heroFallR = '../assets/img/Hero/Fall_right.png';
+      const heroFallL = '../assets/img/Hero/Fall_left.png';
+      const heroDeath = '../assets/img/Hero/Player_death.png';
+      const backgroundImg = '../assets/img/Background_images/bg_2.jpg';
+      const platformSolid = '../assets/img/Platforms/Platform_solid.png';
+      const spikes = '../assets/img/Platforms/Platform_spikes.png';
+      const platformOneStep = '../assets/img/Platforms/Platform_oneStep.png';
+      const platformOneStepExplosion = '../assets/img/Platforms/Platform_oneStep_Explosion.png';
+      const platformJump = '../assets/img/Platforms/Platform_jump.png';
+      const platformJumpDisabled = '../assets/img/Platforms/Platform_jump_disabled.png';
+      const platformOne = '../assets/img/Platforms/Platform_one.png';
+      const saw = '../assets/img/Traps/Saw.png';
+      const fan = '../assets/img/Traps/Fan.png';
 
       // import platformImgSrc300 from '/assets/img/platform.png';
       // import heroIdleR from '/assets/img/Idle_right.png';
@@ -428,7 +430,7 @@
         /* harmony export */"OnePlatform": () => /* binding */OnePlatform,
         /* harmony export */"OneStep": () => /* binding */OneStep,
         /* harmony export */"Platform": () => /* binding */Platform,
-        /* harmony export */"PlatformSpikes": () => /* binding */PlatformSpikes,
+        /* harmony export */"spikes": () => /* binding */spikes,
         /* harmony export */"Saw": () => /* binding */Saw
         /* harmony export */
       });
@@ -523,11 +525,29 @@
           this.collisionRightSide();
         }
       }
-      class PlatformSpikes extends Platform {
+      class spikes extends Platform {
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'spikes';
         }
+        // collision() {
+        //   // Player - platform collision (player is above the spike platform)
+        //     if (player.position.y + player.height <= this.position.y &&
+        //     player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+        //     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+        //     player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
+        //     player.position.x <= this.position.x + this.width - player.width / 3) { 
+        //       init();
+        //     }
+        //     // Player - platform collision (player is under the platform)
+        //     if (player.position.y <= this.position.y + this.height &&
+        //       player.position.y + player.height + player.velocity.y >= this.position.y &&
+        //       player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
+        //       player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+        //       init();
+        //     }
+        // }
+
         collision() {
           // Player - platform collision (player is above the spike platform)
           if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
@@ -536,17 +556,17 @@
           _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3 &&
           // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
           _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
-            (0, _index__WEBPACK_IMPORTED_MODULE_4__.init)();
+            _index__WEBPACK_IMPORTED_MODULE_4__.player.die();
           }
           // Player - platform collision (player is under the platform)
           if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2 &&
           // можно сделать 1.75
           _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2) {
-            (0, _index__WEBPACK_IMPORTED_MODULE_4__.init)();
+            _index__WEBPACK_IMPORTED_MODULE_4__.player.die();
           }
         }
       }
-      class Saw extends PlatformSpikes {
+      class Saw extends spikes {
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'saw';
@@ -699,7 +719,9 @@
       /* harmony import */
       var _CreateImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./CreateImage */"./src/js/CreateImage.js");
       /* harmony import */
-      var _js_Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../js/Assets */"./src/js/Assets.js");
+      var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../index */"./src/index.js");
+      /* harmony import */
+      var _js_Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../js/Assets */"./src/js/Assets.js");
       class Player {
         constructor() {
           this.position = {
@@ -712,26 +734,28 @@
           };
           this.width = 32;
           this.height = 32;
+          this.frequency = 21;
 
           //this.image = createImage(heroIdleR, 32, 32);
           this.frames = 0;
           this.sprites = {
             idle: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroIdleR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroIdleL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroIdleR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroIdleL, 32, 32)
             },
             run: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroRunR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroRunL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroRunR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroRunL, 32, 32)
             },
             jump: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroJumpR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroJumpL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroJumpR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroJumpL, 32, 32)
             },
             fall: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroFallR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_2__.heroFallL, 32, 32)
-            }
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroFallR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroFallL, 32, 32)
+            },
+            death: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroDeath, 32, 32)
           };
           this.currentSprite = this.sprites.idle.right;
         }
@@ -741,9 +765,15 @@
           _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height); // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
         }
 
+        die() {
+          this.velocity.x = 0;
+          this.velocity.y = 0;
+          this.currentSprite = this.sprites.death;
+          setTimeout(_index__WEBPACK_IMPORTED_MODULE_2__.init, 550);
+        }
         update() {
           this.frames++;
-          if (this.frames > 21) this.frames = 0;
+          if (this.frames > this.frequency) this.frames = 0;
           this.draw();
           this.position.y += this.velocity.y;
           this.position.x += this.velocity.x;

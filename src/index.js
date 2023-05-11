@@ -9,23 +9,27 @@ import { createImage } from './js/CreateImage';
 import { Player } from './js/Player';
 import { Platform, PlatformSpikes, Saw, OneStep, Fan, JumpToggle, OnePlatform } from './js/Platform';
 import { platformImgSrc300,
-          heroIdleR,
-          heroIdleL,
-          heroRunR,
-          heroRunL,
-          heroJumpR,
-          heroJumpL,
-          heroFallR,
-          heroFallL,
-          backgroundImg,
-          platformSolid,
-          platformSpikes,
-          platformOneStep,
-          platformOneStepExplosion,
-          platformJump,
-          platformOne,
-          saw,
-          fan,
+        heroIdleR,
+        heroIdleL,
+        heroRunR,
+        heroRunL,
+        heroJumpR,
+        heroJumpL,
+        heroFallR,
+        heroFallL,
+        heroDeath,
+        backgroundImg,
+        platformSolid,
+        platformOneStep,
+        platformOneStepExplosion,
+        platformJump,
+        platformJumpDisabled,
+        platformOne,
+        platformTwo,
+        platformThree,
+        saw,
+        fan,
+        spike,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
@@ -52,12 +56,13 @@ export let platforms = [new Platform(210, 525, createImage(platformSolid, 36, 36
 
 export let player = new Player();
 
-              let spikes = new PlatformSpikes(100, 415, createImage(platformSpikes, 36, 36))
+              let spikes = new PlatformSpikes(270, 205, createImage(spike, 36, 36))
               // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
               export let sawTrap = new Saw(360, 315, createImage(saw, 36, 36))
               let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
               export let jump = new JumpToggle(170, 355, createImage(platformOne, 36, 36))
 export function init() {
+  player.velocity.y = 1;
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
 

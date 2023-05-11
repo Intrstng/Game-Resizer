@@ -1,25 +1,28 @@
 import { canvas, c, gravity } from './Canvas';
 import { createImage } from './CreateImage';
 import { platformImgSrc300,
-  heroIdleR,
-  heroIdleL,
-  heroRunR,
-  heroRunL,
-  heroJumpR,
-  heroJumpL,
-  heroFallR,
-  heroFallL,
-  backgroundImg,
-  platformSolid,
-  platformSpikes,
-  platformOneStep,
-  platformOneStepExplosion,
-  platformJump,
-  platformJumpDisabled,
-  platformOne,
-  saw,
-  fan,
-} from './Assets';
+        heroIdleR,
+        heroIdleL,
+        heroRunR,
+        heroRunL,
+        heroJumpR,
+        heroJumpL,
+        heroFallR,
+        heroFallL,
+        heroDeath,
+        backgroundImg,
+        platformSolid,
+        platformOneStep,
+        platformOneStepExplosion,
+        platformJump,
+        platformJumpDisabled,
+        platformOne,
+        platformTwo,
+        platformThree,
+        saw,
+        fan,
+        spike,
+      } from './Assets';
 import { keys } from './Keys';
 import { player } from '../index';
 import { init } from '../index';
@@ -118,22 +121,40 @@ class PlatformSpikes extends Platform {
     super(posX, posY, image);
     this.type = 'spikes';
   }
+  // collision() {
+  //   // Player - platform collision (player is above the spike platform)
+  //     if (player.position.y + player.height <= this.position.y &&
+  //     player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+  //     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+  //     player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
+  //     player.position.x <= this.position.x + this.width - player.width / 3) { 
+  //       init();
+  //     }
+  //     // Player - platform collision (player is under the platform)
+  //     if (player.position.y <= this.position.y + this.height &&
+  //       player.position.y + player.height + player.velocity.y >= this.position.y &&
+  //       player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
+  //       player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+  //       init();
+  //     }
+  // }
+
   collision() {
-  // Player - platform collision (player is above the spike platform)
-    if (player.position.y + player.height <= this.position.y &&
-    player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-    player.position.x <= this.position.x + this.width - player.width / 3) { 
-      init();
-    }
-    // Player - platform collision (player is under the platform)
-    if (player.position.y <= this.position.y + this.height &&
-      player.position.y + player.height + player.velocity.y >= this.position.y &&
-      player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-      player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
-      init();
-    }
+    // Player - platform collision (player is above the spike platform)
+      if (player.position.y + player.height <= this.position.y &&
+        player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+        // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+        player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
+        player.position.x <= this.position.x + this.width - player.width / 3) { 
+        player.die();
+      }
+      // Player - platform collision (player is under the platform)
+      if (player.position.y <= this.position.y + this.height &&
+        player.position.y + player.height + player.velocity.y >= this.position.y &&
+        player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
+        player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
+          player.die();
+      }
   }
 }
 

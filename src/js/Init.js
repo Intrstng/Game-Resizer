@@ -1,5 +1,5 @@
 // import { AdditionalElements } from './AdditionalElements';
-// import { Platform, PlatformSpikes, Saw, OneStep } from './AdditionalElements';
+// import { Platform, spikes, Saw, OneStep } from './AdditionalElements';
 // import { Player } from './Player';
 // import { player, platforms, additionalElements, spikes } from '../index';
 // import { createImage } from './CreateImage';
