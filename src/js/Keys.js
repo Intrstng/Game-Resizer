@@ -3,6 +3,8 @@ import { platforms } from '../index';
 import { sawTrap, sawTrap2 } from '../index';
 import { jump } from '../index';
 
+
+
 const keys = {
   right: {
     pressed: false
@@ -29,10 +31,10 @@ const keyDownHandler = (e) => {
         }
         keys.up.pressed = true;
         if (player.velocity.y === 0 && keys.lastPressed === 'right') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
-          player.velocity.y -= 10;
+          player.velocity.y -= player.jumpHeight; // -20 is higher
           player.currentSprite = player.sprites.jump.right;
         } else if (player.velocity.y === 0 && keys.lastPressed === 'left') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
-          player.velocity.y -= 10;
+          player.velocity.y -= player.jumpHeight; // -20 is higher
           player.currentSprite = player.sprites.jump.left;
         }
         break;

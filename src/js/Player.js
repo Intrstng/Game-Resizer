@@ -1,4 +1,4 @@
-import { canvas, c, gravity } from './Canvas';
+import { canvas, c } from './Canvas';
 import { createImage } from './CreateImage';
 import { init } from '../index';
 import { platformImgSrc300,
@@ -27,22 +27,25 @@ import { platformImgSrc300,
   fan,
   spike,
       } from '../js/Assets';
+import { platforms, intersection } from '../index';
+
 
 export class Player {
-  constructor() {
+  constructor({ platforms = [] }) {
+    this.platforms = platforms;
     this.position = {
-      x: 200,
-      y: canvas.height / 2
+      x: 165,
+      y: 247 //canvas.height / 2
     }
     this.velocity = {
       x: 0,
       y: 1 
     }
+    this.gravity = 0.25;
+    this.jumpHeight = 10; // -20 is higher
     this.width = 32;
     this.height = 32;
     this.frequency = 21;
-
-    //this.image = createImage(heroIdleR, 32, 32);
     this.frames = 0;
     this.sprites = {
       idle: {
@@ -65,11 +68,36 @@ export class Player {
     }
     this.currentSprite = this.sprites.idle.right;
   }
+            
+  get top() {
+    return this.position.y;
+  }
+  get bottom() {
+    return this.position.y + this.height;
+  }
+  get left() {
+    return this.position.x;
+  }
+  get right() {
+    return this.position.x + this.width;
+  }
+
+
+  set top(value) {
+    this.position.y = value;
+  }
+  set bottom(value) {
+    this.position.y = value;
+  }
+  set left(value) {
+    this.position.x = value;
+  }
+  set right(value) {
+    this.position.x = value;
+  }
 
   draw() {
-    // c.fillStyle = ('red');
-    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-    c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.position.x, this.position.y, this.width, this.height) // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
+    c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.left, this.top, this.width, this.height) // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
   }
 
   die() {
@@ -78,18 +106,63 @@ export class Player {
     this.currentSprite = this.sprites.death;
     setTimeout(init, 550);
   }
+
+  checkCollisionsAxes_X() {
+    // X-axes collision
+    for (let i = 0; i < this.platforms.length; i++) {
+      const platform = this.platforms[i]
+      // If a collision exists
+      if (this.left <= platform.position.x + platform.width &&
+        this.right >= platform.position.x &&
+        this.top <= platform.position.y + platform.height &&
+        this.bottom >= platform.position.y) {
+          if (this.velocity.x < 0) {// moving left       // <= -2
+            this.left = platform.position.x + platform.width + 0.1;
+            break;
+          }
+          if (this.velocity.x > 0) {// moving right      // <= 2
+            this.left = platform.position.x - this.width - 0.1;
+            break;
+          }
+      }
+    }
+  }
+
+  checkCollisionsAxes_Y() {
+    // Y-axes collision
+    for (let i = 0; i < this.platforms.length; i++) {
+      const platform = this.platforms[i]
+      // If a collision exists
+      if (this.left <= platform.position.x + platform.width &&
+        this.right >= platform.position.x &&
+        this.top <= platform.position.y + platform.height &&
+        this.bottom >= platform.position.y) {
+          if (this.velocity.y < 0) {// moving up  // -0.25
+            this.velocity.y = 0;
+            this.top = platform.position.y + platform.height + 0.1;
+            break;
+          }
+          if (this.velocity.y > 0) {// falling down  // 0.25
+            this.velocity.y = 0;
+            this.top = platform.position.y - this.height - 0.1;
+            break;
+          }
+      }
+    }
+  }
+
+  setGravity() {
+    this.velocity.y += this.gravity;
+    this.top += this.velocity.y;
+  }
+
   update() {
     this.frames++;
     if (this.frames > this.frequency) this.frames = 0;
     this.draw();
-    this.position.y += this.velocity.y;
-    this.position.x += this.velocity.x;
-    
-    if (this.position.y + this.height + this.velocity.y <= canvas.height) {
-      this.velocity.y += gravity;
-    } 
-    // else { // если это оставить персонаж не покинет экран при касании нижней границы экрана
-    //   this.velocity.y = 0;
-    // }
+    this.left += this.velocity.x;
+    this.checkCollisionsAxes_X(); // strict order
+    this.setGravity();            // strict order
+    this.checkCollisionsAxes_Y(); // strict order
   }
 }

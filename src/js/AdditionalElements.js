@@ -1,4 +1,4 @@
-import { canvas, c, gravity } from './Canvas';
+import { canvas, c } from './Canvas';
 
 export class AdditionalElements {
   constructor (posX, posY, image) {
