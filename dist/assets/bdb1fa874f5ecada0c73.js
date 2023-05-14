@@ -123,10 +123,9 @@
 
         // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
 
-        // jump.toggle()                    
-
         _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms.forEach(platform => platform.draw());
         _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms.forEach(platform => platform.update()); // рисуем платформы
+        _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms.forEach(platform => platform.type === 'jumpToggle' && platform.toggle());
         player.update();
         if (_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.width) {
           // упор персонажа в правый край экрана
@@ -409,6 +408,18 @@
             console.log(index_X, index_Y);
             platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformSolid, 36, 36), platforms));
           }
+          if (cell === 'jp') {
+            console.log(index_X, index_Y);
+            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggle(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
+          }
+          if (cell === 'sk') {
+            console.log(index_X, index_Y);
+            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformSpikes(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.spike, 36, 36), platforms));
+          }
+          if (cell === 'sw') {
+            console.log(index_X, index_Y);
+            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Saw(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.saw, 36, 36), platforms));
+          }
         });
       });
 
@@ -599,131 +610,8 @@
       var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
       /* harmony import */
       var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../index */"./src/index.js");
-
-      // class Platform {
-      //   constructor (posX, posY, image) {
-      //     this.position = {
-      //       x: posX,
-      //       y: posY
-      //     }
-      //     this.image = image;
-      //     this.width = image.width;
-      //     this.height = image.height;
-      //     this.frames = 0;
-      //     this.frequency = 28;
-      //     this.sprites = {
-      //       idle: this.image,
-      //     }
-      //     this.currentSprite = this.sprites.idle;
-      //     this.type = 'solid';
-      //   }
-
-      //   /* ------------------ */
-      //   get t() {
-      //     return this.position.y;
-      //   }
-      //   get b() {
-      //     return this.position.y + this.height;
-      //   }
-      //   get l() {
-      //     return this.position.x;
-      //   }
-      //   get r() {
-      //     return this.position.x + this.width;
-      //   }
-
-      //   set t(value) {
-      //     this.position.y = value;
-      //   }
-      //   set b(value) {
-      //     this.position.y = value - this.height;
-      //   }
-      //   set l(value) {
-      //     this.position.x = value;
-      //   }
-      //   set r(value) {
-      //     this.position.x = value - this.width;
-      //   }
-
-      // /* -------------------- */
-
-      //   getType() {
-      //     return this.type;
-      //   }
-      //   draw() {
-      //     c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-      //   }
-      //   update() {
-      //     this.frames++;
-      //     if (this.frames > this.frequency) this.frames = 0;
-      //     this.draw();
-      //   }
-      //   collisionAbove() {
-      //   // Player - platform collision (player is above the platform)
-      //     if (player.position.y + player.height <= this.position.y &&
-      //       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      //       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      //       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-      //       player.position.x <= this.position.x + this.width - player.width / 4) { 
-      //         player.velocity.y = 0; // если касается земли
-      //     }
-      //   }
-      //   collisionUnder() {
-      //   // Player - platform collision (player is under the platform)
-      //     if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
-      //       player.position.y + player.height + player.velocity.y >= this.position.y &&
-      //       player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
-      //       player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
-      //         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-      //       }
-      //   }
-      //   collisionLeftSide() {
-      //   // Player - platform collision (player is left from the platform and moves right)
-      //     if (keys.right.pressed &&
-      //       player.position.y + player.height >= this.position.y && 
-      //       player.position.y <= this.position.y + this.height &&
-      //       player.position.x + player.width >= this.position.x) {
-      //         player.velocity.x = 0;
-      //         console.log('hit!');
-      //     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-      //     if (keys.right.pressed &&
-      //       player.position.y + player.height >= this.position.y && 
-      //       player.position.y <= this.position.y + this.height &&
-      //       player.position.x + player.width >= this.position.x + this.width) {
-      //         player.velocity.x = 2;
-      //         console.log('free!');
-      //     }
-      //   }
-      //   collisionRightSide() {
-      //   // Player - platform collision (player is right from the platform and moves left)
-      //   if (keys.left.pressed &&
-      //     player.position.y + player.height >= this.position.y && 
-      //     player.position.y <= this.position.y + this.height &&
-      //     player.position.x <= this.position.x + this.width) {
-      //       player.velocity.x = 0;
-      //       console.log('hit!');
-      //   } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-      //     if (keys.left.pressed &&
-      //       player.position.y + player.height >= this.position.y && 
-      //       player.position.y <= this.position.y + this.height &&
-      //       player.position.x /* + player.width */ <= this.position.x) { // или "-" player.width ???
-      //         player.velocity.x = -2;
-      //         console.log('free!');
-      //     }
-      //   }
-
-      //   collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
-      //     // this.collisionAbove();
-      //     // this.collisionUnder();
-      //     // this.collisionLeftSide();
-      //     // this.collisionRightSide(); 
-      //   }
-      // }
-
       class Platform {
         constructor(posX, posY, image) {
-          let platforms = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-          this.platforms = platforms;
           this.position = {
             x: posX,
             y: posY
@@ -739,8 +627,6 @@
           this.currentSprite = this.sprites.idle;
           this.type = 'solid';
         }
-
-        /* ------------------ */
         get top() {
           return this.position.y;
         }
@@ -765,9 +651,6 @@
         set right(value) {
           this.position.x = value;
         }
-
-        /* -------------------- */
-
         getType() {
           return this.type;
         }
@@ -780,95 +663,12 @@
           if (this.frames > this.frequency) this.frames = 0;
           this.draw();
         }
-        collisionAbove() {
-          // Player - platform collision (player is above the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
-          // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 4 >= this.position.x &&
-          // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 4) {
-            _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
-          }
-        }
-
-        collisionUnder() {
-          // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y - _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y * 0.5 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 1.25 &&
-          // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 1.25) {
-            _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
-          }
-        }
-
-        collisionLeftSide() {
-          // Player - platform collision (player is left from the platform and moves right)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x) {
-            _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 0;
-            console.log('hit!');
-          } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + this.width) {
-            _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 2;
-            console.log('free!');
-          }
-        }
-        collisionRightSide() {
-          // Player - platform collision (player is right from the platform and moves left)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width) {
-            _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = 0;
-            console.log('hit!');
-          } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x /* + player.width */ <= this.position.x) {
-            // или "-" player.width ???
-            _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x = -2;
-            console.log('free!');
-          }
-        }
-        checkCollisionsAxes_X() {
-          // X-axes collision
-          for (let i = 0; i < this.platforms.length; i++) {
-            const platform = this.platforms[i];
-            // If a collision exists
-            if (this.left <= platform.position.x + platform.width && this.right >= platform.position.x && this.top <= platform.position.y + platform.height && this.bottom >= platform.position.y) {
-              if (this.velocity.x < 0) {
-                // moving left       // <= -2
-                this.left = platform.position.x + platform.width + 0.1;
-                break;
-              }
-              if (this.velocity.x > 0) {
-                // moving right      // <= 2
-                this.left = platform.position.x - this.width - 0.1;
-                break;
-              }
-            }
-          }
-        }
-        checkCollisionsAxes_Y() {
-          // Y-axes collision
-          for (let i = 0; i < this.platforms.length; i++) {
-            const platform = this.platforms[i];
-            // If a collision exists
-            if (this.left <= platform.position.x + platform.width && this.right >= platform.position.x && this.top <= platform.position.y + platform.height && this.bottom >= platform.position.y) {
-              if (this.velocity.y < 0) {
-                // moving up  // -0.25
-                this.velocity.y = 0;
-                this.top = platform.position.y + platform.height + 0.1;
-                break;
-              }
-              if (this.velocity.y > 0) {
-                // falling down  // 0.25
-                this.velocity.y = 0;
-                this.top = platform.position.y - this.height - 0.1;
-                break;
-              }
-            }
-          }
-        }
-        collision() {// разбито на отдельные методы, для частичного наследования (если понадобится)
-          // this.collisionAbove();
-          // this.collisionUnder();
-          // this.collisionLeftSide();
-          // this.collisionRightSide(); 
+        collision() {
+          // разбито на отдельные методы, для частичного наследования (если понадобится)
+          collisionAbove();
+          collisionUnder();
+          collisionLeftSide();
+          collisionRightSide();
         }
       }
       class PlatformSpikes extends Platform {
@@ -1031,7 +831,7 @@
             this.checkSpaceToggleCounter();
             // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
             // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
-            if (_index__WEBPACK_IMPORTED_MODULE_4__.platforms.some(elem => {
+            if (platforms.some(elem => {
               return _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height * 0.75 >= elem.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height * 0.35 <= elem.position.y + elem.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width * 0.75 >= elem.position.x && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width * 0.25 <= elem.position.x + elem.width;
             })) {
               _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.deadSignalZone = true;
@@ -1100,7 +900,9 @@
       /* harmony import */
       var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../index */"./src/index.js");
       /* harmony import */
-      var _js_Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../js/Assets */"./src/js/Assets.js");
+      var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
+      /* harmony import */
+      var _js_Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../js/Assets */"./src/js/Assets.js");
       class Player {
         constructor(_ref) {
           let {
@@ -1124,22 +926,22 @@
           this.frames = 0;
           this.sprites = {
             idle: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroIdleR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroIdleL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
             },
             run: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroRunR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroRunL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
             },
             jump: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroJumpR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroJumpL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
             },
             fall: {
-              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroFallR, 32, 32),
-              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroFallL, 32, 32)
+              right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
+              left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
             },
-            death: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.heroDeath, 32, 32)
+            death: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
           };
           this.currentSprite = this.sprites.idle.right;
         }
@@ -1182,17 +984,99 @@
           for (let i = 0; i < this.platforms.length; i++) {
             const platform = this.platforms[i];
             // If a collision exists
-            if (this.left <= platform.position.x + platform.width && this.right >= platform.position.x && this.top <= platform.position.y + platform.height && this.bottom >= platform.position.y) {
-              if (this.velocity.x < 0) {
-                // moving left       // <= -2
-                this.left = platform.position.x + platform.width + 0.1;
+            switch (platform.type) {
+              case 'fan':
+              case 'solid':
+                if (this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+                  if (this.velocity.x < 0) {
+                    // moving left       // <= -2
+                    this.left = platform.right + 0.1;
+                    break;
+                  }
+                  if (this.velocity.x > 0) {
+                    // moving right      // <= 2
+                    this.left = platform.left - this.width - 0.1;
+                    break;
+                  }
+                }
                 break;
-              }
-              if (this.velocity.x > 0) {
-                // moving right      // <= 2
-                this.left = platform.position.x - this.width - 0.1;
+              case 'jumpToggle':
+                if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+                  if (this.velocity.x < 0) {
+                    // moving left       // <= -2
+                    this.left = platform.right + 0.1;
+                    break;
+                  }
+                  if (this.velocity.x > 0) {
+                    // moving right      // <= 2
+                    this.left = platform.left - this.width - 0.1;
+                    break;
+                  }
+                }
                 break;
-              }
+
+              //     case 'platformOne':
+              //     case 'platformTwo':
+              //     case 'platformThree':
+              //       if ((keys.spaceToggleCounter === platform.setCount) &&
+              //       this.left <= platform.right &&
+              //         this.right >= platform.left &&
+              //         this.top <= platform.bottom &&
+              //         this.bottom >= platform.top) {
+              //           if (this.velocity.x < 0) {// moving left       // <= -2
+              //             this.left = platform.right + 0.1;
+              //             break;
+              //           }
+              //           if (this.velocity.x > 0) {// moving right      // <= 2
+              //             this.left = platform.left - this.width - 0.1;
+              //             break;
+              //           }
+              //       platform.currentSprite = platform.sprites.idle;
+              //       platform.checkSpaceToggleCounter();
+              //     } else {
+              //       platform.currentSprite = platform.sprites.disabled;
+              //       platform.checkSpaceToggleCounter();
+              //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+              // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+              //     if (this.platforms.some((block) => {
+              //       return (this.bottom * 0.75 >= block.top &&
+              //         this.bottom * 0.35 <= block.bottom &&
+              //         this.right * 0.75 >= block.top &&
+              //         this.right * 0.25 <= block.right);
+              //     })) {
+              //       keys.deadSignalZone = true;
+              //       //debugger
+              //       console.log('inside')
+              //     } else {
+              //       console.log('outside')   
+              //       keys.deadSignalZone = false;
+              //     }
+              //     }
+              //       break;
+
+              case 'spikes':
+              case 'saw':
+                // Hero - platform collision (player is above the spike platform)
+                if (this.bottom <= platform.top + this.height / 3 && this.bottom + this.velocity.y >= platform.top + this.height / 3 && this.right >= platform.left + this.width / 3 && this.left <= platform.right - this.width / 3) {
+                  // if (this.velocity.x < 0) {// moving left       // <= -2
+                  //   this.left = platform.right + 0.1;
+                  //   break;
+                  // }
+                  // if (this.velocity.x > 0) {// moving right      // <= 2
+                  //   this.left = platform.left - this.width - 0.1;
+                  //   break;
+                  // }
+                  debugger;
+                  this.die();
+                }
+                // Hero - platform collision (player is under the platform)
+                if (this.top <= platform.bottom - Math.abs(this.velocity.y) && this.bottom + this.velocity.y >= platform.top + this.height / 3 &&
+                // + this.velocity.y // оставить!!
+                this.left >= platform.left - this.width / 1.5 && this.right <= platform.right + this.width / 1.5) {
+                  debugger;
+                  this.die();
+                }
+                break;
             }
           }
         }
@@ -1201,19 +1085,127 @@
           for (let i = 0; i < this.platforms.length; i++) {
             const platform = this.platforms[i];
             // If a collision exists
-            if (this.left <= platform.position.x + platform.width && this.right >= platform.position.x && this.top <= platform.position.y + platform.height && this.bottom >= platform.position.y) {
-              if (this.velocity.y < 0) {
-                // moving up  // -0.25
-                this.velocity.y = 0;
-                this.top = platform.position.y + platform.height + 0.1;
+
+            switch (platform.type) {
+              case 'fan':
+              case 'solid':
+                if (this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+                  if (this.velocity.y < 0) {
+                    // moving up  // -0.25
+                    this.velocity.y = 0;
+                    this.top = platform.bottom + 0.1;
+                    break;
+                  }
+                  if (this.velocity.y > 0) {
+                    // falling down  // 0.25
+                    this.velocity.y = 0;
+                    this.top = platform.top - this.height - 0.1;
+                    break;
+                  }
+                }
                 break;
-              }
-              if (this.velocity.y > 0) {
-                // falling down  // 0.25
-                this.velocity.y = 0;
-                this.top = platform.position.y - this.height - 0.1;
+              case 'jumpToggle':
+                if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+                  if (this.velocity.y < 0) {
+                    // moving up  // -0.25
+                    this.velocity.y = 0;
+                    this.top = platform.bottom + 0.1;
+                    break;
+                  }
+                  if (this.velocity.y > 0) {
+                    // falling down  // 0.25
+                    this.velocity.y = 0;
+                    this.top = platform.top - this.height - 0.1;
+                    break;
+                  }
+                }
                 break;
-              }
+
+                //     case 'platformOne':
+                //     case 'platformTwo':
+                //     case 'platformThree':
+                //       if ((keys.spaceToggleCounter === platform.setCount) &&
+                //         this.left <= platform.right &&
+                //         this.right >= platform.left &&
+                //         this.top <= platform.bottom &&
+                //         this.bottom >= platform.top) {
+                //           if (this.velocity.y < 0) {// moving up  // -0.25
+                //             this.velocity.y = 0;
+                //             this.top = platform.bottom + 0.1;
+                //             break;
+                //           }
+                //           if (this.velocity.y > 0) {// falling down  // 0.25
+                //             this.velocity.y = 0;
+                //             this.top = platform.top - this.height - 0.1;
+                //             break;
+                //           }
+                //         platform.currentSprite = platform.sprites.idle;
+                //         platform.checkSpaceToggleCounter();
+
+                //     } else {
+                //       platform.currentSprite = platform.sprites.disabled;
+                //       platform.checkSpaceToggleCounter();
+                //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+                // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+                //     if (this.platforms.some((block) => {
+                //       return (this.bottom * 0.75 >= block.top &&
+                //         this.bottom * 0.35 <= block.bottom &&
+                //         this.right * 0.75 >= block.top &&
+                //         this.right * 0.25 <= block.right);
+                //     })) {
+                //       keys.deadSignalZone = true;
+                //       //debugger
+                //       console.log('inside')
+                //     } else {
+                //       console.log('outside')   
+                //       keys.deadSignalZone = false;
+                //     }
+                //     }
+
+                //       break;
+
+                // case 'spikes': // Коллизия уже выполняется в методе checkCollisionsAxes_X()
+                //   case 'saw':
+                //     if (this.bottom >= platform.top &&
+                //       this.right >= platform.left + this.width / 2 &&
+                //       this.left <= platform.left - this.width / 2) {
+                //         // if (this.velocity.x < 0) {// moving left       // <= -2
+                //         //   this.left = platform.right + 0.1;
+                //         //   break;
+                //         // }
+                //         // if (this.velocity.x > 0) {// moving right      // <= 2
+                //         //   this.left = platform.left - this.width - 0.1;
+                //         //   break;
+                //         // }
+                //         this.die();
+                //     }
+                if (this.top <= platform.bottom && this.bottom + this.velocity.y >= platform.top && this.left >= platform.left - this.width / 2 && this.right <= platform.right + this.width / 2) {
+                  // if (this.velocity.x < 0) {// moving left       // <= -2
+                  //   this.left = platform.right + 0.1;
+                  //   break;
+                  // }
+                  // if (this.velocity.x > 0) {// moving right      // <= 2
+                  //   this.left = platform.left - this.width - 0.1;
+                  //   break;
+                  // }
+
+                  // if (this.left <= platform.right &&
+                  //   this.right >= platform.left &&
+                  //   this.top <= platform.bottom &&
+                  //   this.bottom >= platform.top) {
+                  // if (this.velocity.y < 0) {// moving up  // -0.25
+                  //   this.velocity.y = 0;
+                  //   this.top = platform.bottom + 0.1;
+                  //   break;
+                  // }
+                  // if (this.velocity.y > 0) {// falling down  // 0.25
+                  //   this.velocity.y = 0;
+                  //   this.top = platform.top - this.height - 0.1;
+                  //   break;
+                  // }
+                  this.die();
+                }
+                break;
             }
           }
         }
@@ -1256,7 +1248,7 @@
       // 1s - platform One-Step
       // Traps:
       // sw - Saw trap
-      // st - Spikes trap
+      // sk - Spikes trap
       // ft - Flamethrower
       // dz - Dead signal zone
       // Decorations:
@@ -1265,7 +1257,7 @@
       // Empty:
       // ee - Empty block
 
-      const collisionsLevel_1 = [['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'e', '', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 292, 'ee', 'ee', 292, 'ee', 'ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee', 292, 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']];
+      const collisionsLevel_1 = [['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', '', '', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'e', '', 'ee', 'ee', '', '', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', '', 'ee', 'ee', '', '', '', '', '', 292, 'ee'], ['ee', 292, 292, '', '', 292, '', '', 292, 'ee', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', '', '', '', '', '', '', '', '', '', '', '', 292, ''], ['', 292, '', 'jp', '', '', '', '', 'sw', '', '', '', 'sk', '', 292, ''], ['', 292, '', '', '', '', '', 'ee', '', 'ee', '', 'ee', 'ee', 'ee', 292, ''], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee', 292, 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']];
 
       /***/
     },

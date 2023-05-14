@@ -160,12 +160,13 @@ function animate() {
 
  // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
            
-                                        // jump.toggle()                    
+                                                   
 
-
-                          platforms.forEach(platform => platform.draw())
+                          
+                          platforms.forEach(platform => platform.draw());
                           platforms.forEach(platform => platform.update()); // рисуем платформы
-  player.update();
+                          platforms.forEach(platform => (platform.type === 'jumpToggle') && platform.toggle());
+                          player.update();
 
 
   if (keys.right.pressed && (player.position.x + player.width) <= canvas.width) { // упор персонажа в правый край экрана

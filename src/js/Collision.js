@@ -82,6 +82,21 @@ const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
       platforms.push(new Platform(
         index_X * 36, index_Y * 36, createImage(platformSolid, 36, 36), platforms))
     }
+    if (cell === 'jp') {
+      console.log(index_X, index_Y)
+      platforms.push(new JumpToggle(
+        index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms))
+    }
+    if (cell === 'sk') {
+      console.log(index_X, index_Y);
+      platforms.push(new PlatformSpikes(
+        index_X * 36, index_Y * 36, createImage(spike, 36, 36), platforms))
+    }
+    if (cell === 'sw') {
+      console.log(index_X, index_Y)
+      platforms.push(new Saw(
+        index_X * 36, index_Y * 36, createImage(saw, 36, 36), platforms))
+    }
   })
 })
 

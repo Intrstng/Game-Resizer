@@ -1,6 +1,7 @@
 import { canvas, c } from './Canvas';
 import { createImage } from './CreateImage';
 import { init } from '../index';
+import { keys } from './Keys';
 import { platformImgSrc300,
   heroIdleR,
   heroIdleL,
@@ -82,7 +83,6 @@ export class Player {
     return this.position.x + this.width;
   }
 
-
   set top(value) {
     this.position.y = value;
   }
@@ -110,20 +110,110 @@ export class Player {
   checkCollisionsAxes_X() {
     // X-axes collision
     for (let i = 0; i < this.platforms.length; i++) {
-      const platform = this.platforms[i]
+      const platform = this.platforms[i];
       // If a collision exists
-      if (this.left <= platform.position.x + platform.width &&
-        this.right >= platform.position.x &&
-        this.top <= platform.position.y + platform.height &&
-        this.bottom >= platform.position.y) {
-          if (this.velocity.x < 0) {// moving left       // <= -2
-            this.left = platform.position.x + platform.width + 0.1;
-            break;
+      switch(platform.type) {
+        case 'fan':
+        case 'solid':
+          if (this.left <= platform.right &&
+            this.right >= platform.left &&
+            this.top <= platform.bottom &&
+            this.bottom >= platform.top) {
+              if (this.velocity.x < 0) {// moving left       // <= -2
+                this.left = platform.right + 0.1;
+                break;
+              }
+              if (this.velocity.x > 0) {// moving right      // <= 2
+                this.left = platform.left - this.width - 0.1;
+                break;
+              }
           }
-          if (this.velocity.x > 0) {// moving right      // <= 2
-            this.left = platform.position.x - this.width - 0.1;
-            break;
+          break;
+
+        case 'jumpToggle':
+          if (keys.jumpToggleActive &&
+            this.left <= platform.right &&
+            this.right >= platform.left &&
+            this.top <= platform.bottom &&
+            this.bottom >= platform.top) {
+              if (this.velocity.x < 0) {// moving left       // <= -2
+                this.left = platform.right + 0.1;
+                break;
+              }
+              if (this.velocity.x > 0) {// moving right      // <= 2
+                this.left = platform.left - this.width - 0.1;
+                break;
+              }
           }
+          break;
+
+    //     case 'platformOne':
+    //     case 'platformTwo':
+    //     case 'platformThree':
+    //       if ((keys.spaceToggleCounter === platform.setCount) &&
+    //       this.left <= platform.right &&
+    //         this.right >= platform.left &&
+    //         this.top <= platform.bottom &&
+    //         this.bottom >= platform.top) {
+    //           if (this.velocity.x < 0) {// moving left       // <= -2
+    //             this.left = platform.right + 0.1;
+    //             break;
+    //           }
+    //           if (this.velocity.x > 0) {// moving right      // <= 2
+    //             this.left = platform.left - this.width - 0.1;
+    //             break;
+    //           }
+    //       platform.currentSprite = platform.sprites.idle;
+    //       platform.checkSpaceToggleCounter();
+    //     } else {
+    //       platform.currentSprite = platform.sprites.disabled;
+    //       platform.checkSpaceToggleCounter();
+    //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+    //     if (this.platforms.some((block) => {
+    //       return (this.bottom * 0.75 >= block.top &&
+    //         this.bottom * 0.35 <= block.bottom &&
+    //         this.right * 0.75 >= block.top &&
+    //         this.right * 0.25 <= block.right);
+    //     })) {
+    //       keys.deadSignalZone = true;
+    //       //debugger
+    //       console.log('inside')
+    //     } else {
+    //       console.log('outside')   
+    //       keys.deadSignalZone = false;
+    //     }
+    //     }
+    //       break;
+
+      case 'spikes':
+      case 'saw':
+        // Hero - platform collision (player is above the spike platform)
+        if (this.bottom <= platform.top + this.height / 3 &&
+          this.bottom + this.velocity.y >= platform.top + this.height / 3 &&   
+          this.right >= platform.left + this.width / 3 && 
+          this.left <= platform.right - this.width / 3
+          ) {
+            // if (this.velocity.x < 0) {// moving left       // <= -2
+            //   this.left = platform.right + 0.1;
+            //   break;
+            // }
+            // if (this.velocity.x > 0) {// moving right      // <= 2
+            //   this.left = platform.left - this.width - 0.1;
+            //   break;
+            // }
+            debugger
+            this.die();
+        }
+        // Hero - platform collision (player is under the platform)
+        if (this.top <= platform.bottom - Math.abs(this.velocity.y) &&
+          this.bottom + this.velocity.y >= platform.top + this.height / 3 && // + this.velocity.y // оставить!!
+          this.left >= platform.left - this.width / 1.5 &&
+          this.right <= platform.right + this.width / 1.5) {
+            debugger
+            this.die();
+          }
+        break;
       }
     }
   }
@@ -131,23 +221,143 @@ export class Player {
   checkCollisionsAxes_Y() {
     // Y-axes collision
     for (let i = 0; i < this.platforms.length; i++) {
-      const platform = this.platforms[i]
+      const platform = this.platforms[i];
       // If a collision exists
-      if (this.left <= platform.position.x + platform.width &&
-        this.right >= platform.position.x &&
-        this.top <= platform.position.y + platform.height &&
-        this.bottom >= platform.position.y) {
-          if (this.velocity.y < 0) {// moving up  // -0.25
-            this.velocity.y = 0;
-            this.top = platform.position.y + platform.height + 0.1;
-            break;
-          }
-          if (this.velocity.y > 0) {// falling down  // 0.25
-            this.velocity.y = 0;
-            this.top = platform.position.y - this.height - 0.1;
-            break;
-          }
-      }
+
+    switch(platform.type) {
+      case 'fan':
+      case 'solid':
+        if (this.left <= platform.right &&
+          this.right >= platform.left &&
+          this.top <= platform.bottom &&
+          this.bottom >= platform.top) {
+            if (this.velocity.y < 0) {// moving up  // -0.25
+              this.velocity.y = 0;
+              this.top = platform.bottom + 0.1;
+              break;
+            }
+            if (this.velocity.y > 0) {// falling down  // 0.25
+              this.velocity.y = 0;
+              this.top = platform.top - this.height - 0.1;
+              break;
+            }
+        }
+        break;
+        
+      case 'jumpToggle':
+        if (keys.jumpToggleActive &&
+          this.left <= platform.right &&
+          this.right >= platform.left &&
+          this.top <= platform.bottom &&
+          this.bottom >= platform.top) {
+            if (this.velocity.y < 0) {// moving up  // -0.25
+              this.velocity.y = 0;
+              this.top = platform.bottom + 0.1;
+              break;
+            }
+            if (this.velocity.y > 0) {// falling down  // 0.25
+              this.velocity.y = 0;
+              this.top = platform.top - this.height - 0.1;
+              break;
+            }
+        }
+        break;
+
+
+    //     case 'platformOne':
+    //     case 'platformTwo':
+    //     case 'platformThree':
+    //       if ((keys.spaceToggleCounter === platform.setCount) &&
+    //         this.left <= platform.right &&
+    //         this.right >= platform.left &&
+    //         this.top <= platform.bottom &&
+    //         this.bottom >= platform.top) {
+    //           if (this.velocity.y < 0) {// moving up  // -0.25
+    //             this.velocity.y = 0;
+    //             this.top = platform.bottom + 0.1;
+    //             break;
+    //           }
+    //           if (this.velocity.y > 0) {// falling down  // 0.25
+    //             this.velocity.y = 0;
+    //             this.top = platform.top - this.height - 0.1;
+    //             break;
+    //           }
+    //         platform.currentSprite = platform.sprites.idle;
+    //         platform.checkSpaceToggleCounter();
+          
+
+    //     } else {
+    //       platform.currentSprite = platform.sprites.disabled;
+    //       platform.checkSpaceToggleCounter();
+    //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+    //     if (this.platforms.some((block) => {
+    //       return (this.bottom * 0.75 >= block.top &&
+    //         this.bottom * 0.35 <= block.bottom &&
+    //         this.right * 0.75 >= block.top &&
+    //         this.right * 0.25 <= block.right);
+    //     })) {
+    //       keys.deadSignalZone = true;
+    //       //debugger
+    //       console.log('inside')
+    //     } else {
+    //       console.log('outside')   
+    //       keys.deadSignalZone = false;
+    //     }
+    //     }
+
+    //       break;
+
+
+                                    // case 'spikes': // Коллизия уже выполняется в методе checkCollisionsAxes_X()
+                                    //   case 'saw':
+                                    //     if (this.bottom >= platform.top &&
+                                    //       this.right >= platform.left + this.width / 2 &&
+                                    //       this.left <= platform.left - this.width / 2) {
+                                    //         // if (this.velocity.x < 0) {// moving left       // <= -2
+                                    //         //   this.left = platform.right + 0.1;
+                                    //         //   break;
+                                    //         // }
+                                    //         // if (this.velocity.x > 0) {// moving right      // <= 2
+                                    //         //   this.left = platform.left - this.width - 0.1;
+                                    //         //   break;
+                                    //         // }
+                                    //         this.die();
+                                    //     }
+            if (this.top <= platform.bottom &&
+              this.bottom + this.velocity.y >= platform.top &&
+              this.left >= platform.left - this.width / 2 &&
+              this.right <= platform.right + this.width / 2) {
+                // if (this.velocity.x < 0) {// moving left       // <= -2
+                //   this.left = platform.right + 0.1;
+                //   break;
+                // }
+                // if (this.velocity.x > 0) {// moving right      // <= 2
+                //   this.left = platform.left - this.width - 0.1;
+                //   break;
+                // }
+
+
+
+
+        // if (this.left <= platform.right &&
+        //   this.right >= platform.left &&
+        //   this.top <= platform.bottom &&
+        //   this.bottom >= platform.top) {
+            // if (this.velocity.y < 0) {// moving up  // -0.25
+            //   this.velocity.y = 0;
+            //   this.top = platform.bottom + 0.1;
+            //   break;
+            // }
+            // if (this.velocity.y > 0) {// falling down  // 0.25
+            //   this.velocity.y = 0;
+            //   this.top = platform.top - this.height - 0.1;
+            //   break;
+            // }
+            this.die();
+        }
+        break;
+    }
     }
   }
 

@@ -27,330 +27,75 @@ import { platformImgSrc300,
   spike,
       } from './Assets';
 import { keys } from './Keys';
-import { player, platforms } from '../index';
+import { player/* , platforms */ } from '../index';
 import { intersection } from '../index';
 
-// class Platform {
-//   constructor (posX, posY, image) {
-//     this.position = {
-//       x: posX,
-//       y: posY
-//     }
-//     this.image = image;
-//     this.width = image.width;
-//     this.height = image.height;
-//     this.frames = 0;
-//     this.frequency = 28;
-//     this.sprites = {
-//       idle: this.image,
-//     }
-//     this.currentSprite = this.sprites.idle;
-//     this.type = 'solid';
-//   }
-
-
-
-//   /* ------------------ */
-//   get t() {
-//     return this.position.y;
-//   }
-//   get b() {
-//     return this.position.y + this.height;
-//   }
-//   get l() {
-//     return this.position.x;
-//   }
-//   get r() {
-//     return this.position.x + this.width;
-//   }
-
-
-//   set t(value) {
-//     this.position.y = value;
-//   }
-//   set b(value) {
-//     this.position.y = value - this.height;
-//   }
-//   set l(value) {
-//     this.position.x = value;
-//   }
-//   set r(value) {
-//     this.position.x = value - this.width;
-//   }
-
-// /* -------------------- */
-
-
-
-
-
-
-
-
-
-
-//   getType() {
-//     return this.type;
-//   }
-//   draw() {
-//     c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-//   }
-//   update() {
-//     this.frames++;
-//     if (this.frames > this.frequency) this.frames = 0;
-//     this.draw();
-//   }
-//   collisionAbove() {
-//   // Player - platform collision (player is above the platform)
-//     if (player.position.y + player.height <= this.position.y &&
-//       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-//       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-//       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-//       player.position.x <= this.position.x + this.width - player.width / 4) { 
-//         player.velocity.y = 0; // если касается земли
-//     }
-//   }
-//   collisionUnder() {
-//   // Player - platform collision (player is under the platform)
-//     if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
-//       player.position.y + player.height + player.velocity.y >= this.position.y &&
-//       player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
-//       player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
-//         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-//       }
-//   }
-//   collisionLeftSide() {
-//   // Player - platform collision (player is left from the platform and moves right)
-//     if (keys.right.pressed &&
-//       player.position.y + player.height >= this.position.y && 
-//       player.position.y <= this.position.y + this.height &&
-//       player.position.x + player.width >= this.position.x) {
-//         player.velocity.x = 0;
-//         console.log('hit!');
-//     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-//     if (keys.right.pressed &&
-//       player.position.y + player.height >= this.position.y && 
-//       player.position.y <= this.position.y + this.height &&
-//       player.position.x + player.width >= this.position.x + this.width) {
-//         player.velocity.x = 2;
-//         console.log('free!');
-//     }
-//   }
-//   collisionRightSide() {
-//   // Player - platform collision (player is right from the platform and moves left)
-//   if (keys.left.pressed &&
-//     player.position.y + player.height >= this.position.y && 
-//     player.position.y <= this.position.y + this.height &&
-//     player.position.x <= this.position.x + this.width) {
-//       player.velocity.x = 0;
-//       console.log('hit!');
-//   } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-//     if (keys.left.pressed &&
-//       player.position.y + player.height >= this.position.y && 
-//       player.position.y <= this.position.y + this.height &&
-//       player.position.x /* + player.width */ <= this.position.x) { // или "-" player.width ???
-//         player.velocity.x = -2;
-//         console.log('free!');
-//     }
-//   }
-  
-//   collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
-//     // this.collisionAbove();
-//     // this.collisionUnder();
-//     // this.collisionLeftSide();
-//     // this.collisionRightSide(); 
-//   }
-// }
-
-    class Platform {
-      constructor (posX, posY, image, platforms = []) {
-        this.platforms = platforms;
-        this.position = {
-          x: posX,
-          y: posY
-        }
-        this.image = image;
-        this.width = image.width;
-        this.height = image.height;
-        this.frames = 0;
-        this.frequency = 28;
-        this.sprites = {
-          idle: this.image,
-        }
-        this.currentSprite = this.sprites.idle;
-        this.type = 'solid';
-      }
-    
-    
-    
-      /* ------------------ */
-      get top() {
-        return this.position.y;
-      }
-      get bottom() {
-        return this.position.y + this.height;
-      }
-      get left() {
-        return this.position.x;
-      }
-      get right() {
-        return this.position.x + this.width;
-      }
-    
-    
-      set top(value) {
-        this.position.y = value;
-      }
-      set bottom(value) {
-        this.position.y = value;
-      }
-      set left(value) {
-        this.position.x = value;
-      }
-      set right(value) {
-        this.position.x = value;
-      }
-    
-    /* -------------------- */  
-    
-                                          getType() {
-                                            return this.type;
-                                          }
-      draw() {
-        c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-      }
-      update() {
-        this.frames++;
-        if (this.frames > this.frequency) this.frames = 0;
-        this.draw();
-      }
-      collisionAbove() {
-      // Player - platform collision (player is above the platform)
-        if (player.position.y + player.height <= this.position.y &&
-          player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-          player.position.x <= this.position.x + this.width - player.width / 4) { 
-            player.velocity.y = 0; // если касается земли
-        }
-      }
-      collisionUnder() {
-      // Player - platform collision (player is under the platform)
-        if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
-          player.position.y + player.height + player.velocity.y >= this.position.y &&
-          player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
-          player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
-            player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-          }
-      }
-      collisionLeftSide() {
-      // Player - platform collision (player is left from the platform and moves right)
-        if (keys.right.pressed &&
-          player.position.y + player.height >= this.position.y && 
-          player.position.y <= this.position.y + this.height &&
-          player.position.x + player.width >= this.position.x) {
-            player.velocity.x = 0;
-            console.log('hit!');
-        } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-        if (keys.right.pressed &&
-          player.position.y + player.height >= this.position.y && 
-          player.position.y <= this.position.y + this.height &&
-          player.position.x + player.width >= this.position.x + this.width) {
-            player.velocity.x = 2;
-            console.log('free!');
-        }
-      }
-      collisionRightSide() {
-      // Player - platform collision (player is right from the platform and moves left)
-      if (keys.left.pressed &&
-        player.position.y + player.height >= this.position.y && 
-        player.position.y <= this.position.y + this.height &&
-        player.position.x <= this.position.x + this.width) {
-          player.velocity.x = 0;
-          console.log('hit!');
-      } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-        if (keys.left.pressed &&
-          player.position.y + player.height >= this.position.y && 
-          player.position.y <= this.position.y + this.height &&
-          player.position.x /* + player.width */ <= this.position.x) { // или "-" player.width ???
-            player.velocity.x = -2;
-            console.log('free!');
-        }
-      }
-    
-    
-      checkCollisionsAxes_X() {
-        // X-axes collision
-        for (let i = 0; i < this.platforms.length; i++) {
-          const platform = this.platforms[i]
-          // If a collision exists
-          if (this.left <= platform.position.x + platform.width &&
-            this.right >= platform.position.x &&
-            this.top <= platform.position.y + platform.height &&
-            this.bottom >= platform.position.y) {
-              if (this.velocity.x < 0) {// moving left       // <= -2
-                this.left = platform.position.x + platform.width + 0.1;
-                break;
-              }
-              if (this.velocity.x > 0) {// moving right      // <= 2
-                this.left = platform.position.x - this.width - 0.1;
-                break;
-              }
-          }
-        }
-      }
-    
-    
-    
-    
-    
-    
-    
-      checkCollisionsAxes_Y() {
-        // Y-axes collision
-        for (let i = 0; i < this.platforms.length; i++) {
-          const platform = this.platforms[i]
-          // If a collision exists
-          if (this.left <= platform.position.x + platform.width &&
-            this.right >= platform.position.x &&
-            this.top <= platform.position.y + platform.height &&
-            this.bottom >= platform.position.y) {
-              if (this.velocity.y < 0) {// moving up  // -0.25
-                this.velocity.y = 0;
-                this.top = platform.position.y + platform.height + 0.1;
-                break;
-              }
-              if (this.velocity.y > 0) {// falling down  // 0.25
-                this.velocity.y = 0;
-                this.top = platform.position.y - this.height - 0.1;
-                break;
-              }
-          }
-        }
-      }
-    
-    
-      
-      collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
-        // this.collisionAbove();
-        // this.collisionUnder();
-        // this.collisionLeftSide();
-        // this.collisionRightSide(); 
-      }
+class Platform {
+  constructor (posX, posY, image) {
+    this.position = {
+      x: posX,
+      y: posY
     }
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+    this.frames = 0;
+    this.frequency = 28;
+    this.sprites = {
+      idle: this.image,
+    }
+    this.currentSprite = this.sprites.idle;
+    this.type = 'solid';
+  }
+
+  get top() {
+    return this.position.y;
+  }
+  get bottom() {
+    return this.position.y + this.height;
+  }
+  get left() {
+    return this.position.x;
+  }
+  get right() {
+    return this.position.x + this.width;
+  }
 
 
+  set top(value) {
+    this.position.y = value;
+  }
+  set bottom(value) {
+    this.position.y = value;
+  }
+  set left(value) {
+    this.position.x = value;
+  }
+  set right(value) {
+    this.position.x = value;
+  }
 
+  getType() {
+    return this.type;
+  }
+  draw() {
+    c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
+  }
+  update() {
+    this.frames++;
+    if (this.frames > this.frequency) this.frames = 0;
+    this.draw();
+  }
+    
+  collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
+    collisionAbove();
+    collisionUnder();
+    collisionLeftSide();
+    collisionRightSide();
+  }
+}
 
-
-
-
-
-
-
-
-
-class PlatformSpikes extends Platform {
+  class PlatformSpikes extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'spikes';

@@ -7,7 +7,7 @@
     // 1s - platform One-Step
 // Traps:
     // sw - Saw trap
-    // st - Spikes trap
+    // sk - Spikes trap
     // ft - Flamethrower
     // dz - Dead signal zone
 // Decorations:
@@ -23,13 +23,13 @@ export const collisionsLevel_1 = [
   ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
   ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
   ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 'ee', 'ee', 'e', '', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 292, 'ee', 'ee', 292, 'ee', 'ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
-  ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'],
+  ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', '', '', '', '', '', '', 292, 'ee'],
+  ['ee', 292, 'ee', 'ee', 'e', '', 'ee', 'ee', '', '', '', '', '', '', 292, 'ee'],
+  ['ee', 292, 'ee', 'ee', '', '', '', 'ee', 'ee', '', '', '', '', '', 292, 'ee'],
+  ['ee', 292, 292, '', '', 292, '', '', 292, 'ee', '', '', '', '', 292, 'ee'],
+  ['ee', 292, 'ee', '', '', '', '', '', '', '', '', '', '', '', 292, ''],
+  ['', 292, '', 'jp', '', '', '', '', 'sw', '', '', '', 'sk', '', 292, ''],
+  ['', 292, '', '', '', '', '', 'ee', '', 'ee', '', 'ee', 'ee', 'ee', 292, ''],
   ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee', 292, 'ee'],
   ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'],
   ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']
