@@ -14,10 +14,12 @@ import { Platform,
           Saw,
           OneStep,
           Fan,
-          JumpToggle,
+          JumpToggleActive,
+          JumpToggleDisabled,
           PlatformOne,
           PlatformTwo,
           PlatformThree,
+          DeadSignal,
         } from './js/Platform';
 import { platformImgSrc300,
           heroIdleR,
@@ -44,6 +46,8 @@ import { platformImgSrc300,
           saw,
           fan,
           spike,
+          deadSignalZone,
+          deadSignalZoneHover,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
@@ -173,7 +177,7 @@ function animate() {
                           platforms.forEach(platform => platform.draw());
                           platforms.forEach(platform => platform.update()); // рисуем платформы
                           platforms.forEach(platform => {
-                            (platform.type === 'jumpToggle') && platform.toggle()
+                            (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
                           
                           
                           if (platform.type === 'platformOne' ||

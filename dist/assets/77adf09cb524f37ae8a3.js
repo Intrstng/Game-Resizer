@@ -1,9 +1,6 @@
 /******/(() => {
   // webpackBootstrap
   /******/
-  "use strict";
-
-  /******/
   var __webpack_modules__ = {
     /***/"./src/index.js":
     /*!**********************!*\
@@ -11,6 +8,8 @@
       \**********************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -240,6 +239,8 @@
       \**************************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -274,10 +275,14 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */"backgroundImg": () => /* binding */backgroundImg,
+        /* harmony export */"deadSignalZone": () => /* binding */deadSignalZone,
+        /* harmony export */"deadSignalZoneHover": () => /* binding */deadSignalZoneHover,
         /* harmony export */"fan": () => /* binding */fan,
         /* harmony export */"heroDeath": () => /* binding */heroDeath,
         /* harmony export */"heroFallL": () => /* binding */heroFallL,
@@ -329,6 +334,8 @@
       const saw = '../assets/img/Traps/Saw.png';
       const fan = '../assets/img/Traps/Fan.png';
       const spike = '../assets/img/Traps/Platform_spikes.png';
+      const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
+      const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
 
       // import platformImgSrc300 from '/assets/img/platform.png';
       // import heroIdleR from '/assets/img/Idle_right.png';
@@ -350,6 +357,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -369,6 +378,8 @@
       \*****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -405,7 +416,7 @@
       // const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
       //   row.forEach((cell, index_X) => {
       //     if (cell === 292) {
-      //       console.log(index_X, index_Y)
+      //   
       //       platforms.push(new CollisionBlock(
       //         {position: {
       //           x: index_X * 36,
@@ -416,47 +427,49 @@
       // })
       const parsedCollisions = _data_collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
         row.forEach((cell, index_X) => {
-          if (cell === '1p') {
-            // Space toggled platform (One)
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36), platforms));
-          }
-          if (cell === '2p') {
-            // Space toggled platform (Two)
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36), platforms));
-          }
-          if (cell === '3p') {
-            // Space toggled platform (Three)
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36), platforms));
-          }
-          if (cell === '1s') {
-            // One-Step platform
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36), platforms));
-          }
-          if (cell === 'sl') {
-            // Solid platform
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformSolid, 36, 36), platforms));
-          }
-          if (cell === 'jp') {
-            // Jump-toggled platform
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggle(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
-          }
-          if (cell === 'sk') {
-            // Spikes trap platform
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformSpikes(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.spike, 36, 36), platforms));
-          }
-          if (cell === 'sw') {
-            // Saw trap platform
-            console.log(index_X, index_Y);
-            platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Saw(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.saw, 36, 36), platforms));
+          switch (cell) {
+            case '1p':
+              // Space toggled platform (One)
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36), platforms));
+              break;
+            case '2p':
+              // Space toggled platform (Two)
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36), platforms));
+              break;
+            case '3p':
+              // Space toggled platform (Three)
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36), platforms));
+              break;
+            case '1s':
+              // One-Step platform
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36), platforms));
+              break;
+            case 'sl':
+              // Solid platform
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
+              // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+              index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformSolid, 36, 36), platforms));
+              break;
+            case 'ja':
+              // Jump-toggled platform (active)
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
+              break;
+            case 'jd':
+              // Jump-toggled platform (disabled)
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
+              break;
+            case 'sk':
+              // Saw trap platform
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformSpikes(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.spike, 36, 36), platforms));
+              break;
+            case 'sw':
+              // Spikes trap platform
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Saw(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.saw, 36, 36), platforms));
+              break;
+            case 'dz':
+              // Dead signal zone
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZone, 36, 36), platforms));
+              break;
           }
         });
       });
@@ -470,6 +483,8 @@
       \*******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -513,6 +528,8 @@
       \************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -545,10 +562,11 @@
         if (e.repeat == false) {
           switch (e.code) {
             case 'ArrowUp':
-              if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0) {
+              keys.up.pressed = true;
+              if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y <= 0 && _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y >= -3.5) {
+                //(player.velocity.y === 0) или (player.velocity.y <= 0 && player.velocity.y >= -3.5)
                 keys.jumpToggleActive ? keys.jumpToggleActive = false : keys.jumpToggleActive = true;
               }
-              keys.up.pressed = true;
               if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0 && keys.lastPressed === 'right') {
                 // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
                 _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y -= _index__WEBPACK_IMPORTED_MODULE_0__.player.jumpHeight; // -20 is higher
@@ -620,304 +638,8 @@
       !*** ./src/js/Platform.js ***!
       \****************************/
     /***/
-    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export */
-      __webpack_require__.d(__webpack_exports__, {
-        /* harmony export */"Fan": () => /* binding */Fan,
-        /* harmony export */"JumpToggle": () => /* binding */JumpToggle,
-        /* harmony export */"OneStep": () => /* binding */OneStep,
-        /* harmony export */"Platform": () => /* binding */Platform,
-        /* harmony export */"PlatformOne": () => /* binding */PlatformOne,
-        /* harmony export */"PlatformSpikes": () => /* binding */PlatformSpikes,
-        /* harmony export */"PlatformThree": () => /* binding */PlatformThree,
-        /* harmony export */"PlatformTwo": () => /* binding */PlatformTwo,
-        /* harmony export */"Saw": () => /* binding */Saw
-        /* harmony export */
-      });
-      /* harmony import */
-      var _Collision__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Collision */"./src/js/Collision.js");
-      /* harmony import */
-      var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
-      /* harmony import */
-      var _CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./CreateImage */"./src/js/CreateImage.js");
-      /* harmony import */
-      var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
-      /* harmony import */
-      var _Keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
-      /* harmony import */
-      var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../index */"./src/index.js");
-      class Platform {
-        constructor(posX, posY, image) {
-          this.position = {
-            x: posX,
-            y: posY
-          };
-          this.image = image;
-          this.width = image.width;
-          this.height = image.height;
-          this.frames = 0;
-          this.frequency = 28;
-          this.sprites = {
-            idle: this.image
-          };
-          this.currentSprite = this.sprites.idle;
-          this.type = 'solid';
-          this.statusActive = true;
-        }
-        get top() {
-          return this.position.y;
-        }
-        get bottom() {
-          return this.position.y + this.height;
-        }
-        get left() {
-          return this.position.x;
-        }
-        get right() {
-          return this.position.x + this.width;
-        }
-        set top(value) {
-          this.position.y = value;
-        }
-        set bottom(value) {
-          this.position.y = value;
-        }
-        set left(value) {
-          this.position.x = value;
-        }
-        set right(value) {
-          this.position.x = value;
-        }
-        getType() {
-          return this.type;
-        }
-        draw() {
-          _Canvas__WEBPACK_IMPORTED_MODULE_1__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height); // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-        }
-
-        update() {
-          this.frames++;
-          if (this.frames > this.frequency) this.frames = 0;
-          this.draw();
-        }
-        collisionAbove() {
-          // Player - platform collision (player is above the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
-          // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4 >= this.position.x &&
-          // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -3.5; // если касается земли
-
-            if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed) {
-              _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_5__.player.jumpHeight;
-              _index__WEBPACK_IMPORTED_MODULE_5__.player.gravity = 0.25;
-            }
-          }
-        }
-        collisionUnder() {
-          // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y - _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y * 0.5 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25 &&
-          // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
-          }
-        }
-
-        collisionLeftSide() {
-          // Player - platform collision (player is left from the platform and moves right)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
-            console.log('hit!');
-          } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + this.width) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 2;
-            console.log('free!');
-          }
-        }
-        collisionRightSide() {
-          // Player - platform collision (player is right from the platform and moves left)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.width) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
-            console.log('hit!');
-          } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x) {
-            // или "-" player.width ???
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = -2;
-            console.log('free!');
-          }
-        }
-        collision() {
-          // разбито на отдельные методы, для частичного наследования (если понадобится)
-          this.collisionAbove();
-          this.collisionUnder();
-          this.collisionLeftSide();
-          this.collisionRightSide();
-        }
-      }
-      class PlatformSpikes extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'spikes';
-        }
-        collision() {
-          // Player - platform collision (player is above the spike platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
-          // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3 &&
-          // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.die();
-          }
-          // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 &&
-          // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.die();
-          }
-        }
-      }
-      class Saw extends PlatformSpikes {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'saw';
-          this.frequency = 23;
-        }
-      }
-      class Fan extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'fan';
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 23;
-        }
-      }
-      class JumpToggle extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'jumpToggle';
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
-            disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 63;
-        }
-        toggle() {
-          _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-        }
-        collision() {
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive) {
-            super.collision();
-          }
-        }
-      }
-      class OneStep extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.temporaryPosX = posX;
-          this.hits = 0;
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36),
-            explosion: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStepExplosion, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 28;
-          this.type = 'oneStep';
-        }
-        destroy() {
-          this.currentSprite = this.sprites.explosion;
-          setTimeout(() => {
-            this.position.x = -9999;
-            this.currentSprite = this.sprites.idle;
-          }, 550);
-          this.hits = 0;
-        }
-        restore() {
-          this.position.x = this.temporaryPosX;
-        }
-      }
-      class SpaceToggledPlatform extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'toggledBySpacePlatform';
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
-            disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 63;
-          this.setCount = null;
-          this.activeStatus = true;
-        }
-        checkSpaceToggleCounter() {
-          _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter;
-        }
-        collision() {
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === this.setCount) {
-            super.collisionAbove();
-            super.collisionUnder();
-            super.collisionLeftSide();
-            if ((_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.setCount) {
-              super.collisionRightSide();
-            }
-            this.currentSprite = this.sprites.idle;
-            this.checkSpaceToggleCounter();
-          } else {
-            this.currentSprite = this.sprites.disabled;
-            this.checkSpaceToggleCounter();
-            // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
-            if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(elem => {
-              return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= elem.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= elem.position.y + elem.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= elem.position.x && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= elem.position.x + elem.width;
-            })) {
-              _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = true;
-              console.log('inside');
-            } else {
-              console.log('outside');
-              _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = false;
-            }
-          }
-        }
-      }
-      class PlatformOne extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'platformOne';
-          this.setCount = 1;
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
-            disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
-          };
-        }
-      }
-      class PlatformTwo extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'platformTwo';
-          this.setCount = 2;
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36),
-            disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwoDisabled, 36, 36)
-          };
-        }
-      }
-      class PlatformThree extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'platformThree';
-          this.setCount = 3;
-          this.sprites = {
-            idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36),
-            disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThreeDisabled, 36, 36)
-          };
-        }
-      }
+    () => {
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Platform.js: Export 'JumpToggle' is not defined. (368:8)\n\n  366 |         OneStep,\n  367 |         Fan,\n> 368 |         JumpToggle,\n      |         ^\n  369 |         PlatformOne,\n  370 |         PlatformTwo,\n  371 |         PlatformThree,\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12440:14)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },
@@ -928,6 +650,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1182,6 +906,8 @@
       \***********************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1190,10 +916,11 @@
       });
       // Platforms:
       // sl - platform Solid
-      // 1p - platform One
+      // dz - platform One
       // 2p - platform Two
       // 3p - platform Three
-      // jp - platform Jump-Toggle
+      // ja - platform Jump-Toggle (active)
+      // jd - platform Jump-Toggle (disabled)
       // 1s - platform One-Step
       // Traps:
       // sw - Saw trap
@@ -1206,7 +933,7 @@
       // Empty:
       // ee - Empty block
 
-      const collisionsLevel_1 = [['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', 'jp', '', 'sl', 'sl', 'sl', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', '2p', '', '', '', '', '', '', '', 'jp', 'sw', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', '1p', 'sl'], ['sl',, 'sl', 'sl', '', '', '', '', '', '', '', '', '1s', '', '1p', 'sl'], ['sl', '1p', '1p', '', '',, '', '',, '1s', '1s', '', '', '', '1p', 'sl'], ['sl', '1p', 'sl', '', '', '', '', '', '', '', '', '', '', '', '', ''], ['', 'sl',, '', '', '1s', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', '1p', '', 'sl', 'sl', '', '1p', 'sl', '', 'sl', '', 'sl', 'sl', 'sl', '1p', ''], ['sl', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'sl', '1p', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
+      const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', 'jd', '', 'ja', '', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', '', '', '', '', '', '', '', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', 'dz', 'sl'], ['sl',, 'sl', 'sl', '', '', '', '', '', '', '', '', '1s', '', 'dz', 'sl'], ['sl', 'dz', 'dz', '', '',, '', '',, '1s', '1s', '', '', '', 'dz', 'sl'], ['sl', 'dz', 'sl', '', '', 'dz', '', '', '', '', '', '', '', '', '', ''], ['', 'sl',, '', '', '1s', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', 'dz', '', 'sl', 'sl', '', 'dz', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
 
       /***/
     },
@@ -1217,6 +944,8 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       // extracted by mini-css-extract-plugin
 

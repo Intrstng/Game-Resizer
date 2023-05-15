@@ -126,7 +126,7 @@ function animate() {
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.draw());
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.update()); // рисуем платформы
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
-    platform.type === 'jumpToggle' && platform.toggle();
+    (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
     if (platform.type === 'platformOne' || platform.type === 'platformTwo' || platform.type === 'platformThree' /* ||
                                                                                                                 platform.type === 'oneStep' */) {
       platform.collision();
@@ -267,6 +267,8 @@ class AdditionalElements {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "backgroundImg": () => (/* binding */ backgroundImg),
+/* harmony export */   "deadSignalZone": () => (/* binding */ deadSignalZone),
+/* harmony export */   "deadSignalZoneHover": () => (/* binding */ deadSignalZoneHover),
 /* harmony export */   "fan": () => (/* binding */ fan),
 /* harmony export */   "heroDeath": () => (/* binding */ heroDeath),
 /* harmony export */   "heroFallL": () => (/* binding */ heroFallL),
@@ -317,6 +319,8 @@ const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.p
 const saw = '../assets/img/Traps/Saw.png';
 const fan = '../assets/img/Traps/Fan.png';
 const spike = '../assets/img/Traps/Platform_spikes.png';
+const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
+const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
 
 // import platformImgSrc300 from '/assets/img/platform.png';
 // import heroIdleR from '/assets/img/Idle_right.png';
@@ -390,7 +394,7 @@ const platforms = [];
 // const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
 //   row.forEach((cell, index_X) => {
 //     if (cell === 292) {
-//       console.log(index_X, index_Y)
+//   
 //       platforms.push(new CollisionBlock(
 //         {position: {
 //           x: index_X * 36,
@@ -401,47 +405,49 @@ const platforms = [];
 // })
 const parsedCollisions = _data_collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
-    if (cell === '1p') {
-      // Space toggled platform (One)
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36), platforms));
-    }
-    if (cell === '2p') {
-      // Space toggled platform (Two)
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36), platforms));
-    }
-    if (cell === '3p') {
-      // Space toggled platform (Three)
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36), platforms));
-    }
-    if (cell === '1s') {
-      // One-Step platform
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36), platforms));
-    }
-    if (cell === 'sl') {
-      // Solid platform
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
-      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformSolid, 36, 36), platforms));
-    }
-    if (cell === 'jp') {
-      // Jump-toggled platform
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggle(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
-    }
-    if (cell === 'sk') {
-      // Spikes trap platform
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformSpikes(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.spike, 36, 36), platforms));
-    }
-    if (cell === 'sw') {
-      // Saw trap platform
-      console.log(index_X, index_Y);
-      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Saw(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.saw, 36, 36), platforms));
+    switch (cell) {
+      case '1p':
+        // Space toggled platform (One)
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36), platforms));
+        break;
+      case '2p':
+        // Space toggled platform (Two)
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36), platforms));
+        break;
+      case '3p':
+        // Space toggled platform (Three)
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36), platforms));
+        break;
+      case '1s':
+        // One-Step platform
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36), platforms));
+        break;
+      case 'sl':
+        // Solid platform
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformSolid, 36, 36), platforms));
+        break;
+      case 'ja':
+        // Jump-toggled platform (active)
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
+        break;
+      case 'jd':
+        // Jump-toggled platform (disabled)
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36), platforms));
+        break;
+      case 'sk':
+        // Saw trap platform
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformSpikes(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.spike, 36, 36), platforms));
+        break;
+      case 'sw':
+        // Spikes trap platform
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Saw(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.saw, 36, 36), platforms));
+        break;
+      case 'dz':
+        // Dead signal zone
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZone, 36, 36), platforms));
+        break;
     }
   });
 });
@@ -528,10 +534,11 @@ const keyDownHandler = e => {
   if (e.repeat == false) {
     switch (e.code) {
       case 'ArrowUp':
-        if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0) {
+        keys.up.pressed = true;
+        if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y <= 0 && _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y >= -3.5) {
+          //(player.velocity.y === 0) или (player.velocity.y <= 0 && player.velocity.y >= -3.5)
           keys.jumpToggleActive ? keys.jumpToggleActive = false : keys.jumpToggleActive = true;
         }
-        keys.up.pressed = true;
         if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0 && keys.lastPressed === 'right') {
           // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y -= _index__WEBPACK_IMPORTED_MODULE_0__.player.jumpHeight; // -20 is higher
@@ -606,8 +613,10 @@ const keyUpHandler = e => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeadSignal": () => (/* binding */ DeadSignal),
 /* harmony export */   "Fan": () => (/* binding */ Fan),
-/* harmony export */   "JumpToggle": () => (/* binding */ JumpToggle),
+/* harmony export */   "JumpToggleActive": () => (/* binding */ JumpToggleActive),
+/* harmony export */   "JumpToggleDisabled": () => (/* binding */ JumpToggleDisabled),
 /* harmony export */   "OneStep": () => (/* binding */ OneStep),
 /* harmony export */   "Platform": () => (/* binding */ Platform),
 /* harmony export */   "PlatformOne": () => (/* binding */ PlatformOne),
@@ -691,7 +700,7 @@ class Platform {
     _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4 >= this.position.x &&
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
     _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4) {
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -3.5; // если касается земли
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -3.5; // если касается земли // -3.5
 
       if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed) {
         _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_5__.player.jumpHeight;
@@ -732,7 +741,7 @@ class Platform {
     }
   }
   collision() {
-    // разбито на отдельные методы, для частичного наследования (если понадобится)
+    // разбито на отдельные методы, для частичного наследования
     this.collisionAbove();
     this.collisionUnder();
     this.collisionLeftSide();
@@ -780,24 +789,54 @@ class Fan extends Platform {
     this.frequency = 23;
   }
 }
-class JumpToggle extends Platform {
+class JumpToggleActive extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
-    this.type = 'jumpToggle';
+    this.type = 'jumpToggleActive';
     this.sprites = {
       idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
       disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
+    // this.statusActive = status;
+  }
+
+  toggle() {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true) {
+      this.currentSprite = this.sprites.idle;
+    } else {
+      this.currentSprite = this.sprites.disabled;
+    }
+  }
+  collision() {// Убрать
+    // if (keys.jumpToggleActive) {
+    //   super.collision();
+    // }
+  }
+}
+class JumpToggleDisabled extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'jumpToggleDisabled';
+    this.sprites = {
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
+    };
+    this.currentSprite = this.sprites.disabled;
+    this.frequency = 63;
   }
   toggle() {
-    _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive) {
-      super.collision();
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === false) {
+      this.currentSprite = this.sprites.idle;
+    } else {
+      this.currentSprite = this.sprites.disabled;
     }
+  }
+  collision() {// Убрать
+    // if (keys.jumpToggleActive) {
+    //   super.collision();
+    // }
   }
 }
 class OneStep extends Platform {
@@ -830,7 +869,7 @@ class SpaceToggledPlatform extends Platform {
     super(posX, posY, image);
     this.type = 'toggledBySpacePlatform';
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36),
       disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
@@ -897,6 +936,17 @@ class PlatformThree extends SpaceToggledPlatform {
     this.sprites = {
       idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36),
       disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThreeDisabled, 36, 36)
+    };
+  }
+}
+class DeadSignal extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'deadSignalZone';
+    this.frequency = 1;
+    this.sprites = {
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36)
     };
   }
 }
@@ -1023,8 +1073,22 @@ class Player {
             }
           }
           break;
-        case 'jumpToggle':
+        case 'jumpToggleActive':
           if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+            if (this.velocity.x < 0) {
+              // moving left       // <= -2
+              this.left = platform.right + 0.1;
+              break;
+            }
+            if (this.velocity.x > 0) {
+              // moving right      // <= 2
+              this.left = platform.left - this.width - 0.1;
+              break;
+            }
+          }
+          break;
+        case 'jumpToggleDisabled':
+          if (!_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
             if (this.velocity.x < 0) {
               // moving left       // <= -2
               this.left = platform.right + 0.1;
@@ -1098,8 +1162,24 @@ class Player {
             }
           }
           break;
-        case 'jumpToggle':
+        case 'jumpToggleActive':
           if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+            if (this.velocity.y < 0) {
+              // moving up  // -0.25
+              this.velocity.y = 0;
+              this.top = platform.bottom + 0.1;
+              break;
+            }
+            if (this.velocity.y > 0) {
+              // falling down  // 0.25
+              this.velocity.y = 0;
+              this.top = platform.top - this.height - 0.1;
+              break;
+            }
+          }
+          break;
+        case 'jumpToggleDisabled':
+          if (!_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
             if (this.velocity.y < 0) {
               // moving up  // -0.25
               this.velocity.y = 0;
@@ -1168,10 +1248,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 // Platforms:
 // sl - platform Solid
-// 1p - platform One
+// dz - platform One
 // 2p - platform Two
 // 3p - platform Three
-// jp - platform Jump-Toggle
+// ja - platform Jump-Toggle (active)
+// jd - platform Jump-Toggle (disabled)
 // 1s - platform One-Step
 // Traps:
 // sw - Saw trap
@@ -1184,7 +1265,7 @@ __webpack_require__.r(__webpack_exports__);
 // Empty:
 // ee - Empty block
 
-const collisionsLevel_1 = [['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', 'jp', '', 'sl', 'sl', 'sl', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', '2p', '', '', '', '', '', '', '', 'jp', 'sw', '1p', 'sl'], ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', '1p', 'sl'], ['sl',, 'sl', 'sl', '', '', '', '', '', '', '', '', '1s', '', '1p', 'sl'], ['sl', '1p', '1p', '', '',, '', '',, '1s', '1s', '', '', '', '1p', 'sl'], ['sl', '1p', 'sl', '', '', '', '', '', '', '', '', '', '', '', '', ''], ['', 'sl',, '', '', '1s', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', '1p', '', 'sl', 'sl', '', '1p', 'sl', '', 'sl', '', 'sl', 'sl', 'sl', '1p', ''], ['sl', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'sl', '1p', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
+const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', 'jd', '', 'ja', '', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', '', '', '', '', '', '', '', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', 'dz', 'sl'], ['sl',, 'sl', 'sl', '', '', '', '', '', '', '', '', '1s', '', 'dz', 'sl'], ['sl', 'dz', 'dz', '', '',, '', '',, '1s', '1s', '', '', '', 'dz', 'sl'], ['sl', 'dz', 'sl', '', '', 'dz', '', 'sl', '', 'sl', '', '', '', '', '', ''], ['', 'sl',, '', '', '1s', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', 'dz', '', 'sl', 'sl', '', 'dz', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
 
 /***/ }),
 

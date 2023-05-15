@@ -26,10 +26,10 @@ const keyDownHandler = (e) => {
   if (e.repeat == false) {
     switch (e.code) {
       case 'ArrowUp':
-        if (player.velocity.y === 0) {
+        keys.up.pressed = true;
+        if (player.velocity.y <= 0 && player.velocity.y >= -3.5) { //(player.velocity.y === 0) или (player.velocity.y <= 0 && player.velocity.y >= -3.5)
           keys.jumpToggleActive ? keys.jumpToggleActive = false : keys.jumpToggleActive = true;
         }
-        keys.up.pressed = true;
         if (player.velocity.y === 0 && keys.lastPressed === 'right') { // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           player.velocity.y -= player.jumpHeight; // -20 is higher
           player.currentSprite = player.sprites.jump.right;

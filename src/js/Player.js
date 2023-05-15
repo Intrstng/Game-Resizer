@@ -27,6 +27,8 @@ import { platformImgSrc300,
   saw,
   fan,
   spike,
+  deadSignalZone,
+  deadSignalZoneHover,
       } from '../js/Assets';
 import { platforms, intersection } from '../index';
 
@@ -131,8 +133,25 @@ export class Player {
           }
           break;
 
-        case 'jumpToggle':
-          if (keys.jumpToggleActive &&
+        case 'jumpToggleActive':
+        if (keys.jumpToggleActive &&
+          this.left <= platform.right &&
+          this.right >= platform.left &&
+          this.top <= platform.bottom &&
+          this.bottom >= platform.top) {
+            if (this.velocity.x < 0) {// moving left       // <= -2
+              this.left = platform.right + 0.1;
+              break;
+            }
+            if (this.velocity.x > 0) {// moving right      // <= 2
+              this.left = platform.left - this.width - 0.1;
+              break;
+            }
+          }
+          break;
+
+        case 'jumpToggleDisabled':
+          if (!keys.jumpToggleActive &&
             this.left <= platform.right &&
             this.right >= platform.left &&
             this.top <= platform.bottom &&
@@ -146,7 +165,7 @@ export class Player {
                 break;
               }
             }
-            break;
+          break;
 
         case 'spikes':
         case 'saw':
@@ -220,7 +239,7 @@ export class Player {
           }
           break;
           
-        case 'jumpToggle':
+        case 'jumpToggleActive':
           if (keys.jumpToggleActive &&
             this.left <= platform.right &&
             this.right >= platform.left &&
@@ -238,6 +257,26 @@ export class Player {
               }
           }
           break;
+
+        case 'jumpToggleDisabled':
+          if (!keys.jumpToggleActive &&
+            this.left <= platform.right &&
+            this.right >= platform.left &&
+            this.top <= platform.bottom &&
+            this.bottom >= platform.top) {
+              if (this.velocity.y < 0) {// moving up  // -0.25
+                this.velocity.y = 0;
+                this.top = platform.bottom + 0.1;
+                break;
+              }
+              if (this.velocity.y > 0) {// falling down  // 0.25
+                this.velocity.y = 0;
+                this.top = platform.top - this.height - 0.1;
+                break;
+              }
+          }
+          break;
+
 
         case 'oneStep':
           if (platform.hits === 0 &&

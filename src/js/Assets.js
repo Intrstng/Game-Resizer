@@ -23,6 +23,8 @@ const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.p
 const saw = '../assets/img/Traps/Saw.png';
 const fan = '../assets/img/Traps/Fan.png';
 const spike = '../assets/img/Traps/Platform_spikes.png';
+const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
+const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
 
 
 // import platformImgSrc300 from '/assets/img/platform.png';
@@ -61,4 +63,6 @@ export { platformImgSrc300,
         saw,
         fan,
         spike,
+        deadSignalZone,
+        deadSignalZoneHover,
       }

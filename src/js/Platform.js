@@ -26,6 +26,8 @@ import { platformImgSrc300,
   saw,
   fan,
   spike,
+  deadSignalZone,
+  deadSignalZoneHover,
       } from './Assets';
 
      
@@ -98,7 +100,7 @@ class Platform {
       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
       player.position.x <= this.position.x + this.width - player.width / 4) { 
-      player.velocity.y = -3.5; // если касается земли
+      player.velocity.y = -3.5; // если касается земли // -3.5
     
       if (keys.up.pressed ||
       keys.up.pressed && keys.right.pressed ||
@@ -154,7 +156,7 @@ class Platform {
       }
     }
   
-  collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
+  collision() { // разбито на отдельные методы, для частичного наследования
     this.collisionAbove();
     this.collisionUnder();
     this.collisionLeftSide();
@@ -206,24 +208,54 @@ class Fan extends Platform {
   }
 }
 
-class JumpToggle extends Platform {
+class JumpToggleActive extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
-    this.type = 'jumpToggle';
+    this.type = 'jumpToggleActive';
     this.sprites = {
       idle: createImage(platformJump, 36, 36),
       disabled: createImage(platformJumpDisabled, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
+    // this.statusActive = status;
   }
   toggle() {
-    keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
-  }
-  collision() {
-    if (keys.jumpToggleActive) {
-      super.collision();
+    if (keys.jumpToggleActive === true) {
+      this.currentSprite = this.sprites.idle;
+    } else {
+      this.currentSprite = this.sprites.disabled;
     }
+  }
+  collision() { // Убрать
+    // if (keys.jumpToggleActive) {
+    //   super.collision();
+    // }
+  }
+}
+
+class JumpToggleDisabled extends Platform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'jumpToggleDisabled';
+    this.sprites = {
+      idle: createImage(platformJump, 36, 36),
+      disabled: createImage(platformJumpDisabled, 36, 36),
+    }
+    this.currentSprite = this.sprites.disabled;
+    this.frequency = 63;
+  }
+  toggle() {
+    if (keys.jumpToggleActive === false) {
+      this.currentSprite = this.sprites.idle;
+    } else {
+      this.currentSprite = this.sprites.disabled;
+    }
+  }
+  collision() { // Убрать
+    // if (keys.jumpToggleActive) {
+    //   super.collision();
+    // }
   }
 }
 
@@ -258,7 +290,7 @@ class SpaceToggledPlatform extends Platform {
     super(posX, posY, image);
     this.type = 'toggledBySpacePlatform';
     this.sprites = {
-      idle: createImage(platformOne, 36, 36),
+      idle: createImage(deadSignalZoneHover, 36, 36),
       disabled: createImage(platformOneDisabled, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
@@ -338,13 +370,27 @@ class PlatformThree extends SpaceToggledPlatform {
   }
 }
 
+class DeadSignal extends SpaceToggledPlatform {
+  constructor(posX, posY, image) {
+    super(posX, posY, image);
+    this.type = 'deadSignalZone';
+    this.frequency = 1;
+    this.sprites = {
+      idle: createImage(deadSignalZoneHover, 36, 36),
+      disabled: createImage(deadSignalZoneHover, 36, 36),
+    }
+  }
+}
+
 export { Platform,
         PlatformSpikes,
         Saw,
         OneStep,
         Fan,
-        JumpToggle,
+        JumpToggleActive,
+        JumpToggleDisabled,
         PlatformOne,
         PlatformTwo,
         PlatformThree,
+        DeadSignal,
       }
