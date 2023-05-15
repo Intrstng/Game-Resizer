@@ -72,37 +72,42 @@ const platforms = [];
 // })
 const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
-    if (cell === '1p') {
+    if (cell === '1p') { // Space toggled platform (One)
       console.log(index_X, index_Y)
       platforms.push(new PlatformOne(
         index_X * 36, index_Y * 36, createImage(platformOne, 36, 36), platforms))
     }
-    if (cell === '2p') {
+    if (cell === '2p') { // Space toggled platform (Two)
       console.log(index_X, index_Y)
       platforms.push(new PlatformTwo(
         index_X * 36, index_Y * 36, createImage(platformTwo, 36, 36), platforms))
     }
-    if (cell === '3p') {
+    if (cell === '3p') { // Space toggled platform (Three)
       console.log(index_X, index_Y)
       platforms.push(new PlatformThree(
         index_X * 36, index_Y * 36, createImage(platformThree, 36, 36), platforms))
     }
-    if (cell === 'ee') {
+    if (cell === '1s') { // One-Step platform
       console.log(index_X, index_Y)
-      platforms.push(new Platform(
+      platforms.push(new OneStep(
+        index_X * 36, index_Y * 36, createImage(platformOneStep, 36, 36), platforms))
+    }
+    if (cell === 'sl') { // Solid platform
+      console.log(index_X, index_Y)
+      platforms.push(new Platform( // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         index_X * 36, index_Y * 36, createImage(platformSolid, 36, 36), platforms))
     }
-    if (cell === 'jp') {
+    if (cell === 'jp') { // Jump-toggled platform
       console.log(index_X, index_Y)
       platforms.push(new JumpToggle(
         index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms))
     }
-    if (cell === 'sk') {
+    if (cell === 'sk') { // Spikes trap platform
       console.log(index_X, index_Y);
       platforms.push(new PlatformSpikes(
         index_X * 36, index_Y * 36, createImage(spike, 36, 36), platforms))
     }
-    if (cell === 'sw') {
+    if (cell === 'sw') { // Saw trap platform
       console.log(index_X, index_Y)
       platforms.push(new Saw(
         index_X * 36, index_Y * 36, createImage(saw, 36, 36), platforms))

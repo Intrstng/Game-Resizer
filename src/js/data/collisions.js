@@ -11,26 +11,26 @@
     // ft - Flamethrower
     // dz - Dead signal zone
 // Decorations:
-    // 1f - Frame block 1
-    // 2f - Frame block 2
+    // 1b - Frame brick 1
+    // 2b - Frame block 2
 // Empty:
     // ee - Empty block
 
 export const collisionsLevel_1 = [
-  ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'],
-  ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'],
-  ['ee', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'ee'],
-  ['ee', '1p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1p', 'ee'],
-  ['ee', '1p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1p', 'ee'],
-  ['ee', '1p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1p', 'ee'],
-  ['ee', '1p', 'ee', 'ee', '2p', '', '', '', '', '', '', '', 'jp', 'sw', '1p', 'ee'],
-  ['ee', '1p', 'ee', 'ee', 'ee', 'ee', '', '', '', '', '', '', '', '', '1p', 'ee'],
-  ['ee', , 'ee', 'ee', '', '', '', '', '', '', '', '', '', '', '1p', 'ee'],
-  ['ee', '1p', '1p', '', '', , '', '', , '', '', '', '', '', '1p', 'ee'],
-  ['ee', '1p', 'ee', '', '', '', '', '', '', '', '', '', '', '', '1p', ''],
-  ['', 'ee', , '', '', '', '1p', '', '3p', '', '2p', '', 'sk', '', , '1p'],
-  ['', '1p', '', '', '', '', '1p', 'ee', '', 'ee', '', 'ee', 'ee', 'ee', '1p', ''],
-  ['ee', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'ee', '1p', 'ee'],
-  ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'],
-  ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']
+  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
+  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
+  ['sl', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'sl'],
+  ['sl', '1p', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', '1p', 'sl'],
+  ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', '1p', 'sl'],
+  ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', 'sl', 'sl', 'sl', '1p', 'sl'],
+  ['sl', '1p', 'sl', 'sl', '2p', '', '', '', '', '', '', '', 'jp', 'sw', '1p', 'sl'],
+  ['sl', '1p', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', '1p', 'sl'],
+  ['sl', , 'sl', 'sl', '', '', '', '', '', '', '', '', '1s', '', '1p', 'sl'],
+  ['sl', '1p', '1p', '', '', , '', '', , '1s', '1s', '', '', '', '1p', 'sl'],
+  ['sl', '1p', 'sl', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+  ['', 'sl', , '', '', '1s', '', '', '3p', '', '2p', '', 'sk', '', , ''],
+  ['', '1p', '', 'sl', 'sl', '', '1p', 'sl', '', 'sl', '', 'sl', 'sl', 'sl', '1p', ''],
+  ['sl', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'sl', '1p', 'sl'],
+  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
+  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']
 ];

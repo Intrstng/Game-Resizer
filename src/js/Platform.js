@@ -67,7 +67,6 @@ class Platform {
     return this.position.x + this.width;
   }
 
-
   set top(value) {
     this.position.y = value;
   }
@@ -93,22 +92,20 @@ class Platform {
     this.draw();
   }
   collisionAbove() {
-    console.log('player.velocity.y', player.velocity.y)
   // Player - platform collision (player is above the platform)
     if (player.position.y + player.height <= this.position.y &&
       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
       player.position.x <= this.position.x + this.width - player.width / 4) { 
-        player.velocity.y = -3.5; // если касается земли
-        
-if (keys.up.pressed ||
-  keys.up.pressed && keys.right.pressed ||
-  keys.up.pressed && keys.left.pressed ) {
-  player.velocity.y = -player.jumpHeight;
-  player.gravity = 0.25;
-} 
-       // debugger
+      player.velocity.y = -3.5; // если касается земли
+    
+      if (keys.up.pressed ||
+      keys.up.pressed && keys.right.pressed ||
+      keys.up.pressed && keys.left.pressed) {
+        player.velocity.y = -player.jumpHeight;
+        player.gravity = 0.25;
+      } 
     }
   }
   collisionUnder() {
@@ -118,7 +115,6 @@ if (keys.up.pressed ||
       player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
       player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-     //debugger
       }
   }
   collisionLeftSide() {
@@ -139,63 +135,30 @@ if (keys.up.pressed ||
     }
   }
   collisionRightSide() {
- // Player - platform collision (player is right from the platform and moves left)
- console.log(leftNeighboorBlockFromHero)
-
- if (keys.left.pressed &&
-  (leftNeighboorBlockFromHero != undefined || leftNeighboorBlockFromHero != null) &&
-  player.position.y + player.height >= leftNeighboorBlockFromHero.position.y && 
-  player.position.y <= leftNeighboorBlockFromHero.position.y + leftNeighboorBlockFromHero.height &&
-  player.position.x <= leftNeighboorBlockFromHero.position.x + leftNeighboorBlockFromHero.width) {
-  player.velocity.x = 0;
-  console.log('hit!');
-} // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-  if (keys.left.pressed &&
-    leftNeighboorBlockFromHero != undefined &&
-  (player.position.y + player.height <= leftNeighboorBlockFromHero.position.y || 
-  player.position.y >= leftNeighboorBlockFromHero.position.y + leftNeighboorBlockFromHero.height) &&
-  player.position.x <= leftNeighboorBlockFromHero.position.x) { // или "-" player.width ???
-      player.velocity.x = -2;
-      console.log('free!');
-  }
-  }
+  // Player - platform collision (player is right from the platform and moves left)
+    if (keys.left.pressed &&
+      (leftNeighboorBlockFromHero != undefined || leftNeighboorBlockFromHero != null) &&
+      player.position.y + player.height >= leftNeighboorBlockFromHero.position.y && 
+      player.position.y <= leftNeighboorBlockFromHero.position.y + leftNeighboorBlockFromHero.height &&
+      player.position.x <= leftNeighboorBlockFromHero.position.x + leftNeighboorBlockFromHero.width) {
+        player.velocity.x = 0;
+        console.log('hit!');
+    } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+      if (keys.left.pressed &&
+        leftNeighboorBlockFromHero != undefined &&
+        (player.position.y + player.height <= leftNeighboorBlockFromHero.position.y || 
+        player.position.y >= leftNeighboorBlockFromHero.position.y + leftNeighboorBlockFromHero.height) &&
+        player.position.x <= leftNeighboorBlockFromHero.position.x) { // или "-" player.width ???
+          player.velocity.x = -2;
+          console.log('free!');
+      }
+    }
   
   collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
-
     this.collisionAbove();
     this.collisionUnder();
     this.collisionLeftSide();
     this.collisionRightSide();
-
-
-
-
-    // for (let i = 0; i < platforms.length; i++) {
-    //   const platform = platforms[i];
-   
-
-
-    //       if (!(player.left <= platform.right &&
-    //         player.right >= platform.left &&
-    //         player.top <= platform.bottom &&
-    //         player.bottom >= platform.top)) {
-    //           if (player.velocity.x < 0) {// moving left       // <= -2
-    //             player.left = platform.right + 0.1;
-    //             break;
-    //           }
-    //           if (player.velocity.x > 0) {// moving right      // <= 2
-    //             player.left = platform.left - player.width - 0.1;
-    //             break;
-    //           }
-    //       }
-    //     }
-
-
-
-
-
-
-
   }
 }
 
@@ -288,66 +251,6 @@ class OneStep extends Platform {
   restore() {
     this.position.x = this.temporaryPosX;
   }
-  collision() {
-  // Player - platform collision (player is above the platform)
-    // And moves right and leaves the platform
-    if ((!keys.up.pressed && player.velocity.y === 0 || !keys.up.pressed && player.velocity.y === player.gravity) &&
-        player.position.y + player.height <= this.position.y &&
-        player.position.y + player.height + player.velocity.y >= this.position.y &&
-        (player.position.x + player.width * 2 >= this.position.x &&
-        player.position.x <= this.position.x + this.width)) {
-          this.destroy(); 
-    }
-  // Не нужен но надо оставить, иначе блок пропадает сразу же
-    if (keys.up.pressed && player.velocity.y != 0 &&
-    player.position.y + player.height <= this.position.y &&
-    player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-    player.position.x <= this.position.x + this.width - player.width / 3) { 
-      player.velocity.y = 0; // если касается земли
-      this.destroy();
-    } else if (!keys.up.pressed &&
-      player.position.y + player.height <= this.position.y &&
-      player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-      player.position.x <= this.position.x + this.width - player.width / 3) { 
-        player.velocity.y = 0; // если касается земли
-    }
-    // Player - platform collision (player is under the platform)
-    if (player.position.y <= this.position.y + this.height &&
-      player.position.y + player.height + player.velocity.y >= this.position.y &&
-      player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-      player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
-        player.velocity.y = 1;
-        this.destroy();
-    }
-    // Player - platform collision (player is left from the platform)
-    if (keys.right.pressed &&
-      player.position.y + player.height >= this.position.y && 
-      player.position.y <= this.position.y + this.height &&
-      player.position.x + player.width >= this.position.x &&
-      !(player.position.x >= this.position.x)) { // player is left from the platform and moves right
-        this.hits++;
-        keys.right.pressed = false;
-        player.currentSprite = player.sprites.fall.right;
-        player.velocity.x -= 15;
-        this.hits === 1 && this.destroy();
-    }
-    // Player - platform collision (player is right from the platform)
-    if (keys.left.pressed &&
-      player.position.y + player.height >= this.position.y && 
-      player.position.y <= this.position.y + this.height &&
-      player.position.x <= this.position.x + this.width &&
-      !(player.position.x + player.width <= this.position.x)) { // player is right from the platform and moves left
-        this.hits++;
-        keys.left.pressed = false;
-        player.currentSprite = player.sprites.fall.left;
-        player.velocity.x += 15;
-        this.hits === 1 && this.destroy();
-    }
-  }
 }
 
 class SpaceToggledPlatform extends Platform {
@@ -371,11 +274,9 @@ class SpaceToggledPlatform extends Platform {
       super.collisionAbove();
       super.collisionUnder();
       super.collisionLeftSide();
-      if (
-        (leftNeighboorBlockFromHero != undefined ||
+      if ((leftNeighboorBlockFromHero != undefined ||
         leftNeighboorBlockFromHero != null) &&
-        keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount
-        ) {
+        keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount) {
           super.collisionRightSide();
       }
       
@@ -384,8 +285,7 @@ class SpaceToggledPlatform extends Platform {
     } else {
       this.currentSprite = this.sprites.disabled;
       this.checkSpaceToggleCounter();
-    // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+    // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
     if (platforms.some((elem) => {
       return (player.position.y + player.height * 0.75 >= elem.position.y &&
         player.position.y + player.height * 0.35 <= elem.position.y + elem.height &&
@@ -393,7 +293,6 @@ class SpaceToggledPlatform extends Platform {
         player.position.x + player.width * 0.25 <= elem.position.x + elem.width);
     })) {
       keys.deadSignalZone = true;
-      //debugger
       console.log('inside')
     } else {
       console.log('outside')   
@@ -413,11 +312,6 @@ class PlatformOne extends SpaceToggledPlatform {
       disabled: createImage(platformOneDisabled, 36, 36),
     }
   }
-  // checkSpaceToggleCounter() {
-  //   super.checkSpaceToggleCounter();
-  //   this.setCount 
-  //  }
-  // this.statusActive = true;
 }
 
 class PlatformTwo extends SpaceToggledPlatform {

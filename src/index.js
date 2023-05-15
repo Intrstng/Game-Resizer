@@ -149,6 +149,11 @@ export function init() {
                                           player = new Player({
                                             platforms
                                           });
+
+
+  platforms.forEach(platform => {
+    (platform.type === 'oneStep') && platform.restore()});
+
 }                      
 
 
@@ -173,7 +178,8 @@ function animate() {
                           
                           if (platform.type === 'platformOne' ||
                           platform.type === 'platformTwo' ||
-                          platform.type === 'platformThree'
+                          platform.type === 'platformThree' /* ||
+                          platform.type === 'oneStep' */
                           ) {
                             platform.collision();
                           }
