@@ -12,18 +12,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "additionalElements": () => (/* binding */ additionalElements),
 /* harmony export */   "init": () => (/* binding */ init),
+/* harmony export */   "leftNeighboorBlockFromHero": () => (/* binding */ leftNeighboorBlockFromHero),
 /* harmony export */   "player": () => (/* binding */ player)
 /* harmony export */ });
 /* harmony import */ var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sass/styles.scss */ "./src/sass/styles.scss");
-/* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _js_CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/CreateImage */ "./src/js/CreateImage.js");
-/* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
-/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
-/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
-/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
-/* harmony import */ var _js_data_collisions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/data/collisions */ "./src/js/data/collisions.js");
-/* harmony import */ var _js_Collision__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Collision */ "./src/js/Collision.js");
+/* harmony import */ var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Collision */ "./src/js/Collision.js");
+/* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
+/* harmony import */ var _js_CreateImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
+/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
+/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
+/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
+/* harmony import */ var _js_data_collisions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/data/collisions */ "./src/js/data/collisions.js");
 
 
 // imagePlatform.onload = function getSizes () {
@@ -37,10 +38,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
-_js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.height = 576; // 720 //window.innerHeight;
 
-let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_7__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_5__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.height))];
+_js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
+_js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720 //window.innerHeight;
+
+let leftNeighboorBlockFromHeroArr = [];
+let leftNeighboorBlockFromHero = null;
+let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_8__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_6__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
 // export let platforms = [/* new Platform(210, 525, createImage(platformSolid, 36, 36)),
 //                 new Platform(330, 455, createImage(platformSolid, 36, 36)),
@@ -48,10 +52,9 @@ let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_7_
 //                 new Platform(400, 100, createImage(platformSolid, 36, 36)) */]; // создаем платформы
 
 
-
-console.log(_js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms);
-let player = new _js_Player__WEBPACK_IMPORTED_MODULE_3__.Player({
-  platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms
+console.log(_js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms);
+let player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
+  platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
 }); //collisionBlocks: collisionBlocks
 
 /* -------------------- */
@@ -64,8 +67,8 @@ let player = new _js_Player__WEBPACK_IMPORTED_MODULE_3__.Player({
 
 function init() {
   player.velocity.y = 1;
-  _js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.spaceToggleCounter = 1;
-  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_7__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_5__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.height))];
+  _js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.spaceToggleCounter = 1;
+  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_8__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_6__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
   //   platforms = [/* new Platform(210, 455, createImage(platformSolid, 36, 36)),
   //           new Platform(230, 419, createImage(platformSolid, 36, 36)),
@@ -103,28 +106,37 @@ function init() {
   //               new Platform(830, 455, createImage(platformSolid, 36, 36)),
   //     spikes, sawTrap, sawTrap2, jump   */    ]; // создаем платформы !!!!!!!!!!!!!
 
-  player = new _js_Player__WEBPACK_IMPORTED_MODULE_3__.Player({
-    platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms
+  player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
+    platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
   });
 }
 function animate() {
   requestAnimationFrame(animate);
   //c.clearRect(0, 0, canvas.width, canvas.height);
-  _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.c.fillStyle = 'white';
-  _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.height);
+  _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'white';
+  _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
   console.log('animation counter');
   additionalElements.forEach(element => element.draw());
 
   // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
 
-  _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms.forEach(platform => platform.draw());
-  _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms.forEach(platform => platform.update()); // рисуем платформы
-  _js_Collision__WEBPACK_IMPORTED_MODULE_9__.platforms.forEach(platform => platform.type === 'jumpToggle' && platform.toggle());
+  _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.draw());
+  _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.update()); // рисуем платформы
+  _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
+    platform.type === 'jumpToggle' && platform.toggle();
+    if (platform.type === 'platformOne' || platform.type === 'platformTwo' || platform.type === 'platformThree') {
+      platform.collision();
+    }
+  });
+  leftNeighboorBlockFromHeroArr = _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.filter(platform => {
+    return platform.left <= player.left && platform.top <= player.top && platform.bottom >= player.bottom;
+  });
+  leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
   player.update();
-  if (_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.width) {
+  if (_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
     // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.left.pressed && player.position.x >= 0) {
+  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.left.pressed && player.position.x >= 0) {
     // упор персонажа в левый край экрана
     player.velocity.x = -2;
   } else {
@@ -180,19 +192,19 @@ function animate() {
   //   //   }
   // })
 
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.lastPressed === 'right') {
+  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.lastPressed === 'left') {
+  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.lastPressed === 'left') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.left;
   }
 
   // Падение в пропасть (см. комментарии в player.update())
-  if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_1__.canvas.height) {
+  if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height) {
     // sawTrap.restore();
     //sawTrap2.restore(); // !!!!!!!!!!!!
-    _js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_6__.keys.jumpToggleActive;
+    _js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_7__.keys.jumpToggleActive;
     init();
     console.log('you lose');
 
@@ -202,11 +214,11 @@ function animate() {
 
 init();
 animate();
-window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_6__.keyDownHandler);
-window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_6__.keyUpHandler);
+window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_7__.keyDownHandler);
+window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_7__.keyUpHandler);
 window.addEventListener('click', e => {
   console.log(e.clientX, e.clientY);
-  //  debugger
+  // debugger
 });
 
 /***/ }),
@@ -507,10 +519,7 @@ const keyDownHandler = e => {
       case 'Space':
         {
           !keys.deadSignalZone && keys.spaceToggleCounter++;
-          // arr = [...arr, ...platforms.splice(1,1)];
-          // console.log(arr)
         }
-
         break;
       case 'ArrowRight':
         {
@@ -581,11 +590,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PlatformTwo": () => (/* binding */ PlatformTwo),
 /* harmony export */   "Saw": () => (/* binding */ Saw)
 /* harmony export */ });
-/* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
-/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../index */ "./src/index.js");
+/* harmony import */ var _Collision__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Collision */ "./src/js/Collision.js");
+/* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
+/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
+/* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../index */ "./src/index.js");
+
 
 
 
@@ -637,7 +648,7 @@ class Platform {
     return this.type;
   }
   draw() {
-    _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height); // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
+    _Canvas__WEBPACK_IMPORTED_MODULE_1__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height); // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
   }
 
   update() {
@@ -645,14 +656,161 @@ class Platform {
     if (this.frames > this.frequency) this.frames = 0;
     this.draw();
   }
+  collisionAbove() {
+    console.log('player.velocity.y', _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y);
+    // Player - platform collision (player is above the platform)
+    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
+    // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+    // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4 >= this.position.x &&
+    // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -3.5; // если касается земли
+
+      if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed) {
+        _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_5__.player.jumpHeight;
+        _index__WEBPACK_IMPORTED_MODULE_5__.player.gravity = 0.25;
+      }
+      // debugger
+    }
+  }
+
+  collisionUnder() {
+    // Player - platform collision (player is under the platform)
+    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y - _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y * 0.5 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25 &&
+    // можно сделать 1.75
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
+      //debugger
+    }
+  }
+
+  collisionLeftSide() {
+    // Player - platform collision (player is left from the platform and moves right)
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
+      console.log('hit!');
+    } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + this.width) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 2;
+      console.log('free!');
+    }
+  }
+  collisionRightSide() {
+    // Player - platform collision (player is right from the platform and moves left)
+    console.log(_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero);
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.width) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
+      console.log('hit!');
+    } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x) {
+      // или "-" player.width ???
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = -2;
+      console.log('free!');
+    }
+
+    //   collisionAbove() {
+    //     console.log('player.velocity.y', player.velocity.y)
+    //   // Player - platform collision (player is above the platform)
+    //     if (player.position.y + player.height <= this.position.y &&
+    //       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+    //       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+    //       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+    //       player.position.x <= this.position.x + this.width - player.width / 4) { 
+    //         player.velocity.y = -3.5; // если касается земли
+
+    // if (keys.up.pressed ||
+    //   keys.up.pressed && keys.right.pressed ||
+    //   keys.up.pressed && keys.left.pressed ) {
+    //   player.velocity.y = -player.jumpHeight;
+    //   player.gravity = 0.25;
+    // } 
+    //        // debugger
+    //     }
+    //   }
+    //   collisionUnder() {
+    //   // Player - platform collision (player is under the platform)
+    //     if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
+    //       player.position.y + player.height + player.velocity.y >= this.position.y &&
+    //       player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
+    //       player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
+    //         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+    //      //debugger
+    //       }
+    //   }
+    //   collisionLeftSide() {
+    //   // Player - platform collision (player is left from the platform and moves right)
+    //     if (keys.right.pressed &&
+    //      (player.left <= this.right &&
+    //                 player.right >= this.left &&
+    //                 player.top <= this.bottom &&
+    //                 player.bottom >= this.top)) {
+    //         player.velocity.x = 0;
+
+    //         console.log('hit1!');
+
+    //     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
+    //     if (keys.right.pressed &&
+    //       player.position.y + player.height >= this.position.y && 
+    //       player.position.y <= this.position.y + this.height &&
+    //       player.position.x + player.width >= this.position.x + this.width) {
+    //         player.velocity.x = 2;
+
+    //         console.log('free1!');
+
+    //     }
+    //   }
+    //   collisionRightSide() {
+
+    //   // Player - platform collision (player is right from the platform and moves left)
+    //   if (player.velocity.x < 0 &&
+    //     player.position.y + player.height >= this.position.y && 
+    //     player.position.y <= this.position.y + this.height &&
+    //     player.position.x <= this.position.x + this.width) {
+    //       player.velocity.x = -2;
+
+    //       console.log('hit2!');
+
+    //   } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+    //     if (keys.left.pressed &&
+    //       player.position.y + player.height >= this.position.y && 
+    //       player.position.y != this.position.y + this.height &&
+    //       (player.position.x + player.width >= this.position.x && player.position.x + player.width <= this.position.x + 20)) { // или "-" player.width ???
+    //         player.velocity.x = -2;
+    //         console.log('free2!');
+
+    //     }
+    //   }
+  }
+
   collision() {
     // разбито на отдельные методы, для частичного наследования (если понадобится)
-    collisionAbove();
-    collisionUnder();
-    collisionLeftSide();
-    collisionRightSide();
+
+    this.collisionAbove();
+    this.collisionUnder();
+    this.collisionLeftSide();
+    this.collisionRightSide();
+
+    // for (let i = 0; i < platforms.length; i++) {
+    //   const platform = platforms[i];
+
+    //       if (!(player.left <= platform.right &&
+    //         player.right >= platform.left &&
+    //         player.top <= platform.bottom &&
+    //         player.bottom >= platform.top)) {
+    //           if (player.velocity.x < 0) {// moving left       // <= -2
+    //             player.left = platform.right + 0.1;
+    //             break;
+    //           }
+    //           if (player.velocity.x > 0) {// moving right      // <= 2
+    //             player.left = platform.left - player.width - 0.1;
+    //             break;
+    //           }
+    //       }
+    //     }
   }
 }
+
 class PlatformSpikes extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
@@ -660,19 +818,19 @@ class PlatformSpikes extends Platform {
   }
   collision() {
     // Player - platform collision (player is above the spike platform)
-    if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
+    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
     // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3 &&
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3 &&
     // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.die();
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.die();
     }
     // Player - platform collision (player is under the platform)
-    if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2 &&
+    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 &&
     // можно сделать 1.75
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2) {
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.die();
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.die();
     }
   }
 }
@@ -688,7 +846,7 @@ class Fan extends Platform {
     super(posX, posY, image);
     this.type = 'fan';
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.fan, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 23;
@@ -699,17 +857,17 @@ class JumpToggle extends Platform {
     super(posX, posY, image);
     this.type = 'jumpToggle';
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformJump, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformJumpDisabled, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
   }
   toggle() {
-    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
+    _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true ? this.currentSprite = this.sprites.idle : this.currentSprite = this.sprites.disabled;
   }
   collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive) {
       super.collision();
     }
   }
@@ -720,8 +878,8 @@ class OneStep extends Platform {
     this.temporaryPosX = posX;
     this.hits = 0;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneStep, 36, 36),
-      explosion: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneStepExplosion, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36),
+      explosion: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStepExplosion, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 28;
@@ -741,49 +899,49 @@ class OneStep extends Platform {
   collision() {
     // Player - platform collision (player is above the platform)
     // And moves right and leaves the platform
-    if ((!_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y === 0 || !_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y === _index__WEBPACK_IMPORTED_MODULE_4__.player.gravity) && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width * 2 >= this.position.x && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width) {
+    if ((!_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y === 0 || !_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y === _index__WEBPACK_IMPORTED_MODULE_5__.player.gravity) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 2 >= this.position.x && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width) {
       this.destroy();
     }
     // Не нужен но надо оставить, иначе блок пропадает сразу же
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y != 0 && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y != 0 && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
     // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3 &&
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3 &&
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 0; // если касается земли
       this.destroy();
-    } else if (!_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y &&
+    } else if (!_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
     // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3 &&
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3 &&
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 3) {
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 0; // если касается земли
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 3) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 0; // если касается земли
     }
     // Player - platform collision (player is under the platform)
-    if (_index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height + _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2 &&
+    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 &&
     // можно сделать 1.75
-    _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_4__.player.width / 2) {
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.y = 1;
+    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2) {
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 1;
       this.destroy();
     }
     // Player - platform collision (player is left from the platform)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width >= this.position.x && !(_index__WEBPACK_IMPORTED_MODULE_4__.player.position.x >= this.position.x)) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x && !(_index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x)) {
       // player is left from the platform and moves right
       this.hits++;
-      _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.right.pressed = false;
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_4__.player.sprites.fall.right;
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x -= 15;
+      _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed = false;
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_5__.player.sprites.fall.right;
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x -= 15;
       this.hits === 1 && this.destroy();
     }
     // Player - platform collision (player is right from the platform)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x <= this.position.x + this.width && !(_index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width <= this.position.x)) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width && !(_index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x)) {
       // player is right from the platform and moves left
       this.hits++;
-      _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.left.pressed = false;
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_4__.player.sprites.fall.left;
-      _index__WEBPACK_IMPORTED_MODULE_4__.player.velocity.x += 15;
+      _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed = false;
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_5__.player.sprites.fall.left;
+      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x += 15;
       this.hits === 1 && this.destroy();
     }
   }
@@ -793,19 +951,20 @@ class SpaceToggledPlatform extends Platform {
     super(posX, posY, image);
     this.type = 'toggledBySpacePlatform';
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOne, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneDisabled, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
     this.setCount = 1;
   }
   checkSpaceToggleCounter() {
-    _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter;
+    _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter;
   }
   collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.spaceToggleCounter === this.setCount) {
-      this.currentSprite = this.sprites.idle;
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === this.setCount) {
+      //this.currentSprite = this.sprites.idle;
+
       super.collision();
       this.checkSpaceToggleCounter();
     } else {
@@ -813,15 +972,15 @@ class SpaceToggledPlatform extends Platform {
       this.checkSpaceToggleCounter();
       // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
-      if (platforms.some(elem => {
-        return _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height * 0.75 >= elem.position.y && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_4__.player.height * 0.35 <= elem.position.y + elem.height && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width * 0.75 >= elem.position.x && _index__WEBPACK_IMPORTED_MODULE_4__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_4__.player.width * 0.25 <= elem.position.x + elem.width;
+      if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(elem => {
+        return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= elem.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= elem.position.y + elem.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= elem.position.x && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= elem.position.x + elem.width;
       })) {
-        _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.deadSignalZone = true;
+        _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = true;
         //debugger
         console.log('inside');
       } else {
         console.log('outside');
-        _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.deadSignalZone = false;
+        _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = false;
       }
     }
   }
@@ -832,8 +991,8 @@ class PlatformOne extends SpaceToggledPlatform {
     this.type = 'platformOne';
     this.setCount = 1;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOne, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformOneDisabled, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
     };
   }
 }
@@ -843,8 +1002,8 @@ class PlatformTwo extends SpaceToggledPlatform {
     this.type = 'platformTwo';
     this.setCount = 2;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformTwo, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformTwoDisabled, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwoDisabled, 36, 36)
     };
   }
 }
@@ -854,8 +1013,8 @@ class PlatformThree extends SpaceToggledPlatform {
     this.type = 'platformThree';
     this.setCount = 3;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformThree, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.platformThreeDisabled, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36),
+      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThreeDisabled, 36, 36)
     };
   }
 }
@@ -956,7 +1115,8 @@ class Player {
 
   die() {
     this.velocity.x = 0;
-    this.velocity.y = 0;
+    this.velocity.y = -2;
+    this.gravity = 0;
     this.currentSprite = this.sprites.death;
     setTimeout(_index__WEBPACK_IMPORTED_MODULE_2__.init, 550);
   }
@@ -1022,7 +1182,7 @@ class Player {
         //     if (this.platforms.some((block) => {
         //       return (this.bottom * 0.75 >= block.top &&
         //         this.bottom * 0.35 <= block.bottom &&
-        //         this.right * 0.75 >= block.top &&
+        //         this.right * 0.75 >= block.left &&
         //         this.right * 0.25 <= block.right);
         //     })) {
         //       keys.deadSignalZone = true;
@@ -1035,26 +1195,64 @@ class Player {
         //     }
         //       break;
 
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+        //   case 'platformOne':
+        //     case 'platformTwo':
+        //     case 'platformThree':
+        //       if ((keys.spaceToggleCounter === platform.setCount) && 
+        //               this.left <= platform.right &&
+        //               this.right >= platform.left &&
+        //               this.top <= platform.bottom &&
+        //               this.bottom >= platform.top) {
+        //           console.log('QQQQQQQQQQQQQQQ')
+        //           if (this.velocity.x < 0) {// moving left       // <= -2
+        //             this.left = platform.right + 0.1;
+        //             break;
+        //           }
+        //           if (this.velocity.x > 0) {// moving right      // <= 2
+        //             this.left = platform.left - this.width - 0.1;
+        //             break;
+        //           }
+        //       platform.currentSprite = platform.sprites.disable;
+        //       platform.checkSpaceToggleCounter();
+
+        //       if (this.platforms.some((cell) => {
+        //         return (this.left <= platform.right &&
+        //           this.right >= platform.left &&
+        //           this.top <= platform.bottom &&
+        //           this.bottom >= platform.top);
+        //       })) {
+        //         keys.deadSignalZone = true;
+        //         //debugger
+        //         console.log('inside')
+        //       } else {
+        //         console.log('outside')   
+        //         keys.deadSignalZone = false;
+        //       }
+        //     } else if ((!keys.spaceToggleCounter === platform.setCount) && 
+        //     !(this.left <= platform.right &&
+        //     this.right >= platform.left &&
+        //     this.top <= platform.bottom &&
+        //     this.bottom >= platform.top)) {
+        //       platform.currentSprite = platform.sprites.idle;
+        //       platform.checkSpaceToggleCounter();
+        //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+        // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+        //     }
+        //       break;
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
         case 'spikes':
         case 'saw':
           // Hero - platform collision (player is above the spike platform)
           if (this.bottom <= platform.top + this.height / 3 && this.bottom + this.velocity.y >= platform.top + this.height / 3 && this.right >= platform.left + this.width / 3 && this.left <= platform.right - this.width / 3) {
-            // if (this.velocity.x < 0) {// moving left       // <= -2
-            //   this.left = platform.right + 0.1;
-            //   break;
-            // }
-            // if (this.velocity.x > 0) {// moving right      // <= 2
-            //   this.left = platform.left - this.width - 0.1;
-            //   break;
-            // }
-            debugger;
+            //debugger
             this.die();
           }
           // Hero - platform collision (player is under the platform)
           if (this.top <= platform.bottom - Math.abs(this.velocity.y) && this.bottom + this.velocity.y >= platform.top + this.height / 3 &&
           // + this.velocity.y // оставить!!
           this.left >= platform.left - this.width / 1.5 && this.right <= platform.right + this.width / 1.5) {
-            debugger;
+            //debugger
             this.die();
           }
           break;
@@ -1102,94 +1300,106 @@ class Player {
           }
           break;
 
-          //     case 'platformOne':
-          //     case 'platformTwo':
-          //     case 'platformThree':
-          //       if ((keys.spaceToggleCounter === platform.setCount) &&
-          //         this.left <= platform.right &&
-          //         this.right >= platform.left &&
-          //         this.top <= platform.bottom &&
-          //         this.bottom >= platform.top) {
-          //           if (this.velocity.y < 0) {// moving up  // -0.25
-          //             this.velocity.y = 0;
-          //             this.top = platform.bottom + 0.1;
-          //             break;
-          //           }
-          //           if (this.velocity.y > 0) {// falling down  // 0.25
-          //             this.velocity.y = 0;
-          //             this.top = platform.top - this.height - 0.1;
-          //             break;
-          //           }
-          //         platform.currentSprite = platform.sprites.idle;
-          //         platform.checkSpaceToggleCounter();
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+        //     case 'platformOne':
+        //     case 'platformTwo':
+        //     case 'platformThree':
+        //       if ((keys.spaceToggleCounter === platform.setCount) &&
+        //         this.left <= platform.right &&
+        //         this.right >= platform.left &&
+        //         this.top <= platform.bottom &&
+        //         this.bottom >= platform.top) {
+        //           console.log('YYYYYYYYYYYYYYY')
+        //           if (this.velocity.y < 0) {// moving up  // -0.25
+        //             this.velocity.y = 0;
+        //             this.top = platform.bottom + 0.1;
+        //             break;
+        //           }
+        //           if (this.velocity.y > 0) {// falling down  // 0.25
+        //             this.velocity.y = 0;
+        //             this.top = platform.top - this.height - 0.1;
+        //             break;
+        //           }
+        //         platform.currentSprite = platform.sprites.disabled;
+        //         platform.checkSpaceToggleCounter();
+        //         if (this.platforms.some((cell) => {
+        //           return (this.left <= platform.right &&
+        //             this.right >= platform.left &&
+        //             this.top <= platform.bottom &&
+        //             this.bottom >= platform.top);
+        //         })) {
+        //           keys.deadSignalZone = true;
+        //           //debugger
+        //           console.log('inside')
+        //         } else {
+        //           console.log('outside')   
+        //           keys.deadSignalZone = false;
+        //         }
 
-          //     } else {
-          //       platform.currentSprite = platform.sprites.disabled;
-          //       platform.checkSpaceToggleCounter();
-          //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
-          // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
-          //     if (this.platforms.some((block) => {
-          //       return (this.bottom * 0.75 >= block.top &&
-          //         this.bottom * 0.35 <= block.bottom &&
-          //         this.right * 0.75 >= block.top &&
-          //         this.right * 0.25 <= block.right);
-          //     })) {
-          //       keys.deadSignalZone = true;
-          //       //debugger
-          //       console.log('inside')
-          //     } else {
-          //       console.log('outside')   
-          //       keys.deadSignalZone = false;
-          //     }
-          //     }
+        //     } else if ((!keys.spaceToggleCounter === platform.setCount) &&
+        //     !(this.left <= platform.right &&
+        //       this.right >= platform.left &&
+        //       this.top <= platform.bottom &&
+        //       this.bottom >= platform.top)) {
 
-          //       break;
+        //       platform.currentSprite = platform.sprites.idle;
+        //       platform.checkSpaceToggleCounter();
+        //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+        // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+        //     }
 
-          // case 'spikes': // Коллизия уже выполняется в методе checkCollisionsAxes_X()
-          //   case 'saw':
-          //     if (this.bottom >= platform.top &&
-          //       this.right >= platform.left + this.width / 2 &&
-          //       this.left <= platform.left - this.width / 2) {
-          //         // if (this.velocity.x < 0) {// moving left       // <= -2
-          //         //   this.left = platform.right + 0.1;
-          //         //   break;
-          //         // }
-          //         // if (this.velocity.x > 0) {// moving right      // <= 2
-          //         //   this.left = platform.left - this.width - 0.1;
-          //         //   break;
-          //         // }
-          //         this.die();
-          //     }
-          if (this.top <= platform.bottom && this.bottom + this.velocity.y >= platform.top && this.left >= platform.left - this.width / 2 && this.right <= platform.right + this.width / 2) {
-            // if (this.velocity.x < 0) {// moving left       // <= -2
-            //   this.left = platform.right + 0.1;
-            //   break;
-            // }
-            // if (this.velocity.x > 0) {// moving right      // <= 2
-            //   this.left = platform.left - this.width - 0.1;
-            //   break;
-            // }
+        //       break;
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-            // if (this.left <= platform.right &&
-            //   this.right >= platform.left &&
-            //   this.top <= platform.bottom &&
-            //   this.bottom >= platform.top) {
-            // if (this.velocity.y < 0) {// moving up  // -0.25
-            //   this.velocity.y = 0;
-            //   this.top = platform.bottom + 0.1;
-            //   break;
-            // }
-            // if (this.velocity.y > 0) {// falling down  // 0.25
-            //   this.velocity.y = 0;
-            //   this.top = platform.top - this.height - 0.1;
-            //   break;
-            // }
-            this.die();
-          }
-          break;
+        // case 'spikes': // Коллизия уже выполняется в методе checkCollisionsAxes_X()
+        //   case 'saw':
+        //     if (this.bottom >= platform.top &&
+        //       this.right >= platform.left + this.width / 2 &&
+        //       this.left <= platform.left - this.width / 2) {
+        //         // if (this.velocity.x < 0) {// moving left       // <= -2
+        //         //   this.left = platform.right + 0.1;
+        //         //   break;
+        //         // }
+        //         // if (this.velocity.x > 0) {// moving right      // <= 2
+        //         //   this.left = platform.left - this.width - 0.1;
+        //         //   break;
+        //         // }
+        //         this.die();
+        //     }
+        //     if (this.top <= platform.bottom &&
+        //       this.bottom + this.velocity.y >= platform.top &&
+        //       this.left >= platform.left - this.width / 2 &&
+        //       this.right <= platform.right + this.width / 2) {
+        //         // if (this.velocity.x < 0) {// moving left       // <= -2
+        //         //   this.left = platform.right + 0.1;
+        //         //   break;
+        //         // }
+        //         // if (this.velocity.x > 0) {// moving right      // <= 2
+        //         //   this.left = platform.left - this.width - 0.1;
+        //         //   break;
+        //         // }
+
+        // // if (this.left <= platform.right &&
+        // //   this.right >= platform.left &&
+        // //   this.top <= platform.bottom &&
+        // //   this.bottom >= platform.top) {
+        //     // if (this.velocity.y < 0) {// moving up  // -0.25
+        //     //   this.velocity.y = 0;
+        //     //   this.top = platform.bottom + 0.1;
+        //     //   break;
+        //     // }
+        //     // if (this.velocity.y > 0) {// falling down  // 0.25
+        //     //   this.velocity.y = 0;
+        //     //   this.top = platform.top - this.height - 0.1;
+        //     //   break;
+        //     // }
+        //     this.die();
+        // }
+        // break;
       }
     }
   }
+
   setGravity() {
     this.velocity.y += this.gravity;
     this.top += this.velocity.y;
@@ -1235,7 +1445,7 @@ __webpack_require__.r(__webpack_exports__);
 // Empty:
 // ee - Empty block
 
-const collisionsLevel_1 = [['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', 'ee', 'ee', '', '', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'e', '', 'ee', 'ee', '', '', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', '', 'ee', 'ee', '', '', '', '', '', 292, 'ee'], ['ee', 292, 292, '', '', 292, '', '', 292, 'ee', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', '', '', '', '', '', '', '', '', '', '', '', 292, ''], ['', 292, '', 'jp', '', '', '', '', 'sw', '', '', '', 'sk', '', 292, ''], ['', 292, '', '', '', '', '', 'ee', '', 'ee', '', 'ee', 'ee', 'ee', 292, ''], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee', 292, 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']];
+const collisionsLevel_1 = [['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', '', '', '', '', '', '', 'jp', 'sw', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', '', '', '', '', '', '', '', '', 292, 'ee'], ['ee',, 'ee', 'ee', '', '', '', '', '', '', '', '', '', '', 292, 'ee'], ['ee', 292, 292, '', '',, '', '',, '', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', '', '', '', '', '', '', '', '', '', '', '', 292, ''], ['', 'ee',, '', '', '', 292, '', 292, '', '', '', 'sk', '',, 292], ['', 292, '', '', '', '', 292, 'ee', '', 'ee', '', 'ee', 'ee', 'ee', 292, ''], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee', 292, 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']];
 
 /***/ }),
 

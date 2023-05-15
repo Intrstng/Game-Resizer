@@ -102,7 +102,8 @@ export class Player {
 
   die() {
     this.velocity.x = 0;
-    this.velocity.y = 0;
+    this.velocity.y = -2;
+    this.gravity = 0
     this.currentSprite = this.sprites.death;
     setTimeout(init, 550);
   }
@@ -173,7 +174,7 @@ export class Player {
     //     if (this.platforms.some((block) => {
     //       return (this.bottom * 0.75 >= block.top &&
     //         this.bottom * 0.35 <= block.bottom &&
-    //         this.right * 0.75 >= block.top &&
+    //         this.right * 0.75 >= block.left &&
     //         this.right * 0.25 <= block.right);
     //     })) {
     //       keys.deadSignalZone = true;
@@ -186,6 +187,52 @@ export class Player {
     //     }
     //       break;
 
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+  //   case 'platformOne':
+  //     case 'platformTwo':
+  //     case 'platformThree':
+  //       if ((keys.spaceToggleCounter === platform.setCount) && 
+  //               this.left <= platform.right &&
+  //               this.right >= platform.left &&
+  //               this.top <= platform.bottom &&
+  //               this.bottom >= platform.top) {
+  //           console.log('QQQQQQQQQQQQQQQ')
+  //           if (this.velocity.x < 0) {// moving left       // <= -2
+  //             this.left = platform.right + 0.1;
+  //             break;
+  //           }
+  //           if (this.velocity.x > 0) {// moving right      // <= 2
+  //             this.left = platform.left - this.width - 0.1;
+  //             break;
+  //           }
+  //       platform.currentSprite = platform.sprites.disable;
+  //       platform.checkSpaceToggleCounter();
+
+  //       if (this.platforms.some((cell) => {
+  //         return (this.left <= platform.right &&
+  //           this.right >= platform.left &&
+  //           this.top <= platform.bottom &&
+  //           this.bottom >= platform.top);
+  //       })) {
+  //         keys.deadSignalZone = true;
+  //         //debugger
+  //         console.log('inside')
+  //       } else {
+  //         console.log('outside')   
+  //         keys.deadSignalZone = false;
+  //       }
+  //     } else if ((!keys.spaceToggleCounter === platform.setCount) && 
+  //     !(this.left <= platform.right &&
+  //     this.right >= platform.left &&
+  //     this.top <= platform.bottom &&
+  //     this.bottom >= platform.top)) {
+  //       platform.currentSprite = platform.sprites.idle;
+  //       platform.checkSpaceToggleCounter();
+  //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+  // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+  //     }
+  //       break;
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
       case 'spikes':
       case 'saw':
         // Hero - platform collision (player is above the spike platform)
@@ -194,15 +241,7 @@ export class Player {
           this.right >= platform.left + this.width / 3 && 
           this.left <= platform.right - this.width / 3
           ) {
-            // if (this.velocity.x < 0) {// moving left       // <= -2
-            //   this.left = platform.right + 0.1;
-            //   break;
-            // }
-            // if (this.velocity.x > 0) {// moving right      // <= 2
-            //   this.left = platform.left - this.width - 0.1;
-            //   break;
-            // }
-            debugger
+            //debugger
             this.die();
         }
         // Hero - platform collision (player is under the platform)
@@ -210,7 +249,7 @@ export class Player {
           this.bottom + this.velocity.y >= platform.top + this.height / 3 && // + this.velocity.y // оставить!!
           this.left >= platform.left - this.width / 1.5 &&
           this.right <= platform.right + this.width / 1.5) {
-            debugger
+            //debugger
             this.die();
           }
         break;
@@ -263,51 +302,56 @@ export class Player {
         }
         break;
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+//     case 'platformOne':
+//     case 'platformTwo':
+//     case 'platformThree':
+//       if ((keys.spaceToggleCounter === platform.setCount) &&
+//         this.left <= platform.right &&
+//         this.right >= platform.left &&
+//         this.top <= platform.bottom &&
+//         this.bottom >= platform.top) {
+//           console.log('YYYYYYYYYYYYYYY')
+//           if (this.velocity.y < 0) {// moving up  // -0.25
+//             this.velocity.y = 0;
+//             this.top = platform.bottom + 0.1;
+//             break;
+//           }
+//           if (this.velocity.y > 0) {// falling down  // 0.25
+//             this.velocity.y = 0;
+//             this.top = platform.top - this.height - 0.1;
+//             break;
+//           }
+//         platform.currentSprite = platform.sprites.disabled;
+//         platform.checkSpaceToggleCounter();
+//         if (this.platforms.some((cell) => {
+//           return (this.left <= platform.right &&
+//             this.right >= platform.left &&
+//             this.top <= platform.bottom &&
+//             this.bottom >= platform.top);
+//         })) {
+//           keys.deadSignalZone = true;
+//           //debugger
+//           console.log('inside')
+//         } else {
+//           console.log('outside')   
+//           keys.deadSignalZone = false;
+//         }
 
-    //     case 'platformOne':
-    //     case 'platformTwo':
-    //     case 'platformThree':
-    //       if ((keys.spaceToggleCounter === platform.setCount) &&
-    //         this.left <= platform.right &&
-    //         this.right >= platform.left &&
-    //         this.top <= platform.bottom &&
-    //         this.bottom >= platform.top) {
-    //           if (this.velocity.y < 0) {// moving up  // -0.25
-    //             this.velocity.y = 0;
-    //             this.top = platform.bottom + 0.1;
-    //             break;
-    //           }
-    //           if (this.velocity.y > 0) {// falling down  // 0.25
-    //             this.velocity.y = 0;
-    //             this.top = platform.top - this.height - 0.1;
-    //             break;
-    //           }
-    //         platform.currentSprite = platform.sprites.idle;
-    //         platform.checkSpaceToggleCounter();
-          
+//     } else if ((!keys.spaceToggleCounter === platform.setCount) &&
+//     !(this.left <= platform.right &&
+//       this.right >= platform.left &&
+//       this.top <= platform.bottom &&
+//       this.bottom >= platform.top)) {
+      
+//       platform.currentSprite = platform.sprites.idle;
+//       platform.checkSpaceToggleCounter();
+//     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
+// // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
+//     }
 
-    //     } else {
-    //       platform.currentSprite = platform.sprites.disabled;
-    //       platform.checkSpaceToggleCounter();
-    //     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)
-    // // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Переделать platforms    
-    //     if (this.platforms.some((block) => {
-    //       return (this.bottom * 0.75 >= block.top &&
-    //         this.bottom * 0.35 <= block.bottom &&
-    //         this.right * 0.75 >= block.top &&
-    //         this.right * 0.25 <= block.right);
-    //     })) {
-    //       keys.deadSignalZone = true;
-    //       //debugger
-    //       console.log('inside')
-    //     } else {
-    //       console.log('outside')   
-    //       keys.deadSignalZone = false;
-    //     }
-    //     }
-
-    //       break;
-
+//       break;
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
                                     // case 'spikes': // Коллизия уже выполняется в методе checkCollisionsAxes_X()
                                     //   case 'saw':
@@ -324,39 +368,39 @@ export class Player {
                                     //         // }
                                     //         this.die();
                                     //     }
-            if (this.top <= platform.bottom &&
-              this.bottom + this.velocity.y >= platform.top &&
-              this.left >= platform.left - this.width / 2 &&
-              this.right <= platform.right + this.width / 2) {
-                // if (this.velocity.x < 0) {// moving left       // <= -2
-                //   this.left = platform.right + 0.1;
-                //   break;
-                // }
-                // if (this.velocity.x > 0) {// moving right      // <= 2
-                //   this.left = platform.left - this.width - 0.1;
-                //   break;
-                // }
+        //     if (this.top <= platform.bottom &&
+        //       this.bottom + this.velocity.y >= platform.top &&
+        //       this.left >= platform.left - this.width / 2 &&
+        //       this.right <= platform.right + this.width / 2) {
+        //         // if (this.velocity.x < 0) {// moving left       // <= -2
+        //         //   this.left = platform.right + 0.1;
+        //         //   break;
+        //         // }
+        //         // if (this.velocity.x > 0) {// moving right      // <= 2
+        //         //   this.left = platform.left - this.width - 0.1;
+        //         //   break;
+        //         // }
 
 
 
 
-        // if (this.left <= platform.right &&
-        //   this.right >= platform.left &&
-        //   this.top <= platform.bottom &&
-        //   this.bottom >= platform.top) {
-            // if (this.velocity.y < 0) {// moving up  // -0.25
-            //   this.velocity.y = 0;
-            //   this.top = platform.bottom + 0.1;
-            //   break;
-            // }
-            // if (this.velocity.y > 0) {// falling down  // 0.25
-            //   this.velocity.y = 0;
-            //   this.top = platform.top - this.height - 0.1;
-            //   break;
-            // }
-            this.die();
-        }
-        break;
+        // // if (this.left <= platform.right &&
+        // //   this.right >= platform.left &&
+        // //   this.top <= platform.bottom &&
+        // //   this.bottom >= platform.top) {
+        //     // if (this.velocity.y < 0) {// moving up  // -0.25
+        //     //   this.velocity.y = 0;
+        //     //   this.top = platform.bottom + 0.1;
+        //     //   break;
+        //     // }
+        //     // if (this.velocity.y > 0) {// falling down  // 0.25
+        //     //   this.velocity.y = 0;
+        //     //   this.top = platform.top - this.height - 0.1;
+        //     //   break;
+        //     // }
+        //     this.die();
+        // }
+        // break;
     }
     }
   }

@@ -1,3 +1,4 @@
+import { CollisionBlock, platforms, parsedCollisions } from './Collision';
 import { canvas, c } from './Canvas';
 import { createImage } from './CreateImage';
 import { platformImgSrc300,
@@ -26,10 +27,14 @@ import { platformImgSrc300,
   fan,
   spike,
       } from './Assets';
-import { keys } from './Keys';
-import { player/* , platforms */ } from '../index';
-import { intersection } from '../index';
 
+     
+      
+
+
+import { keys } from './Keys';
+import { player } from '../index';
+import { leftNeighboorBlockFromHero } from '../index';
 class Platform {
   constructor (posX, posY, image) {
     this.position = {
@@ -86,12 +91,195 @@ class Platform {
     if (this.frames > this.frequency) this.frames = 0;
     this.draw();
   }
-    
+  collisionAbove() {
+    console.log('player.velocity.y', player.velocity.y)
+  // Player - platform collision (player is above the platform)
+    if (player.position.y + player.height <= this.position.y &&
+      player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+      player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+      player.position.x <= this.position.x + this.width - player.width / 4) { 
+        player.velocity.y = -3.5; // если касается земли
+        
+if (keys.up.pressed ||
+  keys.up.pressed && keys.right.pressed ||
+  keys.up.pressed && keys.left.pressed ) {
+  player.velocity.y = -player.jumpHeight;
+  player.gravity = 0.25;
+} 
+       // debugger
+    }
+  }
+  collisionUnder() {
+  // Player - platform collision (player is under the platform)
+    if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
+      player.position.y + player.height + player.velocity.y >= this.position.y &&
+      player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
+      player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
+        player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+     //debugger
+      }
+  }
+  collisionLeftSide() {
+  // Player - platform collision (player is left from the platform and moves right)
+    if (keys.right.pressed &&
+      player.position.y + player.height >= this.position.y && 
+      player.position.y <= this.position.y + this.height &&
+      player.position.x + player.width >= this.position.x) {
+        player.velocity.x = 0;
+        console.log('hit!');
+    } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
+    if (keys.right.pressed &&
+      player.position.y + player.height >= this.position.y && 
+      player.position.y <= this.position.y + this.height &&
+      player.position.x + player.width >= this.position.x + this.width) {
+        player.velocity.x = 2;
+        console.log('free!');
+    }
+  }
+  collisionRightSide() {
+ // Player - platform collision (player is right from the platform and moves left)
+ console.log(leftNeighboorBlockFromHero)
+
+ if (keys.left.pressed &&
+  leftNeighboorBlockFromHero != undefined &&
+  player.position.y + player.height >= leftNeighboorBlockFromHero.position.y && 
+  player.position.y <= leftNeighboorBlockFromHero.position.y + leftNeighboorBlockFromHero.height &&
+  player.position.x - player.width / 2 <= leftNeighboorBlockFromHero.position.x + leftNeighboorBlockFromHero.width) {
+  player.velocity.x = 0;
+  console.log('hit!');
+} // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+  if (keys.left.pressed &&
+    leftNeighboorBlockFromHero != undefined &&
+  (player.position.y + player.height <= leftNeighboorBlockFromHero.position.y || 
+  player.position.y >= leftNeighboorBlockFromHero.position.y + leftNeighboorBlockFromHero.height) &&
+  player.position.x - player.width / 2 <= leftNeighboorBlockFromHero.position.x) { // или "-" player.width ???
+      player.velocity.x = -2;
+      console.log('free!');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //   collisionAbove() {
+  //     console.log('player.velocity.y', player.velocity.y)
+  //   // Player - platform collision (player is above the platform)
+  //     if (player.position.y + player.height <= this.position.y &&
+  //       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+  //       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+  //       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+  //       player.position.x <= this.position.x + this.width - player.width / 4) { 
+  //         player.velocity.y = -3.5; // если касается земли
+          
+  // if (keys.up.pressed ||
+  //   keys.up.pressed && keys.right.pressed ||
+  //   keys.up.pressed && keys.left.pressed ) {
+  //   player.velocity.y = -player.jumpHeight;
+  //   player.gravity = 0.25;
+  // } 
+  //        // debugger
+  //     }
+  //   }
+  //   collisionUnder() {
+  //   // Player - platform collision (player is under the platform)
+  //     if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
+  //       player.position.y + player.height + player.velocity.y >= this.position.y &&
+  //       player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
+  //       player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
+  //         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+  //      //debugger
+  //       }
+  //   }
+  //   collisionLeftSide() {
+  //   // Player - platform collision (player is left from the platform and moves right)
+  //     if (keys.right.pressed &&
+  //      (player.left <= this.right &&
+  //                 player.right >= this.left &&
+  //                 player.top <= this.bottom &&
+  //                 player.bottom >= this.top)) {
+  //         player.velocity.x = 0;
+          
+  //         console.log('hit1!');
+          
+  //     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
+  //     if (keys.right.pressed &&
+  //       player.position.y + player.height >= this.position.y && 
+  //       player.position.y <= this.position.y + this.height &&
+  //       player.position.x + player.width >= this.position.x + this.width) {
+  //         player.velocity.x = 2;
+          
+  //         console.log('free1!');
+          
+  //     }
+  //   }
+  //   collisionRightSide() {
+  
+  //   // Player - platform collision (player is right from the platform and moves left)
+  //   if (player.velocity.x < 0 &&
+  //     player.position.y + player.height >= this.position.y && 
+  //     player.position.y <= this.position.y + this.height &&
+  //     player.position.x <= this.position.x + this.width) {
+  //       player.velocity.x = -2;
+        
+  //       console.log('hit2!');
+        
+  //   } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
+  //     if (keys.left.pressed &&
+  //       player.position.y + player.height >= this.position.y && 
+  //       player.position.y != this.position.y + this.height &&
+  //       (player.position.x + player.width >= this.position.x && player.position.x + player.width <= this.position.x + 20)) { // или "-" player.width ???
+  //         player.velocity.x = -2;
+  //         console.log('free2!');
+          
+  //     }
+  //   }
+  }
+  
   collision() { // разбито на отдельные методы, для частичного наследования (если понадобится)
-    collisionAbove();
-    collisionUnder();
-    collisionLeftSide();
-    collisionRightSide();
+
+    this.collisionAbove();
+    this.collisionUnder();
+    this.collisionLeftSide();
+    this.collisionRightSide();
+
+
+
+
+    // for (let i = 0; i < platforms.length; i++) {
+    //   const platform = platforms[i];
+   
+
+
+    //       if (!(player.left <= platform.right &&
+    //         player.right >= platform.left &&
+    //         player.top <= platform.bottom &&
+    //         player.bottom >= platform.top)) {
+    //           if (player.velocity.x < 0) {// moving left       // <= -2
+    //             player.left = platform.right + 0.1;
+    //             break;
+    //           }
+    //           if (player.velocity.x > 0) {// moving right      // <= 2
+    //             player.left = platform.left - player.width - 0.1;
+    //             break;
+    //           }
+    //       }
+    //     }
+
+
+
+
+
+
+
   }
 }
 
@@ -263,7 +451,8 @@ class SpaceToggledPlatform extends Platform {
   }
   collision() {
     if (keys.spaceToggleCounter === this.setCount) {
-      this.currentSprite = this.sprites.idle;
+      //this.currentSprite = this.sprites.idle;
+      
       super.collision();
       this.checkSpaceToggleCounter();
     } else {

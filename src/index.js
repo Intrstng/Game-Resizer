@@ -4,9 +4,11 @@ import './sass/styles.scss';
 //   imagePlatform.width = imagePlatform.naturalWidth;
 //   imagePlatform.height = imagePlatform.naturalHeight;
 //}
+import { CollisionBlock, platforms, parsedCollisions } from './js/Collision';
 import { canvas, c } from './js/Canvas';
 import { createImage, Sprite } from './js/CreateImage';
 import { Player } from './js/Player';
+
 import { Platform,
           PlatformSpikes,
           Saw,
@@ -51,7 +53,8 @@ import { AdditionalElements } from './js/AdditionalElements';
 canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 // 720 //window.innerHeight;
 
-
+let leftNeighboorBlockFromHeroArr = [];
+export let leftNeighboorBlockFromHero = null;
 
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
@@ -72,7 +75,7 @@ export let additionalElements = [
 
 
 import { collisionsLevel_1 } from './js/data/collisions';
-import { CollisionBlock, platforms, parsedCollisions } from './js/Collision';
+
 
 
 console.log(platforms)
@@ -161,11 +164,32 @@ function animate() {
  // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
            
                                                    
-
                           
                           platforms.forEach(platform => platform.draw());
                           platforms.forEach(platform => platform.update()); // рисуем платформы
-                          platforms.forEach(platform => (platform.type === 'jumpToggle') && platform.toggle());
+                          platforms.forEach(platform => {
+                            (platform.type === 'jumpToggle') && platform.toggle()
+                          
+                          
+                          if (platform.type === 'platformOne' ||
+                          platform.type === 'platformTwo' ||
+                          platform.type === 'platformThree'
+                          ) {
+                            platform.collision();
+                          }
+                          
+                          
+                          });
+                          
+leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
+  return (platform.left <= player.left &&
+    (platform.top <= player.top &&
+    platform.bottom >= player.bottom)
+    );
+})
+leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1]
+
+
                           player.update();
 
 
@@ -258,5 +282,5 @@ window.addEventListener('keyup', keyUpHandler);
 
 window.addEventListener('click', (e) => {
   console.log(e.clientX, e.clientY)
-  //  debugger
+   // debugger
 })

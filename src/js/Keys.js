@@ -41,8 +41,6 @@ const keyDownHandler = (e) => {
 
       case 'Space': {
         !keys.deadSignalZone && keys.spaceToggleCounter++;
-        // arr = [...arr, ...platforms.splice(1,1)];
-        // console.log(arr)
       }
         break;
 
