@@ -72,10 +72,20 @@ const platforms = [];
 // })
 const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
-    if (cell === 292) {
+    if (cell === '1p') {
       console.log(index_X, index_Y)
       platforms.push(new PlatformOne(
         index_X * 36, index_Y * 36, createImage(platformOne, 36, 36), platforms))
+    }
+    if (cell === '2p') {
+      console.log(index_X, index_Y)
+      platforms.push(new PlatformTwo(
+        index_X * 36, index_Y * 36, createImage(platformTwo, 36, 36), platforms))
+    }
+    if (cell === '3p') {
+      console.log(index_X, index_Y)
+      platforms.push(new PlatformThree(
+        index_X * 36, index_Y * 36, createImage(platformThree, 36, 36), platforms))
     }
     if (cell === 'ee') {
       console.log(index_X, index_Y)

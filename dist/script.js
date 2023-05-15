@@ -397,9 +397,17 @@ const platforms = [];
 // })
 const parsedCollisions = _data_collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
-    if (cell === 292) {
+    if (cell === '1p') {
       console.log(index_X, index_Y);
       platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36), platforms));
+    }
+    if (cell === '2p') {
+      console.log(index_X, index_Y);
+      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36), platforms));
+    }
+    if (cell === '3p') {
+      console.log(index_X, index_Y);
+      platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_4__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36), platforms));
     }
     if (cell === 'ee') {
       console.log(index_X, index_Y);
@@ -619,6 +627,7 @@ class Platform {
     };
     this.currentSprite = this.sprites.idle;
     this.type = 'solid';
+    this.statusActive = true;
   }
   get top() {
     return this.position.y;
@@ -699,90 +708,16 @@ class Platform {
   collisionRightSide() {
     // Player - platform collision (player is right from the platform and moves left)
     console.log(_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero);
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.width) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.width) {
       _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
       console.log('hit!');
     } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 2 <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x) {
       // или "-" player.width ???
       _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = -2;
       console.log('free!');
     }
-
-    //   collisionAbove() {
-    //     console.log('player.velocity.y', player.velocity.y)
-    //   // Player - platform collision (player is above the platform)
-    //     if (player.position.y + player.height <= this.position.y &&
-    //       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-    //       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    //       player.position.x + player.width - player.width / 4 >= this.position.x  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-    //       player.position.x <= this.position.x + this.width - player.width / 4) { 
-    //         player.velocity.y = -3.5; // если касается земли
-
-    // if (keys.up.pressed ||
-    //   keys.up.pressed && keys.right.pressed ||
-    //   keys.up.pressed && keys.left.pressed ) {
-    //   player.velocity.y = -player.jumpHeight;
-    //   player.gravity = 0.25;
-    // } 
-    //        // debugger
-    //     }
-    //   }
-    //   collisionUnder() {
-    //   // Player - platform collision (player is under the platform)
-    //     if (player.position.y - player.velocity.y * 0.5 <= this.position.y + this.height &&
-    //       player.position.y + player.height + player.velocity.y >= this.position.y &&
-    //       player.position.x >= this.position.x - player.width / 1.25 && // можно сделать 1.75
-    //       player.position.x + player.width <= this.position.x + this.width + player.width / 1.25) {
-    //         player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-    //      //debugger
-    //       }
-    //   }
-    //   collisionLeftSide() {
-    //   // Player - platform collision (player is left from the platform and moves right)
-    //     if (keys.right.pressed &&
-    //      (player.left <= this.right &&
-    //                 player.right >= this.left &&
-    //                 player.top <= this.bottom &&
-    //                 player.bottom >= this.top)) {
-    //         player.velocity.x = 0;
-
-    //         console.log('hit1!');
-
-    //     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-    //     if (keys.right.pressed &&
-    //       player.position.y + player.height >= this.position.y && 
-    //       player.position.y <= this.position.y + this.height &&
-    //       player.position.x + player.width >= this.position.x + this.width) {
-    //         player.velocity.x = 2;
-
-    //         console.log('free1!');
-
-    //     }
-    //   }
-    //   collisionRightSide() {
-
-    //   // Player - platform collision (player is right from the platform and moves left)
-    //   if (player.velocity.x < 0 &&
-    //     player.position.y + player.height >= this.position.y && 
-    //     player.position.y <= this.position.y + this.height &&
-    //     player.position.x <= this.position.x + this.width) {
-    //       player.velocity.x = -2;
-
-    //       console.log('hit2!');
-
-    //   } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-    //     if (keys.left.pressed &&
-    //       player.position.y + player.height >= this.position.y && 
-    //       player.position.y != this.position.y + this.height &&
-    //       (player.position.x + player.width >= this.position.x && player.position.x + player.width <= this.position.x + 20)) { // или "-" player.width ???
-    //         player.velocity.x = -2;
-    //         console.log('free2!');
-
-    //     }
-    //   }
   }
-
   collision() {
     // разбито на отдельные методы, для частичного наследования (если понадобится)
 
@@ -956,16 +891,21 @@ class SpaceToggledPlatform extends Platform {
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
-    this.setCount = 1;
+    this.setCount = null;
+    this.activeStatus = true;
   }
   checkSpaceToggleCounter() {
     _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter;
   }
   collision() {
     if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === this.setCount) {
-      //this.currentSprite = this.sprites.idle;
-
-      super.collision();
+      super.collisionAbove();
+      super.collisionUnder();
+      super.collisionLeftSide();
+      if ((_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.setCount) {
+        super.collisionRightSide();
+      }
+      this.currentSprite = this.sprites.idle;
       this.checkSpaceToggleCounter();
     } else {
       this.currentSprite = this.sprites.disabled;
@@ -995,7 +935,13 @@ class PlatformOne extends SpaceToggledPlatform {
       disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
     };
   }
+  // checkSpaceToggleCounter() {
+  //   super.checkSpaceToggleCounter();
+  //   this.setCount 
+  //  }
+  // this.statusActive = true;
 }
+
 class PlatformTwo extends SpaceToggledPlatform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
@@ -1050,7 +996,7 @@ class Player {
     } = _ref;
     this.platforms = platforms;
     this.position = {
-      x: 165,
+      x: 180,
       y: 247 //canvas.height / 2
     };
 
@@ -1445,7 +1391,7 @@ __webpack_require__.r(__webpack_exports__);
 // Empty:
 // ee - Empty block
 
-const collisionsLevel_1 = [['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 292, 'ee'], ['ee', 292, 'ee', 'ee', '', '', '', '', '', '', '', '', 'jp', 'sw', 292, 'ee'], ['ee', 292, 'ee', 'ee', 'ee', 'ee', '', '', '', '', '', '', '', '', 292, 'ee'], ['ee',, 'ee', 'ee', '', '', '', '', '', '', '', '', '', '', 292, 'ee'], ['ee', 292, 292, '', '',, '', '',, '', '', '', '', '', 292, 'ee'], ['ee', 292, 'ee', '', '', '', '', '', '', '', '', '', '', '', 292, ''], ['', 'ee',, '', '', '', 292, '', 292, '', '', '', 'sk', '',, 292], ['', 292, '', '', '', '', 292, 'ee', '', 'ee', '', 'ee', 'ee', 'ee', 292, ''], ['ee', 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 'ee', 292, 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']];
+const collisionsLevel_1 = [['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'ee'], ['ee', '1p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1p', 'ee'], ['ee', '1p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1p', 'ee'], ['ee', '1p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1p', 'ee'], ['ee', '1p', 'ee', 'ee', '2p', '', '', '', '', '', '', '', 'jp', 'sw', '1p', 'ee'], ['ee', '1p', 'ee', 'ee', 'ee', 'ee', '', '', '', '', '', '', '', '', '1p', 'ee'], ['ee',, 'ee', 'ee', '', '', '', '', '', '', '', '', '', '', '1p', 'ee'], ['ee', '1p', '1p', '', '',, '', '',, '', '', '', '', '', '1p', 'ee'], ['ee', '1p', 'ee', '', '', '', '', '', '', '', '', '', '', '', '1p', ''], ['', 'ee',, '', '', '', '1p', '', '3p', '', '2p', '', 'sk', '',, '1p'], ['', '1p', '', '', '', '', '1p', 'ee', '', 'ee', '', 'ee', 'ee', 'ee', '1p', ''], ['ee', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', '1p', 'ee', '1p', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee']];
 
 /***/ }),
 

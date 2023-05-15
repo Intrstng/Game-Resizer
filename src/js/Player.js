@@ -35,7 +35,7 @@ export class Player {
   constructor({ platforms = [] }) {
     this.platforms = platforms;
     this.position = {
-      x: 165,
+      x: 180,
       y: 247 //canvas.height / 2
     }
     this.velocity = {
