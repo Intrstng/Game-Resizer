@@ -29,8 +29,8 @@ export const collisionsLevel_1 = [
   ['sl', , 'sl', 'sl', '', '', '', '', '', '', '', '', '1s', '', 'dz', 'sl'],
   ['sl', 'dz', 'dz', '', '', , '', '', , '1s', '1s', '', '', '', 'dz', 'sl'],
   ['sl', 'dz', 'sl', '', '', 'dz', '', 'sl', '', 'sl', '', '', '', '', '', ''],
-  ['', 'sl', , '', '', '1s', '', '', '3p', '', '2p', '', 'sk', '', , ''],
-  ['', 'dz', '', 'sl', 'sl', '', 'dz', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''],
+  ['', 'sl', , 'dz', '', 'dz', '', '', '3p', '', '2p', '', 'sk', '', , ''],
+  ['', 'dz', '', 'sl', 'sl', '', 'sl', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''],
   ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'],
   ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
   ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']

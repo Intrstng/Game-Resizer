@@ -182,8 +182,11 @@ function animate() {
                           
                           if (platform.type === 'platformOne' ||
                           platform.type === 'platformTwo' ||
-                          platform.type === 'platformThree' /* ||
-                          platform.type === 'oneStep' */
+                          platform.type === 'platformThree' 
+                          
+                          
+                          
+                          || platform.type === 'deadSignalZone'
                           ) {
                             platform.collision();
                           }
