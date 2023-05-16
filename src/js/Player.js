@@ -2,7 +2,8 @@ import { canvas, c } from './Canvas';
 import { createImage } from './CreateImage';
 import { init } from '../index';
 import { keys } from './Keys';
-import { platformImgSrc300,
+import { 
+  platformImgSrc300,
   heroIdleR,
   heroIdleL,
   heroRunR,
@@ -29,6 +30,10 @@ import { platformImgSrc300,
   spike,
   deadSignalZone,
   deadSignalZoneHover,
+  flamethrowerLeft,
+  flamethrowerRight,
+  flamethrowerUp,
+  flamethrowerDown,
       } from '../js/Assets';
 import { platforms, intersection } from '../index';
 

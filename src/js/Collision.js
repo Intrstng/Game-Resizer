@@ -1,8 +1,8 @@
 import { collisionsLevel_1 } from './data/collisions';
 import { canvas, c } from './Canvas';
+
+
 import { Platform,
-  PlatformSpikes,
-  Saw,
   OneStep,
   Fan,
   JumpToggleActive,
@@ -12,6 +12,18 @@ import { Platform,
   PlatformThree,
   DeadSignal,
 } from './Platform';
+
+
+
+import {
+  PlatformSpikes,
+  Saw,
+  FlamethrowerLeft,
+  FlamethrowerRight,
+  FlamethrowerUp,
+  FlamethrowerDown,
+  BulletController,
+} from './Traps';
 
 import { platformImgSrc300,
   heroIdleR,
@@ -40,6 +52,10 @@ import { platformImgSrc300,
   spike,
   deadSignalZone,
   deadSignalZoneHover,
+  flamethrowerLeft,
+  flamethrowerRight,
+  flamethrowerUp,
+  flamethrowerDown,
 } from './Assets';
 import { createImage, Sprite } from './CreateImage';
 
@@ -68,6 +84,9 @@ const platforms = [];
 //     }
 //   })
 // })
+
+
+
 const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
     switch(cell) {
@@ -91,20 +110,36 @@ const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
         platforms.push(new JumpToggleActive(index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms));
           break;
       case 'jd': // Jump-toggled platform (disabled)
-        platforms.push(new JumpToggleDisabled(index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms))
+        platforms.push(new JumpToggleDisabled(index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms));
           break;
       case 'sk': // Saw trap platform
-        platforms.push(new PlatformSpikes(index_X * 36, index_Y * 36, createImage(spike, 36, 36), platforms))
+        platforms.push(new PlatformSpikes(index_X * 36, index_Y * 36, createImage(spike, 36, 36), platforms));
           break;
       case 'sw': // Spikes trap platform
-        platforms.push(new Saw(index_X * 36, index_Y * 36, createImage(saw, 36, 36), platforms))
+        platforms.push(new Saw(index_X * 36, index_Y * 36, createImage(saw, 36, 36), platforms));
           break;
       case 'dz': // Dead signal zone
         platforms.push(new DeadSignal(
-          index_X * 36, index_Y * 36, createImage(deadSignalZone, 36, 36), platforms))
+          index_X * 36, index_Y * 36, createImage(deadSignalZone, 36, 36), platforms));
           break;
+      case 'fl': // Flamethrower (left)
+      platforms.push(new FlamethrowerLeft(
+        index_X * 36, index_Y * 36, createImage(flamethrowerLeft, 36, 36), platforms, new BulletController()));
+        break;
+      case 'fr': // Flamethrower (right)
+      platforms.push(new FlamethrowerRight(
+        index_X * 36, index_Y * 36, createImage(flamethrowerRight, 36, 36), platforms, new BulletController()));
+        break;
+      case 'fu': // Flamethrower (up)
+      platforms.push(new FlamethrowerUp(
+        index_X * 36, index_Y * 36, createImage(flamethrowerUp, 36, 36), platforms, new BulletController()));
+        break;
+      case 'fd': // Flamethrower (down)
+      platforms.push(new FlamethrowerDown(
+        index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms, new BulletController()));
+        break;
     }
   })
 })
-
+                                                        
 export { CollisionBlock, platforms, parsedCollisions }

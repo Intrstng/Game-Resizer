@@ -505,6 +505,11 @@ import { platformImgSrc300,
   spike,
   deadSignalZone,
   deadSignalZoneHover,
+  flamethrowerLeft,
+  flamethrowerRight,
+  flamethrowerUp,
+  flamethrowerDown,
+
       } from './Assets';
 
      
@@ -638,38 +643,6 @@ class Platform {
     this.collisionUnder();
     this.collisionLeftSide();
     this.collisionRightSide();
-  }
-}
-
-  class PlatformSpikes extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'spikes';
-  }
-  collision() {
-  // Player - platform collision (player is above the spike platform)
-    if (player.position.y + player.height <= this.position.y &&
-      player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-      player.position.x <= this.position.x + this.width - player.width / 3) { 
-      player.die();
-    }
-    // Player - platform collision (player is under the platform)
-    if (player.position.y <= this.position.y + this.height &&
-      player.position.y + player.height + player.velocity.y >= this.position.y &&
-      player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-      player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
-        player.die();
-    }
-  }
-}
-
-class Saw extends PlatformSpikes {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'saw';
-    this.frequency = 23;
   }
 }
 
@@ -932,8 +905,6 @@ class DeadSignal extends SpaceToggledPlatform {
 } 
 
 export { Platform,
-        PlatformSpikes,
-        Saw,
         OneStep,
         Fan,
         JumpToggleActive,

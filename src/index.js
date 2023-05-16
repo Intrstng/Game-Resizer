@@ -9,18 +9,32 @@ import { canvas, c } from './js/Canvas';
 import { createImage, Sprite } from './js/CreateImage';
 import { Player } from './js/Player';
 
+import { bulletController } from './js/Collision';
+
+
 import { Platform,
-          PlatformSpikes,
-          Saw,
-          OneStep,
-          Fan,
-          JumpToggleActive,
-          JumpToggleDisabled,
-          PlatformOne,
-          PlatformTwo,
-          PlatformThree,
-          DeadSignal,
-        } from './js/Platform';
+  OneStep,
+  Fan,
+  JumpToggleActive,
+  JumpToggleDisabled,
+  PlatformOne,
+  PlatformTwo,
+  PlatformThree,
+  DeadSignal,
+} from './js/Platform';
+
+import {
+  PlatformSpikes,
+  Saw,
+  FlamethrowerLeft,
+  FlamethrowerRight,
+  FlamethrowerUp,
+  FlamethrowerDown,
+  BulletController,
+
+
+  Flamethrower
+} from './js/Traps';
 import { platformImgSrc300,
           heroIdleR,
           heroIdleL,
@@ -48,6 +62,10 @@ import { platformImgSrc300,
           spike,
           deadSignalZone,
           deadSignalZoneHover,
+          flamethrowerLeft,
+          flamethrowerRight,
+          flamethrowerUp,
+          flamethrowerDown,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
@@ -182,17 +200,33 @@ function animate() {
                           
                           if (platform.type === 'platformOne' ||
                           platform.type === 'platformTwo' ||
-                          platform.type === 'platformThree' 
-                          
-                          
-                          
-                          || platform.type === 'deadSignalZone'
+                          platform.type === 'platformThree' ||
+                          platform.type === 'deadSignalZone' ||
+                          platform.type === 'flamethrowerLeft' ||
+                          platform.type === 'flamethrowerRight' ||
+                          platform.type === 'flamethrowerUp' ||
+                          platform.type === 'flamethrowerDown'
                           ) {
                             platform.collision();
                           }
                           
+
+                          if (platform.type === 'flamethrowerLeft' ||
+                          platform.type === 'flamethrowerRight' ||
+                          platform.type === 'flamethrowerUp' ||
+                          platform.type === 'flamethrowerDown') {
+                            platform.shoot();
+                          }
                           
                           });
+                          //flamethrower.shootPressed = true
+                          // bulletController.draw();
+                          
+
+
+
+
+
                           
 leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
   return (platform.left <= player.left &&
