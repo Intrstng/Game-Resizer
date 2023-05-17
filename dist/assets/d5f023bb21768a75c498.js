@@ -134,13 +134,16 @@
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.update()); // рисуем платформы
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
           (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
-          if (platform.type === 'platformOne' || platform.type === 'platformTwo' || platform.type === 'platformThree' || platform.type === 'deadSignalZone') {
+          if (platform.type === 'platformOne' || platform.type === 'platformTwo' || platform.type === 'platformThree' || platform.type === 'deadSignalZone' || platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') {
             platform.collision();
           }
           if (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') {
             platform.shoot();
           }
         });
+        //flamethrower.shootPressed = true
+        // bulletController.draw();
+
         leftNeighboorBlockFromHeroArr = _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.filter(platform => {
           return platform.left <= player.left && platform.top <= player.top && platform.bottom >= player.bottom;
         });
@@ -288,9 +291,14 @@
         /* harmony export */"deadSignalZone": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_25__,
         /* harmony export */"deadSignalZoneHover": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__,
         /* harmony export */"fan": () => /* reexport default export from named module */_assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_23__,
+        /* harmony export */"fireballDown": () => /* reexport default export from named module */_assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_30__,
+        /* harmony export */"fireballLeft": () => /* reexport default export from named module */_assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_31__,
+        /* harmony export */"fireballRight": () => /* reexport default export from named module */_assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_32__,
+        /* harmony export */"fireballUp": () => /* reexport default export from named module */_assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_29__,
+        /* harmony export */"flamethrowerDown": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__,
         /* harmony export */"flamethrowerLeft": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__,
         /* harmony export */"flamethrowerRight": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__,
-        /* harmony export */"flamethrowerVertical": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__,
+        /* harmony export */"flamethrowerUp": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__,
         /* harmony export */"heroDeath": () => /* reexport default export from named module */_assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__,
         /* harmony export */"heroFallL": () => /* reexport default export from named module */_assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__,
         /* harmony export */"heroFallR": () => /* reexport default export from named module */_assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__,
@@ -374,6 +382,14 @@
       var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__( /*! ../../../assets/img/Traps/Flamethrower_left.png */"./assets/img/Traps/Flamethrower_left.png");
       /* harmony import */
       var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__( /*! ../../../assets/img/Traps/Flamethrower_right.png */"./assets/img/Traps/Flamethrower_right.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_up.png */"./assets/img/Traps/Fireball_up.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_down.png */"./assets/img/Traps/Fireball_down.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_left.png */"./assets/img/Traps/Fireball_left.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_right.png */"./assets/img/Traps/Fireball_right.png");
       // const platformImgSrc300 = '../assets/img/Platforms/platform.png';
       // const heroIdleR = '../assets/img/Hero/Idle_right.png';
       // const heroIdleL = '../assets/img/Hero/Idle_left.png';
@@ -405,9 +421,8 @@
       // const flamethrowerRight = '../assets/img/Traps/Flamethrower_right.png';
       // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
       // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
-
-      // import flamethrowerUp from '/assets/img/Traps/Flamethrower_left.png';
-      // import flamethrowerDown from '/assets/img/Traps/Flamethrower_left.png';
+      // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
+      // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
 
       /***/
     },
@@ -488,6 +503,7 @@
       //     }
       //   })
       // })
+
       const parsedCollisions = _data_collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
         row.forEach((cell, index_X) => {
           switch (cell) {
@@ -535,28 +551,23 @@
               break;
             case 'fl':
               // Flamethrower (left)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
             case 'fr':
               // Flamethrower (right)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
-            case 'fv':
-              // Flamethrower (vertical)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerVertical(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerVertical, 36, 36), platforms));
+            case 'fu':
+              // Flamethrower (up)
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerUp(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+              break;
+            case 'fd':
+              // Flamethrower (down)
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerDown(index_X * 36, index_Y * 36, (0, _CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
           }
         });
       });
-
-      // case 'fu': // Flamethrower (up)
-      // platforms.push(new FlamethrowerUp(
-      //   index_X * 36, index_Y * 36, createImage(flamethrowerUp, 36, 36), platforms))
-      //   break;
-      // case 'fd': // Flamethrower (down)
-      // platforms.push(new FlamethrowerDown(
-      //   index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms))
-      //   break;
 
       /***/
     },
@@ -1856,7 +1867,7 @@
       \*************************/
     /***/
     () => {
-      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Traps.js: Identifier 'Bullet' has already been declared. (255:6)\n\n\u001b[0m \u001b[90m 253 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 254 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 255 |\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mBullet\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m     |\u001b[39m       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 256 |\u001b[39m   constructor(x\u001b[33m,\u001b[39m y\u001b[33m,\u001b[39m speed\u001b[33m,\u001b[39m damage) {\u001b[0m\n\u001b[0m \u001b[90m 257 |\u001b[39m     \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mx \u001b[33m=\u001b[39m x\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 258 |\u001b[39m     \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39my \u001b[33m=\u001b[39m y\u001b[33m;\u001b[39m\u001b[0m\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at ScopeHandler.checkRedeclarationInScope (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:1556:19)\n    at ScopeHandler.declareName (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:1527:12)\n    at Parser.declareNameFromIdentifier (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:7544:16)\n    at Parser.parseClassId (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13597:14)\n    at Parser.parseClass (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13279:10)\n    at Parser.parseStatementContent (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12578:21)\n    at Parser.parseStatementLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Traps.js: Unexpected token (220:6)\n\n  218 |   bullets = [];\n  219 |   timerTillNextBullet = 0;\n> 220 |   let platforms = null;\n      |       ^\n  221 |   shoot(posX, posY, delay, flight_X, flight_Y, caliber, directionFlametrowerType, platforms) {\n  222 |     platforms = platforms;\n  223 |     if (this.timerTillNextBullet <= 0) {\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.unexpected (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3300:16)\n    at Parser.parseClassMemberWithIsStatic (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13485:12)\n    at Parser.parseClassMember (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13373:10)\n    at D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13323:14\n    at Parser.withSmartMixTopicForbiddingContext (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12234:14)\n    at Parser.parseClassBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13303:10)\n    at Parser.parseClass (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13281:22)\n    at Parser.parseStatementContent (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12578:21)\n    at Parser.parseStatementLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },
@@ -1894,10 +1905,11 @@
       // Decorations:
       // 1b - Frame brick 1
       // 2b - Frame block 2
+      // fn - Fan
       // Empty:
       // ee - Empty block
 
-      const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', 'jd', '', 'ja', '', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', '', '', '', '', '', '', '', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', 'dz', 'sl'], ['sl',, 'sl', 'sl', '', '', '', 'fl', '', '', '', '', '1s', '', 'dz', 'sl'], ['sl', 'dz', 'dz', '', '',, '', 'fr',, '1s', '1s', '', '', '', 'dz', 'sl'], ['sl', 'dz', 'sl', '', '', 'dz', '', 'sl', '', 'sl', '', '', '', '', '', ''], ['', 'sl',, 'dz', '', 'dz', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', 'dz', '', 'sl', 'sl', '', 'sl', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
+      const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', 'jd', '', 'ja', '', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', '', '', '', 'fu', '', '', '', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', 'dz', 'sl'], ['sl',, 'sl', 'sl', '', '', '', '', '', '', 'fr', '', '1s', '', 'dz', 'sl'], ['sl', 'dz', 'dz', '', '',, '', '',, '1s', '1s', '', '1p', '', 'dz', 'sl'], ['sl', 'dz', 'sl', '', '', 'dz', '', 'fd', '', 'sl', '', '', '', '', '', ''], ['', 'sl',, 'dz', 'fl', 'dz', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', 'dz', '', 'sl', 'sl', '', 'sl', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
 
       /***/
     },
@@ -2237,6 +2249,58 @@
       "use strict";
 
       module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_down.png":
+    /*!********************************************!*\
+      !*** ./assets/img/Traps/Fireball_down.png ***!
+      \********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_left.png":
+    /*!********************************************!*\
+      !*** ./assets/img/Traps/Fireball_left.png ***!
+      \********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_right.png":
+    /*!*********************************************!*\
+      !*** ./assets/img/Traps/Fireball_right.png ***!
+      \*********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_up.png":
+    /*!******************************************!*\
+      !*** ./assets/img/Traps/Fireball_up.png ***!
+      \******************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
 
       /***/
     },

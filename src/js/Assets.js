@@ -63,6 +63,10 @@ import flamethrowerLeft from '/assets/img/Traps/Flamethrower_left.png';
 import flamethrowerRight from '/assets/img/Traps/Flamethrower_right.png';
 import flamethrowerUp from '/assets/img/Traps/Flamethrower_left.png';
 import flamethrowerDown from '/assets/img/Traps/Flamethrower_left.png';
+import fireballUp from '/assets/img/Traps/Fireball_up.png';
+import fireballDown from '/assets/img/Traps/Fireball_down.png';
+import fireballLeft from '/assets/img/Traps/Fireball_left.png';
+import fireballRight from '/assets/img/Traps/Fireball_right.png';
 
 export { platformImgSrc300,
         heroIdleR,
@@ -95,4 +99,8 @@ export { platformImgSrc300,
         flamethrowerRight,
         flamethrowerUp,
         flamethrowerDown,
+        fireballUp,
+        fireballDown,
+        fireballLeft,
+        fireballRight,
       }

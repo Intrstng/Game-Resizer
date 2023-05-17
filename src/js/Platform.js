@@ -296,7 +296,7 @@
 //     this.currentSprite = this.sprites.idle;
 //     this.frequency = 63;
 //     this.setCount = null;
-//     this.activeStatus = true;
+//     this.statusActive = true;
 //   }
 //   checkSpaceToggleCounter() {
 //    keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter =  1 : keys.spaceToggleCounter; 
@@ -650,6 +650,7 @@ class Fan extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'fan';
+    this.statusActive = true;
     this.sprites = {
       idle: createImage(fan, 36, 36),
     }
@@ -662,19 +663,22 @@ class JumpToggleActive extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'jumpToggleActive';
+    this.statusActive = true;
     this.sprites = {
       idle: createImage(platformJump, 36, 36),
       disabled: createImage(platformJumpDisabled, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
-    // this.statusActive = status;
   }
   toggle() {
+    console.log(this.type, this.statusActive)
     if (keys.jumpToggleActive === true) {
       this.currentSprite = this.sprites.idle;
+      this.statusActive = true;
     } else {
       this.currentSprite = this.sprites.disabled;
+      this.statusActive = false;
     }
   }
   collision() { // Убрать
@@ -688,6 +692,7 @@ class JumpToggleDisabled extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'jumpToggleDisabled';
+    this.statusActive = false;
     this.sprites = {
       idle: createImage(platformJump, 36, 36),
       disabled: createImage(platformJumpDisabled, 36, 36),
@@ -696,10 +701,13 @@ class JumpToggleDisabled extends Platform {
     this.frequency = 63;
   }
   toggle() {
+    console.log(this.type, this.statusActive)
     if (keys.jumpToggleActive === false) {
       this.currentSprite = this.sprites.idle;
+      this.statusActive = true;
     } else {
       this.currentSprite = this.sprites.disabled;
+      this.statusActive = false;
     }
   }
   collision() { // Убрать
@@ -721,17 +729,20 @@ class OneStep extends Platform {
     this.currentSprite = this.sprites.idle;
     this.frequency = 28;
     this.type = 'oneStep';
+    this.statusActive = true;
   }
   destroy() {
     this.currentSprite = this.sprites.explosion;
     setTimeout(() => {
       this.position.x = -9999;
       this.currentSprite = this.sprites.idle;
+      this.statusActive = false;
   }, 550);
     this.hits = 0;
   } 
   restore() {
     this.position.x = this.temporaryPosX;
+    this.statusActive = true;
   }
 }
 
@@ -739,6 +750,7 @@ class SpaceToggledPlatform extends Platform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'toggledBySpacePlatform';
+    this.statusActive = false;
     this.sprites = {
       idle: createImage(deadSignalZoneHover, 36, 36),
       disabled: createImage(platformOneDisabled, 36, 36),
@@ -746,13 +758,13 @@ class SpaceToggledPlatform extends Platform {
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
     this.setCount = null;
-    this.activeStatus = true;
   }
   checkSpaceToggleCounter() {
    keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter =  1 : keys.spaceToggleCounter; 
   }
   collision() {
     if (keys.spaceToggleCounter === this.setCount) {
+      this.statusActive = true;
       super.collisionAbove();
       super.collisionUnder();
       super.collisionLeftSide();
@@ -761,11 +773,11 @@ class SpaceToggledPlatform extends Platform {
         keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount) {
           super.collisionRightSide();
       }
-      
       this.currentSprite = this.sprites.idle;
       this.checkSpaceToggleCounter();
     } else {
       this.currentSprite = this.sprites.disabled;
+      this.statusActive = false;
       this.checkSpaceToggleCounter();
     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
     if (platforms.some((block) => {
@@ -824,6 +836,7 @@ class DeadSignal extends SpaceToggledPlatform {
   constructor(posX, posY, image) {
     super(posX, posY, image);
     this.type = 'deadSignalZone';
+    this.statusActive = false;
     this.frequency = 1;
     this.sprites = {
       idle: createImage(deadSignalZone, 36, 36),
