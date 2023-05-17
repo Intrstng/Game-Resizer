@@ -127,9 +127,9 @@ class Flamethrower {
     let bullet_X, bullet_Y;
     //Bullet position x/y axes
     switch(this.type) {
-  case 'flamethrowerLeft': bullet_X = this.position.x - this.caliber / 2; // bullet_X = this.position.x - this.caliber;
+  case 'flamethrowerLeft': bullet_X = this.position.x - this.caliber / 3; // bullet_X = this.position.x - this.caliber;
         break;
-  case 'flamethrowerRight': bullet_X = this.position.x + this.width - this.caliber / 2; // bullet_X = this.position.x + this.width;
+  case 'flamethrowerRight': bullet_X = this.position.x + this.width - this.caliber * 0.7; // bullet_X = this.position.x + this.width;
         break;
       case 'flamethrowerUp':
       case 'flamethrowerDown': bullet_X = this.position.x + this.width / 2 - this.caliber / 2;
@@ -141,7 +141,7 @@ class Flamethrower {
         break;
       case 'flamethrowerUp': bullet_Y = this.position.y - this.caliber / 3; // bullet_Y = this.position.y - this.caliber;
         break;
-      case 'flamethrowerDown': bullet_Y = this.position.y + this.height - this.caliber / 3; // bullet_Y = this.position.y + this.height;
+      case 'flamethrowerDown': bullet_Y = this.position.y + this.height - this.caliber * 0.75; // bullet_Y = this.position.y + this.height;
         break;
     }
     // Bullet velocity x/y axes

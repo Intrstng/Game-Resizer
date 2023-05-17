@@ -278,14 +278,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "deadSignalZone": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_25__),
 /* harmony export */   "deadSignalZoneHover": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__),
 /* harmony export */   "fan": () => (/* reexport default export from named module */ _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_23__),
-/* harmony export */   "fireballDown": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_30__),
-/* harmony export */   "fireballLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_31__),
-/* harmony export */   "fireballRight": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_32__),
-/* harmony export */   "fireballUp": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_29__),
-/* harmony export */   "flamethrowerDown": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__),
+/* harmony export */   "fireballDown": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_32__),
+/* harmony export */   "fireballLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_33__),
+/* harmony export */   "fireballRight": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_34__),
+/* harmony export */   "fireballUp": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_31__),
+/* harmony export */   "flamethrowerDown": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_30__),
 /* harmony export */   "flamethrowerLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__),
 /* harmony export */   "flamethrowerRight": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__),
-/* harmony export */   "flamethrowerUp": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__),
+/* harmony export */   "flamethrowerUp": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_29__),
 /* harmony export */   "heroDeath": () => (/* reexport default export from named module */ _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__),
 /* harmony export */   "heroFallL": () => (/* reexport default export from named module */ _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__),
 /* harmony export */   "heroFallR": () => (/* reexport default export from named module */ _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__),
@@ -339,10 +339,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
 /* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
 /* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
-/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
-/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
-/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
+/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
+/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
 // const platformImgSrc300 = '../assets/img/Platforms/platform.png';
 // const heroIdleR = '../assets/img/Hero/Idle_right.png';
 // const heroIdleL = '../assets/img/Hero/Idle_left.png';
@@ -1944,10 +1946,10 @@ class Flamethrower {
     //Bullet position x/y axes
     switch (this.type) {
       case 'flamethrowerLeft':
-        bullet_X = this.position.x - this.caliber / 2; // bullet_X = this.position.x - this.caliber;
+        bullet_X = this.position.x - this.caliber / 3; // bullet_X = this.position.x - this.caliber;
         break;
       case 'flamethrowerRight':
-        bullet_X = this.position.x + this.width - this.caliber / 2; // bullet_X = this.position.x + this.width;
+        bullet_X = this.position.x + this.width - this.caliber * 0.7; // bullet_X = this.position.x + this.width;
         break;
       case 'flamethrowerUp':
       case 'flamethrowerDown':
@@ -1963,7 +1965,7 @@ class Flamethrower {
         bullet_Y = this.position.y - this.caliber / 3; // bullet_Y = this.position.y - this.caliber;
         break;
       case 'flamethrowerDown':
-        bullet_Y = this.position.y + this.height - this.caliber / 3; // bullet_Y = this.position.y + this.height;
+        bullet_Y = this.position.y + this.height - this.caliber * 0.75; // bullet_Y = this.position.y + this.height;
         break;
     }
     // Bullet velocity x/y axes
@@ -2720,6 +2722,16 @@ module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
 
 /***/ }),
 
+/***/ "./assets/img/Traps/Flamethrower_down.png":
+/*!************************************************!*\
+  !*** ./assets/img/Traps/Flamethrower_down.png ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/a81ec16a567429e11f71.png";
+
+/***/ }),
+
 /***/ "./assets/img/Traps/Flamethrower_left.png":
 /*!************************************************!*\
   !*** ./assets/img/Traps/Flamethrower_left.png ***!
@@ -2737,6 +2749,16 @@ module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
+
+/***/ }),
+
+/***/ "./assets/img/Traps/Flamethrower_up.png":
+/*!**********************************************!*\
+  !*** ./assets/img/Traps/Flamethrower_up.png ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
 
 /***/ }),
 

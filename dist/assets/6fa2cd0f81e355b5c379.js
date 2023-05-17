@@ -1,6 +1,9 @@
 /******/(() => {
   // webpackBootstrap
   /******/
+  "use strict";
+
+  /******/
   var __webpack_modules__ = {
     /***/"./src/index.js":
     /*!**********************!*\
@@ -8,8 +11,6 @@
       \**********************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -246,8 +247,6 @@
       \**************************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -281,8 +280,153 @@
       !*** ./src/js/Assets.js ***!
       \**************************/
     /***/
-    () => {
-      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\Assets.js: Export 'fireballLeft' is not defined. (103:8)\n\n  101 |         fireballUp,\n  102 |         fireballDown,\n> 103 |         fireballLeft,\n      |         ^\n  104 |         fireballRight,\n  105 |       }\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12440:14)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
+    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"backgroundImg": () => /* reexport default export from named module */_assets_img_Background_images_bg_2_jpg__WEBPACK_IMPORTED_MODULE_10__,
+        /* harmony export */"deadSignalZone": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_25__,
+        /* harmony export */"deadSignalZoneHover": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__,
+        /* harmony export */"fan": () => /* reexport default export from named module */_assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_23__,
+        /* harmony export */"fireballDown": () => /* reexport default export from named module */_assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_32__,
+        /* harmony export */"fireballLeft": () => /* reexport default export from named module */_assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_33__,
+        /* harmony export */"fireballRight": () => /* reexport default export from named module */_assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_34__,
+        /* harmony export */"fireballUp": () => /* reexport default export from named module */_assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_31__,
+        /* harmony export */"flamethrowerLeft": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__,
+        /* harmony export */"flamethrowerRight": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__,
+        /* harmony export */"flamethrowerUp": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_29__,
+        /* harmony export */"heroDeath": () => /* reexport default export from named module */_assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__,
+        /* harmony export */"heroFallL": () => /* reexport default export from named module */_assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__,
+        /* harmony export */"heroFallR": () => /* reexport default export from named module */_assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__,
+        /* harmony export */"heroIdleL": () => /* reexport default export from named module */_assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__,
+        /* harmony export */"heroIdleR": () => /* reexport default export from named module */_assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__,
+        /* harmony export */"heroJumpL": () => /* reexport default export from named module */_assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__,
+        /* harmony export */"heroJumpR": () => /* reexport default export from named module */_assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__,
+        /* harmony export */"heroRunL": () => /* reexport default export from named module */_assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__,
+        /* harmony export */"heroRunR": () => /* reexport default export from named module */_assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__,
+        /* harmony export */"platformImgSrc300": () => /* reexport default export from named module */_assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__,
+        /* harmony export */"platformJump": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_14__,
+        /* harmony export */"platformJumpDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_15__,
+        /* harmony export */"platformOne": () => /* reexport default export from named module */_assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_16__,
+        /* harmony export */"platformOneDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_19__,
+        /* harmony export */"platformOneStep": () => /* reexport default export from named module */_assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_12__,
+        /* harmony export */"platformOneStepExplosion": () => /* reexport default export from named module */_assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_13__,
+        /* harmony export */"platformSolid": () => /* reexport default export from named module */_assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_11__,
+        /* harmony export */"platformThree": () => /* reexport default export from named module */_assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_18__,
+        /* harmony export */"platformThreeDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_21__,
+        /* harmony export */"platformTwo": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_17__,
+        /* harmony export */"platformTwoDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_20__,
+        /* harmony export */"saw": () => /* reexport default export from named module */_assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_22__,
+        /* harmony export */"spike": () => /* reexport default export from named module */_assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_24__
+        /* harmony export */
+      });
+      /* empty/unused harmony star reexport */
+      /* harmony import */
+      var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../assets/img/Platforms/platform.png */"./assets/img/Platforms/platform.png");
+      /* harmony import */
+      var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ../../../assets/img/Hero/Idle_right.png */"./assets/img/Hero/Idle_right.png");
+      /* harmony import */
+      var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../../assets/img/Hero/Idle_left.png */"./assets/img/Hero/Idle_left.png");
+      /* harmony import */
+      var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../../../assets/img/Hero/Run_right.png */"./assets/img/Hero/Run_right.png");
+      /* harmony import */
+      var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../../../assets/img/Hero/Run_left.png */"./assets/img/Hero/Run_left.png");
+      /* harmony import */
+      var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../../../assets/img/Hero/Jump_right.png */"./assets/img/Hero/Jump_right.png");
+      /* harmony import */
+      var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../../../assets/img/Hero/Jump_left.png */"./assets/img/Hero/Jump_left.png");
+      /* harmony import */
+      var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ../../../assets/img/Hero/Fall_right.png */"./assets/img/Hero/Fall_right.png");
+      /* harmony import */
+      var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ../../../assets/img/Hero/Fall_left.png */"./assets/img/Hero/Fall_left.png");
+      /* harmony import */
+      var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ../../../assets/img/Hero/Player_death.png */"./assets/img/Hero/Player_death.png");
+      /* harmony import */
+      var _assets_img_Background_images_bg_2_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ../../../assets/img/Background_images/bg_2.jpg */"./assets/img/Background_images/bg_2.jpg");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_solid.png */"./assets/img/Platforms/Platform_solid.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_oneStep.png */"./assets/img/Platforms/Platform_oneStep.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_oneStep_Explosion.png */"./assets/img/Platforms/Platform_oneStep_Explosion.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_jump.png */"./assets/img/Platforms/Platform_jump.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_jump_disabled.png */"./assets/img/Platforms/Platform_jump_disabled.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_one.png */"./assets/img/Platforms/Platform_one.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_two.png */"./assets/img/Platforms/Platform_two.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_three.png */"./assets/img/Platforms/Platform_three.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_one_disabled.png */"./assets/img/Platforms/Platform_one_disabled.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_two_disabled.png */"./assets/img/Platforms/Platform_two_disabled.png");
+      /* harmony import */
+      var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__( /*! ../../../assets/img/Platforms/Platform_three_disabled.png */"./assets/img/Platforms/Platform_three_disabled.png");
+      /* harmony import */
+      var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__( /*! ../../../assets/img/Traps/Saw.png */"./assets/img/Traps/Saw.png");
+      /* harmony import */
+      var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__( /*! ../../../assets/img/Traps/Fan.png */"./assets/img/Traps/Fan.png");
+      /* harmony import */
+      var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__( /*! ../../../assets/img/Traps/Platform_spikes.png */"./assets/img/Traps/Platform_spikes.png");
+      /* harmony import */
+      var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__( /*! ../../../assets/img/Traps/Dead_signal_zone.png */"./assets/img/Traps/Dead_signal_zone.png");
+      /* harmony import */
+      var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__( /*! ../../../assets/img/Traps/Dead_signal_zone_hover.png */"./assets/img/Traps/Dead_signal_zone_hover.png");
+      /* harmony import */
+      var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__( /*! ../../../assets/img/Traps/Flamethrower_left.png */"./assets/img/Traps/Flamethrower_left.png");
+      /* harmony import */
+      var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__( /*! ../../../assets/img/Traps/Flamethrower_right.png */"./assets/img/Traps/Flamethrower_right.png");
+      /* harmony import */
+      var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__( /*! ../../../assets/img/Traps/Flamethrower_up.png */"./assets/img/Traps/Flamethrower_up.png");
+      Object(function webpackMissingModule() {
+        var e = new Error("Cannot find module '/assets/img/Traps/Flamethrower_down.png'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+      }());
+      /* harmony import */
+      var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_up.png */"./assets/img/Traps/Fireball_up.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_down.png */"./assets/img/Traps/Fireball_down.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_left.png */"./assets/img/Traps/Fireball_left.png");
+      /* harmony import */
+      var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__( /*! ../../../assets/img/Traps/Fireball_right.png */"./assets/img/Traps/Fireball_right.png");
+      // const platformImgSrc300 = '../assets/img/Platforms/platform.png';
+      // const heroIdleR = '../assets/img/Hero/Idle_right.png';
+      // const heroIdleL = '../assets/img/Hero/Idle_left.png';
+      // const heroRunR = '../assets/img/Hero/Run_right.png';
+      // const heroRunL = '../assets/img/Hero/Run_left.png';
+      // const heroJumpR = '../assets/img/Hero/Jump_right.png';
+      // const heroJumpL = '../assets/img/Hero/Jump_left.png';
+      // const heroFallR = '../assets/img/Hero/Fall_right.png';
+      // const heroFallL = '../assets/img/Hero/Fall_left.png';
+      // const heroDeath = '../assets/img/Hero/Player_death.png';
+      // const backgroundImg = '../assets/img/Background_images/bg_2.jpg';
+      // const platformSolid = '../assets/img/Platforms/Platform_solid.png';
+      // const platformOneStep = '../assets/img/Platforms/Platform_oneStep.png';
+      // const platformOneStepExplosion = '../assets/img/Platforms/Platform_oneStep_Explosion.png';
+      // const platformJump = '../assets/img/Platforms/Platform_jump.png';
+      // const platformJumpDisabled = '../assets/img/Platforms/Platform_jump_disabled.png';
+      // const platformOne = '../assets/img/Platforms/Platform_one.png';
+      // const platformTwo = '../assets/img/Platforms/Platform_two.png';
+      // const platformThree = '../assets/img/Platforms/Platform_three.png';
+      // const platformOneDisabled = '../assets/img/Platforms/Platform_one_disabled.png';
+      // const platformTwoDisabled = '../assets/img/Platforms/Platform_two_disabled.png';
+      // const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.png';
+      // const saw = '../assets/img/Traps/Saw.png';
+      // const fan = '../assets/img/Traps/Fan.png';
+      // const spike = '../assets/img/Traps/Platform_spikes.png';
+      // const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
+      // const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
+      // const flamethrowerLeft = '../assets/img/Traps/Flamethrower_left.png';
+      // const flamethrowerRight = '../assets/img/Traps/Flamethrower_right.png';
+      // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
+      // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
+      // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
+      // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
 
       /***/
     },
@@ -293,8 +437,6 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -314,8 +456,6 @@
       \*****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -438,8 +578,6 @@
       \*******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -483,8 +621,6 @@
       \************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -594,8 +730,6 @@
       \****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -916,7 +1050,7 @@
       //     this.currentSprite = this.sprites.idle;
       //     this.frequency = 63;
       //     this.setCount = null;
-      //     this.activeStatus = true;
+      //     this.statusActive = true;
       //   }
       //   checkSpaceToggleCounter() {
       //    keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter =  1 : keys.spaceToggleCounter; 
@@ -1203,6 +1337,7 @@
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'fan';
+          this.statusActive = true;
           this.sprites = {
             idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
           };
@@ -1214,20 +1349,22 @@
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'jumpToggleActive';
+          this.statusActive = true;
           this.sprites = {
             idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
             disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
           };
           this.currentSprite = this.sprites.idle;
           this.frequency = 63;
-          // this.statusActive = status;
         }
-
         toggle() {
+          console.log(this.type, this.statusActive);
           if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true) {
             this.currentSprite = this.sprites.idle;
+            this.statusActive = true;
           } else {
             this.currentSprite = this.sprites.disabled;
+            this.statusActive = false;
           }
         }
         collision() {// Убрать
@@ -1240,6 +1377,7 @@
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'jumpToggleDisabled';
+          this.statusActive = false;
           this.sprites = {
             idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
             disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
@@ -1248,10 +1386,13 @@
           this.frequency = 63;
         }
         toggle() {
+          console.log(this.type, this.statusActive);
           if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === false) {
             this.currentSprite = this.sprites.idle;
+            this.statusActive = true;
           } else {
             this.currentSprite = this.sprites.disabled;
+            this.statusActive = false;
           }
         }
         collision() {// Убрать
@@ -1272,23 +1413,27 @@
           this.currentSprite = this.sprites.idle;
           this.frequency = 28;
           this.type = 'oneStep';
+          this.statusActive = true;
         }
         destroy() {
           this.currentSprite = this.sprites.explosion;
           setTimeout(() => {
             this.position.x = -9999;
             this.currentSprite = this.sprites.idle;
+            this.statusActive = false;
           }, 550);
           this.hits = 0;
         }
         restore() {
           this.position.x = this.temporaryPosX;
+          this.statusActive = true;
         }
       }
       class SpaceToggledPlatform extends Platform {
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'toggledBySpacePlatform';
+          this.statusActive = false;
           this.sprites = {
             idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36),
             disabled: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
@@ -1296,13 +1441,13 @@
           this.currentSprite = this.sprites.idle;
           this.frequency = 63;
           this.setCount = null;
-          this.activeStatus = true;
         }
         checkSpaceToggleCounter() {
           _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter;
         }
         collision() {
           if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === this.setCount) {
+            this.statusActive = true;
             super.collisionAbove();
             super.collisionUnder();
             super.collisionLeftSide();
@@ -1313,6 +1458,7 @@
             this.checkSpaceToggleCounter();
           } else {
             this.currentSprite = this.sprites.disabled;
+            this.statusActive = false;
             this.checkSpaceToggleCounter();
             // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
             if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
@@ -1364,6 +1510,7 @@
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'deadSignalZone';
+          this.statusActive = false;
           this.frequency = 1;
           this.sprites = {
             idle: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZone, 36, 36),
@@ -1441,8 +1588,6 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1727,8 +1872,6 @@
       \*************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1755,21 +1898,22 @@
         constructor(posX, posY, image) {
           super(posX, posY, image);
           this.type = 'spikes';
+          this.statusActive = true;
         }
         collision() {
           // Player - platform collision (player is above the spike platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height + _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y >= this.position.y &&
+          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.bottom <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.bottom + _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y >= this.position.y &&
           // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
           // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 3 &&
+          _index__WEBPACK_IMPORTED_MODULE_1__.player.right >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 3 &&
           // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 3) {
+          _index__WEBPACK_IMPORTED_MODULE_1__.player.left <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 3) {
             _index__WEBPACK_IMPORTED_MODULE_1__.player.die();
           }
           // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height + _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 2 &&
+          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.top <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_1__.player.bottom + _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.left >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 2 &&
           // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 2) {
+          _index__WEBPACK_IMPORTED_MODULE_1__.player.right <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 2) {
             _index__WEBPACK_IMPORTED_MODULE_1__.player.die();
           }
         }
@@ -1781,103 +1925,10 @@
           this.frequency = 23;
         }
       }
-
-      // class Bullet {
-      //   constructor(flamethrowerPos_X, flamethrowerPos_Y, flamethrowerWidth, flamethrowerHeight, flamethrowerType, image) {
-      //     this.position = {
-      //       x: null,
-      //       y: null //canvas.height / 2
-      //     }
-      //     this.velocity = {
-      //       x: null,  // 0
-      //       y: null   // 1
-      //     }
-      //     this.width = 15 //image.width;
-      //     this.height = 15 //image.height;
-      //     this.bulletSpeed = 1;
-      //     // Bullet position x/y axes
-      //     switch(flamethrowerType) {
-      //       case 'flamethrowerLeft': this.position.x = flamethrowerPos_X;
-      //         break;
-      //       case 'flamethrowerRight': this.position.x = flamethrowerPos_X + flamethrowerWidth;
-      //         break;
-      //       case 'flamethrowerUp':
-      //       case 'flamethrowerDown': this.position.x = flamethrowerPos_X + flamethrowerWidth / 2;
-      //         break;
-      //     }
-      //     switch(flamethrowerType) {
-      //       case 'flamethrowerLeft':
-      //       case 'flamethrowerRight': this.position.y = flamethrowerPos_Y + flamethrowerHeight / 2;
-      //         break;
-      //       case 'flamethrowerUp': this.position.y = flamethrowerPos_Y;
-      //         break;
-      //       case 'flamethrowerDown': this.position.y = flamethrowerPos_X + flamethrowerHeight;
-      //         break;
-      //     }
-      //     // Bullet velocity x/y axes
-      //     switch(flamethrowerType) {
-      //       case 'flamethrowerLeft': this.velocity.x = -this.bulletSpeed;
-      //         break;
-      //       case 'flamethrowerRight': this.velocity.x = this.bulletSpeed;
-      //         break;
-      //       case 'flamethrowerUp':
-      //       case 'flamethrowerDown': this.velocity.x = 0;
-      //         break;
-      //     }
-      //     switch(flamethrowerType) {
-      //       case 'flamethrowerLeft':
-      //       case 'flamethrowerRight': this.velocity.y = 0;
-      //         break;
-      //       case 'flamethrowerUp': this.velocity.y = -this.bulletSpeed;
-      //         break;
-      //       case 'flamethrowerDown': this.velocity.y = this.bulletSpeed;
-      //         break;
-      //     }
-      //     this.frames = 0;
-      //     this.frequency = 28;
-      //     this.sprites = {
-      //       idle: this.image,
-      //     }
-      //     this.currentSprite = this.sprites.idle;
-      //     this.type = 'bullet';
-      //   }
-
-      // draw() {
-      //   // c.clearRect(this.position.x, this.position.y, this.width, this.height);
-      //   console.log('Shoot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-      //   c.fillStyle = 'black';
-      //   c.fillRect(this.position.x, this.position.y, this.width, this.height);
-      //   //c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-      // }
-      // update() {
-      //   this.frames++;
-      //   if (this.frames > this.frequency) this.frames = 0;
-      //   this.position.x += this.velocity.x;
-      //   console.log(this.position.x)
-      //   //this.draw();
-      // }
-      // }
-
-      // let bullet;
-
-      // class Flamethrower extends PlatformSpikes {
-
-      //   constructor(posX, posY, image) {
-      //     super(posX, posY, image);
-      //     this.type = 'flamethrower';
-      //     this.frequency = 79;
-      //     this.bullets = [];
-      //   }
-      //   shoot() {
-      //     //this.update();
-      //     setInterval(() => this.bullets.push(new Bullet(this.left, this.right, this.width, this.height, this.type, saw)), 1000);
-      //     //this.bullets.forEach((bullet) => bullet.update());
-      //   }
-      // }
-
       class Flamethrower {
         constructor(posX, posY, image, platforms, bulletController) {
           this.type = 'flamethrower';
+          this.statusActive = true;
           this.position = {
             x: posX,
             y: posY
@@ -1889,10 +1940,11 @@
           };
           this.width = 36;
           this.height = 36;
-          this.bulletSpeed = 0.5; //2
+          this.bulletSpeed = 2; //2
           this.caliber = 36; // Bullet size
-          this.delay = 140;
+          this.delay = 200;
           this.bulletController = bulletController;
+          this.platforms = platforms;
           this.frames = 1;
           this.frequency = 79;
           this.sprites = {
@@ -1914,7 +1966,7 @@
         }
         shoot() {
           const delay = this.delay;
-          let bullet_X, bullet_Y, speedBulletAndDirection;
+          let bullet_X, bullet_Y;
           //Bullet position x/y axes
           switch (this.type) {
             case 'flamethrowerLeft':
@@ -1931,13 +1983,13 @@
           switch (this.type) {
             case 'flamethrowerLeft':
             case 'flamethrowerRight':
-              bullet_Y = this.position.y + this.height / 2; // bullet_Y = this.position.y + this.height / 2 - this.caliber / 2;
+              bullet_Y = this.position.y + this.height / 2 - this.caliber / 3.5; // bullet_Y = this.position.y + this.height / 2 - this.caliber / 2;
               break;
             case 'flamethrowerUp':
-              bullet_Y = this.position.y - this.caliber + this.caliber; // bullet_Y = this.position.y - this.caliber;
+              bullet_Y = this.position.y - this.caliber / 3; // bullet_Y = this.position.y - this.caliber;
               break;
             case 'flamethrowerDown':
-              bullet_Y = this.position.y + this.height - this.caliber / 2; // bullet_Y = this.position.y + this.height;
+              bullet_Y = this.position.y + this.height - this.caliber / 3; // bullet_Y = this.position.y + this.height;
               break;
           }
           // Bullet velocity x/y axes
@@ -1965,7 +2017,7 @@
               this.bulletFlight.y = -this.bulletSpeed;
               break;
           }
-          this.bulletController.shoot(bullet_X, bullet_Y, delay, this.bulletFlight.x, this.bulletFlight.y, this.caliber, this.type);
+          this.bulletController.shoot(bullet_X, bullet_Y, delay, this.bulletFlight.x, this.bulletFlight.y, this.caliber, this.type, this.platforms);
         }
         collision() {
           // Player - platform collision (player is above the spike platform)
@@ -2013,11 +2065,17 @@
         }
       }
       class BulletController {
+        constructor() {
+          this.platforms = null;
+          this.caliber = null;
+        }
         bullets = [];
         timerTillNextBullet = 0;
-        shoot(posX, posY, delay, flight_X, flight_Y, caliber, directionFlametrowerType) {
+        shoot(posX, posY, delay, flight_X, flight_Y, caliber, directionFlametrowerType, platforms) {
+          this.platforms = platforms;
+          this.caliber = caliber;
           if (this.timerTillNextBullet <= 0) {
-            this.bullets.push(new Bullet(posX, posY, flight_X, flight_Y, caliber, directionFlametrowerType));
+            this.bullets.push(new Bullet(posX, posY, flight_X, flight_Y, caliber, directionFlametrowerType, platforms));
             this.timerTillNextBullet = delay;
           }
           this.timerTillNextBullet--;
@@ -2030,7 +2088,17 @@
             }
             bullet.draw();
             bullet.collision();
+            this.collisionWithBlocks(bullet);
           });
+        }
+        collisionWithBlocks(bullet) {
+          this.platforms.forEach(block => {
+            block.statusActive && bullet.position.x + bullet.width * 0.1 <= block.right && bullet.position.x >= block.left && bullet.position.y <= block.bottom && bullet.position.y >= block.top && this.destroy(bullet);
+          });
+        }
+        destroy(bullet) {
+          const index = this.bullets.indexOf(bullet);
+          this.bullets.splice(index, 1);
         }
         collideWith(sprite) {
           return this.bullets.some(bullet => {
@@ -2042,11 +2110,11 @@
           });
         }
         isBulletOffScreen(bullet) {
-          return bullet.y <= -bullet.height;
+          return bullet.position.y <= 0 || bullet.position.y >= _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height || bullet.position.x <= 0 || bullet.position.x >= _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width;
         }
       }
       class Bullet {
-        constructor(posX, posY, flight_X, flight_Y, caliber, directionFlametrowerType) {
+        constructor(posX, posY, flight_X, flight_Y, caliber, directionFlametrowerType, platforms) {
           this.position = {
             x: posX,
             y: posY
@@ -2058,9 +2126,10 @@
           this.height = caliber;
           this.frames = 1;
           this.frequency = 23;
+          this.platforms = platforms;
           this.sprites = {
-            left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36),
-            right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.spike, 36, 36),
+            left: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballLeft, 36, 36),
+            right: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballRight, 36, 36),
             up: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballUp, 36, 36),
             down: (0, _CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballDown, 36, 36)
           };
@@ -2080,7 +2149,6 @@
           }
         }
         draw() {
-          console.log(this.type);
           this.position.x -= this.flight_X;
           this.position.y -= this.flight_Y;
           this.frames++;
@@ -2088,29 +2156,36 @@
           _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height);
         }
         collision() {
-          // Player - platform collision (player is above the spike platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height + _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y >= this.position.y &&
-          // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width >= this.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 3 &&
-          // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 3) {
-            _index__WEBPACK_IMPORTED_MODULE_1__.player.die();
-          }
-          // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height + _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 2 &&
-          // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 2) {
+          if (_index__WEBPACK_IMPORTED_MODULE_1__.player.top + _index__WEBPACK_IMPORTED_MODULE_1__.player.height * 0.3 >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_1__.player.top + _index__WEBPACK_IMPORTED_MODULE_1__.player.height * 0.3 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_1__.player.left + _index__WEBPACK_IMPORTED_MODULE_1__.player.width * 0.3 >= this.position.x && _index__WEBPACK_IMPORTED_MODULE_1__.player.left + _index__WEBPACK_IMPORTED_MODULE_1__.player.width * 0.3 <= this.position.x + this.width) {
             _index__WEBPACK_IMPORTED_MODULE_1__.player.die();
           }
         }
-        collideWith(sprite) {
-          if (this.x < sprite.x + sprite.width && this.x + this.width > sprite.x && this.y < sprite.y + sprite.height && this.y + this.height > sprite.y) {
-            sprite.takeDamage();
-            return true;
-          }
-          return false;
-        }
+        // collisionWithBlocks() {
+        //   this.platforms.forEach((block) => {
+        //     if (this.position.x <= block.right &&
+        //       this.position.x + this.width >= block.left &&
+        //       this.position.y <= block.bottom &&
+        //       this.position.y + this.height > block.top) {
+        //     }
+        //   })
+
+        // }
+        // destroy() {
+        //   console.log('Ouch!')
+        // }
+
+        // collideWith(sprite) {
+        //   if (
+        //     this.x < sprite.x + sprite.width &&
+        //     this.x + this.width > sprite.x &&
+        //     this.y < sprite.y + sprite.height &&
+        //     this.y + this.height > sprite.y
+        //   ) {
+        //     sprite.takeDamage();
+        //     return true;
+        //   }
+        //   return false;
+        // }
       }
 
       // import { canvas, c } from './Canvas';
@@ -2337,8 +2412,6 @@
       \***********************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2368,7 +2441,7 @@
       // Empty:
       // ee - Empty block
 
-      const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', 'jd', '', 'ja', '', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', '', '', '', 'fu', '', '', '', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', '', '', '', '', '', '', '', '', 'dz', 'sl'], ['sl',, 'sl', 'sl', '', '', '', '', '', '', 'fr', '', '1s', '', 'dz', 'sl'], ['sl', 'dz', 'dz', '', '',, '', '',, '1s', '1s', '', '1p', '', 'dz', 'sl'], ['sl', 'dz', 'sl', '', '', 'dz', '', 'fd', '', 'sl', '', '', '', '', '', ''], ['', 'sl',, 'dz', 'fl', 'dz', '', '', '3p', '', '2p', '', 'sk', '',, ''], ['', 'dz', '', 'sl', 'sl', '', 'sl', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', ''], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
+      const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'fd', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ja', 'ee', '2p', '1p', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'dz', 'sl'], ['sl', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'ee', 'dz', 'sl'], ['sl', 'dz', 'dz', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'sl', '1s', '1p', 'ee', 'dz', 'sl'], ['sl', 'dz', 'sl', 'fr', 'ee', 'dz', 'ee', '1p', '3p', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'fl'], ['ee', 'sl', 'ee', 'dz', 'ee', 'ee', 'ee', '2p', '3p', 'ee', '2p', 'fu', 'sk', 'ee', 'ee', 'ee'], ['ee', 'dz', 'ee', 'sl', 'sl', 'ee', 'ee', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', 'ee'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
 
       /***/
     },
@@ -2379,10 +2452,382 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
       __webpack_require__.r(__webpack_exports__);
       // extracted by mini-css-extract-plugin
+
+      /***/
+    },
+
+    /***/"./assets/img/Background_images/bg_2.jpg":
+    /*!***********************************************!*\
+      !*** ./assets/img/Background_images/bg_2.jpg ***!
+      \***********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/7c68bde787cbb30d2409.jpg";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Fall_left.png":
+    /*!***************************************!*\
+      !*** ./assets/img/Hero/Fall_left.png ***!
+      \***************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/caa8591cb3f3a1855c29.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Fall_right.png":
+    /*!****************************************!*\
+      !*** ./assets/img/Hero/Fall_right.png ***!
+      \****************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/61cdd2e0f3c3604e7b1f.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Idle_left.png":
+    /*!***************************************!*\
+      !*** ./assets/img/Hero/Idle_left.png ***!
+      \***************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/47bb81cb0aaa2c499d5c.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Idle_right.png":
+    /*!****************************************!*\
+      !*** ./assets/img/Hero/Idle_right.png ***!
+      \****************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/8a499ad60f919b1f6cad.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Jump_left.png":
+    /*!***************************************!*\
+      !*** ./assets/img/Hero/Jump_left.png ***!
+      \***************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/02bc1678beb112beb4a1.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Jump_right.png":
+    /*!****************************************!*\
+      !*** ./assets/img/Hero/Jump_right.png ***!
+      \****************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/4e23b39a2281ee54125f.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Player_death.png":
+    /*!******************************************!*\
+      !*** ./assets/img/Hero/Player_death.png ***!
+      \******************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/c53e7b3ac960db1762a9.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Run_left.png":
+    /*!**************************************!*\
+      !*** ./assets/img/Hero/Run_left.png ***!
+      \**************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/542a853a490865e4177b.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Hero/Run_right.png":
+    /*!***************************************!*\
+      !*** ./assets/img/Hero/Run_right.png ***!
+      \***************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/e361987edb2dc29e1508.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_jump.png":
+    /*!************************************************!*\
+      !*** ./assets/img/Platforms/Platform_jump.png ***!
+      \************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/befd1a46da1a01267d9e.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_jump_disabled.png":
+    /*!*********************************************************!*\
+      !*** ./assets/img/Platforms/Platform_jump_disabled.png ***!
+      \*********************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/73ffdfeda1c0c3fa260e.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_one.png":
+    /*!***********************************************!*\
+      !*** ./assets/img/Platforms/Platform_one.png ***!
+      \***********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/acab1e8646b2b2daa06e.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_oneStep.png":
+    /*!***************************************************!*\
+      !*** ./assets/img/Platforms/Platform_oneStep.png ***!
+      \***************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/c2b486028ea06a42538d.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_oneStep_Explosion.png":
+    /*!*************************************************************!*\
+      !*** ./assets/img/Platforms/Platform_oneStep_Explosion.png ***!
+      \*************************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/a27c1909728c39bb81d1.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_one_disabled.png":
+    /*!********************************************************!*\
+      !*** ./assets/img/Platforms/Platform_one_disabled.png ***!
+      \********************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/15a754e2c1925bdc527f.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_solid.png":
+    /*!*************************************************!*\
+      !*** ./assets/img/Platforms/Platform_solid.png ***!
+      \*************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/dd246bde66e7e6e5e3fc.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_three.png":
+    /*!*************************************************!*\
+      !*** ./assets/img/Platforms/Platform_three.png ***!
+      \*************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/a593fa5442153625de5d.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_three_disabled.png":
+    /*!**********************************************************!*\
+      !*** ./assets/img/Platforms/Platform_three_disabled.png ***!
+      \**********************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/171091192763139674e9.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_two.png":
+    /*!***********************************************!*\
+      !*** ./assets/img/Platforms/Platform_two.png ***!
+      \***********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/d80232957d7216f6c18f.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/Platform_two_disabled.png":
+    /*!********************************************************!*\
+      !*** ./assets/img/Platforms/Platform_two_disabled.png ***!
+      \********************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Platforms/platform.png":
+    /*!*******************************************!*\
+      !*** ./assets/img/Platforms/platform.png ***!
+      \*******************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/7eac2d1901ea34422f0e.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Dead_signal_zone.png":
+    /*!***********************************************!*\
+      !*** ./assets/img/Traps/Dead_signal_zone.png ***!
+      \***********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/03857753acbdef4e6e04.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Dead_signal_zone_hover.png":
+    /*!*****************************************************!*\
+      !*** ./assets/img/Traps/Dead_signal_zone_hover.png ***!
+      \*****************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/62e7d0778000c13e26fd.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fan.png":
+    /*!**********************************!*\
+      !*** ./assets/img/Traps/Fan.png ***!
+      \**********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_down.png":
+    /*!********************************************!*\
+      !*** ./assets/img/Traps/Fireball_down.png ***!
+      \********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_left.png":
+    /*!********************************************!*\
+      !*** ./assets/img/Traps/Fireball_left.png ***!
+      \********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_right.png":
+    /*!*********************************************!*\
+      !*** ./assets/img/Traps/Fireball_right.png ***!
+      \*********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Fireball_up.png":
+    /*!******************************************!*\
+      !*** ./assets/img/Traps/Fireball_up.png ***!
+      \******************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Flamethrower_left.png":
+    /*!************************************************!*\
+      !*** ./assets/img/Traps/Flamethrower_left.png ***!
+      \************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Flamethrower_right.png":
+    /*!*************************************************!*\
+      !*** ./assets/img/Traps/Flamethrower_right.png ***!
+      \*************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Flamethrower_up.png":
+    /*!**********************************************!*\
+      !*** ./assets/img/Traps/Flamethrower_up.png ***!
+      \**********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Platform_spikes.png":
+    /*!**********************************************!*\
+      !*** ./assets/img/Traps/Platform_spikes.png ***!
+      \**********************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/Traps/Saw.png":
+    /*!**********************************!*\
+      !*** ./assets/img/Traps/Saw.png ***!
+      \**********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
 
       /***/
     }
@@ -2444,6 +2889,24 @@
     /******/
   })();
   /******/
+  /******/ /* webpack/runtime/global */
+  /******/
+  (() => {
+    /******/__webpack_require__.g = function () {
+      /******/if (typeof globalThis === 'object') return globalThis;
+      /******/
+      try {
+        /******/return this || new Function('return this')();
+        /******/
+      } catch (e) {
+        /******/if (typeof window === 'object') return window;
+        /******/
+      }
+      /******/
+    }();
+    /******/
+  })();
+  /******/
   /******/ /* webpack/runtime/hasOwnProperty shorthand */
   /******/
   (() => {
@@ -2468,6 +2931,42 @@
       });
       /******/
     };
+    /******/
+  })();
+  /******/
+  /******/ /* webpack/runtime/publicPath */
+  /******/
+  (() => {
+    /******/var scriptUrl;
+    /******/
+    if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+    /******/
+    var document = __webpack_require__.g.document;
+    /******/
+    if (!scriptUrl && document) {
+      /******/if (document.currentScript) /******/scriptUrl = document.currentScript.src;
+      /******/
+      if (!scriptUrl) {
+        /******/var scripts = document.getElementsByTagName("script");
+        /******/
+        if (scripts.length) {
+          /******/var i = scripts.length - 1;
+          /******/
+          while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
+          /******/
+        }
+        /******/
+      }
+      /******/
+    }
+    /******/ // When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+    /******/ // or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+    /******/
+    if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+    /******/
+    scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+    /******/
+    __webpack_require__.p = scriptUrl;
     /******/
   })();
   /******/
