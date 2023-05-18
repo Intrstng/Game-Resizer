@@ -11,6 +11,8 @@ import { Platform,
   PlatformTwo,
   PlatformThree,
   DeadSignal,
+  Brick_1,
+  Brick_2,
 } from './Platform';
 
 
@@ -138,6 +140,18 @@ const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
       case 'fd': // Flamethrower (down)
       platforms.push(new FlamethrowerDown(
         index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms, new BulletController()));
+        break;
+      case 'fn': // Fan (decoration)
+      platforms.push(new Fan(
+        index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms));
+        break;
+      case 'b1': // Fan (decoration)
+      platforms.push(new Brick_1(
+        index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms));
+        break;
+      case 'b2': // Fan (decoration)
+      platforms.push(new Brick_2(
+        index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms));
         break;
     }
   })

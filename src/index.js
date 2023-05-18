@@ -71,6 +71,32 @@ import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
 
 
+
+canvas.width = document.documentElement.clientWidth;
+canvas.height = document.documentElement.clientHeight;
+
+                      // window.addEventListener('resize', () => {
+                      //   canvas.width = document.documentElement.clientWidth;
+                      //   canvas.height = document.documentElement.clientHeight;
+                      // });
+
+                      // function onResize( element, callback ){
+                      //   var elementHeight = element.height,
+                      //       elementWidth = element.width;
+                      //   setInterval(function(){
+                      //       if( element.height !== elementHeight || element.width !== elementWidth ){
+                      //         elementHeight = element.height;
+                      //         elementWidth = element.width;
+                      //         callback();
+                      //       }
+                      //   }, 300);
+                      // }
+
+                      // onResize(canvas, function(){ alert('Resized!');
+                      // canvas.width = document.documentElement.clientWidth;
+                      // canvas.height = document.documentElement.clientHeight;
+                      // } );
+
 canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 // 720 //window.innerHeight;
 let requestAnim = window.requestAnimationFrame ||
@@ -82,6 +108,37 @@ let requestAnim = window.requestAnimationFrame ||
 
 
 
+// const fullScreenBtn = document.getElementById('fullscreen');
+// fullScreenBtn.addEventListener('click', () => fullScreen(canvas));
+
+window.addEventListener('keydown', (e) => fullScreen(e, canvas));
+// window.addEventListener('keydown', fullScreenCancel);
+
+function fullScreen(e, element) {
+  if (e.code === 'KeyF') {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.webkitrequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if(element.mozRequestFullscreen) {
+      element.mozRequestFullScreen();
+    }
+  }
+}
+
+// function fullScreenCancel(e) {
+//   if (e.code === 'KeyS') {
+//     if(document.documentElement.requestFullscreen) {
+//       document.documentElement.requestFullscreen();
+//     } else if(document.documentElement.webkitRequestFullscreen ) {
+//       document.documentElement.webkitRequestFullscreen();
+//     } else if(document.documentElement.mozRequestFullscreen) {
+//       document.documentElement.mozRequestFullScreen();
+//     }
+//   }
+// }
+
+
 
 let leftNeighboorBlockFromHeroArr = [];
 export let timerShoot_1 = null;
@@ -91,16 +148,6 @@ export let leftNeighboorBlockFromHero = null;
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ]
-
-
-// export let platforms = [/* new Platform(210, 525, createImage(platformSolid, 36, 36)),
-//                 new Platform(330, 455, createImage(platformSolid, 36, 36)),
-//                 new Platform(250, 400, createImage(platformSolid, 36, 36)),
-//                 new Platform(400, 100, createImage(platformSolid, 36, 36)) */]; // создаем платформы
-
-
-
-
 
 
 
@@ -123,24 +170,14 @@ export let player;
 
 new Player({
   platforms
-}); //collisionBlocks: collisionBlocks
-
-  // collisionsLevel_1.forEach((row, index_Y) => {
-  //   row.forEach((cell, index_X) => {
-  //    cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
-  //   })
-  // })
-
-/* -------------------- */
+}); //platforms: platforms
 
 
 
 
-              //let spikes = new PlatformSpikes(420, 135, createImage(spike, 36, 36))
-              // let sawTrap = new Saw(400, 415, createImage(saw, 36, 36))
-             // export let sawTrap = new Saw(560, 315, createImage(saw, 36, 36))
-   // export let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
-             // export let jump = new JumpToggle(100, 355, createImage(platformOne, 36, 36))
+
+
+            
                                                 platforms.forEach(platform => {
                                                 if (platform.type === 'flamethrowerLeft' ||
                                                 platform.type === 'flamethrowerRight' ||
@@ -160,48 +197,7 @@ export function init() {
   keys.spaceToggleCounter = 1;
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
-
-//   platforms = [/* new Platform(210, 455, createImage(platformSolid, 36, 36)),
-//           new Platform(230, 419, createImage(platformSolid, 36, 36)),
-// //new Platform(25, 420, createImage(platformSolid, 36, 36)),
-// new Platform(65, 420, createImage(platformSolid, 36, 36)),
-//               new Platform(315, 455, createImage(platformSolid, 36, 36)),
-//               new Platform(170, 455, createImage(platformSolid, 36, 36)),
-//               new Platform(130, 419, createImage(platformSolid, 36, 36)),
-// //new PlatformTwo(10, 419, createImage(platformSolid, 36, 36)),             
-// new Platform(160, 280, createImage(platformSolid, 36, 36)),
-// new Platform(196, 316, createImage(platformSolid, 36, 36)),
-//               new Platform(370, 200, createImage(platformSolid, 36, 36)),
-//               new Platform(345, 244, createImage(platformSolid, 36, 36)),
-//               new Platform(310, 278, createImage(platformSolid, 36, 36)),
-// new Platform(230, 278, createImage(platformSolid, 36, 36)),
-//               //265 204
-// // new PlatformTwo(120, 245, createImage(platformSolid, 36, 36)),
-// // new PlatformTwo(125, 281, createImage(platformSolid, 36, 36)),
-// //           new PlatformTwo(266, 349, createImage(platformSolid, 36, 36)),
-// //           new PlatformTwo(266, 312, createImage(platformSolid, 36, 36)),
-// //          new PlatformTwo(266, 276, createImage(platformSolid, 36, 36)),
-// //          new PlatformTwo(266, 240, createImage(platformSolid, 36, 36)),
-// //          new PlatformTwo(266, 204, createImage(platformSolid, 36, 36)),
-// //           new PlatformTwo(266, 384, createImage(platformSolid, 36, 36)),
-//               new PlatformOne(570, 200, createImage(platformSolid, 36, 36)),
-//               new PlatformThree(670, 200, createImage(platformSolid, 36, 36)),
-//               new Platform(280, 455, createImage(platformSolid, 36, 36)),
-//               new Platform(436, 455, createImage(platformSolid, 36, 36)),
-
-// // Right wall
-//               new Platform(830, 312, createImage(platformSolid, 36, 36)),
-//               new Platform(830, 348, createImage(platformSolid, 36, 36)),
-//               new Platform(830, 384, createImage(platformSolid, 36, 36)),
-//               new Platform(830, 419, createImage(platformSolid, 36, 36)),
-//               new Platform(830, 455, createImage(platformSolid, 36, 36)),
-//     spikes, sawTrap, sawTrap2, jump   */    ]; // создаем платформы !!!!!!!!!!!!!
-
-
-
-
-
-    
+   
                                          // player = new Player({ platforms });
 
 

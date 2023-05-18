@@ -354,13 +354,28 @@ template {
 /*!***************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/sass/styles.scss ***!
   \***************************************************************************************************************/
+html {
+  box-sizing: border-box;
+  overflow: hidden; }
+
 body {
-  margin: 0;
+  margin: 0 auto;
   display: flex;
-  overflow: hidden;
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
   width: 100vh;
+  height: 100vh;
   background-color: black; }
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#fullscreen {
+  position: absolute;
+  top: 50px;
+  right: 50px; }
 
 
 /*# sourceMappingURL=style.css.map*/
