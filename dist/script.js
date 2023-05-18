@@ -13,19 +13,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "additionalElements": () => (/* binding */ additionalElements),
 /* harmony export */   "init": () => (/* binding */ init),
 /* harmony export */   "leftNeighboorBlockFromHero": () => (/* binding */ leftNeighboorBlockFromHero),
-/* harmony export */   "player": () => (/* binding */ player)
+/* harmony export */   "player": () => (/* binding */ player),
+/* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
+/* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
 /* harmony export */ });
 /* harmony import */ var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sass/styles.scss */ "./src/sass/styles.scss");
 /* harmony import */ var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Collision */ "./src/js/Collision.js");
 /* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _js_CreateImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/CreateImage */ "./src/js/CreateImage.js");
 /* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
-/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
-/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
-/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
-/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
-/* harmony import */ var _js_data_collisions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/data/collisions */ "./src/js/data/collisions.js");
+/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
+/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
+/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
+/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
+/* harmony import */ var _js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/data/Collisions */ "./src/js/data/Collisions.js");
 
 
 // imagePlatform.onload = function getSizes () {
@@ -42,12 +45,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720 //window.innerHeight;
-
+let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+  window.setTimeout(callback, 1000 / 60);
+};
 let leftNeighboorBlockFromHeroArr = [];
+let timerShoot_1 = null;
+let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
-let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
 // export let platforms = [/* new Platform(210, 525, createImage(platformSolid, 36, 36)),
 //                 new Platform(330, 455, createImage(platformSolid, 36, 36)),
@@ -67,11 +75,20 @@ let player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
 // export let sawTrap = new Saw(560, 315, createImage(saw, 36, 36))
 // export let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
 // export let jump = new JumpToggle(100, 355, createImage(platformOne, 36, 36))
-
+_js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
+  if (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') {
+    // setInterval(() => gameSoundEffects(audio.fire), 1000);
+    timerShoot_1 = setTimeout(function soundFire() {
+      timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
+      (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.fire);
+    }, platform.delay * 8);
+  }
+});
 function init() {
   player.velocity.y = 1;
-  _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.spaceToggleCounter = 1;
-  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+  player.alive = true;
+  _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.spaceToggleCounter = 1;
+  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
   //   platforms = [/* new Platform(210, 455, createImage(platformSolid, 36, 36)),
   //           new Platform(230, 419, createImage(platformSolid, 36, 36)),
@@ -117,7 +134,7 @@ function init() {
   });
 }
 function animate() {
-  requestAnimationFrame(animate);
+  requestAnim(animate);
   //c.clearRect(0, 0, canvas.width, canvas.height);
   _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'white';
   _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
@@ -145,10 +162,10 @@ function animate() {
   });
   leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
   player.update();
-  if (_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
+  if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
     // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.left.pressed && player.position.x >= 0) {
+  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && player.position.x >= 0) {
     // упор персонажа в левый край экрана
     player.velocity.x = -2;
   } else {
@@ -204,10 +221,10 @@ function animate() {
   //   //   }
   // })
 
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.lastPressed === 'right') {
+  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.lastPressed === 'left') {
+  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'left') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.left;
   }
@@ -216,7 +233,7 @@ function animate() {
   if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height) {
     // sawTrap.restore();
     //sawTrap2.restore(); // !!!!!!!!!!!!
-    _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.jumpToggleActive;
+    _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive;
     init();
     console.log('you lose');
 
@@ -226,8 +243,8 @@ function animate() {
 
 init();
 animate();
-window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keyDownHandler);
-window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keyUpHandler);
+window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyDownHandler);
+window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyUpHandler);
 window.addEventListener('click', e => {
   console.log(e.clientX, e.clientY);
   // debugger
@@ -447,7 +464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "parsedCollisions": () => (/* binding */ parsedCollisions),
 /* harmony export */   "platforms": () => (/* binding */ platforms)
 /* harmony export */ });
-/* harmony import */ var _data_collisions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/collisions */ "./src/js/data/collisions.js");
+/* harmony import */ var _data_Collisions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/Collisions */ "./src/js/data/Collisions.js");
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
 /* harmony import */ var _Traps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Traps */ "./src/js/Traps.js");
@@ -487,7 +504,7 @@ const platforms = [];
 //   })
 // })
 
-const parsedCollisions = _data_collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
+const parsedCollisions = _data_Collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
     switch (cell) {
       case '1p':
@@ -608,6 +625,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "keys": () => (/* binding */ keys)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
+/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+
 
 
 
@@ -622,8 +641,12 @@ const keys = {
   up: {
     pressed: false
   },
+  space: {
+    pressed: false
+  },
   lastPressed: 'right',
   jumpToggleActive: true,
+  isJumped: false,
   spaceToggleCounter: 1,
   // Platform One type is active
   deadSignalZone: false
@@ -638,6 +661,7 @@ const keyDownHandler = e => {
         if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y <= 0 && _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y >= -3.5) {
           //(player.velocity.y === 0) или (player.velocity.y <= 0 && player.velocity.y >= -3.5)
           keys.jumpToggleActive ? keys.jumpToggleActive = false : keys.jumpToggleActive = true;
+          (0,_data_Audio__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_1__.audio.jump);
         }
         if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0 && keys.lastPressed === 'right') {
           // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
@@ -651,6 +675,7 @@ const keyDownHandler = e => {
         break;
       case 'Space':
         {
+          keys.space.pressed = true;
           !keys.deadSignalZone && keys.spaceToggleCounter++;
         }
         break;
@@ -698,6 +723,11 @@ const keyUpHandler = e => {
           _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.idle.left;
         }
         break;
+      case 'Space':
+        {
+          keys.space.pressed = false;
+        }
+        break;
     }
   }
 };
@@ -727,8 +757,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../index */ "./src/index.js");
+/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../index */ "./src/index.js");
 // import { CollisionBlock, platforms, parsedCollisions } from './Collision';
 // import { canvas, c } from './Canvas';
 // import { createImage } from './CreateImage';
@@ -1202,6 +1233,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 class Platform {
   constructor(posX, posY, image) {
     this.position = {
@@ -1258,49 +1290,51 @@ class Platform {
   }
   collisionAbove() {
     // Player - platform collision (player is above the platform)
-    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
+    if (_index__WEBPACK_IMPORTED_MODULE_6__.player.bottom <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom + _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y >= this.top &&
     // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4 >= this.position.x &&
+    _index__WEBPACK_IMPORTED_MODULE_6__.player.right - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 4 >= this.left &&
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4) {
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -3.5; // если касается земли // -3.5
-
-      if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed) {
-        _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_5__.player.jumpHeight;
-        _index__WEBPACK_IMPORTED_MODULE_5__.player.gravity = 0.25;
+    _index__WEBPACK_IMPORTED_MODULE_6__.player.left <= this.right - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 4) {
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = -3.5; // если касается земли // -3.5
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.jumpOnSpaceToggledPlatform);
+      if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed) {
+        _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_6__.player.jumpHeight;
+        _index__WEBPACK_IMPORTED_MODULE_6__.player.gravity = 0.25;
       }
     }
   }
   collisionUnder() {
     // Player - platform collision (player is under the platform)
-    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y - _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y * 0.5 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25 &&
+    if (_index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom &&
+    // player.position.y - player.velocity.y * 0.5
+    _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom + _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y >= this.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.left >= this.left - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 1.25 &&
     // можно сделать 1.75
-    _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25) {
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
+    _index__WEBPACK_IMPORTED_MODULE_6__.player.right <= this.right + _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 1.25) {
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
     }
   }
-
   collisionLeftSide() {
     // Player - platform collision (player is left from the platform and moves right)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x) {
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.left) {
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 0;
       console.log('hit!');
     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + this.width) {
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 2;
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.right) {
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 2;
       console.log('free!');
     }
   }
   collisionRightSide() {
     // Player - platform collision (player is right from the platform and moves left)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.width) {
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.left <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.right) {
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 0;
       console.log('hit!');
     } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_6__.player.bottom <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.top || _index__WEBPACK_IMPORTED_MODULE_6__.player.top >= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.bottom) && _index__WEBPACK_IMPORTED_MODULE_6__.player.left <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.left) {
       // или "-" player.width ???
-      _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = -2;
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = -2;
       console.log('free!');
     }
   }
@@ -1338,18 +1372,13 @@ class JumpToggleActive extends Platform {
   }
   toggle() {
     console.log(this.type, this.statusActive);
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.jumpToggleActive === true) {
       this.currentSprite = this.sprites.idle;
       this.statusActive = true;
     } else {
       this.currentSprite = this.sprites.disabled;
       this.statusActive = false;
     }
-  }
-  collision() {// Убрать
-    // if (keys.jumpToggleActive) {
-    //   super.collision();
-    // }
   }
 }
 class JumpToggleDisabled extends Platform {
@@ -1366,18 +1395,13 @@ class JumpToggleDisabled extends Platform {
   }
   toggle() {
     console.log(this.type, this.statusActive);
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === false) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.jumpToggleActive === false) {
       this.currentSprite = this.sprites.idle;
       this.statusActive = true;
     } else {
       this.currentSprite = this.sprites.disabled;
       this.statusActive = false;
     }
-  }
-  collision() {// Убрать
-    // if (keys.jumpToggleActive) {
-    //   super.collision();
-    // }
   }
 }
 class OneStep extends Platform {
@@ -1395,6 +1419,7 @@ class OneStep extends Platform {
     this.statusActive = true;
   }
   destroy() {
+    _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.explosionBlock);
     this.currentSprite = this.sprites.explosion;
     setTimeout(() => {
       this.position.x = -9999;
@@ -1422,15 +1447,15 @@ class SpaceToggledPlatform extends Platform {
     this.setCount = null;
   }
   checkSpaceToggleCounter() {
-    _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter;
+    _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter;
   }
   collision() {
-    if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === this.setCount) {
+    if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter === this.setCount) {
       this.statusActive = true;
       super.collisionAbove();
       super.collisionUnder();
       super.collisionLeftSide();
-      if ((_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.setCount) {
+      if ((_index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.setCount) {
         super.collisionRightSide();
       }
       this.currentSprite = this.sprites.idle;
@@ -1441,13 +1466,13 @@ class SpaceToggledPlatform extends Platform {
       this.checkSpaceToggleCounter();
       // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
       if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-        return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.position.y + block.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.position.x && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.position.x + block.width;
+        return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
       })) {
-        _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = true;
+        _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
         console.log('inside');
       } else {
         console.log('outside');
-        _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = false;
+        _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
       }
     }
   }
@@ -1530,15 +1555,15 @@ class DeadSignal extends SpaceToggledPlatform {
   //   }
 
   hover() {
-    if (_index__WEBPACK_IMPORTED_MODULE_5__.player.left <= this.right && _index__WEBPACK_IMPORTED_MODULE_5__.player.right >= this.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.bottom >= this.top && _Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-      return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.right;
+    if (_index__WEBPACK_IMPORTED_MODULE_6__.player.left <= this.right && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
+      return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
     })) {
       // Inside of the block
       this.checkSpaceToggleCounter();
       this.currentSprite = this.sprites.idle;
     } else if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
       // Outside of the block
-      return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.right;
+      return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
     })) {
       this.currentSprite = this.sprites.disabled;
     }
@@ -1547,13 +1572,16 @@ class DeadSignal extends SpaceToggledPlatform {
     this.hover(); // Hover the block when the hero is inside of it
     // Hero is inside or outside of block (for toggled by space platformes and deadSignal zone platforms)   
     if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-      return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.right;
+      return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
     })) {
-      _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = true;
+      _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
+      console.log(_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed);
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
       console.log('inside');
     } else {
       console.log('outside');
-      _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = false;
+      _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
+      _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
     }
   }
 }
@@ -1576,6 +1604,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
 /* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/data/Audio */ "./src/js/data/Audio.js");
+
 
 
 
@@ -1603,6 +1633,7 @@ class Player {
     this.height = 32;
     this.frequency = 21;
     this.frames = 0;
+    this.alive = true;
     this.sprites = {
       idle: {
         right: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
@@ -1657,6 +1688,8 @@ class Player {
     this.velocity.y = -2;
     this.gravity = 0;
     this.currentSprite = this.sprites.death;
+    this.alive && (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.heroDeath);
+    this.alive = false;
     setTimeout(_index__WEBPACK_IMPORTED_MODULE_2__.init, 550);
   }
   checkCollisionsAxes_X() {
@@ -1770,11 +1803,14 @@ class Player {
           }
           break;
         case 'jumpToggleActive':
-          if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+          if (_Keys__WEBPACK_IMPORTED_MODULE_3__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom - this.height / 4 &&
+          // - this.height / 4 (поправка на прозрачность спрайта героя)
+          this.bottom >= platform.top) {
             if (this.velocity.y < 0) {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
+              this.alive && (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.bottomHit);
               break;
             }
             if (this.velocity.y > 0) {
@@ -1814,7 +1850,7 @@ class Player {
             }
             if (this.velocity.y > 0) {
               // falling down  // 0.25
-              this.velocity.y = 0;
+              this.velocity.y = -this.jumpHeight; // 0
               _Keys__WEBPACK_IMPORTED_MODULE_3__.keys.up.pressed = false;
               platform.hits++;
               platform.destroy();
@@ -1864,6 +1900,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
 /* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/data/Audio */ "./src/js/data/Audio.js");
+
 
 
 
@@ -2383,9 +2421,175 @@ class Bullet {
 
 /***/ }),
 
-/***/ "./src/js/data/collisions.js":
+/***/ "./src/js/data/Audio.js":
+/*!******************************!*\
+  !*** ./src/js/data/Audio.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "audio": () => (/* binding */ audio),
+/* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects)
+/* harmony export */ });
+const audio = {
+  isCanPlay: new Audio(),
+  blockHit: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/block_hit.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/block_hit.ogg'),
+    volume: 1
+  },
+  bottomHit: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/bottom_hit.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/bottom_hit.ogg'),
+    volume: 1
+  },
+  choose: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/choose.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/choose.ogg'),
+    volume: 1
+  },
+  explosionBlock: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/explosion_block.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/explosion_block.ogg'),
+    volume: 1
+  },
+  fallingInDepth: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/falling_in_depth.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/falling_in_depth.ogg'),
+    volume: 1
+  },
+  fallingInDepth2: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/falling_in_depth2.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/falling_in_depth2.ogg'),
+    volume: 1
+  },
+  fire: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/fire.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/fire.ogg'),
+    volume: 1
+  },
+  heroDeath: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/hero_death.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/hero_death.ogg'),
+    volume: 1
+  },
+  jump: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/jump.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/jump.ogg'),
+    volume: 1
+  },
+  jumpOnSpaceToggledPlatform: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg'),
+    volume: 0.5
+  },
+  nextLevel: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/next_level.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/next_level.ogg'),
+    volume: 1
+  },
+  ok: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/ok.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/ok.ogg'),
+    volume: 1
+  },
+  select: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/select.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/select.ogg'),
+    volume: 1
+  },
+  teleport: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/teleport.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/teleport.ogg'),
+    volume: 1
+  },
+  toggle: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/toggle.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/toggle.ogg'),
+    volume: 1
+  },
+  toggleDisabled: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/toggle_disabled.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/toggle_disabled.ogg'),
+    volume: 1
+  },
+  error: {
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/error.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/error.ogg'),
+    volume: 1
+  }
+};
+let source = null;
+// Choose supported source and preload
+;
+(function () {
+  if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
+    source = 'src_MP3';
+  } else {
+    source = 'src_OGG';
+  }
+  for (let sound in audio) {
+    if (sound != 'isCanPlay') {
+      let {
+        src_MP3: mp3,
+        src_OGG: ogg
+      } = audio[sound];
+      mp3.play();
+      mp3.pause();
+      ogg.play();
+      ogg.pause();
+    }
+  }
+})();
+let counter = 0;
+function gameSoundEffects(item) {
+  item[source].currentTime = 0;
+  item[source].volume = item.volume;
+  item[source].play();
+}
+
+// function gameSoundEffects(item) {
+//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
+//     item.src_OGG.currentTime = 0;
+//     item.src_OGG.play();
+//   } else {
+//     item.src_MP3.currentTime = 0;
+//     item.src_MP3.play();
+//   }
+// }
+
+// function gameSoundEffects(item) {
+//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
+//     audio.sound.src= item.src_MP3;
+//   } else {
+//     audio.sound.src= item.src_OGG;
+//   }
+//   audio.sound.currentTime = 0;
+//   audio.sound.play();
+// }
+
+// function gameSoundEffects(item) {
+//   item.currentTime = 0;
+//   item.play();
+// }
+
+// For music
+// let isPlayed = false;
+// function gameSoundEffects(item) {
+//   if(!isPlayed)
+//   item.currentTime = 0;
+//   item.play();
+//   isPlayed = true;
+// }
+
+
+
+/***/ }),
+
+/***/ "./src/js/data/Collisions.js":
 /*!***********************************!*\
-  !*** ./src/js/data/collisions.js ***!
+  !*** ./src/js/data/Collisions.js ***!
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2416,7 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
 // Empty:
 // ee - Empty block
 
-const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'fd', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ja', 'ee', '2p', '1p', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'dz', 'sl'], ['sl', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'ee', 'dz', 'sl'], ['sl', 'dz', 'dz', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'sl', '1s', '1p', 'ee', 'dz', 'sl'], ['sl', 'dz', 'sl', 'fr', 'ee', 'dz', 'ee', '1p', '3p', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'fl'], ['ee', 'sl', 'ee', 'dz', 'ee', 'ee', 'ee', '2p', '3p', 'ee', '2p', 'fu', 'sk', 'ee', 'ee', 'ee'], ['ee', 'dz', 'ee', 'sl', 'sl', 'ee', 'ee', 'sl', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', 'ee'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
+const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', '1s', 'ja', 'ee', '2p', '1p', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'dz', 'sl'], ['sl', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'ee', 'dz', 'sl'], ['sl', 'dz', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'sl', '1s', '1p', 'ee', 'dz', 'sl'], ['sl', 'dz', 'sl', 'ee', 'ee', 'dz', 'ee', 'ee', '3p', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'sl', 'ee', 'dz', 'ee', 'ee', 'ee', 'ee', '3p', 'ee', '2p', 'ee', 'sk', 'ee', 'ee', 'ee'], ['ee', 'dz', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', 'ee'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'ee', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', '1s', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
 
 /***/ }),
 

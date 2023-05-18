@@ -1,4 +1,4 @@
-import { collisionsLevel_1 } from './data/collisions';
+import { collisionsLevel_1 } from './data/Collisions';
 import { canvas, c } from './Canvas';
 
 

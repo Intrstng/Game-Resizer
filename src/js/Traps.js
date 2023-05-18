@@ -48,7 +48,7 @@ import { platformImgSrc300,
   fireballLeft,
   fireballRight,
       } from './Assets';
-
+import { audio, gameSoundEffects } from '../js/data/Audio';
 
 class PlatformSpikes extends Platform {
   constructor(posX, posY, image) {
@@ -118,7 +118,6 @@ class Flamethrower {
     this.frames++;
     if (this.frames > this.frequency) this.frames = 0;
     c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height);
-    
     this.shoot();
     this.bulletController.draw();
   }
@@ -247,7 +246,6 @@ class BulletController {
   }
 
   collisionWithBlocks(bullet) {
- 
     this.platforms.forEach((block) => {
       (block.statusActive &&
       bullet.position.x + bullet.width * 0.1 <= block.right &&

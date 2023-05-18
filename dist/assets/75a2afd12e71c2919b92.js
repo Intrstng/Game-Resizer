@@ -1,9 +1,6 @@
 /******/(() => {
   // webpackBootstrap
   /******/
-  "use strict";
-
-  /******/
   var __webpack_modules__ = {
     /***/"./src/index.js":
     /*!**********************!*\
@@ -11,6 +8,8 @@
       \**********************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -41,7 +40,9 @@
       /* harmony import */
       var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ./js/AdditionalElements */"./src/js/AdditionalElements.js");
       /* harmony import */
-      var _js_data_collisions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./js/data/collisions */"./src/js/data/collisions.js");
+      var _js_data_Audio__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./js/data/Audio */"./src/js/data/Audio.js");
+      /* harmony import */
+      var _js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ./js/data/Collisions */"./src/js/data/Collisions.js");
 
       // imagePlatform.onload = function getSizes () {
       //   imagePlatform.width = imagePlatform.naturalWidth;
@@ -50,7 +51,9 @@
 
       _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
       _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720 //window.innerHeight;
-
+      let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+      };
       let leftNeighboorBlockFromHeroArr = [];
       let leftNeighboorBlockFromHero = null;
       let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0, _js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
@@ -122,7 +125,7 @@
         });
       }
       function animate() {
-        requestAnimationFrame(animate);
+        requestAnim(animate);
         //c.clearRect(0, 0, canvas.width, canvas.height);
         _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'white';
         _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
@@ -247,6 +250,8 @@
       \**************************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -281,6 +286,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -434,6 +441,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -453,6 +462,8 @@
       \*****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -462,7 +473,7 @@
         /* harmony export */
       });
       /* harmony import */
-      var _data_collisions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./data/collisions */"./src/js/data/collisions.js");
+      var _data_Collisions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./data/Collisions */"./src/js/data/Collisions.js");
       /* harmony import */
       var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
       /* harmony import */
@@ -501,7 +512,7 @@
       //   })
       // })
 
-      const parsedCollisions = _data_collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
+      const parsedCollisions = _data_Collisions__WEBPACK_IMPORTED_MODULE_0__.collisionsLevel_1.forEach((row, index_Y) => {
         row.forEach((cell, index_X) => {
           switch (cell) {
             case '1p':
@@ -575,6 +586,8 @@
       \*******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -618,6 +631,8 @@
       \************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -636,6 +651,9 @@
           pressed: false
         },
         up: {
+          pressed: false
+        },
+        space: {
           pressed: false
         },
         lastPressed: 'right',
@@ -667,6 +685,7 @@
               break;
             case 'Space':
               {
+                keys.space.pressed = true;
                 !keys.deadSignalZone && keys.spaceToggleCounter++;
               }
               break;
@@ -714,6 +733,11 @@
                 _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.idle.left;
               }
               break;
+            case 'Space':
+              {
+                keys.space.pressed = false;
+              }
+              break;
           }
         }
       };
@@ -727,6 +751,8 @@
       \****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -750,9 +776,11 @@
       /* harmony import */
       var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
       /* harmony import */
-      var _Keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
+      var _data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./data/Audio */"./src/js/data/Audio.js");
       /* harmony import */
-      var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../index */"./src/index.js");
+      var _Keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
+      /* harmony import */
+      var _index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../index */"./src/index.js");
       // import { CollisionBlock, platforms, parsedCollisions } from './Collision';
       // import { canvas, c } from './Canvas';
       // import { createImage } from './CreateImage';
@@ -1276,49 +1304,49 @@
         }
         collisionAbove() {
           // Player - platform collision (player is above the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y &&
+          if (_index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height + _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y >= this.position.y &&
           // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
           // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4 >= this.position.x &&
+          _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 4 >= this.position.x &&
           // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 4) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -3.5; // если касается земли // -3.5
+          _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x <= this.position.x + this.width - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 4) {
+            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = -3.5; // если касается земли // -3.5
 
-            if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed) {
-              _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_5__.player.jumpHeight;
-              _index__WEBPACK_IMPORTED_MODULE_5__.player.gravity = 0.25;
+            if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed) {
+              _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_6__.player.jumpHeight;
+              _index__WEBPACK_IMPORTED_MODULE_6__.player.gravity = 0.25;
             }
           }
         }
         collisionUnder() {
           // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y - _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y * 0.5 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height + _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25 &&
+          if (_index__WEBPACK_IMPORTED_MODULE_6__.player.position.y - _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y * 0.5 <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height + _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x >= this.position.x - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 1.25 &&
           // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_5__.player.width / 1.25) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
+          _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width <= this.position.x + this.width + _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 1.25) {
+            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
           }
         }
 
         collisionLeftSide() {
           // Player - platform collision (player is left from the platform and moves right)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width >= this.position.x) {
+            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 0;
             console.log('hit!');
           } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width >= this.position.x + this.width) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 2;
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height >= this.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y <= this.position.y + this.height && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width >= this.position.x + this.width) {
+            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 2;
             console.log('free!');
           }
         }
         collisionRightSide() {
           // Player - platform collision (player is right from the platform and moves left)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.width) {
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = 0;
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height >= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.height && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.width) {
+            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 0;
             console.log('hit!');
           } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.position.x) {
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.position.y || _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y >= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.height) && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.position.x) {
             // или "-" player.width ???
-            _index__WEBPACK_IMPORTED_MODULE_5__.player.velocity.x = -2;
+            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = -2;
             console.log('free!');
           }
         }
@@ -1356,7 +1384,7 @@
         }
         toggle() {
           console.log(this.type, this.statusActive);
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === true) {
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.jumpToggleActive === true) {
             this.currentSprite = this.sprites.idle;
             this.statusActive = true;
           } else {
@@ -1384,7 +1412,7 @@
         }
         toggle() {
           console.log(this.type, this.statusActive);
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive === false) {
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.jumpToggleActive === false) {
             this.currentSprite = this.sprites.idle;
             this.statusActive = true;
           } else {
@@ -1440,15 +1468,15 @@
           this.setCount = null;
         }
         checkSpaceToggleCounter() {
-          _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter;
+          _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter;
         }
         collision() {
-          if (_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === this.setCount) {
+          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter === this.setCount) {
             this.statusActive = true;
             super.collisionAbove();
             super.collisionUnder();
             super.collisionLeftSide();
-            if ((_index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_5__.leftNeighboorBlockFromHero.setCount) {
+            if ((_index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.setCount) {
               super.collisionRightSide();
             }
             this.currentSprite = this.sprites.idle;
@@ -1459,13 +1487,13 @@
             this.checkSpaceToggleCounter();
             // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
             if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-              return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.position.y && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.position.y + block.height && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.position.x && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.position.x + block.width;
+              return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.position.y + block.height && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.position.x && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.position.x + block.width;
             })) {
-              _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = true;
+              _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
               console.log('inside');
             } else {
               console.log('outside');
-              _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = false;
+              _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
             }
           }
         }
@@ -1548,15 +1576,15 @@
         //   }
 
         hover() {
-          if (_index__WEBPACK_IMPORTED_MODULE_5__.player.left <= this.right && _index__WEBPACK_IMPORTED_MODULE_5__.player.right >= this.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.bottom >= this.top && _Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-            return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.right;
+          if (_index__WEBPACK_IMPORTED_MODULE_6__.player.left <= this.right && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
+            return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
           })) {
             // Inside of the block
             this.checkSpaceToggleCounter();
             this.currentSprite = this.sprites.idle;
           } else if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
             // Outside of the block
-            return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.right;
+            return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
           })) {
             this.currentSprite = this.sprites.disabled;
           }
@@ -1565,13 +1593,16 @@
           this.hover(); // Hover the block when the hero is inside of it
           // Hero is inside or outside of block (for toggled by space platformes and deadSignal zone platforms)   
           if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-            return _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_5__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_5__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_5__.player.width * 0.25 <= block.right;
+            return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
           })) {
-            _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = true;
+            _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
+            console.log(_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed);
+            _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleSpaceDisabled);
             console.log('inside');
           } else {
             console.log('outside');
-            _Keys__WEBPACK_IMPORTED_MODULE_4__.keys.deadSignalZone = false;
+            _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
+            _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleSpace);
           }
         }
       }
@@ -1585,6 +1616,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1869,6 +1902,8 @@
       \*************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2403,12 +2438,25 @@
       /***/
     },
 
-    /***/"./src/js/data/collisions.js":
+    /***/"./src/js/data/Audio.js":
+    /*!******************************!*\
+      !*** ./src/js/data/Audio.js ***!
+      \******************************/
+    /***/
+    () => {
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Game\\src\\js\\data\\Audio.js: Unexpected token, expected \",\" (82:0)\n\n  80 |\n  81 |\n> 82 | function gameSoundInit(...args) {\n     | ^\n  83 |   for (let arg of args) {\n  84 |     arg.play();\n  85 |     arg.pause();\n    at instantiate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.unexpected (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3300:16)\n    at Parser.expect (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3642:28)\n    at Parser.parseObjectLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:11639:14)\n    at Parser.parseExprAtom (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:11159:23)\n    at Parser.parseExprSubscripts (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10872:23)\n    at Parser.parseUpdate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10855:21)\n    at Parser.parseMaybeUnary (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10831:23)\n    at Parser.parseMaybeUnaryOrPrivate (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10669:61)\n    at Parser.parseExprOps (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10674:23)\n    at Parser.parseMaybeConditional (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10651:23)\n    at Parser.parseMaybeAssign (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10612:21)\n    at D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10582:39\n    at Parser.allowInAnd (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12252:16)\n    at Parser.parseMaybeAssignAllowIn (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:10582:17)\n    at Parser.parseVar (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13193:91)\n    at Parser.parseVarStatement (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13032:10)\n    at Parser.parseStatementContent (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12629:23)\n    at Parser.parseStatementLike (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Game\\node_modules\\gensync\\index.js:223:11)");
+
+      /***/
+    },
+
+    /***/"./src/js/data/Collisions.js":
     /*!***********************************!*\
-      !*** ./src/js/data/collisions.js ***!
+      !*** ./src/js/data/Collisions.js ***!
       \***********************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2449,6 +2497,8 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       // extracted by mini-css-extract-plugin
 
@@ -2461,6 +2511,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7c68bde787cbb30d2409.jpg";
 
       /***/
@@ -2472,6 +2524,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/caa8591cb3f3a1855c29.png";
 
       /***/
@@ -2483,6 +2537,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/61cdd2e0f3c3604e7b1f.png";
 
       /***/
@@ -2494,6 +2550,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/47bb81cb0aaa2c499d5c.png";
 
       /***/
@@ -2505,6 +2563,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8a499ad60f919b1f6cad.png";
 
       /***/
@@ -2516,6 +2576,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/02bc1678beb112beb4a1.png";
 
       /***/
@@ -2527,6 +2589,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4e23b39a2281ee54125f.png";
 
       /***/
@@ -2538,6 +2602,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c53e7b3ac960db1762a9.png";
 
       /***/
@@ -2549,6 +2615,8 @@
       \**************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/542a853a490865e4177b.png";
 
       /***/
@@ -2560,6 +2628,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/e361987edb2dc29e1508.png";
 
       /***/
@@ -2571,6 +2641,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/befd1a46da1a01267d9e.png";
 
       /***/
@@ -2582,6 +2654,8 @@
       \*********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/73ffdfeda1c0c3fa260e.png";
 
       /***/
@@ -2593,6 +2667,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/893ecde318d7755323b7.png";
 
       /***/
@@ -2604,6 +2680,8 @@
       \***************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c2b486028ea06a42538d.png";
 
       /***/
@@ -2615,6 +2693,8 @@
       \*************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a27c1909728c39bb81d1.png";
 
       /***/
@@ -2626,6 +2706,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/15a754e2c1925bdc527f.png";
 
       /***/
@@ -2637,6 +2719,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/dd246bde66e7e6e5e3fc.png";
 
       /***/
@@ -2648,6 +2732,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8227e458d9e6b45666dc.png";
 
       /***/
@@ -2659,6 +2745,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/171091192763139674e9.png";
 
       /***/
@@ -2670,6 +2758,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4550e1c7d8d19a7959ef.png";
 
       /***/
@@ -2681,6 +2771,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
 
       /***/
@@ -2692,6 +2784,8 @@
       \*******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7eac2d1901ea34422f0e.png";
 
       /***/
@@ -2703,6 +2797,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/03857753acbdef4e6e04.png";
 
       /***/
@@ -2714,6 +2810,8 @@
       \*****************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/62e7d0778000c13e26fd.png";
 
       /***/
@@ -2725,6 +2823,8 @@
       \**********************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
 
       /***/
@@ -2736,6 +2836,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
 
       /***/
@@ -2747,6 +2849,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
 
       /***/
@@ -2758,6 +2862,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
 
       /***/
@@ -2769,6 +2875,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
 
       /***/
@@ -2780,6 +2888,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a81ec16a567429e11f71.png";
 
       /***/
@@ -2791,6 +2901,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
 
       /***/
@@ -2802,6 +2914,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
 
       /***/
@@ -2813,6 +2927,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
 
       /***/
@@ -2824,6 +2940,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
 
       /***/
@@ -2835,6 +2953,8 @@
       \**********************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
 
       /***/

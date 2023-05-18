@@ -10,7 +10,7 @@ import { createImage, Sprite } from './js/CreateImage';
 import { Player } from './js/Player';
 
 import { bulletController } from './js/Collision';
-
+import { audio, gameSoundEffects } from './js/data/Audio';
 
 import { Platform,
   OneStep,
@@ -71,11 +71,21 @@ import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
 
 
-
 canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 // 720 //window.innerHeight;
+let requestAnim = window.requestAnimationFrame ||
+                  window.webkitRequestAnimationFrame ||
+                  window.mozRequestAnimationFrame ||
+                  window.oRequestAnimationFrame ||
+                  window.msRequestAnimationFrame ||
+                  function(callback) { window.setTimeout(callback, 1000 / 60); }
+
+
+
 
 let leftNeighboorBlockFromHeroArr = [];
+export let timerShoot_1 = null;
+export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
 
 export let additionalElements = [
@@ -96,7 +106,7 @@ export let additionalElements = [
 
 
 
-import { collisionsLevel_1 } from './js/data/collisions';
+import { collisionsLevel_1 } from './js/data/Collisions';
 
 
 
@@ -119,10 +129,22 @@ export let player = new Player({
              // export let sawTrap = new Saw(560, 315, createImage(saw, 36, 36))
    // export let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
              // export let jump = new JumpToggle(100, 355, createImage(platformOne, 36, 36))
-
+  platforms.forEach(platform => {
+  if (platform.type === 'flamethrowerLeft' ||
+  platform.type === 'flamethrowerRight' ||
+  platform.type === 'flamethrowerUp' ||
+  platform.type === 'flamethrowerDown') {
+  // setInterval(() => gameSoundEffects(audio.fire), 1000);
+  timerShoot_1 = setTimeout(function soundFire() {
+      timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
+      gameSoundEffects(audio.fire);
+    }, platform.delay * 8);                          
+  }
+});
 
 export function init() {
-  player.velocity.y = 1; 
+  player.velocity.y = 1;
+  player.alive = true;
   keys.spaceToggleCounter = 1;
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ];
@@ -180,7 +202,7 @@ export function init() {
 
 
 function animate() {
-  requestAnimationFrame(animate);
+  requestAnim(animate);
   //c.clearRect(0, 0, canvas.width, canvas.height);
   c.fillStyle = ('white');
   c.fillRect(0, 0, canvas.width, canvas.height);
@@ -215,7 +237,7 @@ function animate() {
                           platform.type === 'flamethrowerRight' ||
                           platform.type === 'flamethrowerUp' ||
                           platform.type === 'flamethrowerDown') {
-                            platform.shoot();
+                            platform.shoot();                      
                           }
                           
                           });

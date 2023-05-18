@@ -36,7 +36,7 @@ import {
   flamethrowerDown,
       } from '../js/Assets';
 import { platforms, intersection } from '../index';
-
+import { audio, gameSoundEffects } from '../js/data/Audio';
 
 export class Player {
   constructor({ platforms = [] }) {
@@ -55,6 +55,7 @@ export class Player {
     this.height = 32;
     this.frequency = 21;
     this.frames = 0;
+    this.alive = true;
     this.sprites = {
       idle: {
         right: createImage(heroIdleR, 32, 32),
@@ -110,8 +111,10 @@ export class Player {
   die() {
     this.velocity.x = 0;
     this.velocity.y = -2;
-    this.gravity = 0
+    this.gravity = 0;
     this.currentSprite = this.sprites.death;
+    this.alive && gameSoundEffects(audio.heroDeath);
+    this.alive = false;
     setTimeout(init, 550);
   }
 
@@ -201,7 +204,7 @@ export class Player {
             this.bottom >= platform.top) {
               if (this.velocity.x < 0) {// moves left       // <= -2
                 this.left = platform.right + 0.1;
-                keys.left.pressed = false;        
+                keys.left.pressed = false;   
                 platform.hits++;
                 platform.destroy();
                 break;
@@ -248,11 +251,12 @@ export class Player {
           if (keys.jumpToggleActive &&
             this.left <= platform.right &&
             this.right >= platform.left &&
-            this.top <= platform.bottom &&
+            this.top <= platform.bottom - this.height / 4 && // - this.height / 4 (поправка на прозрачность спрайта героя)
             this.bottom >= platform.top) {
               if (this.velocity.y < 0) {// moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
+                this.alive && gameSoundEffects(audio.bottomHit);
                 break;
               }
               if (this.velocity.y > 0) {// falling down  // 0.25
@@ -298,7 +302,7 @@ export class Player {
                 break;
               }
               if (this.velocity.y > 0) {// falling down  // 0.25
-                this.velocity.y = 0;
+                this.velocity.y = -this.jumpHeight; // 0
                 keys.up.pressed = false;      
                 platform.hits++;
                 platform.destroy();
