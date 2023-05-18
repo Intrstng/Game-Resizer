@@ -20,22 +20,51 @@
     // fn - Fan
 // Empty:
     // ee - Empty block
+// Player:
+    // st - Start point
+    // fp - Finish point
 
 export const collisionsLevel_1 = [
-  ['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'],
-  ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
-  ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'],
-  ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'],
-  ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'sl', 'dz', 'sl'],
-  ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', '1s', 'ja', 'ee', '2p', '1p', 'sl', 'dz', 'sl'],
-  ['sl', 'dz', 'sl', 'sl', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'jp', 'sw', 'dz', 'sl'],
-  ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'dz', 'sl'],
-  ['sl', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'ee', 'dz', 'sl'],
-  ['sl', 'dz', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'sl', '1s', '1p', 'ee', 'dz', 'sl'],
-  ['sl', 'dz', 'sl', 'ee', 'ee', 'dz', 'ee', 'ee', '3p', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'],
-  ['ee', 'sl', 'ee', 'dz', 'ee', 'ee', 'ee', 'ee', '3p', 'ee', '2p', 'ee', 'sk', 'ee', 'ee', 'ee'],
-  ['ee', 'dz', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', 'ee'],
-  ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'ee', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'],
-  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', '1s', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
-  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']
+  ["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+  ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"],
+  ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"],
+  ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "st", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"],
+  ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"],
+  ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"],
+  ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"],
+  ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"],
+  ["sl", "ee", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"],
+  ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"],
+  ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"],
+  ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"],
+  ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"],
+  ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"],
+  ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"],
+  ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]
 ];
+
+
+const data = {
+    "player": {
+        "x": 200,
+        "y": 300,
+    },
+    "map": [
+        ["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+        ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"],
+        ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"],
+        ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"],
+        ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"],
+        ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"],
+        ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"],
+        ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"],
+        ["sl", "ee", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"],
+        ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"],
+        ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"],
+        ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"],
+        ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"],
+        ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"],
+        ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"],
+        ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]
+      ],
+}

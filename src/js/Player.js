@@ -39,16 +39,17 @@ import { platforms, intersection } from '../index';
 import { audio, gameSoundEffects } from '../js/data/Audio';
 
 export class Player {
-  constructor({ platforms = [] }) {
+  constructor({ platforms = [] }, posX, posY) {
     this.platforms = platforms;
     this.position = {
-      x: 180,
-      y: 247 //canvas.height / 2
+      x: posX,
+      y: posY,
     }
     this.velocity = {
       x: 0,
-      y: 1 
+      y: 1,
     }
+    this.type = 'player';
     this.gravity = 0.25;
     this.jumpHeight = 10; // -20 is higher
     this.width = 32;

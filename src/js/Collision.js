@@ -58,6 +58,7 @@ import { platformImgSrc300,
   flamethrowerDown,
 } from './Assets';
 import { createImage, Sprite } from './CreateImage';
+import { Player } from './Player';
 
 class CollisionBlock {
   constructor ({ position }) {

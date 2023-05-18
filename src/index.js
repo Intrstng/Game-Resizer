@@ -113,11 +113,23 @@ import { collisionsLevel_1 } from './js/data/Collisions';
 console.log(platforms)
 
 
-export let player = new Player({
+export let player;
+  collisionsLevel_1.forEach((row, index_Y) => {
+    row.forEach((cell, index_X) => {
+     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
+    })
+  })
+
+
+new Player({
   platforms
 }); //collisionBlocks: collisionBlocks
 
-
+  // collisionsLevel_1.forEach((row, index_Y) => {
+  //   row.forEach((cell, index_X) => {
+  //    cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
+  //   })
+  // })
 
 /* -------------------- */
 
@@ -190,14 +202,19 @@ export function init() {
 
 
     
-                                          player = new Player({
-                                            platforms
-                                          });
+                                         // player = new Player({ platforms });
 
 
   platforms.forEach(platform => {
-    (platform.type === 'oneStep') && platform.restore()});
+    (platform.type === 'oneStep') && platform.restore();
+  });
 
+  collisionsLevel_1.forEach((row, index_Y) => {
+    row.forEach((cell, index_X) => {
+     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
+    })
+  })
+   
 }                      
 
 

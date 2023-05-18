@@ -69,9 +69,23 @@
       //                 new Platform(400, 100, createImage(platformSolid, 36, 36)) */]; // создаем платформы
 
       console.log(_js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms);
-      let player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
+      let player;
+      _js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__.collisionsLevel_1.forEach((row, index_Y) => {
+        row.forEach((cell, index_X) => {
+          cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
+            platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
+          }, index_X * 36, index_Y * 36));
+        });
+      });
+      new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
         platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
       }); //collisionBlocks: collisionBlocks
+
+      // collisionsLevel_1.forEach((row, index_Y) => {
+      //   row.forEach((cell, index_X) => {
+      //    cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
+      //   })
+      // })
 
       /* -------------------- */
 
@@ -131,11 +145,17 @@
         //               new Platform(830, 455, createImage(platformSolid, 36, 36)),
         //     spikes, sawTrap, sawTrap2, jump   */    ]; // создаем платформы !!!!!!!!!!!!!
 
-        player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
-          platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
-        });
+        // player = new Player({ platforms });
+
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
           platform.type === 'oneStep' && platform.restore();
+        });
+        _js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__.collisionsLevel_1.forEach((row, index_Y) => {
+          row.forEach((cell, index_X) => {
+            cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
+              platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
+            }, index_X * 36, index_Y * 36));
+          });
         });
       }
       function animate() {
@@ -491,6 +511,8 @@
       var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
       /* harmony import */
       var _CreateImage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./CreateImage */"./src/js/CreateImage.js");
+      /* harmony import */
+      var _Player__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ./Player */"./src/js/Player.js");
       class CollisionBlock {
         constructor(_ref) {
           let {
@@ -1633,20 +1655,20 @@
       /* harmony import */
       var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../js/data/Audio */"./src/js/data/Audio.js");
       class Player {
-        constructor(_ref) {
+        constructor(_ref, posX, posY) {
           let {
             platforms = []
           } = _ref;
           this.platforms = platforms;
           this.position = {
-            x: 180,
-            y: 247 //canvas.height / 2
+            x: posX,
+            y: posY
           };
-
           this.velocity = {
             x: 0,
             y: 1
           };
+          this.type = 'player';
           this.gravity = 0.25;
           this.jumpHeight = 10; // -20 is higher
           this.width = 32;
@@ -2643,8 +2665,18 @@
       // fn - Fan
       // Empty:
       // ee - Empty block
+      // Player:
+      // st - Start point
+      // fp - Finish point
 
-      const collisionsLevel_1 = [['dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz'], ['dz', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', '1s', 'ja', 'ee', '2p', '1p', 'sl', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'jp', 'sw', 'dz', 'sl'], ['sl', 'dz', 'sl', 'sl', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'dz', 'sl'], ['sl', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'ee', 'dz', 'sl'], ['sl', 'dz', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee', '1s', 'sl', '1s', '1p', 'ee', 'dz', 'sl'], ['sl', 'dz', 'sl', 'ee', 'ee', 'dz', 'ee', 'ee', '3p', '2p', 'ee', 'ee', 'ee', 'ee', 'ee', 'ee'], ['ee', 'sl', 'ee', 'dz', 'ee', 'ee', 'ee', 'ee', '3p', 'ee', '2p', 'ee', 'sk', 'ee', 'ee', 'ee'], ['ee', 'dz', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', 'ee'], ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'ee', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', '1s', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'], ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']];
+      const collisionsLevel_1 = [["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "st", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"], ["sl", "ee", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"], ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"], ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"], ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"], ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]];
+      const data = {
+        "player": {
+          "x": 200,
+          "y": 300
+        },
+        "map": [["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"], ["sl", "ee", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"], ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"], ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"], ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"], ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]]
+      };
 
       /***/
     },
