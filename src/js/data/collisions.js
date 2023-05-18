@@ -37,5 +37,5 @@ export const collisionsLevel_1 = [
   ['ee', 'dz', 'ee', 'sl', 'sl', 'ee', 'ee', 'ee', 'dz', 'dz', 'dz', 'sl', 'sl', 'sl', 'dz', 'ee'],
   ['sl', 'dz', 'dz', 'dz', 'dz', 'dz', 'dz', 'ee', 'dz', 'dz', 'dz', 'dz', 'dz', 'sl', 'dz', 'sl'],
   ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', '1s', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl'],
-  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']
+  ['sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'ee', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl', 'sl']
 ];

@@ -129,18 +129,18 @@ export let player = new Player({
              // export let sawTrap = new Saw(560, 315, createImage(saw, 36, 36))
    // export let sawTrap2 = new OneStep(400, 455, createImage(platformOneStep, 36, 36))
              // export let jump = new JumpToggle(100, 355, createImage(platformOne, 36, 36))
-  platforms.forEach(platform => {
-  if (platform.type === 'flamethrowerLeft' ||
-  platform.type === 'flamethrowerRight' ||
-  platform.type === 'flamethrowerUp' ||
-  platform.type === 'flamethrowerDown') {
-  // setInterval(() => gameSoundEffects(audio.fire), 1000);
-  timerShoot_1 = setTimeout(function soundFire() {
-      timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
-      gameSoundEffects(audio.fire);
-    }, platform.delay * 8);                          
-  }
-});
+                                                platforms.forEach(platform => {
+                                                if (platform.type === 'flamethrowerLeft' ||
+                                                platform.type === 'flamethrowerRight' ||
+                                                platform.type === 'flamethrowerUp' ||
+                                                platform.type === 'flamethrowerDown') {
+                                                // setInterval(() => gameSoundEffects(audio.fire), 1000);
+                                                timerShoot_1 = setTimeout(function soundFire() {
+                                                    timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
+                                                    gameSoundEffects(audio.fire);
+                                                  }, platform.delay * 8);                          
+                                                }
+                                              });
 
 export function init() {
   player.velocity.y = 1;
@@ -202,6 +202,7 @@ export function init() {
 
 
 function animate() {
+
   requestAnim(animate);
   //c.clearRect(0, 0, canvas.width, canvas.height);
   c.fillStyle = ('white');
@@ -331,7 +332,8 @@ if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.press
     // Падение в пропасть (см. комментарии в player.update())
       if (player.position.y > canvas.height) {
 // sawTrap.restore();
-                                                    //sawTrap2.restore(); // !!!!!!!!!!!!
+                             //sawTrap2.restore(); // !!!!!!!!!!!!
+gameSoundEffects(audio.fallingInDepth2);
 keys.jumpToggleActive = !keys.jumpToggleActive;
         init();
         console.log('you lose')

@@ -26,8 +26,8 @@ const audio = {
     volume: 1,
   },
   fallingInDepth2: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/falling_in_depth2.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/falling_in_depth2.ogg'),
+    src_MP3: new Audio('./../../assets/sounds/effects/mp3/falling_in_depth_2.mp3'),
+    src_OGG: new Audio('./../../assets/sounds/effects/ogg/falling_in_depth_2.ogg'),
     volume: 1,
   },
   fire: {
