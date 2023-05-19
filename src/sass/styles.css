@@ -1,0 +1,15 @@
+@import '../../node_modules/normalize.css/normalize.css';
+html {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+  height: 100vh;
+  background-color: black;
+}/*# sourceMappingURL=styles.css.map */
