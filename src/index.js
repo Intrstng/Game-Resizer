@@ -66,6 +66,8 @@ import { platformImgSrc300,
           flamethrowerRight,
           flamethrowerUp,
           flamethrowerDown,
+          brick_1,
+          brick_2,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';

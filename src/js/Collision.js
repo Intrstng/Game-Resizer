@@ -58,6 +58,8 @@ import { platformImgSrc300,
   flamethrowerRight,
   flamethrowerUp,
   flamethrowerDown,
+  brick_1,
+  brick_2,
 } from './Assets';
 import { createImage, Sprite } from './CreateImage';
 import { Player } from './Player';
@@ -147,11 +149,11 @@ const parsedCollisions = collisionsLevel_1.forEach((row, index_Y) => {
         break;
       case 'b1': // Fan (decoration)
       platforms.push(new Brick_1(
-        index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms));
+        index_X * 36, index_Y * 36, createImage(brick_1, 36, 36), platforms));
         break;
       case 'b2': // Fan (decoration)
       platforms.push(new Brick_2(
-        index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms));
+        index_X * 36, index_Y * 36, createImage(brick_2, 36, 36), platforms));
         break;
     }
   })

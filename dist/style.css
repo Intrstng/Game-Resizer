@@ -367,15 +367,5 @@ body {
   height: 100vh;
   background-color: black; }
 
-.game {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-#fullscreen {
-  position: absolute;
-  top: 50px;
-  right: 50px; }
-
 
 /*# sourceMappingURL=style.css.map*/

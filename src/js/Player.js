@@ -34,6 +34,8 @@ import {
   flamethrowerRight,
   flamethrowerUp,
   flamethrowerDown,
+  brick_1,
+  brick_2,
       } from '../js/Assets';
 import { platforms, intersection } from '../index';
 import { audio, gameSoundEffects } from '../js/data/Audio';

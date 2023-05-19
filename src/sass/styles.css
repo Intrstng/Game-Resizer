@@ -12,16 +12,4 @@ body {
   width: 100vh;
   height: 100vh;
   background-color: black;
-}
-
-.game {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#fullscreen {
-  position: absolute;
-  top: 50px;
-  right: 50px;
 }/*# sourceMappingURL=styles.css.map */

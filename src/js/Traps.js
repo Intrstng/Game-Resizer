@@ -47,6 +47,8 @@ import { platformImgSrc300,
   fireballDown,
   fireballLeft,
   fireballRight,
+  brick_1,
+  brick_2,
       } from './Assets';
 import { audio, gameSoundEffects } from '../js/data/Audio';
 

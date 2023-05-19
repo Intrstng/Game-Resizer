@@ -49,7 +49,7 @@ module.exports = (env, options) => {
           use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
         {
-            test: /\.(png|jpg|jpeg|gif)$/i,
+            test: /\.(png|jpg|jpeg|gif|mp3|ogg)$/i,
             type: 'asset/resource',
         },
         {
@@ -59,10 +59,6 @@ module.exports = (env, options) => {
             //     filename: path.join('assets/[hash][ext]'),
             // },
         },
-        // {
-        //   test: /\.mp3$/,
-        //   loader: 'file-loader',
-        // },
         {
             test: /\.(woff2?|eot|ttf|otf)$/i,
             type: 'asset/resource',

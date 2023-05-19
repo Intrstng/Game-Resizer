@@ -340,17 +340,19 @@ class AdditionalElements {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "backgroundImg": () => (/* reexport default export from named module */ _assets_img_Background_images_bg_3_jpg__WEBPACK_IMPORTED_MODULE_10__),
-/* harmony export */   "deadSignalZone": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_25__),
-/* harmony export */   "deadSignalZoneHover": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__),
-/* harmony export */   "fan": () => (/* reexport default export from named module */ _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_23__),
-/* harmony export */   "fireballDown": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_32__),
-/* harmony export */   "fireballLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_33__),
-/* harmony export */   "fireballRight": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_34__),
-/* harmony export */   "fireballUp": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_31__),
-/* harmony export */   "flamethrowerDown": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_30__),
-/* harmony export */   "flamethrowerLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__),
-/* harmony export */   "flamethrowerRight": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__),
-/* harmony export */   "flamethrowerUp": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_29__),
+/* harmony export */   "brick_1": () => (/* reexport default export from named module */ _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_22__),
+/* harmony export */   "brick_2": () => (/* reexport default export from named module */ _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_23__),
+/* harmony export */   "deadSignalZone": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_27__),
+/* harmony export */   "deadSignalZoneHover": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_28__),
+/* harmony export */   "fan": () => (/* reexport default export from named module */ _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_25__),
+/* harmony export */   "fireballDown": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_34__),
+/* harmony export */   "fireballLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_35__),
+/* harmony export */   "fireballRight": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_36__),
+/* harmony export */   "fireballUp": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_33__),
+/* harmony export */   "flamethrowerDown": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_32__),
+/* harmony export */   "flamethrowerLeft": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_29__),
+/* harmony export */   "flamethrowerRight": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_30__),
+/* harmony export */   "flamethrowerUp": () => (/* reexport default export from named module */ _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_31__),
 /* harmony export */   "heroDeath": () => (/* reexport default export from named module */ _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__),
 /* harmony export */   "heroFallL": () => (/* reexport default export from named module */ _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__),
 /* harmony export */   "heroFallR": () => (/* reexport default export from named module */ _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__),
@@ -372,8 +374,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "platformThreeDisabled": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_21__),
 /* harmony export */   "platformTwo": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_17__),
 /* harmony export */   "platformTwoDisabled": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_20__),
-/* harmony export */   "saw": () => (/* reexport default export from named module */ _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_22__),
-/* harmony export */   "spike": () => (/* reexport default export from named module */ _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_24__)
+/* harmony export */   "saw": () => (/* reexport default export from named module */ _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_24__),
+/* harmony export */   "spike": () => (/* reexport default export from named module */ _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_26__)
 /* harmony export */ });
 /* harmony import */ var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../assets/img/Platforms/platform.png */ "./assets/img/Platforms/platform.png");
 /* harmony import */ var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../assets/img/Hero/Idle_right.png */ "./assets/img/Hero/Idle_right.png");
@@ -397,19 +399,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_one_disabled.png */ "./assets/img/Platforms/Platform_one_disabled.png");
 /* harmony import */ var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_two_disabled.png */ "./assets/img/Platforms/Platform_two_disabled.png");
 /* harmony import */ var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_three_disabled.png */ "./assets/img/Platforms/Platform_three_disabled.png");
-/* harmony import */ var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../assets/img/Traps/Saw.png */ "./assets/img/Traps/Saw.png");
-/* harmony import */ var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fan.png */ "./assets/img/Traps/Fan.png");
-/* harmony import */ var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../../assets/img/Traps/Platform_spikes.png */ "./assets/img/Traps/Platform_spikes.png");
-/* harmony import */ var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../../assets/img/Traps/Dead_signal_zone.png */ "./assets/img/Traps/Dead_signal_zone.png");
-/* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
-/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
-/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
+/* harmony import */ var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../assets/img/Platforms/brick_1.png */ "./assets/img/Platforms/brick_1.png");
+/* harmony import */ var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../../assets/img/Platforms/brick_2.png */ "./assets/img/Platforms/brick_2.png");
+/* harmony import */ var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../../assets/img/Traps/Saw.png */ "./assets/img/Traps/Saw.png");
+/* harmony import */ var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fan.png */ "./assets/img/Traps/Fan.png");
+/* harmony import */ var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../../assets/img/Traps/Platform_spikes.png */ "./assets/img/Traps/Platform_spikes.png");
+/* harmony import */ var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../../assets/img/Traps/Dead_signal_zone.png */ "./assets/img/Traps/Dead_signal_zone.png");
+/* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
+/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
+/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
 // const platformImgSrc300 = '../assets/img/Platforms/platform.png';
 // const heroIdleR = '../assets/img/Hero/Idle_right.png';
 // const heroIdleL = '../assets/img/Hero/Idle_left.png';
@@ -443,6 +447,8 @@ __webpack_require__.r(__webpack_exports__);
 // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
 // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
 // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
+
+
 
 
 
@@ -621,11 +627,11 @@ const parsedCollisions = _data_Collisions__WEBPACK_IMPORTED_MODULE_0__.collision
         break;
       case 'b1':
         // Fan (decoration)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_1, 36, 36), platforms));
         break;
       case 'b2':
         // Fan (decoration)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms));
         break;
     }
   });
@@ -962,7 +968,7 @@ class Brick_1 extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_1, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 1;
@@ -974,7 +980,7 @@ class Brick_2 extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
+      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_2, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 1;
@@ -2021,91 +2027,159 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "audio": () => (/* binding */ audio),
 /* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects)
 /* harmony export */ });
+/* harmony import */ var _assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/block_hit.mp3 */ "./assets/sounds/effects/mp3/block_hit.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/block_hit.ogg */ "./assets/sounds/effects/ogg/block_hit.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/bottom_hit.mp3 */ "./assets/sounds/effects/mp3/bottom_hit.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/bottom_hit.ogg */ "./assets/sounds/effects/ogg/bottom_hit.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/choose.mp3 */ "./assets/sounds/effects/mp3/choose.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/choose.ogg */ "./assets/sounds/effects/ogg/choose.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/explosion_block.mp3 */ "./assets/sounds/effects/mp3/explosion_block.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/explosion_block.ogg */ "./assets/sounds/effects/ogg/explosion_block.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/falling_in_depth.mp3 */ "./assets/sounds/effects/mp3/falling_in_depth.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/falling_in_depth.ogg */ "./assets/sounds/effects/ogg/falling_in_depth.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/falling_in_depth_2.mp3 */ "./assets/sounds/effects/mp3/falling_in_depth_2.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/falling_in_depth_2.ogg */ "./assets/sounds/effects/ogg/falling_in_depth_2.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/fire.mp3 */ "./assets/sounds/effects/mp3/fire.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/fire.ogg */ "./assets/sounds/effects/ogg/fire.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/hero_death.mp3 */ "./assets/sounds/effects/mp3/hero_death.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/hero_death.ogg */ "./assets/sounds/effects/ogg/hero_death.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/jump.mp3 */ "./assets/sounds/effects/mp3/jump.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/jump.ogg */ "./assets/sounds/effects/ogg/jump.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3 */ "./assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg */ "./assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/next_level.mp3 */ "./assets/sounds/effects/mp3/next_level.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/next_level.ogg */ "./assets/sounds/effects/ogg/next_level.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/ok.mp3 */ "./assets/sounds/effects/mp3/ok.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/ok.ogg */ "./assets/sounds/effects/ogg/ok.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/select.mp3 */ "./assets/sounds/effects/mp3/select.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/select.ogg */ "./assets/sounds/effects/ogg/select.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/teleport.mp3 */ "./assets/sounds/effects/mp3/teleport.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/teleport.ogg */ "./assets/sounds/effects/ogg/teleport.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/toggle.mp3 */ "./assets/sounds/effects/mp3/toggle.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/toggle.ogg */ "./assets/sounds/effects/ogg/toggle.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/toggle_disabled.mp3 */ "./assets/sounds/effects/mp3/toggle_disabled.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/toggle_disabled.ogg */ "./assets/sounds/effects/ogg/toggle_disabled.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/error.mp3 */ "./assets/sounds/effects/mp3/error.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/error.ogg */ "./assets/sounds/effects/ogg/error.ogg");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const audio = {
   isCanPlay: new Audio(),
   blockHit: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/block_hit.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/block_hit.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__),
     volume: 1
   },
   bottomHit: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/bottom_hit.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/bottom_hit.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__),
     volume: 1
   },
   choose: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/choose.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/choose.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__),
     volume: 1
   },
   explosionBlock: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/explosion_block.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/explosion_block.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__),
     volume: 1
   },
   fallingInDepth: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/falling_in_depth.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/falling_in_depth.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__),
     volume: 1
   },
   fallingInDepth2: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/falling_in_depth_2.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/falling_in_depth_2.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__),
     volume: 1
   },
   fire: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/fire.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/fire.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__),
     volume: 1
   },
   heroDeath: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/hero_death.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/hero_death.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__),
     volume: 1
   },
   jump: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/jump.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/jump.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__),
     volume: 1
   },
   jumpOnSpaceToggledPlatform: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__),
     volume: 0.5
   },
   nextLevel: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/next_level.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/next_level.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__),
     volume: 1
   },
   ok: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/ok.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/ok.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__),
     volume: 1
   },
   select: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/select.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/select.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__),
     volume: 1
   },
   teleport: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/teleport.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/teleport.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__),
     volume: 1
   },
   toggle: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/toggle.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/toggle.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__),
     volume: 1
   },
   toggleDisabled: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/toggle_disabled.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/toggle_disabled.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__),
     volume: 1
   },
   error: {
-    src_MP3: new Audio('./../../assets/sounds/effects/mp3/error.mp3'),
-    src_OGG: new Audio('./../../assets/sounds/effects/ogg/error.ogg'),
+    src_MP3: new Audio(_assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__),
     volume: 1
   }
 };
@@ -2203,8 +2277,8 @@ __webpack_require__.r(__webpack_exports__);
 // fd - Flamethrower (down)
 // dz - Dead signal zone
 // Decorations:
-// 1b - Frame brick 1
-// 2b - Frame block 2
+// b1 - Frame brick 1
+// b2 - Frame block 2
 // fn - Fan
 // Empty:
 // ee - Empty block
@@ -2212,13 +2286,13 @@ __webpack_require__.r(__webpack_exports__);
 // st - Start point
 // fp - Finish point
 
-const collisionsLevel_1 = [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["sl", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]];
+const collisionsLevel_1 = [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b2", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]];
 const data = {
   "player": {
     "x": 200,
     "y": 300
   },
-  "map": [["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"], ["sl", "ee", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"], ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"], ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"], ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"], ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]]
+  "map": [["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"], ["sl", "ee", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"], ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"], ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"], ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"], ["b1", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["b2", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]]
 };
 
 /***/ }),
@@ -2445,6 +2519,26 @@ module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
 
 /***/ }),
 
+/***/ "./assets/img/Platforms/brick_1.png":
+/*!******************************************!*\
+  !*** ./assets/img/Platforms/brick_1.png ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/cf7f7083ae6b5338384a.png";
+
+/***/ }),
+
+/***/ "./assets/img/Platforms/brick_2.png":
+/*!******************************************!*\
+  !*** ./assets/img/Platforms/brick_2.png ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/ee2cf136916afa6626fe.png";
+
+/***/ }),
+
 /***/ "./assets/img/Platforms/platform.png":
 /*!*******************************************!*\
   !*** ./assets/img/Platforms/platform.png ***!
@@ -2582,6 +2676,346 @@ module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/block_hit.mp3":
+/*!*************************************************!*\
+  !*** ./assets/sounds/effects/mp3/block_hit.mp3 ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/868328e1d62559dea3d3.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/bottom_hit.mp3":
+/*!**************************************************!*\
+  !*** ./assets/sounds/effects/mp3/bottom_hit.mp3 ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/315ce5bb8774f67f6a53.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/choose.mp3":
+/*!**********************************************!*\
+  !*** ./assets/sounds/effects/mp3/choose.mp3 ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/b070217cc3ec9826fd89.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/error.mp3":
+/*!*********************************************!*\
+  !*** ./assets/sounds/effects/mp3/error.mp3 ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/07b873397bd181f0fe5b.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/explosion_block.mp3":
+/*!*******************************************************!*\
+  !*** ./assets/sounds/effects/mp3/explosion_block.mp3 ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/173e28202170f19073b8.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/falling_in_depth.mp3":
+/*!********************************************************!*\
+  !*** ./assets/sounds/effects/mp3/falling_in_depth.mp3 ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/1dec2f6bcf25b798920b.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/falling_in_depth_2.mp3":
+/*!**********************************************************!*\
+  !*** ./assets/sounds/effects/mp3/falling_in_depth_2.mp3 ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/5c0e7724e5723b97e9be.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/fire.mp3":
+/*!********************************************!*\
+  !*** ./assets/sounds/effects/mp3/fire.mp3 ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/2517213c91f01c976f92.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/hero_death.mp3":
+/*!**************************************************!*\
+  !*** ./assets/sounds/effects/mp3/hero_death.mp3 ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/a2a93b9461f413734ad7.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/jump.mp3":
+/*!********************************************!*\
+  !*** ./assets/sounds/effects/mp3/jump.mp3 ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/a2774fd0d75bdfeed2da.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3":
+/*!**********************************************************************!*\
+  !*** ./assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3 ***!
+  \**********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/037494008090ce9e60f2.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/next_level.mp3":
+/*!**************************************************!*\
+  !*** ./assets/sounds/effects/mp3/next_level.mp3 ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/87197dcb8811e09b73e1.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/ok.mp3":
+/*!******************************************!*\
+  !*** ./assets/sounds/effects/mp3/ok.mp3 ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/75e0f3d8b173961534ec.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/select.mp3":
+/*!**********************************************!*\
+  !*** ./assets/sounds/effects/mp3/select.mp3 ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/b6ba29659cf55d571cc0.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/teleport.mp3":
+/*!************************************************!*\
+  !*** ./assets/sounds/effects/mp3/teleport.mp3 ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/97462a60fa4b16083f2e.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/toggle.mp3":
+/*!**********************************************!*\
+  !*** ./assets/sounds/effects/mp3/toggle.mp3 ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/76d8a9edad64667bb800.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/mp3/toggle_disabled.mp3":
+/*!*******************************************************!*\
+  !*** ./assets/sounds/effects/mp3/toggle_disabled.mp3 ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/a2a5e45d00f4a784b94b.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/block_hit.ogg":
+/*!*************************************************!*\
+  !*** ./assets/sounds/effects/ogg/block_hit.ogg ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/409a03408bb32d1202d2.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/bottom_hit.ogg":
+/*!**************************************************!*\
+  !*** ./assets/sounds/effects/ogg/bottom_hit.ogg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/9771e96a1d6912ab23c6.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/choose.ogg":
+/*!**********************************************!*\
+  !*** ./assets/sounds/effects/ogg/choose.ogg ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/55972719deb5d18b267e.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/error.ogg":
+/*!*********************************************!*\
+  !*** ./assets/sounds/effects/ogg/error.ogg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/2dc046f6177bea7f2950.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/explosion_block.ogg":
+/*!*******************************************************!*\
+  !*** ./assets/sounds/effects/ogg/explosion_block.ogg ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/9ea75121a93a42b1411e.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/falling_in_depth.ogg":
+/*!********************************************************!*\
+  !*** ./assets/sounds/effects/ogg/falling_in_depth.ogg ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/b0867563ae4e9e18a2e8.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/falling_in_depth_2.ogg":
+/*!**********************************************************!*\
+  !*** ./assets/sounds/effects/ogg/falling_in_depth_2.ogg ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/e6ae7ad1b65788f9dae5.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/fire.ogg":
+/*!********************************************!*\
+  !*** ./assets/sounds/effects/ogg/fire.ogg ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/957cddacb1deaac79e00.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/hero_death.ogg":
+/*!**************************************************!*\
+  !*** ./assets/sounds/effects/ogg/hero_death.ogg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/70068ae31959fab95e81.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/jump.ogg":
+/*!********************************************!*\
+  !*** ./assets/sounds/effects/ogg/jump.ogg ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/9efb836c3a9ba68ca120.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg":
+/*!**********************************************************************!*\
+  !*** ./assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg ***!
+  \**********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/d1e681bf5a15caf9026f.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/next_level.ogg":
+/*!**************************************************!*\
+  !*** ./assets/sounds/effects/ogg/next_level.ogg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/523646943918c59d2b3d.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/ok.ogg":
+/*!******************************************!*\
+  !*** ./assets/sounds/effects/ogg/ok.ogg ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/de74680fa0d4fb3d8e14.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/select.ogg":
+/*!**********************************************!*\
+  !*** ./assets/sounds/effects/ogg/select.ogg ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/c46e5b7d17520ff6935f.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/teleport.ogg":
+/*!************************************************!*\
+  !*** ./assets/sounds/effects/ogg/teleport.ogg ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/4f6c0dc57802e6e026c6.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/toggle.ogg":
+/*!**********************************************!*\
+  !*** ./assets/sounds/effects/ogg/toggle.ogg ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/aaf531751543bc351744.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/effects/ogg/toggle_disabled.ogg":
+/*!*******************************************************!*\
+  !*** ./assets/sounds/effects/ogg/toggle_disabled.ogg ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/8d6e93c66366655257dd.ogg";
 
 /***/ })
 

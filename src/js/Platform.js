@@ -32,7 +32,8 @@ import { platformImgSrc300,
   flamethrowerRight,
   flamethrowerUp,
   flamethrowerDown,
-
+  brick_1,
+  brick_2,
       } from './Assets';
 
      
@@ -191,7 +192,7 @@ class Brick_1 extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: createImage(fan, 36, 36),
+      idle: createImage(brick_1, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
     this.frequency = 1;
@@ -204,7 +205,7 @@ class Brick_2 extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: createImage(fan, 36, 36),
+      idle: createImage(brick_2, 36, 36),
     }
     this.currentSprite = this.sprites.idle;
     this.frequency = 1;
