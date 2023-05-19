@@ -34,6 +34,7 @@ import { platformImgSrc300,
   flamethrowerDown,
   brick_1,
   brick_2,
+  finish,
       } from './Assets';
 
      
@@ -46,11 +47,12 @@ import { leftNeighboorBlockFromHero } from '../index';
 
 
 class Platform {
-  constructor (posX, posY, image) {
+  constructor (posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
     this.position = {
-      x: posX,
-      y: posY
+      x: posX + marginLeft,
+      y: posY + marginTop,
     }
+
     this.image = image;
     this.width = image.width;
     this.height = image.height;
@@ -174,8 +176,12 @@ class Platform {
 }
 
 class Fan extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
@@ -187,9 +193,13 @@ class Fan extends Platform {
 }
 
 class Brick_1 extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'fan';
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
+    this.type = 'brick_1';
     this.statusActive = true;
     this.sprites = {
       idle: createImage(brick_1, 36, 36),
@@ -200,9 +210,13 @@ class Brick_1 extends Platform {
 }
 
 class Brick_2 extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.type = 'fan';
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
+    this.type = 'brick_2';
     this.statusActive = true;
     this.sprites = {
       idle: createImage(brick_2, 36, 36),
@@ -212,9 +226,30 @@ class Brick_2 extends Platform {
   }
 }
 
+class Finish extends Platform {
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
+    this.type = 'finish';
+    this.statusActive = true;
+    this.sprites = {
+      idle: createImage(finish, 36, 36),
+    }
+    this.currentSprite = this.sprites.idle;
+    this.frequency = 27;
+  }
+}
+
 class JumpToggleActive extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.type = 'jumpToggleActive';
     this.statusActive = true;
     this.sprites = {
@@ -237,8 +272,12 @@ class JumpToggleActive extends Platform {
 }
 
 class JumpToggleDisabled extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.type = 'jumpToggleDisabled';
     this.statusActive = false;
     this.sprites = {
@@ -261,9 +300,13 @@ class JumpToggleDisabled extends Platform {
 }
 
 class OneStep extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
-    this.temporaryPosX = posX;
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
+    this.temporaryPosX = posX + marginLeft;
     this.hits = 0;
     this.sprites = {
       idle: createImage(platformOneStep, 36, 36),
@@ -291,8 +334,12 @@ class OneStep extends Platform {
 }
 
 class SpaceToggledPlatform extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.type = 'toggledBySpacePlatform';
     this.statusActive = false;
     this.sprites = {
@@ -341,9 +388,13 @@ class SpaceToggledPlatform extends Platform {
 }
 
 class PlatformOne extends SpaceToggledPlatform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
     this.type = 'platformOne';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.setCount = 1;
     this.sprites = {
       idle: createImage(platformOne, 36, 36),
@@ -353,9 +404,13 @@ class PlatformOne extends SpaceToggledPlatform {
 }
 
 class PlatformTwo extends SpaceToggledPlatform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
     this.type = 'platformTwo';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.setCount = 2;
     this.sprites = {
       idle: createImage(platformTwo, 36, 36),
@@ -365,9 +420,13 @@ class PlatformTwo extends SpaceToggledPlatform {
 }
 
 class PlatformThree extends SpaceToggledPlatform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
     this.type = 'platformThree';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.setCount = 3;
     this.sprites = {
       idle: createImage(platformThree, 36, 36),
@@ -377,9 +436,13 @@ class PlatformThree extends SpaceToggledPlatform {
 }
 
 class DeadSignal extends SpaceToggledPlatform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
     this.type = 'deadSignalZone';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.statusActive = false;
     this.frequency = 1;
     this.sprites = {
@@ -443,4 +506,5 @@ export { Platform,
         DeadSignal,
         Brick_1,
         Brick_2,
+        Finish,
       }

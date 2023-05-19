@@ -1,9 +1,6 @@
 /******/(() => {
   // webpackBootstrap
   /******/
-  "use strict";
-
-  /******/
   var __webpack_modules__ = {
     /***/"./src/index.js":
     /*!**********************!*\
@@ -11,6 +8,8 @@
       \**********************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -28,11 +27,8 @@
       var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./js/Collision */"./src/js/Collision.js");
       /* harmony import */
       var _js_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./js/Canvas */"./src/js/Canvas.js");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './js/CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
+      /* harmony import */
+      var _js_Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./js/Utils */"./src/js/Utils.js");
       /* harmony import */
       var _js_Player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./js/Player */"./src/js/Player.js");
       /* harmony import */
@@ -114,11 +110,7 @@
       let timerShoot_1 = null;
       let timerShoot_2 = null;
       let leftNeighboorBlockFromHero = null;
-      let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './js/CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }())(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+      let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
       let player;
       _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.forEach((row, index_Y) => {
         row.forEach((cell, index_X) => {
@@ -140,16 +132,18 @@
           }, platform.delay * 8);
         }
       });
+      let track = (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+      track.pause();
+      track = (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+      //track.play();
+      track.onended = function () {
+        (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+      };
       function init() {
-        (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.track_3);
         player.velocity.y = 1;
         player.alive = true;
         _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
-        additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, Object(function webpackMissingModule() {
-          var e = new Error("Cannot find module './js/CreateImage'");
-          e.code = 'MODULE_NOT_FOUND';
-          throw e;
-        }())(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+        additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
         // player = new Player({ platforms });
 
@@ -291,6 +285,8 @@
       \**************************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -299,11 +295,8 @@
       });
       /* harmony import */
       var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
+      /* harmony import */
+      var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./Utils */"./src/js/Utils.js");
       /* harmony import */
       var _Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
       // import { canvas, c } from './Canvas';
@@ -332,11 +325,7 @@
             y: posY
           };
           this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_2__.backgroundImg, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height)
+            idle: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.backgroundImg, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height)
           };
           this.currentSprite = this.sprites.idle;
           this.type = 'backgrounds';
@@ -358,6 +347,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -517,6 +508,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -536,6 +529,8 @@
       \*****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -554,11 +549,8 @@
       var _Traps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Traps */"./src/js/Traps.js");
       /* harmony import */
       var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
+      /* harmony import */
+      var _Utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./Utils */"./src/js/Utils.js");
       /* harmony import */
       var _Player__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ./Player */"./src/js/Player.js");
       class CollisionBlock {
@@ -594,141 +586,77 @@
           switch (cell) {
             case '1p':
               // Space toggled platform (One)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOne, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOne, 36, 36), platforms));
               break;
             case '2p':
               // Space toggled platform (Two)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformTwo, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformTwo, 36, 36), platforms));
               break;
             case '3p':
               // Space toggled platform (Three)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformThree, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformThree, 36, 36), platforms));
               break;
             case '1s':
               // One-Step platform
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36), platforms));
               break;
             case 'sl':
               // Solid platform
               platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
               // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-              index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36), platforms));
+              index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36), platforms));
               break;
             case 'ja':
               // Jump-toggled platform (active)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
               break;
             case 'jd':
               // Jump-toggled platform (disabled)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
               break;
             case 'sk':
               // Saw trap platform
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.spike, 36, 36), platforms));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.spike, 36, 36), platforms));
               break;
             case 'sw':
               // Spikes trap platform
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.Saw(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36), platforms));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.Saw(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36), platforms));
               break;
             case 'dz':
               // Dead signal zone
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.deadSignalZone, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.deadSignalZone, 36, 36), platforms));
               break;
             case 'fl':
               // Flamethrower (left)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
             case 'fr':
               // Flamethrower (right)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
             case 'fu':
               // Flamethrower (up)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerUp(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerUp(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
             case 'fd':
               // Flamethrower (down)
-              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerDown(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+              platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerDown(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
               break;
             case 'fn':
               // Fan (decoration)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Fan(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Fan(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms));
               break;
             case 'b1':
               // Fan (decoration)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_1, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_1, 36, 36), platforms));
               break;
             case 'b2':
               // Fan (decoration)
-              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms));
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms));
+              break;
+            case 'fp':
+              // Finish point
+              platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Finish(index_X * 36, index_Y * 36, (0, _Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms));
               break;
           }
         });
@@ -743,6 +671,8 @@
       \************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -864,458 +794,8 @@
       !*** ./src/js/Platform.js ***!
       \****************************/
     /***/
-    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export */
-      __webpack_require__.d(__webpack_exports__, {
-        /* harmony export */"Brick_1": () => /* binding */Brick_1,
-        /* harmony export */"Brick_2": () => /* binding */Brick_2,
-        /* harmony export */"DeadSignal": () => /* binding */DeadSignal,
-        /* harmony export */"Fan": () => /* binding */Fan,
-        /* harmony export */"JumpToggleActive": () => /* binding */JumpToggleActive,
-        /* harmony export */"JumpToggleDisabled": () => /* binding */JumpToggleDisabled,
-        /* harmony export */"OneStep": () => /* binding */OneStep,
-        /* harmony export */"Platform": () => /* binding */Platform,
-        /* harmony export */"PlatformOne": () => /* binding */PlatformOne,
-        /* harmony export */"PlatformThree": () => /* binding */PlatformThree,
-        /* harmony export */"PlatformTwo": () => /* binding */PlatformTwo
-        /* harmony export */
-      });
-      /* harmony import */
-      var _Collision__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Collision */"./src/js/Collision.js");
-      /* harmony import */
-      var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
-      /* harmony import */
-      var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
-      /* harmony import */
-      var _data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./data/Audio */"./src/js/data/Audio.js");
-      /* harmony import */
-      var _Keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
-      /* harmony import */
-      var _index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../index */"./src/index.js");
-      class Platform {
-        constructor(posX, posY, image) {
-          this.position = {
-            x: posX,
-            y: posY
-          };
-          this.image = image;
-          this.width = image.width;
-          this.height = image.height;
-          this.frames = 0;
-          this.frequency = 28;
-          this.sprites = {
-            idle: this.image
-          };
-          this.currentSprite = this.sprites.idle;
-          this.type = 'solid';
-          this.statusActive = true;
-        }
-        get top() {
-          return this.position.y;
-        }
-        get bottom() {
-          return this.position.y + this.height;
-        }
-        get left() {
-          return this.position.x;
-        }
-        get right() {
-          return this.position.x + this.width;
-        }
-        set top(value) {
-          this.position.y = value;
-        }
-        set bottom(value) {
-          this.position.y = value;
-        }
-        set left(value) {
-          this.position.x = value;
-        }
-        set right(value) {
-          this.position.x = value;
-        }
-        getType() {
-          return this.type;
-        }
-        draw() {
-          _Canvas__WEBPACK_IMPORTED_MODULE_1__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height); // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-        }
-
-        update() {
-          this.frames++;
-          if (this.frames > this.frequency) this.frames = 0;
-          this.draw();
-        }
-        collisionAbove() {
-          // Player - platform collision (player is above the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_6__.player.bottom <= this.position.y && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom + _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y >= this.top &&
-          // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-          // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-          _index__WEBPACK_IMPORTED_MODULE_6__.player.right - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 4 >= this.left &&
-          // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-          _index__WEBPACK_IMPORTED_MODULE_6__.player.left <= this.right - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 4) {
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = -3.5; // если касается земли // -3.5
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.jumpOnSpaceToggledPlatform);
-            if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed) {
-              _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_6__.player.jumpHeight;
-              _index__WEBPACK_IMPORTED_MODULE_6__.player.gravity = 0.25;
-            }
-          }
-        }
-        collisionUnder() {
-          // Player - platform collision (player is under the platform)
-          if (_index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom &&
-          // player.position.y - player.velocity.y * 0.5
-          _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom + _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y >= this.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.left >= this.left - _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 1.25 &&
-          // можно сделать 1.75
-          _index__WEBPACK_IMPORTED_MODULE_6__.player.right <= this.right + _index__WEBPACK_IMPORTED_MODULE_6__.player.width / 1.25) {
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
-          }
-        }
-        collisionLeftSide() {
-          // Player - platform collision (player is left from the platform and moves right)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.left) {
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 0;
-            console.log('hit!');
-          } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.right) {
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 2;
-            console.log('free!');
-          }
-        }
-        collisionRightSide() {
-          // Player - platform collision (player is right from the platform and moves left)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed && (_index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != null) && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.left <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.right) {
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = 0;
-            console.log('hit!');
-          } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed && _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined && (_index__WEBPACK_IMPORTED_MODULE_6__.player.bottom <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.top || _index__WEBPACK_IMPORTED_MODULE_6__.player.top >= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.bottom) && _index__WEBPACK_IMPORTED_MODULE_6__.player.left <= _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.left) {
-            // или "-" player.width ???
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.velocity.x = -2;
-            console.log('free!');
-          }
-        }
-        collision() {
-          // разбито на отдельные методы, для частичного наследования
-          this.collisionAbove();
-          this.collisionUnder();
-          this.collisionLeftSide();
-          this.collisionRightSide();
-        }
-      }
-      class Fan extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'fan';
-          this.statusActive = true;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 23;
-        }
-      }
-      class Brick_1 extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'fan';
-          this.statusActive = true;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_1, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 1;
-        }
-      }
-      class Brick_2 extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'fan';
-          this.statusActive = true;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_2, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 1;
-        }
-      }
-      class JumpToggleActive extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'jumpToggleActive';
-          this.statusActive = true;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 63;
-        }
-        toggle() {
-          console.log(this.type, this.statusActive);
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.jumpToggleActive === true) {
-            this.currentSprite = this.sprites.idle;
-            this.statusActive = true;
-          } else {
-            this.currentSprite = this.sprites.disabled;
-            this.statusActive = false;
-          }
-        }
-      }
-      class JumpToggleDisabled extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'jumpToggleDisabled';
-          this.statusActive = false;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
-          };
-          this.currentSprite = this.sprites.disabled;
-          this.frequency = 63;
-        }
-        toggle() {
-          console.log(this.type, this.statusActive);
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.jumpToggleActive === false) {
-            this.currentSprite = this.sprites.idle;
-            this.statusActive = true;
-          } else {
-            this.currentSprite = this.sprites.disabled;
-            this.statusActive = false;
-          }
-        }
-      }
-      class OneStep extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.temporaryPosX = posX;
-          this.hits = 0;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36),
-            explosion: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStepExplosion, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 28;
-          this.type = 'oneStep';
-          this.statusActive = true;
-        }
-        destroy() {
-          _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.explosionBlock);
-          this.currentSprite = this.sprites.explosion;
-          setTimeout(() => {
-            this.position.x = -9999;
-            this.currentSprite = this.sprites.idle;
-            this.statusActive = false;
-          }, 550);
-          this.hits = 0;
-        }
-        restore() {
-          this.position.x = this.temporaryPosX;
-          this.statusActive = true;
-        }
-      }
-      class SpaceToggledPlatform extends Platform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'toggledBySpacePlatform';
-          this.statusActive = false;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
-          };
-          this.currentSprite = this.sprites.idle;
-          this.frequency = 63;
-          this.setCount = null;
-        }
-        checkSpaceToggleCounter() {
-          _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter >= 4 ? _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter = 1 : _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter;
-        }
-        collision() {
-          if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter === this.setCount) {
-            this.statusActive = true;
-            super.collisionAbove();
-            super.collisionUnder();
-            super.collisionLeftSide();
-            if ((_index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != undefined || _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero != null) && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.spaceToggleCounter === _index__WEBPACK_IMPORTED_MODULE_6__.leftNeighboorBlockFromHero.setCount) {
-              super.collisionRightSide();
-            }
-            this.currentSprite = this.sprites.idle;
-            this.checkSpaceToggleCounter();
-          } else {
-            this.currentSprite = this.sprites.disabled;
-            this.statusActive = false;
-            this.checkSpaceToggleCounter();
-            // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
-            if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-              return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
-            })) {
-              _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
-              console.log('inside');
-            } else {
-              console.log('outside');
-              _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
-            }
-          }
-        }
-      }
-      class PlatformOne extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'platformOne';
-          this.setCount = 1;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
-          };
-        }
-      }
-      class PlatformTwo extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'platformTwo';
-          this.setCount = 2;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwoDisabled, 36, 36)
-          };
-        }
-      }
-      class PlatformThree extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'platformThree';
-          this.setCount = 3;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThreeDisabled, 36, 36)
-          };
-        }
-      }
-      class DeadSignal extends SpaceToggledPlatform {
-        constructor(posX, posY, image) {
-          super(posX, posY, image);
-          this.type = 'deadSignalZone';
-          this.statusActive = false;
-          this.frequency = 1;
-          this.sprites = {
-            idle: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZone, 36, 36),
-            disabled: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36)
-          };
-        }
-        hover() {
-          if (_index__WEBPACK_IMPORTED_MODULE_6__.player.left <= this.right && _index__WEBPACK_IMPORTED_MODULE_6__.player.right >= this.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.top <= this.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.bottom >= this.top && _Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-            return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
-          })) {
-            // Inside of the block
-            this.checkSpaceToggleCounter();
-            this.currentSprite = this.sprites.idle;
-          } else if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-            // Outside of the block
-            return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
-          })) {
-            this.currentSprite = this.sprites.disabled;
-          }
-        }
-        collision() {
-          this.hover(); // Hover the block when the hero is inside of it
-          // Hero is inside or outside of block (for toggled by space platformes and deadSignal zone platforms)   
-          if (_Collision__WEBPACK_IMPORTED_MODULE_0__.platforms.some(block => {
-            return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
-          })) {
-            _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
-            console.log(_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed);
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
-            console.log('inside');
-          } else {
-            console.log('outside');
-            _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
-            _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
-          }
-        }
-      }
+    () => {
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Work\\Game\\src\\js\\Platform.js: Export 'Finish' is not defined. (446:8)\n\n  444 |         Brick_1,\n  445 |         Brick_2,\n> 446 |         Finish,\n      |         ^\n  447 |       }\n    at instantiate (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.parseProgram (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12440:14)\n    at Parser.parseTopLevel (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Work\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Work\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Work\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },
@@ -1326,6 +806,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1334,11 +816,8 @@
       });
       /* harmony import */
       var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
+      /* harmony import */
+      var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./Utils */"./src/js/Utils.js");
       /* harmony import */
       var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../index */"./src/index.js");
       /* harmony import */
@@ -1371,58 +850,22 @@
           this.alive = true;
           this.sprites = {
             idle: {
-              right: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
-              left: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
             },
             run: {
-              right: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
-              left: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
             },
             jump: {
-              right: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
-              left: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
             },
             fall: {
-              right: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
-              left: Object(function webpackMissingModule() {
-                var e = new Error("Cannot find module './CreateImage'");
-                e.code = 'MODULE_NOT_FOUND';
-                throw e;
-              }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
             },
-            death: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
+            death: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
           };
           this.currentSprite = this.sprites.idle.right;
         }
@@ -1657,6 +1100,8 @@
       \*************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1673,11 +1118,8 @@
       var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Canvas */"./src/js/Canvas.js");
       /* harmony import */
       var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ../index */"./src/index.js");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module './CreateImage'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
+      /* harmony import */
+      var _Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./Utils */"./src/js/Utils.js");
       /* harmony import */
       var _Platform__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Platform */"./src/js/Platform.js");
       /* harmony import */
@@ -1918,26 +1360,10 @@
           this.frequency = 23;
           this.platforms = platforms;
           this.sprites = {
-            left: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballLeft, 36, 36),
-            right: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballRight, 36, 36),
-            up: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballUp, 36, 36),
-            down: Object(function webpackMissingModule() {
-              var e = new Error("Cannot find module './CreateImage'");
-              e.code = 'MODULE_NOT_FOUND';
-              throw e;
-            }())(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballDown, 36, 36)
+            left: (0, _Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballLeft, 36, 36),
+            right: (0, _Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballRight, 36, 36),
+            up: (0, _Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballUp, 36, 36),
+            down: (0, _Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballDown, 36, 36)
           };
           switch (this.type) {
             case 'flamethrowerLeft':
@@ -2212,17 +1638,68 @@
       /***/
     },
 
+    /***/"./src/js/Utils.js":
+    /*!*************************!*\
+      !*** ./src/js/Utils.js ***!
+      \*************************/
+    /***/
+    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"createImage": () => /* binding */createImage,
+        /* harmony export */"randomNumber": () => /* binding */randomNumber
+        /* harmony export */
+      });
+      function createImage(src, width, height) {
+        const image = new Image();
+        image.src = src;
+        image.width = width;
+        image.height = height;
+        return image;
+      }
+      function randomNumber() {
+        let min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        let max = arguments.length > 1 ? arguments[1] : undefined;
+        return Math.floor(min + Math.random() * (max + 1 - min));
+      }
+
+      // export class Sprite {
+      //   constructor ({ position, imageSrc }) {
+      //     this.position = position;
+      //     this.image = new Image();
+      //     this.image.onload = () => {
+      //       this.loaded = true;
+      //     }
+      //     this.image.src = imageSrc;
+      //     this.loaded = false;
+      //   }
+      //   draw() {
+      //     if (!this.loaded) return;
+      //     c.drawImage(this.image, this.position.x, this.position.y)
+      //   }
+      // }
+
+      /***/
+    },
+
     /***/"./src/js/data/Audio.js":
     /*!******************************!*\
       !*** ./src/js/data/Audio.js ***!
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */"audio": () => /* binding */audio,
-        /* harmony export */"gameSoundEffects": () => /* binding */gameSoundEffects
+        /* harmony export */"gameSoundEffects": () => /* binding */gameSoundEffects,
+        /* harmony export */"getRandomTrack": () => /* binding */getRandomTrack,
+        /* harmony export */"playNextTrack": () => /* binding */playNextTrack
         /* harmony export */
       });
       /* harmony import */
@@ -2309,6 +1786,8 @@
       var _assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__( /*! ../../../assets/sounds/music/mp3/track_4.mp3 */"./assets/sounds/music/mp3/track_4.mp3");
       /* harmony import */
       var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__( /*! ../../../assets/sounds/music/ogg/track_4.ogg */"./assets/sounds/music/ogg/track_4.ogg");
+      /* harmony import */
+      var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__( /*! ../Utils */"./src/js/Utils.js");
       const audio = {
         isCanPlay: new Audio(),
         blockHit: {
@@ -2444,6 +1923,28 @@
         item[source].volume = item.volume;
         item[source].play();
       }
+      function getRandomTrack(playlist) {
+        let tracksList = [];
+        for (let sound in playlist) {
+          sound.includes('track') && tracksList.push(playlist[sound]);
+        }
+        return tracksList[(0, _Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
+      }
+      const playNextTrack = (currentTrack, playlist) => {
+        let tracksList = [];
+        let currentTrackNumber = null;
+        for (let sound in playlist) {
+          sound.includes('track') && tracksList.push(playlist[sound]);
+        }
+        tracksList.forEach((track, index) => {
+          track[source] === currentTrack && (currentTrackNumber = index);
+        });
+        currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
+        tracksList[currentTrackNumber][source].play();
+        tracksList[currentTrackNumber][source].onended = function () {
+          playNextTrack(tracksList[currentTrackNumber][source], audio);
+        };
+      };
 
       // function gameSoundEffects(item) {
       //   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
@@ -2488,6 +1989,8 @@
       \***********************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2520,7 +2023,7 @@
       // st - Start point
       // fp - Finish point
 
-      const collisionsLevel_1 = [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b2", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]];
+      const collisionsLevel_1 = [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b2", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]];
       const data = {
         "player": {
           "x": 200,
@@ -2538,6 +2041,8 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       // extracted by mini-css-extract-plugin
 
@@ -2550,6 +2055,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/019905a133fdd18a829c.jpg";
 
       /***/
@@ -2561,6 +2068,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/caa8591cb3f3a1855c29.png";
 
       /***/
@@ -2572,6 +2081,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/61cdd2e0f3c3604e7b1f.png";
 
       /***/
@@ -2583,6 +2094,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/47bb81cb0aaa2c499d5c.png";
 
       /***/
@@ -2594,6 +2107,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8a499ad60f919b1f6cad.png";
 
       /***/
@@ -2605,6 +2120,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/02bc1678beb112beb4a1.png";
 
       /***/
@@ -2616,6 +2133,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4e23b39a2281ee54125f.png";
 
       /***/
@@ -2627,6 +2146,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c53e7b3ac960db1762a9.png";
 
       /***/
@@ -2638,6 +2159,8 @@
       \**************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/542a853a490865e4177b.png";
 
       /***/
@@ -2649,6 +2172,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/e361987edb2dc29e1508.png";
 
       /***/
@@ -2660,6 +2185,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/befd1a46da1a01267d9e.png";
 
       /***/
@@ -2671,6 +2198,8 @@
       \*********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/73ffdfeda1c0c3fa260e.png";
 
       /***/
@@ -2682,6 +2211,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/893ecde318d7755323b7.png";
 
       /***/
@@ -2693,6 +2224,8 @@
       \***************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c2b486028ea06a42538d.png";
 
       /***/
@@ -2704,6 +2237,8 @@
       \*************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a27c1909728c39bb81d1.png";
 
       /***/
@@ -2715,6 +2250,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/15a754e2c1925bdc527f.png";
 
       /***/
@@ -2726,6 +2263,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/dd246bde66e7e6e5e3fc.png";
 
       /***/
@@ -2737,6 +2276,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8227e458d9e6b45666dc.png";
 
       /***/
@@ -2748,6 +2289,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/171091192763139674e9.png";
 
       /***/
@@ -2759,6 +2302,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4550e1c7d8d19a7959ef.png";
 
       /***/
@@ -2770,6 +2315,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
 
       /***/
@@ -2781,6 +2328,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/cf7f7083ae6b5338384a.png";
 
       /***/
@@ -2792,6 +2341,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/ee2cf136916afa6626fe.png";
 
       /***/
@@ -2803,6 +2354,8 @@
       \*******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7eac2d1901ea34422f0e.png";
 
       /***/
@@ -2814,6 +2367,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/03857753acbdef4e6e04.png";
 
       /***/
@@ -2825,6 +2380,8 @@
       \*****************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/62e7d0778000c13e26fd.png";
 
       /***/
@@ -2836,6 +2393,8 @@
       \**********************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
 
       /***/
@@ -2847,6 +2406,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
 
       /***/
@@ -2858,6 +2419,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
 
       /***/
@@ -2869,6 +2432,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
 
       /***/
@@ -2880,6 +2445,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
 
       /***/
@@ -2891,6 +2458,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a81ec16a567429e11f71.png";
 
       /***/
@@ -2902,6 +2471,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
 
       /***/
@@ -2913,6 +2484,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
 
       /***/
@@ -2924,6 +2497,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
 
       /***/
@@ -2935,6 +2510,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
 
       /***/
@@ -2946,6 +2523,8 @@
       \**********************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
 
       /***/
@@ -2957,6 +2536,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/868328e1d62559dea3d3.mp3";
 
       /***/
@@ -2968,6 +2549,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/315ce5bb8774f67f6a53.mp3";
 
       /***/
@@ -2979,6 +2562,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/b070217cc3ec9826fd89.mp3";
 
       /***/
@@ -2990,6 +2575,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/07b873397bd181f0fe5b.mp3";
 
       /***/
@@ -3001,6 +2588,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/173e28202170f19073b8.mp3";
 
       /***/
@@ -3012,6 +2601,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1dec2f6bcf25b798920b.mp3";
 
       /***/
@@ -3023,6 +2614,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/5c0e7724e5723b97e9be.mp3";
 
       /***/
@@ -3034,6 +2627,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2517213c91f01c976f92.mp3";
 
       /***/
@@ -3045,6 +2640,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a2a93b9461f413734ad7.mp3";
 
       /***/
@@ -3056,6 +2653,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a2774fd0d75bdfeed2da.mp3";
 
       /***/
@@ -3067,6 +2666,8 @@
       \**********************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/037494008090ce9e60f2.mp3";
 
       /***/
@@ -3078,6 +2679,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/87197dcb8811e09b73e1.mp3";
 
       /***/
@@ -3089,6 +2692,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/75e0f3d8b173961534ec.mp3";
 
       /***/
@@ -3100,6 +2705,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/b6ba29659cf55d571cc0.mp3";
 
       /***/
@@ -3111,6 +2718,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/97462a60fa4b16083f2e.mp3";
 
       /***/
@@ -3122,6 +2731,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/76d8a9edad64667bb800.mp3";
 
       /***/
@@ -3133,6 +2744,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a2a5e45d00f4a784b94b.mp3";
 
       /***/
@@ -3144,6 +2757,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/409a03408bb32d1202d2.ogg";
 
       /***/
@@ -3155,6 +2770,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9771e96a1d6912ab23c6.ogg";
 
       /***/
@@ -3166,6 +2783,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/55972719deb5d18b267e.ogg";
 
       /***/
@@ -3177,6 +2796,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2dc046f6177bea7f2950.ogg";
 
       /***/
@@ -3188,6 +2809,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9ea75121a93a42b1411e.ogg";
 
       /***/
@@ -3199,6 +2822,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/b0867563ae4e9e18a2e8.ogg";
 
       /***/
@@ -3210,6 +2835,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/e6ae7ad1b65788f9dae5.ogg";
 
       /***/
@@ -3221,6 +2848,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/957cddacb1deaac79e00.ogg";
 
       /***/
@@ -3232,6 +2861,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/70068ae31959fab95e81.ogg";
 
       /***/
@@ -3243,6 +2874,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9efb836c3a9ba68ca120.ogg";
 
       /***/
@@ -3254,6 +2887,8 @@
       \**********************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d1e681bf5a15caf9026f.ogg";
 
       /***/
@@ -3265,6 +2900,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/523646943918c59d2b3d.ogg";
 
       /***/
@@ -3276,6 +2913,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/de74680fa0d4fb3d8e14.ogg";
 
       /***/
@@ -3287,6 +2926,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c46e5b7d17520ff6935f.ogg";
 
       /***/
@@ -3298,6 +2939,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4f6c0dc57802e6e026c6.ogg";
 
       /***/
@@ -3309,6 +2952,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/aaf531751543bc351744.ogg";
 
       /***/
@@ -3320,6 +2965,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8d6e93c66366655257dd.ogg";
 
       /***/
@@ -3331,6 +2978,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/60db4a6c1bb2742d1f9c.mp3";
 
       /***/
@@ -3342,6 +2991,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4e1718e91aa4e1cca135.mp3";
 
       /***/
@@ -3353,6 +3004,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1afb1b0a35b44cdf1ff1.mp3";
 
       /***/
@@ -3364,6 +3017,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4dcabd1247bcf8d7ebcf.mp3";
 
       /***/
@@ -3375,6 +3030,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2c26659bbe1eda6e9e5d.ogg";
 
       /***/
@@ -3386,6 +3043,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d97f6fbd97ff9dc44f3f.ogg";
 
       /***/
@@ -3397,6 +3056,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/91a16270795862ed0a69.ogg";
 
       /***/
@@ -3408,6 +3069,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c516101ffeada79f1199.ogg";
 
       /***/

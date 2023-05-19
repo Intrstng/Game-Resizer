@@ -41,11 +41,15 @@ import { platforms, intersection } from '../index';
 import { audio, gameSoundEffects } from '../js/data/Audio';
 
 export class Player {
-  constructor({ platforms = [] }, posX, posY) {
+  constructor({ platforms = [] }, posX, posY, marginLeft = 0, marginTop = 0) {
     this.platforms = platforms;
+    // this.margin = {
+    //   left: ,
+    //   right: ,
+    // }
     this.position = {
-      x: posX,
-      y: posY,
+      x: posX + marginLeft,
+      y: posY + marginTop,
     }
     this.velocity = {
       x: 0,
@@ -129,6 +133,8 @@ export class Player {
       switch(platform.type) {
         case 'fan':
         case 'solid':
+        case 'brick_1':
+        case 'brick_2':
           if (this.left <= platform.right &&
             this.right >= platform.left &&
             this.top <= platform.bottom &&
@@ -233,6 +239,8 @@ export class Player {
       switch(platform.type) {
         case 'fan':
         case 'solid':
+        case 'brick_1':
+        case 'brick_2':
           if (this.left <= platform.right &&
             this.right >= platform.left &&
             this.top <= platform.bottom &&

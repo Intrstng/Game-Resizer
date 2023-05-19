@@ -54,6 +54,7 @@ import platformThree from '/assets/img/Platforms/Platform_three.png';
 import platformOneDisabled from '/assets/img/Platforms/Platform_one_disabled.png';
 import platformTwoDisabled from '/assets/img/Platforms/Platform_two_disabled.png';
 import platformThreeDisabled from '/assets/img/Platforms/Platform_three_disabled.png';
+import finish from '/assets/img/Platforms/Finish_T_L.png';
 import brick_1 from '/assets/img/Platforms/brick_1.png';
 import brick_2 from '/assets/img/Platforms/brick_2.png';
 import saw from '/assets/img/Traps/Saw.png';
@@ -107,4 +108,5 @@ export { platformImgSrc300,
         fireballRight,
         brick_1,
         brick_2,
+        finish,
       }

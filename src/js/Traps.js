@@ -53,9 +53,13 @@ import { platformImgSrc300,
 import { audio, gameSoundEffects } from '../js/data/Audio';
 
 class PlatformSpikes extends Platform {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
     this.type = 'spikes';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.statusActive = true;
   }
   collision() {
@@ -78,24 +82,28 @@ class PlatformSpikes extends Platform {
 }
 
 class Saw extends PlatformSpikes {
-  constructor(posX, posY, image) {
-    super(posX, posY, image);
+  constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, marginLeft, marginTop);
     this.type = 'saw';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
     this.frequency = 23;
   }
 }
 
 class Flamethrower {
-  constructor(posX, posY, image, platforms, bulletController) {
+  constructor(posX, posY, image, platforms, bulletController, marginLeft = 0, marginTop = 0) {
     this.type = 'flamethrower';
     this.statusActive = true;
     this.position = {
-      x: posX,
-      y: posY,
+      x: posX + marginLeft,
+      y: posY + marginTop,
     }
     this.bulletFlight = { // speed and direction
-      x: 0,
-      y: 0,
+      x: 0 + marginLeft,
+      y: 0 + marginTop,
     }
     this.width = 36;
     this.height = 36;
@@ -190,29 +198,33 @@ class Flamethrower {
 
 
 class FlamethrowerLeft extends Flamethrower {
-  constructor(posX, posY, image, platforms, bulletController) {
-    super(posX, posY, image, platforms, bulletController);
+  constructor(posX, posY, image, platforms, bulletController, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, platforms, bulletController, marginLeft, marginTop);
     this.type = 'flamethrowerLeft';
+    this.position = {
+      x: posX + marginLeft,
+      y: posY + marginTop,
+    }
   }
 }
 
 class FlamethrowerRight extends Flamethrower {
-  constructor(posX, posY, image, platforms, bulletController) {
-    super(posX, posY, image, platforms, bulletController);
+  constructor(posX, posY, image, platforms, bulletController, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, platforms, bulletController, marginLeft, marginTop);
     this.type = 'flamethrowerRight';
   }
 }
 
 class FlamethrowerUp extends Flamethrower {
-  constructor(posX, posY, image, platforms, bulletController) {
-    super(posX, posY, image, platforms, bulletController);
+  constructor(posX, posY, image, platforms, bulletController, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, platforms, bulletController, marginLeft, marginTop);
     this.type = 'flamethrowerUp';
   }
 }
 
 class FlamethrowerDown extends Flamethrower {
-  constructor(posX, posY, image, platforms, bulletController) {
-    super(posX, posY, image, platforms, bulletController);
+  constructor(posX, posY, image, platforms, bulletController, marginLeft = 0, marginTop = 0) {
+    super(posX, posY, image, platforms, bulletController, marginLeft, marginTop);
     this.type = 'flamethrowerDown';
   }
 }
@@ -286,7 +298,7 @@ class BulletController {
 
 
 class Bullet {
-  constructor(posX, posY, flight_X, flight_Y, caliber, directionFlametrowerType, platforms) {
+  constructor(posX, posY, flight_X, flight_Y, caliber, directionFlametrowerType, platforms, marginLeft = 0, marginTop = 0) {
     this.position = {
       x: posX,
       y: posY,

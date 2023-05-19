@@ -149,16 +149,16 @@ export let additionalElements = [
 
 
 export let player;
-  collisionsLevel_1.forEach((row, index_Y) => {
+  collisionsLevel_1.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
+     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
     })
   })
 
 
-new Player({
-  platforms
-}); //platforms: platforms
+// new Player({
+//   platforms
+// }); //platforms: platforms
 
 
 
@@ -183,15 +183,15 @@ new Player({
 
 
 
-let track = getRandomTrack(audio);
+                                        let track = getRandomTrack(audio);
+                                        track.pause();
+                                        track = getRandomTrack(audio)
+                                        //track.play();
+                                        track.onended = function() {
+                                          playNextTrack(track, audio);
+                                        }
 
 export function init() {
-  track.pause();
-  track = getRandomTrack(audio)
-  track.play();
-  track.onended = function() {
-    playNextTrack(track, audio);
-  }
 
   player.velocity.y = 1;
   player.alive = true;
@@ -206,9 +206,9 @@ export function init() {
     (platform.type === 'oneStep') && platform.restore();
   });
 
-  collisionsLevel_1.forEach((row, index_Y) => {
+  collisionsLevel_1.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36));
+     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
     })
   })
    
@@ -219,8 +219,8 @@ function animate() {
 
   requestAnim(animate);
   //c.clearRect(0, 0, canvas.width, canvas.height);
-  c.fillStyle = ('white');
-  c.fillRect(0, 0, canvas.width, canvas.height);
+                            c.fillStyle = ('white');
+                            c.fillRect(0, 0, canvas.width, canvas.height);
   console.log('animation counter');
 
   additionalElements.forEach(element => element.draw());
