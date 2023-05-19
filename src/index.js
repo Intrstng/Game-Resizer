@@ -10,7 +10,7 @@ import { createImage, Sprite } from './js/Utils';
 import { Player } from './js/Player';
 import { collisionsLevel_1 } from './js/data/Collisions';
 import { bulletController } from './js/Collision';
-import { audio, gameSoundEffects, getRandomTrack, playNextTrack } from './js/data/Audio';
+import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from './js/data/Audio';
 
 import { Platform,
   OneStep,

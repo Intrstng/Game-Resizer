@@ -44,113 +44,116 @@ import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
 
 import { createImage, randomNumber } from '../Utils';
 
+let volumeEffects = 1;
+let volumeMusic = 1;
+
 const audio = {
   isCanPlay: new Audio(),
   blockHit: {
     src_MP3: new Audio(blockHit_MP3),
     src_OGG: new Audio(blockHit_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   bottomHit: {
     src_MP3: new Audio(bottomHit_MP3),
     src_OGG: new Audio(bottomHit_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   choose: {
     src_MP3: new Audio(choose_MP3),
     src_OGG: new Audio(choose_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   explosionBlock: {
     src_MP3: new Audio(explosionBlock_MP3),
     src_OGG: new Audio(explosionBlock_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   fallingInDepth: {
     src_MP3: new Audio(fallingInDepth_MP3),
     src_OGG: new Audio(fallingInDepth_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   fallingInDepth2: {
     src_MP3: new Audio(fallingInDepth2_MP3),
     src_OGG: new Audio(fallingInDepth2_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   fire: {
     src_MP3: new Audio(fire_MP3),
     src_OGG: new Audio(fire_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   heroDeath: {
     src_MP3: new Audio(heroDeath_MP3),
     src_OGG: new Audio(heroDeath_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   jump: {
     src_MP3: new Audio(jump_MP3),
     src_OGG: new Audio(jump_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   jumpOnSpaceToggledPlatform: {
     src_MP3: new Audio(jumpOnSpaceToggledPlatform_MP3),
     src_OGG: new Audio(jumpOnSpaceToggledPlatform_OGG),
-    volume: 0.5,
+    volume: volumeEffects / 2,
   },
   nextLevel: {
     src_MP3: new Audio(nextLevel_MP3),
     src_OGG: new Audio(nextLevel_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   ok: {
     src_MP3: new Audio(ok_MP3),
     src_OGG: new Audio(ok_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   select: {
     src_MP3: new Audio(select_MP3),
     src_OGG: new Audio(select_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   teleport: {
     src_MP3: new Audio(teleport_MP3),
     src_OGG: new Audio(teleport_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   toggle: {
     src_MP3: new Audio(toggle_MP3),
     src_OGG: new Audio(toggle_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   toggleDisabled: {
     src_MP3: new Audio(toggleDisabled_MP3),
     src_OGG: new Audio(toggleDisabled_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
   error: {
     src_MP3: new Audio(error_MP3),
     src_OGG: new Audio(error_OGG),
-    volume: 1,
+    volume: volumeEffects,
   },
 
   track_1: {
     src_MP3: new Audio(track_1_MP3),
     src_OGG: new Audio(track_1_OGG),
-    volume: 1,
+    volume: volumeMusic,
   },
   track_2: {
     src_MP3: new Audio(track_2_MP3),
     src_OGG: new Audio(track_2_OGG),
-    volume: 1,
+    volume: volumeMusic,
   },
   track_3: {
     src_MP3: new Audio(track_3_MP3),
     src_OGG: new Audio(track_3_OGG),
-    volume: 1,
+    volume: volumeMusic,
   },
   track_4: {
     src_MP3: new Audio(track_4_MP3),
     src_OGG: new Audio(track_4_OGG),
-    volume: 1,
+    volume: volumeMusic,
   },
 }
 
@@ -257,4 +260,4 @@ const playNextTrack = (currentTrack, playlist) => {
 
 
 
-export { audio, gameSoundEffects, getRandomTrack, playNextTrack }
+export { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic }

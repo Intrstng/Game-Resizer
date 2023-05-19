@@ -2163,7 +2163,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "audio": () => (/* binding */ audio),
 /* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects),
 /* harmony export */   "getRandomTrack": () => (/* binding */ getRandomTrack),
-/* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack)
+/* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack),
+/* harmony export */   "volumeEffects": () => (/* binding */ volumeEffects),
+/* harmony export */   "volumeMusic": () => (/* binding */ volumeMusic)
 /* harmony export */ });
 /* harmony import */ var _assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/block_hit.mp3 */ "./assets/sounds/effects/mp3/block_hit.mp3");
 /* harmony import */ var _assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/block_hit.ogg */ "./assets/sounds/effects/ogg/block_hit.ogg");
@@ -2251,112 +2253,114 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+let volumeEffects = 1;
+let volumeMusic = 1;
 const audio = {
   isCanPlay: new Audio(),
   blockHit: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__),
-    volume: 1
+    volume: volumeEffects
   },
   bottomHit: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__),
-    volume: 1
+    volume: volumeEffects
   },
   choose: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__),
-    volume: 1
+    volume: volumeEffects
   },
   explosionBlock: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__),
-    volume: 1
+    volume: volumeEffects
   },
   fallingInDepth: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__),
-    volume: 1
+    volume: volumeEffects
   },
   fallingInDepth2: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__),
-    volume: 1
+    volume: volumeEffects
   },
   fire: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__),
-    volume: 1
+    volume: volumeEffects
   },
   heroDeath: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__),
-    volume: 1
+    volume: volumeEffects
   },
   jump: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__),
-    volume: 1
+    volume: volumeEffects
   },
   jumpOnSpaceToggledPlatform: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__),
-    volume: 0.5
+    volume: volumeEffects / 2
   },
   nextLevel: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__),
-    volume: 1
+    volume: volumeEffects
   },
   ok: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__),
-    volume: 1
+    volume: volumeEffects
   },
   select: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__),
-    volume: 1
+    volume: volumeEffects
   },
   teleport: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__),
-    volume: 1
+    volume: volumeEffects
   },
   toggle: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__),
-    volume: 1
+    volume: volumeEffects
   },
   toggleDisabled: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__),
-    volume: 1
+    volume: volumeEffects
   },
   error: {
     src_MP3: new Audio(_assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__),
-    volume: 1
+    volume: volumeEffects
   },
   track_1: {
     src_MP3: new Audio(_assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__),
     src_OGG: new Audio(_assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__),
-    volume: 1
+    volume: volumeMusic
   },
   track_2: {
     src_MP3: new Audio(_assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__),
     src_OGG: new Audio(_assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__),
-    volume: 1
+    volume: volumeMusic
   },
   track_3: {
     src_MP3: new Audio(_assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__),
     src_OGG: new Audio(_assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__),
-    volume: 1
+    volume: volumeMusic
   },
   track_4: {
     src_MP3: new Audio(_assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__),
     src_OGG: new Audio(_assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__),
-    volume: 1
+    volume: volumeMusic
   }
 };
 let source = null;
@@ -2489,7 +2493,7 @@ const collisionsLevel_1 = {
     left: 60,
     top: 60
   },
-  map: [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "fu", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "fl", "ee", "fr", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "fd", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "fd", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b2", "ee", "ff", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
+  map: [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "fu", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "fl", "ee", "fr", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "fd", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b2", "ee", "ff", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
 };
 const data = {
   "player": {
