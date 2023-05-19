@@ -33,6 +33,17 @@ import toggleDisabled_OGG from '../../../assets/sounds/effects/ogg/toggle_disabl
 import error_MP3 from '../../../assets/sounds/effects/mp3/error.mp3';
 import error_OGG from '../../../assets/sounds/effects/ogg/error.ogg';
 
+import track_1_MP3 from '../../../assets/sounds/music/mp3/track_1.mp3';
+import track_1_OGG from '../../../assets/sounds/music/ogg/track_1.ogg';
+import track_2_MP3 from '../../../assets/sounds/music/mp3/track_2.mp3';
+import track_2_OGG from '../../../assets/sounds/music/ogg/track_2.ogg';
+import track_3_MP3 from '../../../assets/sounds/music/mp3/track_3.mp3';
+import track_3_OGG from '../../../assets/sounds/music/ogg/track_3.ogg';
+import track_4_MP3 from '../../../assets/sounds/music/mp3/track_4.mp3';
+import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
+
+import { createImage, randomNumber } from '../Utils';
+
 const audio = {
   isCanPlay: new Audio(),
   blockHit: {
@@ -119,7 +130,28 @@ const audio = {
     src_MP3: new Audio(error_MP3),
     src_OGG: new Audio(error_OGG),
     volume: 1,
-}
+  },
+
+  track_1: {
+    src_MP3: new Audio(track_1_MP3),
+    src_OGG: new Audio(track_1_OGG),
+    volume: 1,
+  },
+  track_2: {
+    src_MP3: new Audio(track_2_MP3),
+    src_OGG: new Audio(track_2_OGG),
+    volume: 1,
+  },
+  track_3: {
+    src_MP3: new Audio(track_3_MP3),
+    src_OGG: new Audio(track_3_OGG),
+    volume: 1,
+  },
+  track_4: {
+    src_MP3: new Audio(track_4_MP3),
+    src_OGG: new Audio(track_4_OGG),
+    volume: 1,
+  },
 }
 
 let source = null;
@@ -140,12 +172,43 @@ let source = null;
       }
     }
 })();
-let counter = 0
+
 function gameSoundEffects(item) {
   item[source].currentTime = 0;
   item[source].volume = item.volume;
   item[source].play();
 }
+
+function getRandomTrack(playlist) {
+  let tracksList = [];
+  for (let sound in playlist) {
+    sound.includes('track') && tracksList.push(playlist[sound]);
+  }
+  return tracksList[randomNumber(0, tracksList.length - 1)][source];
+}
+
+const playNextTrack = (currentTrack, playlist) => {
+  let tracksList = [];
+  let currentTrackNumber = null;
+  for (let sound in playlist) {
+    sound.includes('track') && tracksList.push(playlist[sound]);
+  }
+  tracksList.forEach((track, index) => {
+    track[source] === currentTrack && (currentTrackNumber = index);
+  });
+  currentTrackNumber < (tracksList.length - 1) ? currentTrackNumber++ : currentTrackNumber = 0;
+  tracksList[currentTrackNumber][source].play();
+  tracksList[currentTrackNumber][source].onended = function() {
+    playNextTrack(tracksList[currentTrackNumber][source], audio);
+  }
+}
+
+
+
+
+
+
+
 
 
 // function gameSoundEffects(item) {
@@ -194,4 +257,4 @@ function gameSoundEffects(item) {
 
 
 
-export { audio, gameSoundEffects }
+export { audio, gameSoundEffects, getRandomTrack, playNextTrack }

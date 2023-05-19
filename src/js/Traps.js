@@ -1,7 +1,7 @@
 import { canvas, c } from './Canvas';
 import { platforms } from '../index';
 import { player } from '../index';
-import { createImage } from './CreateImage';
+import { createImage } from './Utils';
 import { Platform,
   OneStep,
   Fan,

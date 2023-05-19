@@ -1,6 +1,6 @@
 import { CollisionBlock, platforms, parsedCollisions } from './Collision';
 import { canvas, c } from './Canvas';
-import { createImage } from './CreateImage';
+import { createImage } from './Utils';
 import { platformImgSrc300,
   heroIdleR,
   heroIdleL,

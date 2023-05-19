@@ -20,21 +20,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sass/styles.scss */ "./src/sass/styles.scss");
 /* harmony import */ var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Collision */ "./src/js/Collision.js");
 /* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _js_CreateImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _js_Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Utils */ "./src/js/Utils.js");
 /* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
-/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/data/Audio */ "./src/js/data/Audio.js");
-/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
-/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
-/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
-/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
-/* harmony import */ var _js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/data/Collisions */ "./src/js/data/Collisions.js");
+/* harmony import */ var _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/data/Collisions */ "./src/js/data/Collisions.js");
+/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
+/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
+/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
+/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
 
 
 // imagePlatform.onload = function getSizes () {
 //   imagePlatform.width = imagePlatform.naturalWidth;
 //   imagePlatform.height = imagePlatform.naturalHeight;
 //}
+
 
 
 
@@ -76,13 +77,7 @@ _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720 //window.inn
 let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
   window.setTimeout(callback, 1000 / 60);
 };
-
-// const fullScreenBtn = document.getElementById('fullscreen');
-// fullScreenBtn.addEventListener('click', () => fullScreen(canvas));
-
 window.addEventListener('keydown', e => fullScreen(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas));
-// window.addEventListener('keydown', fullScreenCancel);
-
 function fullScreen(e, element) {
   if (e.code === 'KeyF') {
     if (element.requestFullscreen) {
@@ -111,11 +106,9 @@ let leftNeighboorBlockFromHeroArr = [];
 let timerShoot_1 = null;
 let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
-let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
-
-console.log(_js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms);
+let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 let player;
-_js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__.collisionsLevel_1.forEach((row, index_Y) => {
+_js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.forEach((row, index_Y) => {
   row.forEach((cell, index_X) => {
     cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
       platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
@@ -131,22 +124,29 @@ _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
     // setInterval(() => gameSoundEffects(audio.fire), 1000);
     timerShoot_1 = setTimeout(function soundFire() {
       timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
-      (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.fire);
+      (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fire);
     }, platform.delay * 8);
   }
 });
+let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
 function init() {
+  track.pause();
+  track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+  track.play();
+  track.onended = function () {
+    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+  };
   player.velocity.y = 1;
   player.alive = true;
-  _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.spaceToggleCounter = 1;
-  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_CreateImage__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+  _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
+  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
   // player = new Player({ platforms });
 
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
     platform.type === 'oneStep' && platform.restore();
   });
-  _js_data_Collisions__WEBPACK_IMPORTED_MODULE_11__.collisionsLevel_1.forEach((row, index_Y) => {
+  _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
         platforms: _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms
@@ -183,10 +183,10 @@ function animate() {
   });
   leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
   player.update();
-  if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
+  if (_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
     // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && player.position.x >= 0) {
+  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && player.position.x >= 0) {
     // упор персонажа в левый край экрана
     player.velocity.x = -2;
   } else {
@@ -242,10 +242,10 @@ function animate() {
   //   //   }
   // })
 
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'right') {
+  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'left') {
+  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'left') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.left;
   }
@@ -254,8 +254,8 @@ function animate() {
   if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height) {
     // sawTrap.restore();
     //sawTrap2.restore(); // !!!!!!!!!!!!
-    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.fallingInDepth2);
-    _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive;
+    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fallingInDepth2);
+    _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive;
     init();
     console.log('you lose');
 
@@ -265,8 +265,8 @@ function animate() {
 
 init();
 animate();
-window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyDownHandler);
-window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyUpHandler);
+window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keyDownHandler);
+window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keyUpHandler);
 window.addEventListener('click', e => {
   console.log(e.clientX, e.clientY);
   // debugger
@@ -285,7 +285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AdditionalElements": () => (/* binding */ AdditionalElements)
 /* harmony export */ });
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 // import { canvas, c } from './Canvas';
 
@@ -316,7 +316,7 @@ class AdditionalElements {
       y: posY
     };
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.backgroundImg, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.backgroundImg, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height)
     };
     this.currentSprite = this.sprites.idle;
     this.type = 'backgrounds';
@@ -523,7 +523,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
 /* harmony import */ var _Traps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Traps */ "./src/js/Traps.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Player */ "./src/js/Player.js");
 
 
@@ -565,118 +565,78 @@ const parsedCollisions = _data_Collisions__WEBPACK_IMPORTED_MODULE_0__.collision
     switch (cell) {
       case '1p':
         // Space toggled platform (One)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOne, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOne, 36, 36), platforms));
         break;
       case '2p':
         // Space toggled platform (Two)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformTwo, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformTwo, 36, 36), platforms));
         break;
       case '3p':
         // Space toggled platform (Three)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformThree, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformThree, 36, 36), platforms));
         break;
       case '1s':
         // One-Step platform
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36), platforms));
         break;
       case 'sl':
         // Solid platform
         platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36), platforms));
+        index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36), platforms));
         break;
       case 'ja':
         // Jump-toggled platform (active)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
         break;
       case 'jd':
         // Jump-toggled platform (disabled)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms));
         break;
       case 'sk':
         // Saw trap platform
-        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.spike, 36, 36), platforms));
+        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.spike, 36, 36), platforms));
         break;
       case 'sw':
         // Spikes trap platform
-        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.Saw(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36), platforms));
+        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.Saw(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36), platforms));
         break;
       case 'dz':
         // Dead signal zone
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.deadSignalZone, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.deadSignalZone, 36, 36), platforms));
         break;
       case 'fl':
         // Flamethrower (left)
-        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
         break;
       case 'fr':
         // Flamethrower (right)
-        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
         break;
       case 'fu':
         // Flamethrower (up)
-        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerUp(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerUp(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
         break;
       case 'fd':
         // Flamethrower (down)
-        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerDown(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
+        platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerDown(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController()));
         break;
       case 'fn':
         // Fan (decoration)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Fan(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Fan(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms));
         break;
       case 'b1':
         // Fan (decoration)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_1, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_1, 36, 36), platforms));
         break;
       case 'b2':
         // Fan (decoration)
-        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, (0,_CreateImage__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms));
+        platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms));
         break;
     }
   });
 });
 
-
-/***/ }),
-
-/***/ "./src/js/CreateImage.js":
-/*!*******************************!*\
-  !*** ./src/js/CreateImage.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Sprite": () => (/* binding */ Sprite),
-/* harmony export */   "createImage": () => (/* binding */ createImage)
-/* harmony export */ });
-function createImage(src, width, height) {
-  const image = new Image();
-  image.src = src;
-  image.width = width;
-  image.height = height;
-  return image;
-}
-class Sprite {
-  constructor(_ref) {
-    let {
-      position,
-      imageSrc
-    } = _ref;
-    this.position = position;
-    this.image = new Image();
-    this.image.onload = () => {
-      this.loaded = true;
-    };
-    this.image.src = imageSrc;
-    this.loaded = false;
-  }
-  draw() {
-    if (!this.loaded) return;
-    c.drawImage(this.image, this.position.x, this.position.y);
-  }
-}
 
 /***/ }),
 
@@ -825,7 +785,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Collision__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Collision */ "./src/js/Collision.js");
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 /* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
 /* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
@@ -956,7 +916,7 @@ class Fan extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.fan, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 23;
@@ -968,7 +928,7 @@ class Brick_1 extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_1, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_1, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 1;
@@ -980,7 +940,7 @@ class Brick_2 extends Platform {
     this.type = 'fan';
     this.statusActive = true;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_2, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.brick_2, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 1;
@@ -992,8 +952,8 @@ class JumpToggleActive extends Platform {
     this.type = 'jumpToggleActive';
     this.statusActive = true;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
@@ -1015,8 +975,8 @@ class JumpToggleDisabled extends Platform {
     this.type = 'jumpToggleDisabled';
     this.statusActive = false;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJump, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformJumpDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.disabled;
     this.frequency = 63;
@@ -1038,8 +998,8 @@ class OneStep extends Platform {
     this.temporaryPosX = posX;
     this.hits = 0;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36),
-      explosion: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStepExplosion, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStep, 36, 36),
+      explosion: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneStepExplosion, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 28;
@@ -1067,8 +1027,8 @@ class SpaceToggledPlatform extends Platform {
     this.type = 'toggledBySpacePlatform';
     this.statusActive = false;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
     };
     this.currentSprite = this.sprites.idle;
     this.frequency = 63;
@@ -1111,8 +1071,8 @@ class PlatformOne extends SpaceToggledPlatform {
     this.type = 'platformOne';
     this.setCount = 1;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOne, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformOneDisabled, 36, 36)
     };
   }
 }
@@ -1122,8 +1082,8 @@ class PlatformTwo extends SpaceToggledPlatform {
     this.type = 'platformTwo';
     this.setCount = 2;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwoDisabled, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwo, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformTwoDisabled, 36, 36)
     };
   }
 }
@@ -1133,8 +1093,8 @@ class PlatformThree extends SpaceToggledPlatform {
     this.type = 'platformThree';
     this.setCount = 3;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThreeDisabled, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThree, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.platformThreeDisabled, 36, 36)
     };
   }
 }
@@ -1145,8 +1105,8 @@ class DeadSignal extends SpaceToggledPlatform {
     this.statusActive = false;
     this.frequency = 1;
     this.sprites = {
-      idle: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZone, 36, 36),
-      disabled: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36)
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZone, 36, 36),
+      disabled: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.deadSignalZoneHover, 36, 36)
     };
   }
   hover() {
@@ -1195,7 +1155,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Player": () => (/* binding */ Player)
 /* harmony export */ });
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
 /* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/Assets */ "./src/js/Assets.js");
@@ -1231,22 +1191,22 @@ class Player {
     this.alive = true;
     this.sprites = {
       idle: {
-        right: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
-        left: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
       },
       run: {
-        right: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
-        left: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
       },
       jump: {
-        right: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
-        left: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
       },
       fall: {
-        right: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
-        left: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
       },
-      death: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
+      death: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
     };
     this.currentSprite = this.sprites.idle.right;
   }
@@ -1492,7 +1452,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../index */ "./src/index.js");
-/* harmony import */ var _CreateImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateImage */ "./src/js/CreateImage.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 /* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/data/Audio */ "./src/js/data/Audio.js");
@@ -1737,10 +1697,10 @@ class Bullet {
     this.frequency = 23;
     this.platforms = platforms;
     this.sprites = {
-      left: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballLeft, 36, 36),
-      right: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballRight, 36, 36),
-      up: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballUp, 36, 36),
-      down: (0,_CreateImage__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballDown, 36, 36)
+      left: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballLeft, 36, 36),
+      right: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballRight, 36, 36),
+      up: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballUp, 36, 36),
+      down: (0,_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.fireballDown, 36, 36)
     };
     switch (this.type) {
       case 'flamethrowerLeft':
@@ -2016,6 +1976,49 @@ class Bullet {
 
 /***/ }),
 
+/***/ "./src/js/Utils.js":
+/*!*************************!*\
+  !*** ./src/js/Utils.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createImage": () => (/* binding */ createImage),
+/* harmony export */   "randomNumber": () => (/* binding */ randomNumber)
+/* harmony export */ });
+function createImage(src, width, height) {
+  const image = new Image();
+  image.src = src;
+  image.width = width;
+  image.height = height;
+  return image;
+}
+function randomNumber() {
+  let min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  let max = arguments.length > 1 ? arguments[1] : undefined;
+  return Math.floor(min + Math.random() * (max + 1 - min));
+}
+
+
+// export class Sprite {
+//   constructor ({ position, imageSrc }) {
+//     this.position = position;
+//     this.image = new Image();
+//     this.image.onload = () => {
+//       this.loaded = true;
+//     }
+//     this.image.src = imageSrc;
+//     this.loaded = false;
+//   }
+//   draw() {
+//     if (!this.loaded) return;
+//     c.drawImage(this.image, this.position.x, this.position.y)
+//   }
+// }
+
+/***/ }),
+
 /***/ "./src/js/data/Audio.js":
 /*!******************************!*\
   !*** ./src/js/data/Audio.js ***!
@@ -2025,7 +2028,9 @@ class Bullet {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "audio": () => (/* binding */ audio),
-/* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects)
+/* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects),
+/* harmony export */   "getRandomTrack": () => (/* binding */ getRandomTrack),
+/* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack)
 /* harmony export */ });
 /* harmony import */ var _assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/block_hit.mp3 */ "./assets/sounds/effects/mp3/block_hit.mp3");
 /* harmony import */ var _assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/block_hit.ogg */ "./assets/sounds/effects/ogg/block_hit.ogg");
@@ -2061,6 +2066,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/toggle_disabled.ogg */ "./assets/sounds/effects/ogg/toggle_disabled.ogg");
 /* harmony import */ var _assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/error.mp3 */ "./assets/sounds/effects/mp3/error.mp3");
 /* harmony import */ var _assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/error.ogg */ "./assets/sounds/effects/ogg/error.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_1.mp3 */ "./assets/sounds/music/mp3/track_1.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_1.ogg */ "./assets/sounds/music/ogg/track_1.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_2.mp3 */ "./assets/sounds/music/mp3/track_2.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_2.ogg */ "./assets/sounds/music/ogg/track_2.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_3.mp3 */ "./assets/sounds/music/mp3/track_3.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_3.ogg */ "./assets/sounds/music/ogg/track_3.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_4.mp3 */ "./assets/sounds/music/mp3/track_4.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_4.ogg */ "./assets/sounds/music/ogg/track_4.ogg");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../Utils */ "./src/js/Utils.js");
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2181,6 +2204,26 @@ const audio = {
     src_MP3: new Audio(_assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__),
     src_OGG: new Audio(_assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__),
     volume: 1
+  },
+  track_1: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__),
+    volume: 1
+  },
+  track_2: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__),
+    volume: 1
+  },
+  track_3: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__),
+    volume: 1
+  },
+  track_4: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__),
+    volume: 1
   }
 };
 let source = null;
@@ -2205,12 +2248,33 @@ let source = null;
     }
   }
 })();
-let counter = 0;
 function gameSoundEffects(item) {
   item[source].currentTime = 0;
   item[source].volume = item.volume;
   item[source].play();
 }
+function getRandomTrack(playlist) {
+  let tracksList = [];
+  for (let sound in playlist) {
+    sound.includes('track') && tracksList.push(playlist[sound]);
+  }
+  return tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
+}
+const playNextTrack = (currentTrack, playlist) => {
+  let tracksList = [];
+  let currentTrackNumber = null;
+  for (let sound in playlist) {
+    sound.includes('track') && tracksList.push(playlist[sound]);
+  }
+  tracksList.forEach((track, index) => {
+    track[source] === currentTrack && (currentTrackNumber = index);
+  });
+  currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
+  tracksList[currentTrackNumber][source].play();
+  tracksList[currentTrackNumber][source].onended = function () {
+    playNextTrack(tracksList[currentTrackNumber][source], audio);
+  };
+};
 
 // function gameSoundEffects(item) {
 //   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
@@ -3016,6 +3080,86 @@ module.exports = __webpack_require__.p + "assets/aaf531751543bc351744.ogg";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "assets/8d6e93c66366655257dd.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/mp3/track_1.mp3":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/mp3/track_1.mp3 ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/60db4a6c1bb2742d1f9c.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/mp3/track_2.mp3":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/mp3/track_2.mp3 ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/4e1718e91aa4e1cca135.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/mp3/track_3.mp3":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/mp3/track_3.mp3 ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/1afb1b0a35b44cdf1ff1.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/mp3/track_4.mp3":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/mp3/track_4.mp3 ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/4dcabd1247bcf8d7ebcf.mp3";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/ogg/track_1.ogg":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/ogg/track_1.ogg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/2c26659bbe1eda6e9e5d.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/ogg/track_2.ogg":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/ogg/track_2.ogg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/d97f6fbd97ff9dc44f3f.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/ogg/track_3.ogg":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/ogg/track_3.ogg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/91a16270795862ed0a69.ogg";
+
+/***/ }),
+
+/***/ "./assets/sounds/music/ogg/track_4.ogg":
+/*!*********************************************!*\
+  !*** ./assets/sounds/music/ogg/track_4.ogg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/c516101ffeada79f1199.ogg";
 
 /***/ })
 

@@ -6,11 +6,11 @@ import './sass/styles.scss';
 //}
 import { CollisionBlock, platforms, parsedCollisions } from './js/Collision';
 import { canvas, c } from './js/Canvas';
-import { createImage, Sprite } from './js/CreateImage';
+import { createImage, Sprite } from './js/Utils';
 import { Player } from './js/Player';
-
+import { collisionsLevel_1 } from './js/data/Collisions';
 import { bulletController } from './js/Collision';
-import { audio, gameSoundEffects } from './js/data/Audio';
+import { audio, gameSoundEffects, getRandomTrack, playNextTrack } from './js/data/Audio';
 
 import { Platform,
   OneStep,
@@ -108,13 +108,8 @@ let requestAnim = window.requestAnimationFrame ||
                   window.msRequestAnimationFrame ||
                   function(callback) { window.setTimeout(callback, 1000 / 60); }
 
-
-
-// const fullScreenBtn = document.getElementById('fullscreen');
-// fullScreenBtn.addEventListener('click', () => fullScreen(canvas));
-
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
-// window.addEventListener('keydown', fullScreenCancel);
+
 
 function fullScreen(e, element) {
   if (e.code === 'KeyF') {
@@ -153,15 +148,6 @@ export let additionalElements = [
 
 
 
-
-
-import { collisionsLevel_1 } from './js/data/Collisions';
-
-
-
-console.log(platforms)
-
-
 export let player;
   collisionsLevel_1.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
@@ -193,7 +179,20 @@ new Player({
                                                 }
                                               });
 
+
+
+
+
+let track = getRandomTrack(audio);
+
 export function init() {
+  track.pause();
+  track = getRandomTrack(audio)
+  track.play();
+  track.onended = function() {
+    playNextTrack(track, audio);
+  }
+
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;

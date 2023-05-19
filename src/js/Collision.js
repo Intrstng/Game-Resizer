@@ -61,7 +61,7 @@ import { platformImgSrc300,
   brick_1,
   brick_2,
 } from './Assets';
-import { createImage, Sprite } from './CreateImage';
+import { createImage, Sprite } from './Utils';
 import { Player } from './Player';
 
 class CollisionBlock {

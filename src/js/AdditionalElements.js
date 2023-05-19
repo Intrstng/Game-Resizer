@@ -19,7 +19,7 @@
 
 
 import { canvas, c } from './Canvas';
-import { createImage } from './CreateImage';
+import { createImage } from './Utils';
 import {
   platformImgSrc300,
         heroIdleR,
@@ -56,6 +56,8 @@ import {
         fireballDown,
         fireballLeft,
         fireballRight,
+        brick_1,
+        brick_2,
 } from './Assets';
 export class AdditionalElements {
   constructor (posX, posY, image) {

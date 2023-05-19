@@ -1,5 +1,5 @@
 import { canvas, c } from './Canvas';
-import { createImage } from './CreateImage';
+import { createImage } from './Utils';
 import { init } from '../index';
 import { keys } from './Keys';
 import { 
