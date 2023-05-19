@@ -354,6 +354,10 @@ template {
 /*!***************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/sass/styles.scss ***!
   \***************************************************************************************************************/
+@font-face {
+  font-family: 'Rubik Iso';
+  src: url(assets/88a94199325f890b981d.ttf); }
+
 html {
   box-sizing: border-box;
   overflow: hidden; }
@@ -366,6 +370,14 @@ body {
   width: 100vh;
   height: 100vh;
   background-color: black; }
+
+p {
+  font-family: 'Rubik Iso', cursive;
+  color: white;
+  font-size: 3rem;
+  position: absolute;
+  top: 50px;
+  left: 100px; }
 
 
 /*# sourceMappingURL=style.css.map*/

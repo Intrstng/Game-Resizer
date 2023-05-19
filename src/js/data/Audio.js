@@ -157,8 +157,8 @@ const audio = {
   },
 }
 
-let source = null;
  // Choose supported source and preload
+ let source = null;
 ;(function() {
   if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
     source = 'src_MP3';
@@ -166,7 +166,7 @@ let source = null;
       source = 'src_OGG';
     }
   for (let sound in audio) {
-    if (sound != 'isCanPlay') {
+    if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {  // if (sound != 'isCanPlay')
       let { src_MP3: mp3, src_OGG: ogg } = audio[sound];
         mp3.play();
         mp3.pause();
@@ -260,4 +260,10 @@ const playNextTrack = (currentTrack, playlist) => {
 
 
 
-export { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic }
+export { audio,
+  gameSoundEffects,
+  getRandomTrack,
+  playNextTrack,
+  volumeEffects,
+  volumeMusic,
+}

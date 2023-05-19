@@ -43,6 +43,7 @@ import heroFallR from '/assets/img/Hero/Fall_right.png';
 import heroFallL from '/assets/img/Hero/Fall_left.png';
 import heroDeath from '/assets/img/Hero/Player_death.png';
 import backgroundImg from '/assets/img/Background_images/bg_3.jpg';
+import win from '/assets/img/Background_images/Win_4.jpg';
 import platformSolid from '/assets/img/Platforms/Platform_solid.png';
 import platformOneStep from '/assets/img/Platforms/Platform_oneStep.png';
 import platformOneStepExplosion from '/assets/img/Platforms/Platform_oneStep_Explosion.png';
@@ -82,6 +83,7 @@ export { platformImgSrc300,
         heroFallL,
         heroDeath,
         backgroundImg,
+        win,
         platformSolid,
         platformOneStep,
         platformOneStepExplosion,

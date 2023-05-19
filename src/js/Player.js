@@ -1,6 +1,6 @@
 import { canvas, c } from './Canvas';
 import { createImage } from './Utils';
-import { init } from '../index';
+import { init, completeLevel } from '../index';
 import { keys } from './Keys';
 import { 
   platformImgSrc300,
@@ -38,7 +38,7 @@ import {
   brick_2,
       } from '../js/Assets';
 import { platforms, intersection } from '../index';
-import { audio, gameSoundEffects } from '../js/data/Audio';
+import {  audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from '../js/data/Audio';
 
 export class Player {
   constructor({ platforms = [] }, posX, posY, marginLeft = 0, marginTop = 0) {
@@ -63,6 +63,7 @@ export class Player {
     this.frequency = 21;
     this.frames = 0;
     this.alive = true;
+    this.completeLevel = false;
     this.sprites = {
       idle: {
         right: createImage(heroIdleR, 32, 32),
@@ -227,6 +228,26 @@ export class Player {
               }
           }
           break;
+          case 'finish':
+            if (this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
+                // if (this.velocity.x < 0) {// moving left       // <= -2
+                //   this.left = platform.right + 0.1;
+                //   this.alive && gameSoundEffects(audio.nextLevel);
+                //   break;
+                // }
+                // if (this.velocity.x > 0) {// moving right      // <= 2
+                //   this.left = platform.left - this.width - 0.1;
+                //   this.alive && gameSoundEffects(audio.nextLevel);
+                //   break;
+                // }
+                this.alive && gameSoundEffects(audio.nextLevel);
+                this.completeLevel = true;
+                init();
+            }
+          break;
       }
     }
   }
@@ -273,6 +294,7 @@ export class Player {
               if (this.velocity.y > 0) {// falling down  // 0.25
                 this.velocity.y = 0;
                 this.top = platform.top - this.height - 0.1;
+                this.alive && gameSoundEffects(audio.bottomHit);
                 break;
               }
           }
@@ -321,6 +343,29 @@ export class Player {
                 break;
               }
           }
+          break;
+          case 'finish':
+            if (this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
+                // if (this.velocity.y < 0) {// moving up  // -0.25
+                //   this.velocity.y = 0;
+                //   this.top = platform.bottom + 0.1;
+                //   this.alive && gameSoundEffects(audio.nextLevel);
+                //   break;
+                // }
+                // if (this.velocity.y > 0) {// falling down  // 0.25
+                //   this.velocity.y = 0;
+                //   this.top = platform.top - this.height - 0.1;
+                //   this.alive && gameSoundEffects(audio.nextLevel);
+                //   break;
+                // }
+
+                this.alive && gameSoundEffects(audio.nextLevel);
+                this.completeLevel = true;
+                init();
+            }
           break;
         }
     }

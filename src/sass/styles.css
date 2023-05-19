@@ -1,4 +1,8 @@
 @import '../../node_modules/normalize.css/normalize.css';
+@font-face {
+  font-family: "Rubik Iso";
+  src: url("/assets/fonts/RubikIso-Regular.ttf");
+}
 html {
   box-sizing: border-box;
   overflow: hidden;
@@ -12,4 +16,13 @@ body {
   width: 100vh;
   height: 100vh;
   background-color: black;
+}
+
+p {
+  font-family: "Rubik Iso", cursive;
+  color: white;
+  font-size: 3rem;
+  position: absolute;
+  top: 50px;
+  left: 100px;
 }/*# sourceMappingURL=styles.css.map */

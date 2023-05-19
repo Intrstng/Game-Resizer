@@ -15,6 +15,7 @@
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */"additionalElements": () => /* binding */additionalElements,
+        /* harmony export */"completeLevel": () => /* binding */completeLevel,
         /* harmony export */"init": () => /* binding */init,
         /* harmony export */"leftNeighboorBlockFromHero": () => /* binding */leftNeighboorBlockFromHero,
         /* harmony export */"player": () => /* binding */player,
@@ -54,7 +55,7 @@
 
       _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = document.documentElement.clientWidth;
       _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = document.documentElement.clientHeight;
-
+      const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 15;
       // window.addEventListener('resize', () => {
       //   canvas.width = document.documentElement.clientWidth;
       //   canvas.height = document.documentElement.clientHeight;
@@ -111,6 +112,7 @@
       let timerShoot_1 = null;
       let timerShoot_2 = null;
       let leftNeighboorBlockFromHero = null;
+      let completeLevel = false;
       let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
       let player;
       _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.map.forEach((row, index_Y) => {
@@ -141,14 +143,8 @@
       track.onended = function () {
         (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
       };
-      function init() {
-        player.velocity.y = 1;
-        player.alive = true;
-        _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
+      function showNextLevel() {
         additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
-
-        // player = new Player({ platforms });
-
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
           platform.type === 'oneStep' && platform.restore();
         });
@@ -160,11 +156,31 @@
           });
         });
       }
+      function init() {
+        player.velocity.y = 1;
+        player.alive = true;
+        _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
+        if (player.completeLevel) {
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.save();
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(62, 95, 138';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(255, 255, 255';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.font = `normal ${fontSize}px Rubik Iso`;
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textBaseline = 'middle';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textAlign = 'center';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillText('Next level', _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.restore();
+          setTimeout(() => showNextLevel(), 550);
+          player.completeLevel = false;
+        } else {
+          showNextLevel();
+        }
+      }
       function animate() {
         requestAnim(animate);
+
         //c.clearRect(0, 0, canvas.width, canvas.height);
-        _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'white';
-        _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
+
         console.log('animation counter');
         additionalElements.forEach(element => element.draw());
 
@@ -351,20 +367,20 @@
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */"backgroundImg": () => /* reexport default export from named module */_assets_img_Background_images_bg_3_jpg__WEBPACK_IMPORTED_MODULE_10__,
-        /* harmony export */"brick_1": () => /* reexport default export from named module */_assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_23__,
-        /* harmony export */"brick_2": () => /* reexport default export from named module */_assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_24__,
-        /* harmony export */"deadSignalZone": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_28__,
-        /* harmony export */"deadSignalZoneHover": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_29__,
-        /* harmony export */"fan": () => /* reexport default export from named module */_assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_26__,
-        /* harmony export */"finish": () => /* reexport default export from named module */_assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_22__,
-        /* harmony export */"fireballDown": () => /* reexport default export from named module */_assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_35__,
-        /* harmony export */"fireballLeft": () => /* reexport default export from named module */_assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_36__,
-        /* harmony export */"fireballRight": () => /* reexport default export from named module */_assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_37__,
-        /* harmony export */"fireballUp": () => /* reexport default export from named module */_assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_34__,
-        /* harmony export */"flamethrowerDown": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_33__,
-        /* harmony export */"flamethrowerLeft": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_30__,
-        /* harmony export */"flamethrowerRight": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_31__,
-        /* harmony export */"flamethrowerUp": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_32__,
+        /* harmony export */"brick_1": () => /* reexport default export from named module */_assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__,
+        /* harmony export */"brick_2": () => /* reexport default export from named module */_assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__,
+        /* harmony export */"deadSignalZone": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__,
+        /* harmony export */"deadSignalZoneHover": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__,
+        /* harmony export */"fan": () => /* reexport default export from named module */_assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__,
+        /* harmony export */"finish": () => /* reexport default export from named module */_assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__,
+        /* harmony export */"fireballDown": () => /* reexport default export from named module */_assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__,
+        /* harmony export */"fireballLeft": () => /* reexport default export from named module */_assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__,
+        /* harmony export */"fireballRight": () => /* reexport default export from named module */_assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__,
+        /* harmony export */"fireballUp": () => /* reexport default export from named module */_assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__,
+        /* harmony export */"flamethrowerDown": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__,
+        /* harmony export */"flamethrowerLeft": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__,
+        /* harmony export */"flamethrowerRight": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__,
+        /* harmony export */"flamethrowerUp": () => /* reexport default export from named module */_assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__,
         /* harmony export */"heroDeath": () => /* reexport default export from named module */_assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__,
         /* harmony export */"heroFallL": () => /* reexport default export from named module */_assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__,
         /* harmony export */"heroFallR": () => /* reexport default export from named module */_assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__,
@@ -375,21 +391,22 @@
         /* harmony export */"heroRunL": () => /* reexport default export from named module */_assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__,
         /* harmony export */"heroRunR": () => /* reexport default export from named module */_assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__,
         /* harmony export */"platformImgSrc300": () => /* reexport default export from named module */_assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__,
-        /* harmony export */"platformJump": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_14__,
-        /* harmony export */"platformJumpDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_15__,
-        /* harmony export */"platformOne": () => /* reexport default export from named module */_assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_16__,
-        /* harmony export */"platformOneDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_19__,
-        /* harmony export */"platformOneStep": () => /* reexport default export from named module */_assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_12__,
-        /* harmony export */"platformOneStepExplosion": () => /* reexport default export from named module */_assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_13__,
-        /* harmony export */"platformSolid": () => /* reexport default export from named module */_assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_11__,
-        /* harmony export */"platformThree": () => /* reexport default export from named module */_assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_18__,
-        /* harmony export */"platformThreeDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_21__,
-        /* harmony export */"platformTwo": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_17__,
-        /* harmony export */"platformTwoDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_20__,
-        /* harmony export */"saw": () => /* reexport default export from named module */_assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_25__,
-        /* harmony export */"spike": () => /* reexport default export from named module */_assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_27__
+        /* harmony export */"platformJump": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__,
+        /* harmony export */"platformJumpDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__,
+        /* harmony export */"platformOne": () => /* reexport default export from named module */_assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__,
+        /* harmony export */"platformOneDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__,
+        /* harmony export */"platformOneStep": () => /* reexport default export from named module */_assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__,
+        /* harmony export */"platformOneStepExplosion": () => /* reexport default export from named module */_assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__,
+        /* harmony export */"platformSolid": () => /* reexport default export from named module */_assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__,
+        /* harmony export */"platformThree": () => /* reexport default export from named module */_assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__,
+        /* harmony export */"platformThreeDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__,
+        /* harmony export */"platformTwo": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__,
+        /* harmony export */"platformTwoDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__,
+        /* harmony export */"saw": () => /* reexport default export from named module */_assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__,
+        /* harmony export */"spike": () => /* reexport default export from named module */_assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__
         /* harmony export */
       });
+      /* empty/unused harmony star reexport */
       /* harmony import */
       var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../../assets/img/Platforms/platform.png */"./assets/img/Platforms/platform.png");
       /* harmony import */
@@ -412,60 +429,65 @@
       var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ../../../../assets/img/Hero/Player_death.png */"./assets/img/Hero/Player_death.png");
       /* harmony import */
       var _assets_img_Background_images_bg_3_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ../../../../assets/img/Background_images/bg_3.jpg */"./assets/img/Background_images/bg_3.jpg");
+      Object(function webpackMissingModule() {
+        var e = new Error("Cannot find module '/assets/img/Background_images/Win.png'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+      }());
       /* harmony import */
-      var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_solid.png */"./assets/img/Platforms/Platform_solid.png");
+      var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_solid.png */"./assets/img/Platforms/Platform_solid.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_oneStep.png */"./assets/img/Platforms/Platform_oneStep.png");
+      var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_oneStep.png */"./assets/img/Platforms/Platform_oneStep.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_oneStep_Explosion.png */"./assets/img/Platforms/Platform_oneStep_Explosion.png");
+      var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_oneStep_Explosion.png */"./assets/img/Platforms/Platform_oneStep_Explosion.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_jump.png */"./assets/img/Platforms/Platform_jump.png");
+      var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_jump.png */"./assets/img/Platforms/Platform_jump.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_jump_disabled.png */"./assets/img/Platforms/Platform_jump_disabled.png");
+      var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_jump_disabled.png */"./assets/img/Platforms/Platform_jump_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_one.png */"./assets/img/Platforms/Platform_one.png");
+      var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_one.png */"./assets/img/Platforms/Platform_one.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_two.png */"./assets/img/Platforms/Platform_two.png");
+      var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_two.png */"./assets/img/Platforms/Platform_two.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_three.png */"./assets/img/Platforms/Platform_three.png");
+      var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_three.png */"./assets/img/Platforms/Platform_three.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_one_disabled.png */"./assets/img/Platforms/Platform_one_disabled.png");
+      var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_one_disabled.png */"./assets/img/Platforms/Platform_one_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_two_disabled.png */"./assets/img/Platforms/Platform_two_disabled.png");
+      var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_two_disabled.png */"./assets/img/Platforms/Platform_two_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_three_disabled.png */"./assets/img/Platforms/Platform_three_disabled.png");
+      var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_three_disabled.png */"./assets/img/Platforms/Platform_three_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Finish_T_L.png */"./assets/img/Platforms/Finish_T_L.png");
+      var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Finish_T_L.png */"./assets/img/Platforms/Finish_T_L.png");
       /* harmony import */
-      var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__( /*! ../../../../assets/img/Platforms/brick_1.png */"./assets/img/Platforms/brick_1.png");
+      var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__( /*! ../../../../assets/img/Platforms/brick_1.png */"./assets/img/Platforms/brick_1.png");
       /* harmony import */
-      var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__( /*! ../../../../assets/img/Platforms/brick_2.png */"./assets/img/Platforms/brick_2.png");
+      var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__( /*! ../../../../assets/img/Platforms/brick_2.png */"./assets/img/Platforms/brick_2.png");
       /* harmony import */
-      var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__( /*! ../../../../assets/img/Traps/Saw.png */"./assets/img/Traps/Saw.png");
+      var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__( /*! ../../../../assets/img/Traps/Saw.png */"./assets/img/Traps/Saw.png");
       /* harmony import */
-      var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fan.png */"./assets/img/Traps/Fan.png");
+      var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fan.png */"./assets/img/Traps/Fan.png");
       /* harmony import */
-      var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__( /*! ../../../../assets/img/Traps/Platform_spikes.png */"./assets/img/Traps/Platform_spikes.png");
+      var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__( /*! ../../../../assets/img/Traps/Platform_spikes.png */"./assets/img/Traps/Platform_spikes.png");
       /* harmony import */
-      var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__( /*! ../../../../assets/img/Traps/Dead_signal_zone.png */"./assets/img/Traps/Dead_signal_zone.png");
+      var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__( /*! ../../../../assets/img/Traps/Dead_signal_zone.png */"./assets/img/Traps/Dead_signal_zone.png");
       /* harmony import */
-      var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__( /*! ../../../../assets/img/Traps/Dead_signal_zone_hover.png */"./assets/img/Traps/Dead_signal_zone_hover.png");
+      var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__( /*! ../../../../assets/img/Traps/Dead_signal_zone_hover.png */"./assets/img/Traps/Dead_signal_zone_hover.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_left.png */"./assets/img/Traps/Flamethrower_left.png");
+      var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_left.png */"./assets/img/Traps/Flamethrower_left.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_right.png */"./assets/img/Traps/Flamethrower_right.png");
+      var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_right.png */"./assets/img/Traps/Flamethrower_right.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_up.png */"./assets/img/Traps/Flamethrower_up.png");
+      var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_up.png */"./assets/img/Traps/Flamethrower_up.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_down.png */"./assets/img/Traps/Flamethrower_down.png");
+      var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_down.png */"./assets/img/Traps/Flamethrower_down.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_up.png */"./assets/img/Traps/Fireball_up.png");
+      var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_up.png */"./assets/img/Traps/Fireball_up.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_down.png */"./assets/img/Traps/Fireball_down.png");
+      var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_down.png */"./assets/img/Traps/Fireball_down.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_left.png */"./assets/img/Traps/Fireball_left.png");
+      var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_left.png */"./assets/img/Traps/Fireball_left.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_right.png */"./assets/img/Traps/Fireball_right.png");
+      var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_right.png */"./assets/img/Traps/Fireball_right.png");
       // const platformImgSrc300 = '../assets/img/Platforms/platform.png';
       // const heroIdleR = '../assets/img/Hero/Idle_right.png';
       // const heroIdleL = '../assets/img/Hero/Idle_left.png';
@@ -1305,6 +1327,7 @@
           this.frequency = 21;
           this.frames = 0;
           this.alive = true;
+          this.completeLevel = false;
           this.sprites = {
             idle: {
               right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
@@ -1449,6 +1472,23 @@
                   }
                 }
                 break;
+              case 'finish':
+                if (this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+                  // if (this.velocity.x < 0) {// moving left       // <= -2
+                  //   this.left = platform.right + 0.1;
+                  //   this.alive && gameSoundEffects(audio.nextLevel);
+                  //   break;
+                  // }
+                  // if (this.velocity.x > 0) {// moving right      // <= 2
+                  //   this.left = platform.left - this.width - 0.1;
+                  //   this.alive && gameSoundEffects(audio.nextLevel);
+                  //   break;
+                  // }
+                  this.alive && (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.nextLevel);
+                  this.completeLevel = true;
+                  setTimeout(_index__WEBPACK_IMPORTED_MODULE_2__.init, 550);
+                }
+                break;
             }
           }
         }
@@ -1492,6 +1532,7 @@
                     // falling down  // 0.25
                     this.velocity.y = 0;
                     this.top = platform.top - this.height - 0.1;
+                    this.alive && (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.bottomHit);
                     break;
                   }
                 }
@@ -1532,6 +1573,26 @@
                     this.top = platform.top - this.height - 0.1;
                     break;
                   }
+                }
+                break;
+              case 'finish':
+                if (this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+                  // if (this.velocity.y < 0) {// moving up  // -0.25
+                  //   this.velocity.y = 0;
+                  //   this.top = platform.bottom + 0.1;
+                  //   this.alive && gameSoundEffects(audio.nextLevel);
+                  //   break;
+                  // }
+                  // if (this.velocity.y > 0) {// falling down  // 0.25
+                  //   this.velocity.y = 0;
+                  //   this.top = platform.top - this.height - 0.1;
+                  //   this.alive && gameSoundEffects(audio.nextLevel);
+                  //   break;
+                  // }
+
+                  this.alive && (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.nextLevel);
+                  this.completeLevel = true;
+                  (0, _index__WEBPACK_IMPORTED_MODULE_2__.init)();
                 }
                 break;
             }
@@ -2383,8 +2444,9 @@
           volume: volumeMusic
         }
       };
-      let source = null;
+
       // Choose supported source and preload
+      let source = null;
       ;
       (function () {
         if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
@@ -2393,7 +2455,8 @@
           source = 'src_OGG';
         }
         for (let sound in audio) {
-          if (sound != 'isCanPlay') {
+          if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {
+            // if (sound != 'isCanPlay')
             let {
               src_MP3: mp3,
               src_OGG: ogg
@@ -2514,7 +2577,7 @@
           left: 60,
           top: 60
         },
-        map: [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "fu", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "fl", "ee", "fr", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "fd", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b2", "ee", "ff", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
+        map: [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
       };
       const data = {
         "player": {

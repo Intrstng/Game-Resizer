@@ -31,8 +31,6 @@ import {
   FlamethrowerUp,
   FlamethrowerDown,
   BulletController,
-
-
   Flamethrower
 } from './js/Traps';
 import { platformImgSrc300,
@@ -46,6 +44,7 @@ import { platformImgSrc300,
           heroFallL,
           heroDeath,
           backgroundImg,
+          win,
           platformSolid,
           platformOneStep,
           platformOneStepExplosion,
@@ -74,9 +73,9 @@ import { AdditionalElements } from './js/AdditionalElements';
 
 
 
-canvas.width = document.documentElement.clientWidth;
-canvas.height = document.documentElement.clientHeight;
-
+// canvas.width = document.documentElement.clientWidth;
+// canvas.height = document.documentElement.clientHeight;
+const fontSize = canvas.height / 8; // 10
                       // window.addEventListener('resize', () => {
                       //   canvas.width = document.documentElement.clientWidth;
                       //   canvas.height = document.documentElement.clientHeight;
@@ -141,7 +140,7 @@ let leftNeighboorBlockFromHeroArr = [];
 export let timerShoot_1 = null;
 export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
-
+export let completeLevel = false;
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ]
@@ -191,36 +190,57 @@ export let player;
                                           playNextTrack(track, audio);
                                         }
 
-export function init() {
 
+function showNextLevel() {
+  additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
+  ];
+    platforms.forEach(platform => {
+      (platform.type === 'oneStep') && platform.restore();
+    });
+    collisionsLevel_1.map.forEach((row, index_Y) => {
+      row.forEach((cell, index_X) => {
+       cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
+      })
+    })
+}
+
+let levelOverlay = createImage(win);
+levelOverlay.width = canvas.width;
+levelOverlay.height = canvas.height;
+
+export function init() {
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;
-  additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
-];
-   
-                                         // player = new Player({ platforms });
-
-
-  platforms.forEach(platform => {
-    (platform.type === 'oneStep') && platform.restore();
-  });
-
-  collisionsLevel_1.map.forEach((row, index_Y) => {
-    row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-    })
-  })
-   
+  
+  if (player.completeLevel) {
+    
+    c.save();
+    c.fillStyle = 'rgb(247, 251, 254)';
+    c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
+    c.drawImage(levelOverlay, canvas.width - levelOverlay.width, canvas.height - levelOverlay.height);
+    
+    c.fillStyle = 'rgb(21, 173, 188)'; //'rgb(62, 95, 138)'
+    c.font = `normal ${fontSize}px Rubik Iso`;
+    c.textBaseline = 'middle';
+    c.textAlign = 'center';
+    canvas.style.letterSpacing = `${fontSize / 20}px`;
+    c.fillText('Next level', canvas.width / 2, canvas.height / 2)
+    c.restore();
+    setTimeout(() => showNextLevel(), 1250);
+    player.completeLevel = false;
+  } else {
+    showNextLevel();
+} 
 }                      
 
 
 function animate() {
 
   requestAnim(animate);
+
   //c.clearRect(0, 0, canvas.width, canvas.height);
-                            c.fillStyle = ('white');
-                            c.fillRect(0, 0, canvas.width, canvas.height);
+
   console.log('animation counter');
 
   additionalElements.forEach(element => element.draw());
