@@ -378,9 +378,11 @@ class SpaceToggledPlatform extends Platform {
         player.position.x + player.width * 0.25 <= block.right);
     })) {
       keys.deadSignalZone = true;
-      console.log('inside')
+      player.alive && keys.space.pressed && gameSoundEffects(audio.toggleDisabled);
+      console.log('inside');
     } else {
-      console.log('outside')   
+      console.log('outside');
+      player.alive && keys.space.pressed && gameSoundEffects(audio.toggle);   
       keys.deadSignalZone = false;
     }
     }

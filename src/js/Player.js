@@ -57,7 +57,7 @@ export class Player {
     }
     this.type = 'player';
     this.gravity = 0.25;
-    this.jumpHeight = 10; // -20 is higher
+    this.jumpHeight = 9; // 20 is higher
     this.width = 32;
     this.height = 32;
     this.frequency = 21;
@@ -269,6 +269,7 @@ export class Player {
               if (this.velocity.y < 0) {// moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
+                this.alive && gameSoundEffects(audio.bottomHit);
                 break;
               }
               if (this.velocity.y > 0) {// falling down  // 0.25

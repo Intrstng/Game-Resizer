@@ -93,10 +93,10 @@ const fontSize = canvas.height / 8; // 10
                       //   }, 300);
                       // }
 
-                      // onResize(canvas, function(){ alert('Resized!');
+                      // onResize(canvas, function() { 
                       // canvas.width = document.documentElement.clientWidth;
                       // canvas.height = document.documentElement.clientHeight;
-                      // } );
+                      // });
 
 canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 // 720 //window.innerHeight;
@@ -122,20 +122,6 @@ function fullScreen(e, element) {
   }
 }
 
-// function fullScreenCancel(e) {
-//   if (e.code === 'KeyS') {
-//     if(document.documentElement.requestFullscreen) {
-//       document.documentElement.requestFullscreen();
-//     } else if(document.documentElement.webkitRequestFullscreen ) {
-//       document.documentElement.webkitRequestFullscreen();
-//     } else if(document.documentElement.mozRequestFullscreen) {
-//       document.documentElement.mozRequestFullScreen();
-//     }
-//   }
-// }
-
-
-
 let leftNeighboorBlockFromHeroArr = [];
 export let timerShoot_1 = null;
 export let timerShoot_2 = null;
@@ -154,29 +140,44 @@ export let player;
     })
   })
 
+  
+                                              //   platforms.forEach(platform => {
+                                              //   if (platform.type === 'flamethrowerLeft' ||
+                                              //   platform.type === 'flamethrowerRight' ||
+                                              //   platform.type === 'flamethrowerUp' ||
+                                              //   platform.type === 'flamethrowerDown') {
+                                              //   // setInterval(() => gameSoundEffects(audio.fire), 1000);
+                                              //   timerShoot_1 = setTimeout(function soundFire() {
+                                              //       timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
+                                              //       gameSoundEffects(audio.fire);
+                                              //     }, platform.delay * 8); 
+                                              //     clearTimeout(timerShoot_2)                        
+                                              //   }
+                                              // });
+function fireSoundInterval(delay) {
+  timerShoot_1 = setTimeout(function soundFire() {
+    timerShoot_2 = setTimeout(soundFire, delay);
+    gameSoundEffects(audio.fire);
+  }, delay); 
+}
 
-// new Player({
-//   platforms
-// }); //platforms: platforms
 
+let firethrowerShootDelay = null;
+platforms.forEach(platform => {
+  ( platform.type === 'flamethrowerLeft' ||
+    platform.type === 'flamethrowerRight' ||
+    platform.type === 'flamethrowerUp' ||
+    platform.type === 'flamethrowerDown') && (firethrowerShootDelay = platform.delay);
+})
 
+if (platforms.some(platform => {
+  return (platform.type === 'flamethrowerLeft' ||
+  platform.type === 'flamethrowerRight' ||
+  platform.type === 'flamethrowerUp' ||
+  platform.type === 'flamethrowerDown')})) {
+    fireSoundInterval(firethrowerShootDelay * 8);
+}
 
-
-
-
-            
-                                                platforms.forEach(platform => {
-                                                if (platform.type === 'flamethrowerLeft' ||
-                                                platform.type === 'flamethrowerRight' ||
-                                                platform.type === 'flamethrowerUp' ||
-                                                platform.type === 'flamethrowerDown') {
-                                                // setInterval(() => gameSoundEffects(audio.fire), 1000);
-                                                timerShoot_1 = setTimeout(function soundFire() {
-                                                    timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
-                                                    gameSoundEffects(audio.fire);
-                                                  }, platform.delay * 8);                          
-                                                }
-                                              });
 
 
 
@@ -218,7 +219,7 @@ export function init() {
     c.save();
     c.fillStyle = 'rgb(247, 251, 254)';
     c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
-    c.drawImage(levelOverlay, canvas.width - levelOverlay.width, canvas.height - levelOverlay.height);
+    c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
     
     c.fillStyle = 'rgb(21, 173, 188)'; //'rgb(62, 95, 138)'
     c.font = `normal ${fontSize}px Rubik Iso`;
@@ -238,16 +239,10 @@ export function init() {
 function animate() {
 
   requestAnim(animate);
-
-  //c.clearRect(0, 0, canvas.width, canvas.height);
-
   console.log('animation counter');
 
   additionalElements.forEach(element => element.draw());
-
- // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
-           
-                                                   
+                              
                           
                           platforms.forEach(platform => platform.draw());
                           platforms.forEach(platform => platform.update()); // рисуем платформы
@@ -305,56 +300,7 @@ leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFro
     player.velocity.x = 0;
   }
 
-  
-  // platforms.forEach(platform => {
-  //   platform.collision();
-  //   // // Player - platform collision (player is above the platform)
-  //   // if (player.position.y + player.height <= platform.position.y &&
-  //   //     player.position.y + player.height + player.velocity.y >= platform.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-  //   //     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-  //   //     player.position.x + player.width >= platform.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-  //   //     player.position.x <= platform.position.x + platform.width - player.width / 3) { 
-  //   //       player.velocity.y = 0; // если касается земли
-  //   // }
-  //   // // Player - platform collision (player is under the platform)
-  //   // if (player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.y + player.height + player.velocity.y >= platform.position.y &&
-  //   //     player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
-  //   //     player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
-  //   //       player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-  //   // }
-  //   // // Player - platform collision (player is left from the platform and moves right)
-  //   // if (keys.right.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width >= platform.position.x) {
-  //   //       player.velocity.x = 0;
-  //   //       console.log('hit!');
-  //   // } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-  //   //   if (keys.right.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width >= platform.position.x + platform.width) {
-  //   //       player.velocity.x = 2;
-  //   //       console.log('free!');
-  //   //   }
-  //   // // Player - platform collision (player is right from the platform and moves left)
-  //   // if (keys.left.pressed &&
-  //   //   player.position.y + player.height >= platform.position.y && 
-  //   //   player.position.y <= platform.position.y + platform.height &&
-  //   //   player.position.x <= platform.position.x + platform.width) {
-  //   //     player.velocity.x = 0;
-  //   //     console.log('hit!');
-  //   // } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-  //   //   if (keys.left.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width <= platform.position.x) { // или "-" player.width ???
-  //   //       player.velocity.x = -2;
-  //   //       console.log('free!');
-  //   //   }
-  // })
-        
+
         
 if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
   player.currentSprite = player.sprites.idle.right;

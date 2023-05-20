@@ -1,9 +1,6 @@
 /******/(() => {
   // webpackBootstrap
   /******/
-  "use strict";
-
-  /******/
   var __webpack_modules__ = {
     /***/"./src/index.js":
     /*!**********************!*\
@@ -11,6 +8,8 @@
       \**********************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -53,9 +52,9 @@
       //   imagePlatform.height = imagePlatform.naturalHeight;
       //}
 
-      _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = document.documentElement.clientWidth;
-      _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = document.documentElement.clientHeight;
-      const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 15;
+      // canvas.width = document.documentElement.clientWidth;
+      // canvas.height = document.documentElement.clientHeight;
+      const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 8; // 10
       // window.addEventListener('resize', () => {
       //   canvas.width = document.documentElement.clientWidth;
       //   canvas.height = document.documentElement.clientHeight;
@@ -73,10 +72,10 @@
       //   }, 300);
       // }
 
-      // onResize(canvas, function(){ alert('Resized!');
+      // onResize(canvas, function() { 
       // canvas.width = document.documentElement.clientWidth;
       // canvas.height = document.documentElement.clientHeight;
-      // } );
+      // });
 
       _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
       _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720 //window.innerHeight;
@@ -95,19 +94,6 @@
           }
         }
       }
-
-      // function fullScreenCancel(e) {
-      //   if (e.code === 'KeyS') {
-      //     if(document.documentElement.requestFullscreen) {
-      //       document.documentElement.requestFullscreen();
-      //     } else if(document.documentElement.webkitRequestFullscreen ) {
-      //       document.documentElement.webkitRequestFullscreen();
-      //     } else if(document.documentElement.mozRequestFullscreen) {
-      //       document.documentElement.mozRequestFullScreen();
-      //     }
-      //   }
-      // }
-
       let leftNeighboorBlockFromHeroArr = [];
       let timerShoot_1 = null;
       let timerShoot_2 = null;
@@ -122,11 +108,6 @@
           }, index_X * 36, index_Y * 36, _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.margin.left, _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.margin.top));
         });
       });
-
-      // new Player({
-      //   platforms
-      // }); //platforms: platforms
-
       _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
         if (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') {
           // setInterval(() => gameSoundEffects(audio.fire), 1000);
@@ -156,21 +137,26 @@
           });
         });
       }
+      let levelOverlay = (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.win);
+      levelOverlay.width = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width;
+      levelOverlay.height = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height;
       function init() {
         player.velocity.y = 1;
         player.alive = true;
         _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
         if (player.completeLevel) {
           _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.save();
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(62, 95, 138';
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(255, 255, 255';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(247, 251, 254)';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.drawImage(levelOverlay, 0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(21, 173, 188)'; //'rgb(62, 95, 138)'
           _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.font = `normal ${fontSize}px Rubik Iso`;
           _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textBaseline = 'middle';
           _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textAlign = 'center';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.style.letterSpacing = `${fontSize / 20}px`;
           _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillText('Next level', _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
           _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.restore();
-          setTimeout(() => showNextLevel(), 550);
+          setTimeout(() => showNextLevel(), 1250);
           player.completeLevel = false;
         } else {
           showNextLevel();
@@ -178,14 +164,8 @@
       }
       function animate() {
         requestAnim(animate);
-
-        //c.clearRect(0, 0, canvas.width, canvas.height);
-
         console.log('animation counter');
         additionalElements.forEach(element => element.draw());
-
-        // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
-
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.draw());
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.update()); // рисуем платформы
         _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
@@ -214,56 +194,6 @@
         } else {
           player.velocity.x = 0;
         }
-
-        // platforms.forEach(platform => {
-        //   platform.collision();
-        //   // // Player - platform collision (player is above the platform)
-        //   // if (player.position.y + player.height <= platform.position.y &&
-        //   //     player.position.y + player.height + player.velocity.y >= platform.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-        //   //     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-        //   //     player.position.x + player.width >= platform.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-        //   //     player.position.x <= platform.position.x + platform.width - player.width / 3) { 
-        //   //       player.velocity.y = 0; // если касается земли
-        //   // }
-        //   // // Player - platform collision (player is under the platform)
-        //   // if (player.position.y <= platform.position.y + platform.height &&
-        //   //     player.position.y + player.height + player.velocity.y >= platform.position.y &&
-        //   //     player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
-        //   //     player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
-        //   //       player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-        //   // }
-        //   // // Player - platform collision (player is left from the platform and moves right)
-        //   // if (keys.right.pressed &&
-        //   //     player.position.y + player.height >= platform.position.y && 
-        //   //     player.position.y <= platform.position.y + platform.height &&
-        //   //     player.position.x + player.width >= platform.position.x) {
-        //   //       player.velocity.x = 0;
-        //   //       console.log('hit!');
-        //   // } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-        //   //   if (keys.right.pressed &&
-        //   //     player.position.y + player.height >= platform.position.y && 
-        //   //     player.position.y <= platform.position.y + platform.height &&
-        //   //     player.position.x + player.width >= platform.position.x + platform.width) {
-        //   //       player.velocity.x = 2;
-        //   //       console.log('free!');
-        //   //   }
-        //   // // Player - platform collision (player is right from the platform and moves left)
-        //   // if (keys.left.pressed &&
-        //   //   player.position.y + player.height >= platform.position.y && 
-        //   //   player.position.y <= platform.position.y + platform.height &&
-        //   //   player.position.x <= platform.position.x + platform.width) {
-        //   //     player.velocity.x = 0;
-        //   //     console.log('hit!');
-        //   // } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-        //   //   if (keys.left.pressed &&
-        //   //     player.position.y + player.height >= platform.position.y && 
-        //   //     player.position.y <= platform.position.y + platform.height &&
-        //   //     player.position.x + player.width <= platform.position.x) { // или "-" player.width ???
-        //   //       player.velocity.x = -2;
-        //   //       console.log('free!');
-        //   //   }
-        // })
-
         if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'right') {
           // 10 - когда персонаж на земле
           player.currentSprite = player.sprites.idle.right;
@@ -303,6 +233,8 @@
       \**************************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -350,7 +282,7 @@
           this.height = image.height;
         }
         draw() {
-          _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, this.position.x, this.position.y);
+          _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, this.position.x, this.position.y, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height);
         }
       }
 
@@ -363,6 +295,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -403,10 +337,10 @@
         /* harmony export */"platformTwo": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__,
         /* harmony export */"platformTwoDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__,
         /* harmony export */"saw": () => /* reexport default export from named module */_assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__,
-        /* harmony export */"spike": () => /* reexport default export from named module */_assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__
+        /* harmony export */"spike": () => /* reexport default export from named module */_assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__,
+        /* harmony export */"win": () => /* reexport default export from named module */_assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__
         /* harmony export */
       });
-      /* empty/unused harmony star reexport */
       /* harmony import */
       var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../../assets/img/Platforms/platform.png */"./assets/img/Platforms/platform.png");
       /* harmony import */
@@ -429,11 +363,8 @@
       var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ../../../../assets/img/Hero/Player_death.png */"./assets/img/Hero/Player_death.png");
       /* harmony import */
       var _assets_img_Background_images_bg_3_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ../../../../assets/img/Background_images/bg_3.jpg */"./assets/img/Background_images/bg_3.jpg");
-      Object(function webpackMissingModule() {
-        var e = new Error("Cannot find module '/assets/img/Background_images/Win.png'");
-        e.code = 'MODULE_NOT_FOUND';
-        throw e;
-      }());
+      /* harmony import */
+      var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ../../../../assets/img/Background_images/Win_4.jpg */"./assets/img/Background_images/Win_4.jpg");
       /* harmony import */
       var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_solid.png */"./assets/img/Platforms/Platform_solid.png");
       /* harmony import */
@@ -531,6 +462,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -550,6 +483,8 @@
       \*****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -690,6 +625,8 @@
       \************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -812,6 +749,8 @@
       \****************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1164,9 +1103,11 @@
               return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
             })) {
               _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
+              _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
               console.log('inside');
             } else {
               console.log('outside');
+              _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0, _data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
               _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
             }
           }
@@ -1281,6 +1222,8 @@
       \**************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -1321,7 +1264,7 @@
           };
           this.type = 'player';
           this.gravity = 0.25;
-          this.jumpHeight = 10; // -20 is higher
+          this.jumpHeight = 9; // 20 is higher
           this.width = 32;
           this.height = 32;
           this.frequency = 21;
@@ -1486,7 +1429,7 @@
                   // }
                   this.alive && (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.nextLevel);
                   this.completeLevel = true;
-                  setTimeout(_index__WEBPACK_IMPORTED_MODULE_2__.init, 550);
+                  (0, _index__WEBPACK_IMPORTED_MODULE_2__.init)();
                 }
                 break;
             }
@@ -1507,6 +1450,7 @@
                     // moving up  // -0.25
                     this.velocity.y = 0;
                     this.top = platform.bottom + 0.1;
+                    this.alive && (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.bottomHit);
                     break;
                   }
                   if (this.velocity.y > 0) {
@@ -1622,6 +1566,8 @@
       \*************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2192,6 +2138,8 @@
       \*************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2237,6 +2185,8 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
@@ -2456,7 +2406,6 @@
         }
         for (let sound in audio) {
           if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {
-            // if (sound != 'isCanPlay')
             let {
               src_MP3: mp3,
               src_OGG: ogg
@@ -2496,40 +2445,6 @@
         };
       };
 
-      // function gameSoundEffects(item) {
-      //   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
-      //     item.src_OGG.currentTime = 0;
-      //     item.src_OGG.play();
-      //   } else {
-      //     item.src_MP3.currentTime = 0;
-      //     item.src_MP3.play();
-      //   }
-      // }
-
-      // function gameSoundEffects(item) {
-      //   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
-      //     audio.sound.src= item.src_MP3;
-      //   } else {
-      //     audio.sound.src= item.src_OGG;
-      //   }
-      //   audio.sound.currentTime = 0;
-      //   audio.sound.play();
-      // }
-
-      // function gameSoundEffects(item) {
-      //   item.currentTime = 0;
-      //   item.play();
-      // }
-
-      // For music
-      // let isPlayed = false;
-      // function gameSoundEffects(item) {
-      //   if(!isPlayed)
-      //   item.currentTime = 0;
-      //   item.play();
-      //   isPlayed = true;
-      // }
-
       /***/
     },
 
@@ -2538,54 +2453,8 @@
       !*** ./src/js/data/Collisions.js ***!
       \***********************************/
     /***/
-    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export */
-      __webpack_require__.d(__webpack_exports__, {
-        /* harmony export */"collisionsLevel_1": () => /* binding */collisionsLevel_1
-        /* harmony export */
-      });
-      // Platforms:
-      // sl - platform Solid
-      // dz - platform One
-      // 2p - platform Two
-      // 3p - platform Three
-      // ja - platform Jump-Toggle (active)
-      // jd - platform Jump-Toggle (disabled)
-      // 1s - platform One-Step
-      // Traps:
-      // sw - Saw trap
-      // sk - Spikes trap
-      // fl - Flamethrower (left)
-      // fr - Flamethrower (right)
-      // fu - Flamethrower (up)
-      // fd - Flamethrower (down)
-      // dz - Dead signal zone
-      // Decorations:
-      // b1 - Frame brick 1
-      // b2 - Frame block 2
-      // fn - Fan
-      // Empty:
-      // ee - Empty block
-      // Player:
-      // st - Start point
-      // fp - Finish point
-      // ff - Finish flag
-
-      const collisionsLevel_1 = {
-        margin: {
-          left: 60,
-          top: 60
-        },
-        map: [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-      };
-      const data = {
-        "player": {
-          "x": 200,
-          "y": 300
-        },
-        "map": [["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"], ["sl", "ee", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"], ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"], ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"], ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"], ["b1", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["b2", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]]
-      };
+    () => {
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Projects\\Work\\Game\\src\\js\\data\\Collisions.js: Identifier 'collisionsLevel_1' has already been declared. (69:15)\n\n  67 |   \n  68 |\n> 69 |   export const collisionsLevel_1 = {\n     |                ^\n  70 |     margin: {\n  71 |       left: 150,\n  72 |       top: 180,\n    at instantiate (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at ScopeHandler.checkRedeclarationInScope (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:1556:19)\n    at ScopeHandler.declareName (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:1527:12)\n    at Parser.declareNameFromIdentifier (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:7544:16)\n    at Parser.checkIdentifier (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:7540:12)\n    at Parser.checkLVal (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:7479:12)\n    at Parser.parseVarId (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13214:10)\n    at Parser.parseVar (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13192:12)\n    at Parser.parseVarStatement (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13032:10)\n    at Parser.parseStatementContent (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12629:23)\n    at Parser.parseStatementLike (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseStatementListItem (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12529:17)\n    at Parser.parseExportDeclaration (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13767:17)\n    at Parser.maybeParseExportDeclaration (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13722:31)\n    at Parser.parseExport (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13646:29)\n    at Parser.parseStatementContent (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12661:27)\n    at Parser.parseStatementLike (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (D:\\Projects\\Work\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (D:\\Projects\\Work\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (D:\\Projects\\Work\\Game\\node_modules\\gensync\\index.js:261:32)\n    at D:\\Projects\\Work\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\Projects\\Work\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },
@@ -2596,8 +2465,23 @@
       \******************************/
     /***/
     (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
       __webpack_require__.r(__webpack_exports__);
       // extracted by mini-css-extract-plugin
+
+      /***/
+    },
+
+    /***/"./assets/img/Background_images/Win_4.jpg":
+    /*!************************************************!*\
+      !*** ./assets/img/Background_images/Win_4.jpg ***!
+      \************************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "assets/41902777fb77a1d57149.jpg";
 
       /***/
     },
@@ -2608,6 +2492,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/019905a133fdd18a829c.jpg";
 
       /***/
@@ -2619,6 +2505,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/caa8591cb3f3a1855c29.png";
 
       /***/
@@ -2630,6 +2518,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/61cdd2e0f3c3604e7b1f.png";
 
       /***/
@@ -2641,6 +2531,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/47bb81cb0aaa2c499d5c.png";
 
       /***/
@@ -2652,6 +2544,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8a499ad60f919b1f6cad.png";
 
       /***/
@@ -2663,6 +2557,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/02bc1678beb112beb4a1.png";
 
       /***/
@@ -2674,6 +2570,8 @@
       \****************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4e23b39a2281ee54125f.png";
 
       /***/
@@ -2685,6 +2583,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c53e7b3ac960db1762a9.png";
 
       /***/
@@ -2696,6 +2596,8 @@
       \**************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/542a853a490865e4177b.png";
 
       /***/
@@ -2707,6 +2609,8 @@
       \***************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/e361987edb2dc29e1508.png";
 
       /***/
@@ -2718,6 +2622,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/38915aefe86632a9ac20.png";
 
       /***/
@@ -2729,6 +2635,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/befd1a46da1a01267d9e.png";
 
       /***/
@@ -2740,6 +2648,8 @@
       \*********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/73ffdfeda1c0c3fa260e.png";
 
       /***/
@@ -2751,6 +2661,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/893ecde318d7755323b7.png";
 
       /***/
@@ -2762,6 +2674,8 @@
       \***************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c2b486028ea06a42538d.png";
 
       /***/
@@ -2773,6 +2687,8 @@
       \*************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a27c1909728c39bb81d1.png";
 
       /***/
@@ -2784,6 +2700,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/15a754e2c1925bdc527f.png";
 
       /***/
@@ -2795,6 +2713,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/dd246bde66e7e6e5e3fc.png";
 
       /***/
@@ -2806,6 +2726,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8227e458d9e6b45666dc.png";
 
       /***/
@@ -2817,6 +2739,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/171091192763139674e9.png";
 
       /***/
@@ -2828,6 +2752,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4550e1c7d8d19a7959ef.png";
 
       /***/
@@ -2839,6 +2765,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
 
       /***/
@@ -2850,6 +2778,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/cf7f7083ae6b5338384a.png";
 
       /***/
@@ -2861,6 +2791,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/ee2cf136916afa6626fe.png";
 
       /***/
@@ -2872,6 +2804,8 @@
       \*******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7eac2d1901ea34422f0e.png";
 
       /***/
@@ -2883,6 +2817,8 @@
       \***********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/03857753acbdef4e6e04.png";
 
       /***/
@@ -2894,6 +2830,8 @@
       \*****************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/62e7d0778000c13e26fd.png";
 
       /***/
@@ -2905,6 +2843,8 @@
       \**********************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
 
       /***/
@@ -2916,6 +2856,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
 
       /***/
@@ -2927,6 +2869,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
 
       /***/
@@ -2938,6 +2882,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
 
       /***/
@@ -2949,6 +2895,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
 
       /***/
@@ -2960,6 +2908,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a81ec16a567429e11f71.png";
 
       /***/
@@ -2971,6 +2921,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
 
       /***/
@@ -2982,6 +2934,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
 
       /***/
@@ -2993,6 +2947,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
 
       /***/
@@ -3004,6 +2960,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
 
       /***/
@@ -3015,6 +2973,8 @@
       \**********************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
 
       /***/
@@ -3026,6 +2986,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/868328e1d62559dea3d3.mp3";
 
       /***/
@@ -3037,6 +2999,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/315ce5bb8774f67f6a53.mp3";
 
       /***/
@@ -3048,6 +3012,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/b070217cc3ec9826fd89.mp3";
 
       /***/
@@ -3059,6 +3025,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/07b873397bd181f0fe5b.mp3";
 
       /***/
@@ -3070,6 +3038,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/173e28202170f19073b8.mp3";
 
       /***/
@@ -3081,6 +3051,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1dec2f6bcf25b798920b.mp3";
 
       /***/
@@ -3092,6 +3064,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/5c0e7724e5723b97e9be.mp3";
 
       /***/
@@ -3103,6 +3077,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2517213c91f01c976f92.mp3";
 
       /***/
@@ -3114,6 +3090,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a2a93b9461f413734ad7.mp3";
 
       /***/
@@ -3125,6 +3103,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a2774fd0d75bdfeed2da.mp3";
 
       /***/
@@ -3136,6 +3116,8 @@
       \**********************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/037494008090ce9e60f2.mp3";
 
       /***/
@@ -3147,6 +3129,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/87197dcb8811e09b73e1.mp3";
 
       /***/
@@ -3158,6 +3142,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/75e0f3d8b173961534ec.mp3";
 
       /***/
@@ -3169,6 +3155,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/b6ba29659cf55d571cc0.mp3";
 
       /***/
@@ -3180,6 +3168,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/97462a60fa4b16083f2e.mp3";
 
       /***/
@@ -3191,6 +3181,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/76d8a9edad64667bb800.mp3";
 
       /***/
@@ -3202,6 +3194,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/a2a5e45d00f4a784b94b.mp3";
 
       /***/
@@ -3213,6 +3207,8 @@
       \*************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/409a03408bb32d1202d2.ogg";
 
       /***/
@@ -3224,6 +3220,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9771e96a1d6912ab23c6.ogg";
 
       /***/
@@ -3235,6 +3233,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/55972719deb5d18b267e.ogg";
 
       /***/
@@ -3246,6 +3246,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2dc046f6177bea7f2950.ogg";
 
       /***/
@@ -3257,6 +3259,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9ea75121a93a42b1411e.ogg";
 
       /***/
@@ -3268,6 +3272,8 @@
       \********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/b0867563ae4e9e18a2e8.ogg";
 
       /***/
@@ -3279,6 +3285,8 @@
       \**********************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/e6ae7ad1b65788f9dae5.ogg";
 
       /***/
@@ -3290,6 +3298,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/957cddacb1deaac79e00.ogg";
 
       /***/
@@ -3301,6 +3311,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/70068ae31959fab95e81.ogg";
 
       /***/
@@ -3312,6 +3324,8 @@
       \********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/9efb836c3a9ba68ca120.ogg";
 
       /***/
@@ -3323,6 +3337,8 @@
       \**********************************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d1e681bf5a15caf9026f.ogg";
 
       /***/
@@ -3334,6 +3350,8 @@
       \**************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/523646943918c59d2b3d.ogg";
 
       /***/
@@ -3345,6 +3363,8 @@
       \******************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/de74680fa0d4fb3d8e14.ogg";
 
       /***/
@@ -3356,6 +3376,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c46e5b7d17520ff6935f.ogg";
 
       /***/
@@ -3367,6 +3389,8 @@
       \************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4f6c0dc57802e6e026c6.ogg";
 
       /***/
@@ -3378,6 +3402,8 @@
       \**********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/aaf531751543bc351744.ogg";
 
       /***/
@@ -3389,6 +3415,8 @@
       \*******************************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/8d6e93c66366655257dd.ogg";
 
       /***/
@@ -3400,6 +3428,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/60db4a6c1bb2742d1f9c.mp3";
 
       /***/
@@ -3411,6 +3441,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4e1718e91aa4e1cca135.mp3";
 
       /***/
@@ -3422,6 +3454,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/1afb1b0a35b44cdf1ff1.mp3";
 
       /***/
@@ -3433,6 +3467,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/4dcabd1247bcf8d7ebcf.mp3";
 
       /***/
@@ -3444,6 +3480,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/2c26659bbe1eda6e9e5d.ogg";
 
       /***/
@@ -3455,6 +3493,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/d97f6fbd97ff9dc44f3f.ogg";
 
       /***/
@@ -3466,6 +3506,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/91a16270795862ed0a69.ogg";
 
       /***/
@@ -3477,6 +3519,8 @@
       \*********************************************/
     /***/
     (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
       module.exports = __webpack_require__.p + "assets/c516101ffeada79f1199.ogg";
 
       /***/

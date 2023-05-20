@@ -69,10 +69,10 @@ const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 8; // 1
 //   }, 300);
 // }
 
-// onResize(canvas, function(){ alert('Resized!');
+// onResize(canvas, function() { 
 // canvas.width = document.documentElement.clientWidth;
 // canvas.height = document.documentElement.clientHeight;
-// } );
+// });
 
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720 //window.innerHeight;
@@ -91,19 +91,6 @@ function fullScreen(e, element) {
     }
   }
 }
-
-// function fullScreenCancel(e) {
-//   if (e.code === 'KeyS') {
-//     if(document.documentElement.requestFullscreen) {
-//       document.documentElement.requestFullscreen();
-//     } else if(document.documentElement.webkitRequestFullscreen ) {
-//       document.documentElement.webkitRequestFullscreen();
-//     } else if(document.documentElement.mozRequestFullscreen) {
-//       document.documentElement.mozRequestFullScreen();
-//     }
-//   }
-// }
-
 let leftNeighboorBlockFromHeroArr = [];
 let timerShoot_1 = null;
 let timerShoot_2 = null;
@@ -119,19 +106,34 @@ _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.collisionsLevel_1.map.forEach((
   });
 });
 
-// new Player({
-//   platforms
-// }); //platforms: platforms
-
+//   platforms.forEach(platform => {
+//   if (platform.type === 'flamethrowerLeft' ||
+//   platform.type === 'flamethrowerRight' ||
+//   platform.type === 'flamethrowerUp' ||
+//   platform.type === 'flamethrowerDown') {
+//   // setInterval(() => gameSoundEffects(audio.fire), 1000);
+//   timerShoot_1 = setTimeout(function soundFire() {
+//       timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
+//       gameSoundEffects(audio.fire);
+//     }, platform.delay * 8); 
+//     clearTimeout(timerShoot_2)                        
+//   }
+// });
+function fireSoundInterval(delay) {
+  timerShoot_1 = setTimeout(function soundFire() {
+    timerShoot_2 = setTimeout(soundFire, delay);
+    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fire);
+  }, delay);
+}
+let firethrowerShootDelay = null;
 _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
-  if (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') {
-    // setInterval(() => gameSoundEffects(audio.fire), 1000);
-    timerShoot_1 = setTimeout(function soundFire() {
-      timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
-      (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fire);
-    }, platform.delay * 8);
-  }
+  (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') && (firethrowerShootDelay = platform.delay);
 });
+if (_js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.some(platform => {
+  return platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown';
+})) {
+  fireSoundInterval(firethrowerShootDelay * 8);
+}
 let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
 track.pause();
 track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
@@ -163,7 +165,7 @@ function init() {
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.save();
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(247, 251, 254)';
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
-    _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.drawImage(levelOverlay, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width - levelOverlay.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height - levelOverlay.height);
+    _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.drawImage(levelOverlay, 0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(21, 173, 188)'; //'rgb(62, 95, 138)'
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.font = `normal ${fontSize}px Rubik Iso`;
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textBaseline = 'middle';
@@ -179,14 +181,8 @@ function init() {
 }
 function animate() {
   requestAnim(animate);
-
-  //c.clearRect(0, 0, canvas.width, canvas.height);
-
   console.log('animation counter');
   additionalElements.forEach(element => element.draw());
-
-  // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
-
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.draw());
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => platform.update()); // рисуем платформы
   _js_Collision__WEBPACK_IMPORTED_MODULE_1__.platforms.forEach(platform => {
@@ -215,56 +211,6 @@ function animate() {
   } else {
     player.velocity.x = 0;
   }
-
-  // platforms.forEach(platform => {
-  //   platform.collision();
-  //   // // Player - platform collision (player is above the platform)
-  //   // if (player.position.y + player.height <= platform.position.y &&
-  //   //     player.position.y + player.height + player.velocity.y >= platform.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-  //   //     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-  //   //     player.position.x + player.width >= platform.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-  //   //     player.position.x <= platform.position.x + platform.width - player.width / 3) { 
-  //   //       player.velocity.y = 0; // если касается земли
-  //   // }
-  //   // // Player - platform collision (player is under the platform)
-  //   // if (player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.y + player.height + player.velocity.y >= platform.position.y &&
-  //   //     player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
-  //   //     player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
-  //   //       player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-  //   // }
-  //   // // Player - platform collision (player is left from the platform and moves right)
-  //   // if (keys.right.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width >= platform.position.x) {
-  //   //       player.velocity.x = 0;
-  //   //       console.log('hit!');
-  //   // } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-  //   //   if (keys.right.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width >= platform.position.x + platform.width) {
-  //   //       player.velocity.x = 2;
-  //   //       console.log('free!');
-  //   //   }
-  //   // // Player - platform collision (player is right from the platform and moves left)
-  //   // if (keys.left.pressed &&
-  //   //   player.position.y + player.height >= platform.position.y && 
-  //   //   player.position.y <= platform.position.y + platform.height &&
-  //   //   player.position.x <= platform.position.x + platform.width) {
-  //   //     player.velocity.x = 0;
-  //   //     console.log('hit!');
-  //   // } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-  //   //   if (keys.left.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width <= platform.position.x) { // или "-" player.width ???
-  //   //       player.velocity.x = -2;
-  //   //       console.log('free!');
-  //   //   }
-  // })
-
   if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
@@ -1153,9 +1099,11 @@ class SpaceToggledPlatform extends Platform {
         return _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_6__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_6__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_6__.player.width * 0.25 <= block.right;
       })) {
         _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
+        _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
         console.log('inside');
       } else {
         console.log('outside');
+        _index__WEBPACK_IMPORTED_MODULE_6__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_data_Audio__WEBPACK_IMPORTED_MODULE_4__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
         _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
       }
     }
@@ -1309,7 +1257,7 @@ class Player {
     };
     this.type = 'player';
     this.gravity = 0.25;
-    this.jumpHeight = 10; // -20 is higher
+    this.jumpHeight = 9; // 20 is higher
     this.width = 32;
     this.height = 32;
     this.frequency = 21;
@@ -1495,6 +1443,7 @@ class Player {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
+              this.alive && (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.bottomHit);
               break;
             }
             if (this.velocity.y > 0) {
@@ -2439,7 +2388,6 @@ let source = null;
   }
   for (let sound in audio) {
     if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {
-      // if (sound != 'isCanPlay')
       let {
         src_MP3: mp3,
         src_OGG: ogg
@@ -2479,41 +2427,6 @@ const playNextTrack = (currentTrack, playlist) => {
   };
 };
 
-// function gameSoundEffects(item) {
-//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
-//     item.src_OGG.currentTime = 0;
-//     item.src_OGG.play();
-//   } else {
-//     item.src_MP3.currentTime = 0;
-//     item.src_MP3.play();
-//   }
-// }
-
-// function gameSoundEffects(item) {
-//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
-//     audio.sound.src= item.src_MP3;
-//   } else {
-//     audio.sound.src= item.src_OGG;
-//   }
-//   audio.sound.currentTime = 0;
-//   audio.sound.play();
-// }
-
-// function gameSoundEffects(item) {
-//   item.currentTime = 0;
-//   item.play();
-// }
-
-// For music
-// let isPlayed = false;
-// function gameSoundEffects(item) {
-//   if(!isPlayed)
-//   item.currentTime = 0;
-//   item.play();
-//   isPlayed = true;
-// }
-
-
 
 /***/ }),
 
@@ -2527,7 +2440,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "collisionsLevel_1": () => (/* binding */ collisionsLevel_1)
 /* harmony export */ });
-// Platforms:
+//Platforms:
 // sl - platform Solid
 // dz - platform One
 // 2p - platform Two
@@ -2552,22 +2465,434 @@ __webpack_require__.r(__webpack_exports__);
 // Player:
 // st - Start point
 // fp - Finish point
-// ff - Finish flag
+
+// export const collisionsLevel_0 = {
+//   margin: {
+//     left: 60,
+//     top: 60,
+//   },
+//   map: [
+//     ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"],
+//     ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+// ],
+// }
 
 const collisionsLevel_1 = {
   margin: {
-    left: 60,
-    top: 60
+    left: 180,
+    top: 216
   },
-  map: [["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "1s", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "dz", "ee", "fp", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
+  map: [["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "2p", "2p", "2p", "3p", "3p", "3p", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
 };
-const data = {
-  "player": {
-    "x": 200,
-    "y": 300
-  },
-  "map": [["dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "sl", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "sl", "dz", "sl"], ["sl", "dz", "sl", "sl", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "jp", "sw", "dz", "sl"], ["sl", "dz", "sl", "sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "sl"], ["sl", "ee", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "dz", "sl"], ["sl", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "sl", "1s", "1p", "ee", "dz", "sl"], ["sl", "dz", "sl", "ee", "ee", "dz", "ee", "ee", "3p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "sl", "ee", "dz", "ee", "ee", "ee", "ee", "3p", "ee", "2p", "ee", "sk", "ee", "ee", "ee"], ["ee", "dz", "ee", "sl", "sl", "ee", "ee", "ee", "dz", "dz", "dz", "sl", "sl", "sl", "dz", "ee"], ["sl", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "dz", "dz", "dz", "dz", "dz", "sl", "dz", "sl"], ["b1", "sl", "sl", "sl", "sl", "sl", "ee", "1s", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"], ["b2", "sl", "sl", "sl", "sl", "sl", "ee", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl", "sl"]]
-};
+
+// export const collisionsLevel_2 = {
+//   margin: {
+//     left: 144,
+//     top: 108,
+//   },
+//   map: [
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "st", "b1"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "3p", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+//   ],
+// }
+
+// export const collisionsLevel_3 = {
+//   margin: {
+//     left: 180,
+//     top: 216,
+//   },
+//   map: [
+//     ["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "b2", "b2", "b2", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "ee", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "b2", "b2", "b2", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "b1"],
+//     ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "b1"]
+//    ],
+// }
+
+// export const collisionsLevel_4 = {
+//   margin: {
+//     left: 430,
+//     top: 36,
+//   },
+//   map: [
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp"],
+//     ["b1", "3p", "3p", "3p", "b1", "b1", "b1", "b1", "b1"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "2p", "2p", "2p", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "1p", "1p", "1p", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "3p", "3p", "3p", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "2p", "2p", "2p", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "1p", "1p", "1p", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "st", "ee", "b1", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee"]
+//   ],
+// }
+
+// export const collisionsLevel_5 = {
+//   margin: {
+//     left: 108,
+//     top: 72,
+//   },
+//   map: [
+//     ["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "sl", "sl", "sl", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"]
+//   ],
+// }
+
+// export const collisionsLevel_6 = {
+//   margin: {
+//     left: 144,
+//     top: 108,
+//   },
+//   map: [
+//     ["ee", "ee", "fp", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "fn", "fn", "dz", "dz", "dz", "ee", "b2", "dz", "dz", "dz", "b2", "ee", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "ee", "b2", "dz", "dz", "dz", "dz", "dz", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "3p", "b2", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "1p", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "1p", "1p"],
+//     ["ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "b2", "ee", "st", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee"]
+//   ]
+// }
+
+// export const collisionsLevel_7 = {
+//   margin: {
+//     left: 36,
+//     top: 36,
+//   },
+//   map: [
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "1s", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "1s", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "3p", "1p", "2p", "ee", "2p", "ee", "2p", "3p", "ee", "1p", "ee", "ee", "ee", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "b1", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee"],
+//     ["ee", "b1", "b1", "ee", "ee", "b1", "b2", "ee", "ee", "ee", "1p", "3p", "2p", "3p", "1p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "ee", "ee", "b1", "b1", "b2", "ee", "ee", "ee", "b2", "3p", "2p", "3p", "3p", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "b1", "b1", "ee", "b2", "2p", "1p", "3p", "b2", "b1", "b1", "b1", "sk", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp"],
+//     ["b1", "ee", "b1", "b1", "ee", "ee", "b2", "sw", "sw", "sw", "b2", "b1", "ee", "b1", "b1", "b1", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "sl", "sl"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "1p", "2p", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "b1", "2p", "1p", "3p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+//   ]
+// }
+
+// export const collisionsLevel_LOL = {
+//   margin: {
+//     left: 108,
+//     top: 72,
+//   },
+//   map: [
+//     ["ee", "st", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["fn", "fn", "fn", "ee", "1p", "1p", "1p", "1p", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "fp"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "fn", "fn"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p", "3p", "ee", "ee", "ee", "ee"]
+//  ]
+// }
+
+// export const collisionsLevel_8 = {
+//   margin: {
+//     left: 144,
+//     top: 180,
+//   },
+//   map: [
+//     ["sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz"],
+//     ["sl", "fp", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+//     ["sl", "ee", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "st"],
+//     ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+//     ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+//     ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+//     ["2p", "2p", "2p", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+//     ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "sl", "sl", "sl", "sl"]
+//   ]
+// }
+
+// export const collisionsLevel_9 = {
+//   margin: {
+//     left: 144,
+//     top: 144,
+//   },
+//   map: [
+//     ["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee"]
+//   ]
+// }
+
+// export const collisionsLevel_10 = {
+//   margin: {
+//     left: 144,
+//     top: 72,
+//   },
+//   map: [
+//     ["ee", "ee", "ee", "ee", "ee", "jd", "jd", "jd", "jd", "ja", "ja", "jd", "jd", "jd", "jd", "ee", "ee", "ee", "b2", "ee", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "b2", "ee"],
+//     ["ee", "ja", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "2p", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "jd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "3p", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "b2", "ee"],
+//     ["ee", "ja", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ja", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "jd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "b2", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "ee"],
+//     ["ee", "ja", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+//   ]
+// }
+
+// export const collisionsLevel_11 = {
+//   margin: {
+//     left: 144,
+//     top: 72,
+//   },
+//   map: [
+//     ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "3p", "3p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "jd", "jd", "b1", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "ee", "ee", "jd", "jd", "ee", "ee", "ee", "b1", "ee", "b1"],
+//     ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "3p", "b1"],
+//     ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ja", "b1"],
+//     ["b1", "ja", "ja", "b1", "ee", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "ee", "ee", "ee", "b1", "ee", "b1"],
+//     ["b1", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "b1"],
+//     ["b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "sk", "sk", "sk", "b1", "2p", "b1"],
+//     ["b1", "jd", "jd", "b1", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "ja", "b1"],
+//     ["b1", "ee", "ee", "b1", "sk", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "ee", "ee", "b1"],
+//     ["b1", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],
+//     ["b1", "ee", "ee", "1p", "ee", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "b1", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "b1", "b1", "b1", "b1", "jd", "jd", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee"]
+//   ]
+// }
+
+// export const collisionsLevel_12 = {
+//   margin: {
+//     left: 144,
+//     top: 0,
+//   },
+//   map: [
+//     ["b2", "ee", "st", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "1p", "1p", "1p", "1p", "1p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "2p", "2p", "2p", "2p", "2p", "b2"],
+//     ["b2", "sw", "sw", "ee", "sw", "sw", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "sw", "sw", "sw", "ee", "sw", "b2"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ja", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "2p", "2p", "2p", "2p", "2p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "3p", "3p", "3p", "3p", "3p", "b2"],
+//     ["b2", "ee", "sw", "sw", "sw", "sw", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "sw", "ee", "sw", "sw", "sw", "b2"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "jd", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"],
+//     ["b2", "3p", "3p", "3p", "3p", "3p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "1p", "1p", "1p", "1p", "b2"],
+//     ["b2", "sw", "sw", "sw", "sw", "ee", "b2", "ee", "ee", "ee", "ja", "ja", "ee", "b2", "sw", "sw", "ee", "sw", "sw", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fp"],
+//     ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "b1", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2"]
+//  ]
+// }
+
+// export const collisionsLevel_13 = {
+//   margin: {
+//     left: 240,
+//     top: 0,
+//   },
+//   map: [
+//     ["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//     ["ee", "ee", "ee", "1s", "1s", "1s", "ee", "ee", "ee", "1s", "1s", "ee", "ee", "ee", "eef", "1s", "1s", "b1"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee"],
+//     ["ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "b1", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+//   ]
+// }
+
+// export const collisionsLevel_14 = {
+//   margin: {
+//     left: 72,
+//     top: 36,
+//   },
+//   map: [
+//     ["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "b2"],
+//     ["b1", "3p", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "ee", "ee", "ee", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "3p", "3p", "3p", "b2"],
+//     ["b1", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "fn", "fn", "b2"],
+//     ["ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "dz", "dz", "1p", "dz", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "1p", "st", "dz", "b2"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2"]
+//   ]
+// }
+
+// export const collisionsLevel_15 = {
+//   margin: {
+//     left: 108,
+//     top: 36,
+//   },
+//   map: [
+//     ["ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee"],
+//     ["ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "st", "b1", "ee", "ee"],
+//     ["ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee"],
+//     ["ee", "ee", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "ee"],
+//     ["ee", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "fl", "ee"],
+//     ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "ee"],
+//     ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "3p", "ee", "b1", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "b1", "ee", "ee", "ee"],
+//     ["ee", "b1", "b1", "b1", "b1", "3p", "3p", "b1", "b1", "b1", "3p", "3p", "b1", "b1", "b1", "3p", "3p", "b1", "ee", "b1", "b1", "b1", "ee", "ee"],
+//     ["ee", "b1", "ee", "2p", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "dz", "dz", "2p", "dz", "dz", "dz", "dz", "dz", "dz", "fl", "b1", "ee", "ee"],
+//     ["ee", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee"],
+//     ["ee", "b1", "fp", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+//  ]
+// }
+
+// export const collisionsLevel_1 = {
+//     margin: {
+//       left: 72,
+//       top: 0,
+//     },
+//     map: [     
+//       ["ee", "ee", "b2", "fd", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"],
+//       ["ee", "ee", "b2", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "b2", "ee", "ee", "ee", "ee", "fl", "b2"],
+//       ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "ee", "1p", "1p", "ee", "ee", "b1", "b2"],
+//       ["ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "3p", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "sk", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "sw", "ee", "ee", "ee", "sk", "ee", "ee", "ee", "sw", "ee", "ee", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fl", "b2"],
+//       ["ee", "ee", "ee", "b2", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "b2", "b2", "b2", "ee", "ee", "b2", "ee", "ee", "2p", "ee", "ee", "b1", "b2"],
+//       ["jd", "jd", "jd", "b2", "ja", "ja", "ja", "b2", "1s", "1s", "1s", "b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "2p", "2p", "2p", "b2", "ee", "ee", "1p", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b1", "ee", "ee", "st", "ee", "ee", "ee", "ee"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"]
+//     ]
+//   }
+
+// export const collisionsLevel_17 = {
+//     margin: {
+//       left: 72,
+//       top: -72,
+//     },
+//     map: [
+//       ["st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//       ["dz", "dz", "dz", "dz", "sk", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],  
+//       ["dz", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"],
+//       ["dz", "dz", "dz", "fd", "fd", "fd", "fd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"],
+//       ["dz", "dz", "dz", "dz", "dz", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"],
+//       ["dz", "dz", "dz", "ee", "1p", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"],
+//       ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "3p", "3p", "3p", "3p", "1s", "1s", "1p", "1s", "1s", "2p", "1s", "1s", "3p", "3p", "b1", "ee", "b1", "ee"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "ee", "b1", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "1p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "fd", "fd", "b1", "3p", "b1", "fd", "fd", "b1", "2p", "b1", "fd", "fd", "b1", "1p", "b1", "ee", "ee", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "fp", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fn", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+//       ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1"],
+//       ["ee", "ee", "ee", "ee", "ee", "ee", "b1", "1p", "1p", "1p", "b1", "2p", "2p", "2p", "2p", "b1", "3p", "3p", "3p", "3p", "b1", "ee", "1s", "ee", "b1"]
+//     ]
+//   }
+
+//     map: [
+//     ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "sl", "sl", "sl", "sl"],
+//     ["dz", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "ee", "ee", "ee", "ee", "ee"],
+//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ja", "ee", "2p", "1p", "ee", "dz", "ee", "ee", "ee", "ee", "ee"]
+// ],
+
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+// ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+
+// console.log(collisionsLevel_1.map.length)
+// console.log(collisionsLevel_1.map[0].length)
+// debugger
 
 /***/ }),
 

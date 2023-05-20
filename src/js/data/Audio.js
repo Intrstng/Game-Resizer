@@ -166,7 +166,7 @@ const audio = {
       source = 'src_OGG';
     }
   for (let sound in audio) {
-    if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {  // if (sound != 'isCanPlay')
+    if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {
       let { src_MP3: mp3, src_OGG: ogg } = audio[sound];
         mp3.play();
         mp3.pause();
@@ -205,60 +205,6 @@ const playNextTrack = (currentTrack, playlist) => {
     playNextTrack(tracksList[currentTrackNumber][source], audio);
   }
 }
-
-
-
-
-
-
-
-
-
-// function gameSoundEffects(item) {
-//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
-//     item.src_OGG.currentTime = 0;
-//     item.src_OGG.play();
-//   } else {
-//     item.src_MP3.currentTime = 0;
-//     item.src_MP3.play();
-//   }
-// }
-
-
- 
-// function gameSoundEffects(item) {
-//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
-//     audio.sound.src= item.src_MP3;
-//   } else {
-//     audio.sound.src= item.src_OGG;
-//   }
-//   audio.sound.currentTime = 0;
-//   audio.sound.play();
-// }
-
-
-// function gameSoundEffects(item) {
-//   item.currentTime = 0;
-//   item.play();
-// }
-
-// For music
-// let isPlayed = false;
-// function gameSoundEffects(item) {
-//   if(!isPlayed)
-//   item.currentTime = 0;
-//   item.play();
-//   isPlayed = true;
-// }
-
-
-
-
-
-
-
-
-
 
 export { audio,
   gameSoundEffects,
