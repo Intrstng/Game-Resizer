@@ -4,11 +4,11 @@ import './sass/styles.scss';
 //   imagePlatform.width = imagePlatform.naturalWidth;
 //   imagePlatform.height = imagePlatform.naturalHeight;
 //}
-import { CollisionBlock, platforms, parsedCollisions } from './js/Collision';
+import { parseCollisitions } from './js/Collision';
 import { canvas, c } from './js/Canvas';
 import { createImage, Sprite } from './js/Utils';
 import { Player } from './js/Player';
-import { collisionsLevel_1 } from './js/data/Collisions';
+import { levelMap } from './js/data/Collisions';
 import { bulletController } from './js/Collision';
 import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from './js/data/Audio';
 
@@ -127,33 +127,45 @@ export let timerShoot_1 = null;
 export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
+
+
+
+
+
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
 ]
 
 
+// class Level {
+//   constructor(value) {
+//     this.stage =  value;
+//   }
+// }
+// export let level = new Level(1);
+
+
+
+export let level = 1;
+
+export let platforms = [];
+export let parsedCollisions = parseCollisitions(levelMap[level], platforms);
+
+
+
+
+
+
 
 export let player;
-  collisionsLevel_1.map.forEach((row, index_Y) => {
+levelMap[level].map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
+     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap[level].margin.left, levelMap[level].margin.top));
     })
   })
 
   
-                                              //   platforms.forEach(platform => {
-                                              //   if (platform.type === 'flamethrowerLeft' ||
-                                              //   platform.type === 'flamethrowerRight' ||
-                                              //   platform.type === 'flamethrowerUp' ||
-                                              //   platform.type === 'flamethrowerDown') {
-                                              //   // setInterval(() => gameSoundEffects(audio.fire), 1000);
-                                              //   timerShoot_1 = setTimeout(function soundFire() {
-                                              //       timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
-                                              //       gameSoundEffects(audio.fire);
-                                              //     }, platform.delay * 8); 
-                                              //     clearTimeout(timerShoot_2)                        
-                                              //   }
-                                              // });
+
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {
     timerShoot_2 = setTimeout(soundFire, delay);
@@ -162,12 +174,12 @@ function fireSoundInterval(delay) {
 }
 
 
-let firethrowerShootDelay = null;
+let flamethrowerShootDelay = null;
 platforms.forEach(platform => {
   ( platform.type === 'flamethrowerLeft' ||
     platform.type === 'flamethrowerRight' ||
     platform.type === 'flamethrowerUp' ||
-    platform.type === 'flamethrowerDown') && (firethrowerShootDelay = platform.delay);
+    platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
 })
 
 if (platforms.some(platform => {
@@ -175,7 +187,7 @@ if (platforms.some(platform => {
   platform.type === 'flamethrowerRight' ||
   platform.type === 'flamethrowerUp' ||
   platform.type === 'flamethrowerDown')})) {
-    fireSoundInterval(firethrowerShootDelay * 8);
+    fireSoundInterval(flamethrowerShootDelay * 8);
 }
 
 
@@ -192,15 +204,15 @@ if (platforms.some(platform => {
                                         }
 
 
-function showNextLevel() {
+function reloadGameplay() {
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
   ];
     platforms.forEach(platform => {
       (platform.type === 'oneStep') && platform.restore();
     });
-    collisionsLevel_1.map.forEach((row, index_Y) => {
+    levelMap[level].map.forEach((row, index_Y) => {
       row.forEach((cell, index_X) => {
-       cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
+       cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap[level].margin.left, levelMap[level].margin.top));
       })
     })
 }
@@ -228,10 +240,10 @@ export function init() {
     canvas.style.letterSpacing = `${fontSize / 20}px`;
     c.fillText('Next level', canvas.width / 2, canvas.height / 2)
     c.restore();
-    setTimeout(() => showNextLevel(), 1250);
+    setTimeout(() => reloadGameplay(), 1250);
     player.completeLevel = false;
   } else {
-    showNextLevel();
+    reloadGameplay();
 } 
 }                      
 
