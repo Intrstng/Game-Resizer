@@ -113,6 +113,7 @@ export class Player {
   }
 
   draw() {
+    if (!this.currentSprite.loaded) return;
     c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.left, this.top, this.width, this.height) // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
   }
 

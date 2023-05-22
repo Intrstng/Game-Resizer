@@ -75,6 +75,7 @@ export class AdditionalElements {
     this.height = image.height;   
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     c.drawImage(this.currentSprite, this.position.x, this.position.y, canvas.width, canvas.height);
   }
 }

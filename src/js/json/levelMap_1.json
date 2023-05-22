@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "margin": {
+    "left": 180,
+    "top": 216
+  },
+  "map": [
+    ["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "ee"],
+    ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "2p", "2p", "2p", "3p", "3p", "3p", "b1", "b1", "b1", "b1"],
+    ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+  ]      
+}

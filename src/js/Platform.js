@@ -96,6 +96,7 @@ class Platform {
     return this.type;
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
   }
   update() {

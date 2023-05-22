@@ -1,4 +1,3 @@
-import { levelMap } from './data/Collisions';
 import { canvas, c } from './Canvas';
 import { platforms, parsedCollisions } from '../index';
 
@@ -65,11 +64,8 @@ import { platformImgSrc300,
 import { createImage, Sprite } from './Utils';
 import { Player } from './Player';
 
-
-
-
 export function parseCollisitions(levelMap, platforms) {
-  return levelMap.map.forEach((row, index_Y) => {
+  levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       switch(cell) {
         case '1p': // Space toggled platform (One)
@@ -139,6 +135,7 @@ export function parseCollisitions(levelMap, platforms) {
       }
     })
   })
+  return levelMap;
 }
 
 

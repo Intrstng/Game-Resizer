@@ -124,7 +124,7 @@ class Flamethrower {
     // c.strokeRect(this.position.x, this.position.y, this.width, this.height);
     // c.fillStyle = "black";
     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-    
+    if (!this.currentSprite.loaded) return;
     this.frames++;
     if (this.frames > this.frequency) this.frames = 0;
     c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height);
@@ -248,6 +248,7 @@ class BulletController {
   }
 
   draw() {
+                                // if (!this.currentSprite.loaded) return;
     this.bullets.forEach((bullet) => {
       if (this.isBulletOffScreen(bullet)) {
         const index = this.bullets.indexOf(bullet);
@@ -331,6 +332,7 @@ class Bullet {
   }
 
   draw() {
+    if (!this.currentSprite.loaded) return;
     this.position.x -= this.flight_X;
     this.position.y -= this.flight_Y;
     this.frames++;

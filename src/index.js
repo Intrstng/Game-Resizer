@@ -8,9 +8,27 @@ import { parseCollisitions } from './js/Collision';
 import { canvas, c } from './js/Canvas';
 import { createImage, Sprite } from './js/Utils';
 import { Player } from './js/Player';
-import { levelMap } from './js/data/Collisions';
+// import { levelMap } from './js/data/DescriptionForLevelMap';
 import { bulletController } from './js/Collision';
 import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from './js/data/Audio';
+
+
+
+function setVolume(sound, volume) {
+  sound = volume;
+}
+
+
+
+window.addEventListener('click', fn)
+
+function fn() {
+
+  setVolume(volumeMusic, 0.3)
+}
+
+
+
 
 import { Platform,
   OneStep,
@@ -70,12 +88,12 @@ import { platformImgSrc300,
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
-
+import { requestLevelMap } from './js/Levels';
 
 
 // canvas.width = document.documentElement.clientWidth;
 // canvas.height = document.documentElement.clientHeight;
-const fontSize = canvas.height / 8; // 10
+const fontSize = canvas.height / 5; // 10
                       // window.addEventListener('resize', () => {
                       //   canvas.width = document.documentElement.clientWidth;
                       //   canvas.height = document.documentElement.clientHeight;
@@ -100,7 +118,7 @@ const fontSize = canvas.height / 8; // 10
 
 canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 // 720 //window.innerHeight;
-let requestAnim = window.requestAnimationFrame ||
+export let requestAnim = window.requestAnimationFrame ||
                   window.webkitRequestAnimationFrame ||
                   window.mozRequestAnimationFrame ||
                   window.oRequestAnimationFrame ||
@@ -108,6 +126,30 @@ let requestAnim = window.requestAnimationFrame ||
                   function(callback) { window.setTimeout(callback, 1000 / 60); }
 
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
+
+
+
+
+
+
+
+
+// let game = [];
+
+// class Game {
+//   constructor(level) {
+//     this.level = level;
+//   }
+// }
+
+// function createNewGame(map) {
+//   Object.values(map).forEach(level => {
+//     game.push(new Game(level.id));
+//   })
+// }
+// console.log(game)
+
+
 
 
 function fullScreen(e, element) {
@@ -146,25 +188,43 @@ export let additionalElements = [
 
 
 
-export let level = 1;
-
-export let platforms = [];
-export let parsedCollisions = parseCollisitions(levelMap[level], platforms);
-
-
+export let level = 3;
+function increseLevel(obj) {
+  return level >= Object.keys(obj).length ? level : ++level;
+ }
 
 
 
 
 
-export let player;
-levelMap[level].map.forEach((row, index_Y) => {
+
+
+
+
+export let platforms = [],
+           levelMap,
+           parsedCollisions,
+           player;
+
+requestLevelMap(`/src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+
+function setLevelMap(value) {
+  levelMap = value;
+  console.log(levelMap)
+  return levelMap;
+}
+
+function createPlayer(levelMap, platforms) {
+  levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap[level].margin.left, levelMap[level].margin.top));
+    if (cell === 'st') {
+      player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top);
+    } 
     })
   })
+  return player;
+}
 
-  
 
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {
@@ -172,36 +232,38 @@ function fireSoundInterval(delay) {
     gameSoundEffects(audio.fire);
   }, delay); 
 }
+let initStart = true;
+ function flamethrowerShootSoundIntervalInit() {
+  if (initStart) {
+    let flamethrowerShootDelay = null;
+    platforms.forEach(platform => {
+      ( platform.type === 'flamethrowerLeft' ||
+        platform.type === 'flamethrowerRight' ||
+        platform.type === 'flamethrowerUp' ||
+        platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
+    })
+    
+    if (platforms.some(platform => {
+      return (platform.type === 'flamethrowerLeft' ||
+      platform.type === 'flamethrowerRight' ||
+      platform.type === 'flamethrowerUp' ||
+      platform.type === 'flamethrowerDown')})) {
+        fireSoundInterval(flamethrowerShootDelay * 8);
+    }
+  }
+  initStart = false;
+ }
 
 
-let flamethrowerShootDelay = null;
-platforms.forEach(platform => {
-  ( platform.type === 'flamethrowerLeft' ||
-    platform.type === 'flamethrowerRight' ||
-    platform.type === 'flamethrowerUp' ||
-    platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
-})
-
-if (platforms.some(platform => {
-  return (platform.type === 'flamethrowerLeft' ||
-  platform.type === 'flamethrowerRight' ||
-  platform.type === 'flamethrowerUp' ||
-  platform.type === 'flamethrowerDown')})) {
-    fireSoundInterval(flamethrowerShootDelay * 8);
-}
 
 
-
-
-
-
-                                        let track = getRandomTrack(audio);
-                                        track.pause();
-                                        track = getRandomTrack(audio)
-                                        //track.play();
-                                        track.onended = function() {
-                                          playNextTrack(track, audio);
-                                        }
+                            let track = getRandomTrack(audio);
+                            track.pause();
+                            track = getRandomTrack(audio)
+                            track.play();
+                            track.onended = function() {
+                              playNextTrack(track, audio);
+                            }
 
 
 function reloadGameplay() {
@@ -210,30 +272,33 @@ function reloadGameplay() {
     platforms.forEach(platform => {
       (platform.type === 'oneStep') && platform.restore();
     });
-    levelMap[level].map.forEach((row, index_Y) => {
+    levelMap.map.forEach((row, index_Y) => {
       row.forEach((cell, index_X) => {
-       cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap[level].margin.left, levelMap[level].margin.top));
+       cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top));
       })
-    })
+    })  
 }
+
+
+
 
 let levelOverlay = createImage(win);
 levelOverlay.width = canvas.width;
 levelOverlay.height = canvas.height;
 
 export function init() {
+  flamethrowerShootSoundIntervalInit();
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;
   
   if (player.completeLevel) {
-    
     c.save();
     c.fillStyle = 'rgb(247, 251, 254)';
     c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
     c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
     
-    c.fillStyle = 'rgb(21, 173, 188)'; //'rgb(62, 95, 138)'
+    c.fillStyle = 'rgb(21, 173, 188)';
     c.font = `normal ${fontSize}px Rubik Iso`;
     c.textBaseline = 'middle';
     c.textAlign = 'center';
@@ -245,19 +310,21 @@ export function init() {
   } else {
     reloadGameplay();
 } 
+return player;
 }                      
 
 
 function animate() {
 
   requestAnim(animate);
+  
   console.log('animation counter');
 
   additionalElements.forEach(element => element.draw());
                               
                           
                           platforms.forEach(platform => platform.draw());
-                          platforms.forEach(platform => platform.update()); // рисуем платформы
+                          platforms.forEach(platform => platform.update());
                           platforms.forEach(platform => {
                             (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
                           
@@ -283,8 +350,7 @@ function animate() {
                           }
                           
                           });
-                          //flamethrower.shootPressed = true
-                          // bulletController.draw();
+
                           
 
 
@@ -328,22 +394,12 @@ if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.press
 gameSoundEffects(audio.fallingInDepth2);
 keys.jumpToggleActive = !keys.jumpToggleActive;
         init();
-        console.log('you lose')
-
-        // сюда вставить звук проигрыша
       }
 
 
 }
-init();
-animate();
+// init();
+// animate();
 
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
-
-
-
-window.addEventListener('click', (e) => {
-  console.log(e.clientX, e.clientY)
-   // debugger
-})

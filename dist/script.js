@@ -15,9 +15,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "init": () => (/* binding */ init),
 /* harmony export */   "leftNeighboorBlockFromHero": () => (/* binding */ leftNeighboorBlockFromHero),
 /* harmony export */   "level": () => (/* binding */ level),
+/* harmony export */   "levelMap": () => (/* binding */ levelMap),
 /* harmony export */   "parsedCollisions": () => (/* binding */ parsedCollisions),
 /* harmony export */   "platforms": () => (/* binding */ platforms),
 /* harmony export */   "player": () => (/* binding */ player),
+/* harmony export */   "requestAnim": () => (/* binding */ requestAnim),
 /* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
 /* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
 /* harmony export */ });
@@ -26,13 +28,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _js_Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Utils */ "./src/js/Utils.js");
 /* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
-/* harmony import */ var _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/data/Collisions */ "./src/js/data/Collisions.js");
-/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/data/Audio */ "./src/js/data/Audio.js");
-/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
-/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
-/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
-/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
+/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
+/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
+/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
+/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
+/* harmony import */ var _js_Levels__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/Levels */ "./src/js/Levels.js");
 
 
 // imagePlatform.onload = function getSizes () {
@@ -43,8 +45,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { levelMap } from './js/data/DescriptionForLevelMap';
 
 
+function setVolume(sound, volume) {
+  sound = volume;
+}
+window.addEventListener('click', fn);
+function fn() {
+  setVolume(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.volumeMusic, 0.3);
+}
 
 
 
@@ -54,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // canvas.width = document.documentElement.clientWidth;
 // canvas.height = document.documentElement.clientHeight;
-const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 8; // 10
+const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 5; // 10
 // window.addEventListener('resize', () => {
 //   canvas.width = document.documentElement.clientWidth;
 //   canvas.height = document.documentElement.clientHeight;
@@ -83,6 +93,22 @@ let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationF
   window.setTimeout(callback, 1000 / 60);
 };
 window.addEventListener('keydown', e => fullScreen(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas));
+
+// let game = [];
+
+// class Game {
+//   constructor(level) {
+//     this.level = level;
+//   }
+// }
+
+// function createNewGame(map) {
+//   Object.values(map).forEach(level => {
+//     game.push(new Game(level.id));
+//   })
+// }
+// console.log(game)
+
 function fullScreen(e, element) {
   if (e.code === 'KeyF') {
     if (element.requestFullscreen) {
@@ -99,7 +125,7 @@ let timerShoot_1 = null;
 let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
-let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 
 // class Level {
 //   constructor(value) {
@@ -108,65 +134,87 @@ let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11
 // }
 // export let level = new Level(1);
 
-let level = 1;
-let platforms = [];
-let parsedCollisions = (0,_js_Collision__WEBPACK_IMPORTED_MODULE_1__.parseCollisitions)(_js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level], platforms);
-let player;
-_js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level].map.forEach((row, index_Y) => {
-  row.forEach((cell, index_X) => {
-    cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
-      platforms
-    }, index_X * 36, index_Y * 36, _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level].margin.left, _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level].margin.top));
+let level = 3;
+function increseLevel(obj) {
+  return level >= Object.keys(obj).length ? level : ++level;
+}
+let platforms = [],
+  levelMap,
+  parsedCollisions,
+  player;
+(0,_js_Levels__WEBPACK_IMPORTED_MODULE_11__.requestLevelMap)(`/src/js/json/levelMap_${level}.json`, setLevelMap, _js_Collision__WEBPACK_IMPORTED_MODULE_1__.parseCollisitions, createPlayer, init, animate);
+function setLevelMap(value) {
+  levelMap = value;
+  console.log(levelMap);
+  return levelMap;
+}
+function createPlayer(levelMap, platforms) {
+  levelMap.map.forEach((row, index_Y) => {
+    row.forEach((cell, index_X) => {
+      if (cell === 'st') {
+        player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
+          platforms
+        }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top);
+      }
+    });
   });
-});
+  return player;
+}
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {
     timerShoot_2 = setTimeout(soundFire, delay);
-    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fire);
+    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.fire);
   }, delay);
 }
-let flamethrowerShootDelay = null;
-platforms.forEach(platform => {
-  (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
-});
-if (platforms.some(platform => {
-  return platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown';
-})) {
-  fireSoundInterval(flamethrowerShootDelay * 8);
+let initStart = true;
+function flamethrowerShootSoundIntervalInit() {
+  if (initStart) {
+    let flamethrowerShootDelay = null;
+    platforms.forEach(platform => {
+      (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
+    });
+    if (platforms.some(platform => {
+      return platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown';
+    })) {
+      fireSoundInterval(flamethrowerShootDelay * 8);
+    }
+  }
+  initStart = false;
 }
-let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
 track.pause();
-track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
-//track.play();
+track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
+track.play();
 track.onended = function () {
-  (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+  (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
 };
 function reloadGameplay() {
-  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
+  additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
   platforms.forEach(platform => {
     platform.type === 'oneStep' && platform.restore();
   });
-  _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level].map.forEach((row, index_Y) => {
+  levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
         platforms
-      }, index_X * 36, index_Y * 36, _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level].margin.left, _js_data_Collisions__WEBPACK_IMPORTED_MODULE_5__.levelMap[level].margin.top));
+      }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top));
     });
   });
 }
-let levelOverlay = (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.win);
+let levelOverlay = (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.win);
 levelOverlay.width = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width;
 levelOverlay.height = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height;
 function init() {
+  flamethrowerShootSoundIntervalInit();
   player.velocity.y = 1;
   player.alive = true;
-  _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
+  _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.spaceToggleCounter = 1;
   if (player.completeLevel) {
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.save();
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(247, 251, 254)';
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.drawImage(levelOverlay, 0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
-    _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(21, 173, 188)'; //'rgb(62, 95, 138)'
+    _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(21, 173, 188)';
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.font = `normal ${fontSize}px Rubik Iso`;
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textBaseline = 'middle';
     _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textAlign = 'center';
@@ -178,13 +226,14 @@ function init() {
   } else {
     reloadGameplay();
   }
+  return player;
 }
 function animate() {
   requestAnim(animate);
   console.log('animation counter');
   additionalElements.forEach(element => element.draw());
   platforms.forEach(platform => platform.draw());
-  platforms.forEach(platform => platform.update()); // рисуем платформы
+  platforms.forEach(platform => platform.update());
   platforms.forEach(platform => {
     (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
     if (platform.type === 'platformOne' || platform.type === 'platformTwo' || platform.type === 'platformThree' || platform.type === 'deadSignalZone' || platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') {
@@ -194,27 +243,24 @@ function animate() {
       platform.shoot();
     }
   });
-  //flamethrower.shootPressed = true
-  // bulletController.draw();
-
   leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
     return platform.left <= player.left && platform.top <= player.top && platform.bottom >= player.bottom;
   });
   leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
   player.update();
-  if (_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
+  if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
     // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && player.position.x >= 0) {
+  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && player.position.x >= 0) {
     // упор персонажа в левый край экрана
     player.velocity.x = -2;
   } else {
     player.velocity.x = 0;
   }
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'right') {
+  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'left') {
+  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'left') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.left;
   }
@@ -223,23 +269,16 @@ function animate() {
   if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height) {
     // sawTrap.restore();
     //sawTrap2.restore(); // !!!!!!!!!!!!
-    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fallingInDepth2);
-    _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive;
+    (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.fallingInDepth2);
+    _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive;
     init();
-    console.log('you lose');
-
-    // сюда вставить звук проигрыша
   }
 }
+// init();
+// animate();
 
-init();
-animate();
-window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keyDownHandler);
-window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keyUpHandler);
-window.addEventListener('click', e => {
-  console.log(e.clientX, e.clientY);
-  // debugger
-});
+window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyDownHandler);
+window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyUpHandler);
 
 /***/ }),
 
@@ -294,6 +333,7 @@ class AdditionalElements {
     this.height = image.height;
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, this.position.x, this.position.y, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.width, _Canvas__WEBPACK_IMPORTED_MODULE_0__.canvas.height);
   }
 }
@@ -308,7 +348,7 @@ class AdditionalElements {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "backgroundImg": () => (/* reexport default export from named module */ _assets_img_Background_images_bg_3_jpg__WEBPACK_IMPORTED_MODULE_10__),
+/* harmony export */   "backgroundImg": () => (/* reexport default export from named module */ _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__),
 /* harmony export */   "brick_1": () => (/* reexport default export from named module */ _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__),
 /* harmony export */   "brick_2": () => (/* reexport default export from named module */ _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__),
 /* harmony export */   "deadSignalZone": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__),
@@ -358,7 +398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../assets/img/Hero/Fall_right.png */ "./assets/img/Hero/Fall_right.png");
 /* harmony import */ var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../assets/img/Hero/Fall_left.png */ "./assets/img/Hero/Fall_left.png");
 /* harmony import */ var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../assets/img/Hero/Player_death.png */ "./assets/img/Hero/Player_death.png");
-/* harmony import */ var _assets_img_Background_images_bg_3_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../assets/img/Background_images/bg_3.jpg */ "./assets/img/Background_images/bg_3.jpg");
+/* harmony import */ var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../assets/img/Background_images/bg_1.jpg */ "./assets/img/Background_images/bg_1.jpg");
 /* harmony import */ var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../assets/img/Background_images/Win_4.jpg */ "./assets/img/Background_images/Win_4.jpg");
 /* harmony import */ var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_solid.png */ "./assets/img/Platforms/Platform_solid.png");
 /* harmony import */ var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_oneStep.png */ "./assets/img/Platforms/Platform_oneStep.png");
@@ -490,18 +530,16 @@ const c = canvas.getContext("2d");
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "parseCollisitions": () => (/* binding */ parseCollisitions),
-/* harmony export */   "parsedCollisions": () => (/* reexport safe */ _index__WEBPACK_IMPORTED_MODULE_2__.parsedCollisions),
-/* harmony export */   "platforms": () => (/* reexport safe */ _index__WEBPACK_IMPORTED_MODULE_2__.platforms)
+/* harmony export */   "parsedCollisions": () => (/* reexport safe */ _index__WEBPACK_IMPORTED_MODULE_1__.parsedCollisions),
+/* harmony export */   "platforms": () => (/* reexport safe */ _index__WEBPACK_IMPORTED_MODULE_1__.platforms)
 /* harmony export */ });
-/* harmony import */ var _data_Collisions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/Collisions */ "./src/js/data/Collisions.js");
-/* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../index */ "./src/index.js");
-/* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
-/* harmony import */ var _Traps__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Traps */ "./src/js/Traps.js");
-/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
-/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Player */ "./src/js/Player.js");
-
+/* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../index */ "./src/index.js");
+/* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
+/* harmony import */ var _Traps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Traps */ "./src/js/Traps.js");
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
+/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Player */ "./src/js/Player.js");
 
 
 
@@ -510,86 +548,87 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function parseCollisitions(levelMap, platforms) {
-  return levelMap.map.forEach((row, index_Y) => {
+  levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       switch (cell) {
         case '1p':
           // Space toggled platform (One)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformOne(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformOne, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformOne(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOne, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case '2p':
           // Space toggled platform (Two)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformTwo(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformTwo, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformTwo(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformTwo, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case '3p':
           // Space toggled platform (Three)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.PlatformThree(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformThree, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.PlatformThree(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformThree, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case '1s':
           // One-Step platform
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.OneStep(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformOneStep, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.OneStep(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformOneStep, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'sl':
           // Solid platform
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.Platform(
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Platform(
           // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformSolid, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformSolid, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'ja':
           // Jump-toggled platform (active)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.JumpToggleActive(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformJump, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleActive(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'jd':
           // Jump-toggled platform (disabled)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.platformJump, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.JumpToggleDisabled(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.platformJump, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'sk':
           // Saw trap platform
-          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_4__.PlatformSpikes(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.spike, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.PlatformSpikes(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.spike, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'sw':
           // Spikes trap platform
-          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_4__.Saw(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.saw, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.Saw(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.saw, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'dz':
           // Dead signal zone
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.DeadSignal(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.deadSignalZone, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.DeadSignal(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.deadSignalZone, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'fl':
           // Flamethrower (left)
-          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_4__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_4__.BulletController(), levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerLeft(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerLeft, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController(), levelMap.margin.left, levelMap.margin.top));
           break;
         case 'fr':
           // Flamethrower (right)
-          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_4__.FlamethrowerRight(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_4__.BulletController(), levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerRight(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerRight, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController(), levelMap.margin.left, levelMap.margin.top));
           break;
         case 'fu':
           // Flamethrower (up)
-          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_4__.FlamethrowerUp(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_4__.BulletController(), levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerUp(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerUp, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController(), levelMap.margin.left, levelMap.margin.top));
           break;
         case 'fd':
           // Flamethrower (down)
-          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_4__.FlamethrowerDown(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_4__.BulletController(), levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Traps__WEBPACK_IMPORTED_MODULE_3__.FlamethrowerDown(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, new _Traps__WEBPACK_IMPORTED_MODULE_3__.BulletController(), levelMap.margin.left, levelMap.margin.top));
           break;
         case 'fn':
           // Fan (decoration)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.Fan(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.flamethrowerDown, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Fan(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.flamethrowerDown, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'b1':
           // Fan (decoration)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.Brick_1(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.brick_1, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_1(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_1, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'b2':
           // Fan (decoration)
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.Brick_2(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.brick_2, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Brick_2(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
         case 'fp':
           // Finish point
-          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_3__.Finish(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_6__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_5__.brick_2, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
+          platforms.push(new _Platform__WEBPACK_IMPORTED_MODULE_2__.Finish(index_X * 36, index_Y * 36, (0,_Utils__WEBPACK_IMPORTED_MODULE_5__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.brick_2, 36, 36), platforms, levelMap.margin.left, levelMap.margin.top));
           break;
       }
     });
   });
+  return levelMap;
 }
 
 // const parsedCollisions = collisionsLevel_1.map.forEach((row, index_Y) => {
@@ -707,6 +746,7 @@ const keys = {
   deadSignalZone: false
 };
 // let hiddenPlatformsArr = []
+
 const keyDownHandler = e => {
   console.log(e.code);
   if (e.repeat == false) {
@@ -787,6 +827,30 @@ const keyUpHandler = e => {
   }
 };
 
+
+/***/ }),
+
+/***/ "./src/js/Levels.js":
+/*!**************************!*\
+  !*** ./src/js/Levels.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "requestLevelMap": () => (/* binding */ requestLevelMap)
+/* harmony export */ });
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
+
+function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, callback_5) {
+  fetch(url).then(response => {
+    if (response.status !== 200) {
+      console.log(`Возникла проблема. Код ошибки: ${response.status}`);
+      return;
+    }
+    response.json().then(map => callback_1(map, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(data => callback_2(data, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(player => callback_3(player, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(init => callback_4(init, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(animate => callback_5(animate, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).catch(err => console.error('Fetch Error - levels map load failed', err));
+  });
+}
 
 /***/ }),
 
@@ -874,6 +938,7 @@ class Platform {
     return this.type;
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     _Canvas__WEBPACK_IMPORTED_MODULE_1__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height); // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
   }
 
@@ -1358,6 +1423,7 @@ class Player {
     this.position.x = value;
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.left, this.top, this.width, this.height); // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
   }
 
@@ -1706,7 +1772,7 @@ class Flamethrower {
     // c.strokeRect(this.position.x, this.position.y, this.width, this.height);
     // c.fillStyle = "black";
     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-
+    if (!this.currentSprite.loaded) return;
     this.frames++;
     if (this.frames > this.frequency) this.frames = 0;
     _Canvas__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height);
@@ -1842,6 +1908,7 @@ class BulletController {
     this.timerTillNextBullet--;
   }
   draw() {
+    // if (!this.currentSprite.loaded) return;
     this.bullets.forEach(bullet => {
       if (this.isBulletOffScreen(bullet)) {
         const index = this.bullets.indexOf(bullet);
@@ -1912,6 +1979,7 @@ class Bullet {
     }
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     this.position.x -= this.flight_X;
     this.position.y -= this.flight_Y;
     this.frames++;
@@ -2183,6 +2251,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function createImage(src, width, height) {
   const image = new Image();
+  image.onload = () => {
+    image.loaded = true;
+  };
+  image.loaded = false;
   image.src = src;
   image.width = width;
   image.height = height;
@@ -2206,7 +2278,7 @@ function randomNumber() {
 //     this.loaded = false;
 //   }
 //   draw() {
-//     if (!this.loaded) return;
+//                                 if (!this.loaded) return; // if (!this.currentSprite) return;
 //     c.drawImage(this.image, this.position.x, this.position.y)
 //   }
 // }
@@ -2271,6 +2343,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_4.mp3 */ "./assets/sounds/music/mp3/track_4.mp3");
 /* harmony import */ var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_4.ogg */ "./assets/sounds/music/ogg/track_4.ogg");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../Utils */ "./src/js/Utils.js");
+// import blockHit_MP3 from '/assets/sounds/effects/mp3/block_hit.mp3';
+// import blockHit_OGG from '/assets/sounds/effects/ogg/block_hit.ogg';
 
 
 
@@ -2315,7 +2389,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let volumeEffects = 1;
-let volumeMusic = 1;
+let volumeMusic = 0.8;
 const audio = {
   isCanPlay: new Audio(),
   blockHit: {
@@ -2424,9 +2498,8 @@ const audio = {
     volume: volumeMusic
   }
 };
-
-// Choose supported source and preload
 let source = null;
+// Choose supported source and preload
 ;
 (function () {
   if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
@@ -2435,7 +2508,7 @@ let source = null;
     source = 'src_OGG';
   }
   for (let sound in audio) {
-    if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {
+    if (sound != 'isCanPlay') {
       let {
         src_MP3: mp3,
         src_OGG: ogg
@@ -2454,10 +2527,14 @@ function gameSoundEffects(item) {
 }
 function getRandomTrack(playlist) {
   let tracksList = [];
+  let track;
   for (let sound in playlist) {
     sound.includes('track') && tracksList.push(playlist[sound]);
   }
-  return tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
+  track = tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
+  track.currentTime = 0;
+  track.volume = volumeMusic;
+  return track;
 }
 const playNextTrack = (currentTrack, playlist) => {
   let tracksList = [];
@@ -2469,329 +2546,52 @@ const playNextTrack = (currentTrack, playlist) => {
     track[source] === currentTrack && (currentTrackNumber = index);
   });
   currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
+  tracksList[currentTrackNumber][source].currentTime = 0;
+  tracksList[currentTrackNumber][source].volume = volumeMusic;
   tracksList[currentTrackNumber][source].play();
   tracksList[currentTrackNumber][source].onended = function () {
     playNextTrack(tracksList[currentTrackNumber][source], audio);
   };
 };
 
+// item[source].currentTime = 0;
+// item[source].volume = item.volume;
 
-/***/ }),
-
-/***/ "./src/js/data/Collisions.js":
-/*!***********************************!*\
-  !*** ./src/js/data/Collisions.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "collisionsLevel_1": () => (/* binding */ collisionsLevel_1),
-/* harmony export */   "collisionsLevel_10": () => (/* binding */ collisionsLevel_10),
-/* harmony export */   "collisionsLevel_11": () => (/* binding */ collisionsLevel_11),
-/* harmony export */   "collisionsLevel_12": () => (/* binding */ collisionsLevel_12),
-/* harmony export */   "collisionsLevel_13": () => (/* binding */ collisionsLevel_13),
-/* harmony export */   "collisionsLevel_14": () => (/* binding */ collisionsLevel_14),
-/* harmony export */   "collisionsLevel_15": () => (/* binding */ collisionsLevel_15),
-/* harmony export */   "collisionsLevel_16": () => (/* binding */ collisionsLevel_16),
-/* harmony export */   "collisionsLevel_17": () => (/* binding */ collisionsLevel_17),
-/* harmony export */   "collisionsLevel_2": () => (/* binding */ collisionsLevel_2),
-/* harmony export */   "collisionsLevel_3": () => (/* binding */ collisionsLevel_3),
-/* harmony export */   "collisionsLevel_4": () => (/* binding */ collisionsLevel_4),
-/* harmony export */   "collisionsLevel_5": () => (/* binding */ collisionsLevel_5),
-/* harmony export */   "collisionsLevel_6": () => (/* binding */ collisionsLevel_6),
-/* harmony export */   "collisionsLevel_7": () => (/* binding */ collisionsLevel_7),
-/* harmony export */   "collisionsLevel_8": () => (/* binding */ collisionsLevel_8),
-/* harmony export */   "collisionsLevel_9": () => (/* binding */ collisionsLevel_9),
-/* harmony export */   "levelMap": () => (/* binding */ levelMap)
-/* harmony export */ });
-//Platforms:
-// sl - platform Solid
-// dz - platform One
-// 2p - platform Two
-// 3p - platform Three
-// ja - platform Jump-Toggle (active)
-// jd - platform Jump-Toggle (disabled)
-// 1s - platform One-Step
-// Traps:
-// sw - Saw trap
-// sk - Spikes trap
-// fl - Flamethrower (left)
-// fr - Flamethrower (right)
-// fu - Flamethrower (up)
-// fd - Flamethrower (down)
-// dz - Dead signal zone
-// Decorations:
-// b1 - Frame brick 1
-// b2 - Frame block 2
-// fn - Fan
-// Empty:
-// ee - Empty block
-// Player:
-// st - Start point
-// fp - Finish point
-
-const levelMap = {
-  1: {
-    margin: {
-      left: 180,
-      top: 216
-    },
-    map: [["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "2p", "2p", "2p", "3p", "3p", "3p", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  2: {
-    margin: {
-      left: 144,
-      top: 108
-    },
-    map: [["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "st", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "3p", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  3: {
-    margin: {
-      left: 180,
-      top: 216
-    },
-    map: [["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "b2", "b2", "b2", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "ee", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "b2", "b2", "b2", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "b1"], ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "b1"]]
-  },
-  4: {
-    margin: {
-      left: 430,
-      top: 36
-    },
-    map: [["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp"], ["b1", "3p", "3p", "3p", "b1", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "2p", "2p", "2p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "1p", "1p", "1p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "3p", "3p", "3p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "2p", "2p", "2p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "1p", "1p", "1p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "st", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee"]]
-  },
-  5: {
-    margin: {
-      left: 108,
-      top: 72
-    },
-    map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p"], ["ee", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "sl", "sl", "sl", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  6: {
-    margin: {
-      left: 144,
-      top: 108
-    },
-    map: [["ee", "ee", "fp", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "fn", "fn", "dz", "dz", "dz", "ee", "b2", "dz", "dz", "dz", "b2", "ee", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "ee", "b2", "dz", "dz", "dz", "dz", "dz", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "3p", "b2", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "1p", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "1p", "1p"], ["ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b2", "ee", "st", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee"]]
-  },
-  7: {
-    margin: {
-      left: 36,
-      top: 36
-    },
-    map: [["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "1s", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "1s", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "3p", "1p", "2p", "ee", "2p", "ee", "2p", "3p", "ee", "1p", "ee", "ee", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "b1", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee"], ["ee", "b1", "b1", "ee", "ee", "b1", "b2", "ee", "ee", "ee", "1p", "3p", "2p", "3p", "1p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "ee", "ee", "b1", "b1", "b2", "ee", "ee", "ee", "b2", "3p", "2p", "3p", "3p", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "b1", "b1", "ee", "b2", "2p", "1p", "3p", "b2", "b1", "b1", "b1", "sk", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp"], ["b1", "ee", "b1", "b1", "ee", "ee", "b2", "sw", "sw", "sw", "b2", "b1", "ee", "b1", "b1", "b1", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "sl", "sl"], ["b1", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "1p", "2p", "ee", "ee", "ee", "ee"], ["b1", "b1", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b1", "2p", "1p", "3p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  8: {
-    margin: {
-      left: 144,
-      top: 180
-    },
-    map: [["sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz"], ["sl", "fp", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["sl", "ee", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "st"], ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["2p", "2p", "2p", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "sl", "sl", "sl", "sl"]]
-  },
-  9: {
-    margin: {
-      left: 144,
-      top: 144
-    },
-    map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  10: {
-    margin: {
-      left: 144,
-      top: 72
-    },
-    map: [["ee", "ee", "ee", "ee", "ee", "jd", "jd", "jd", "jd", "ja", "ja", "jd", "jd", "jd", "jd", "ee", "ee", "ee", "b2", "ee", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "b2", "ee"], ["ee", "ja", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "2p", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "jd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "3p", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "b2", "ee"], ["ee", "ja", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ja", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "jd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "ee"], ["ee", "ja", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  11: {
-    margin: {
-      left: 144,
-      top: 72
-    },
-    map: [["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "3p", "3p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "jd", "jd", "b1", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "ee", "ee", "jd", "jd", "ee", "ee", "ee", "b1", "ee", "b1"], ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "3p", "b1"], ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ja", "b1"], ["b1", "ja", "ja", "b1", "ee", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "ee", "ee", "ee", "b1", "ee", "b1"], ["b1", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "b1"], ["b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "sk", "sk", "sk", "b1", "2p", "b1"], ["b1", "jd", "jd", "b1", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "ja", "b1"], ["b1", "ee", "ee", "b1", "sk", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "1p", "ee", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "b1", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "b1", "jd", "jd", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  12: {
-    margin: {
-      left: 144,
-      top: 0
-    },
-    map: [["b2", "ee", "st", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "1p", "1p", "1p", "1p", "1p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "2p", "2p", "2p", "2p", "2p", "b2"], ["b2", "sw", "sw", "ee", "sw", "sw", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "sw", "sw", "sw", "ee", "sw", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ja", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "2p", "2p", "2p", "2p", "2p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "3p", "3p", "3p", "3p", "3p", "b2"], ["b2", "ee", "sw", "sw", "sw", "sw", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "sw", "ee", "sw", "sw", "sw", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "jd", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "3p", "3p", "3p", "3p", "3p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "1p", "1p", "1p", "1p", "b2"], ["b2", "sw", "sw", "sw", "sw", "ee", "b2", "ee", "ee", "ee", "ja", "ja", "ee", "b2", "sw", "sw", "ee", "sw", "sw", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fp"], ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "b1", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2"]]
-  },
-  13: {
-    margin: {
-      left: 240,
-      top: 0
-    },
-    map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "1s", "1s", "1s", "ee", "ee", "ee", "1s", "1s", "ee", "ee", "ee", "eef", "1s", "1s", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee"], ["ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "b1", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  14: {
-    margin: {
-      left: 72,
-      top: 36
-    },
-    map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "b2"], ["b1", "3p", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "ee", "ee", "ee", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "3p", "3p", "3p", "b2"], ["b1", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "fn", "fn", "b2"], ["ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "dz", "dz", "1p", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "1p", "st", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2"]]
-  },
-  15: {
-    margin: {
-      left: 108,
-      top: 36
-    },
-    map: [["ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee"], ["ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "st", "b1", "ee", "ee"], ["ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee"], ["ee", "ee", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "ee"], ["ee", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"], ["ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "fl", "ee"], ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "3p", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "b1", "ee", "ee", "ee"], ["ee", "b1", "b1", "b1", "b1", "3p", "3p", "b1", "b1", "b1", "3p", "3p", "b1", "b1", "b1", "3p", "3p", "b1", "ee", "b1", "b1", "b1", "ee", "ee"], ["ee", "b1", "ee", "2p", "dz", "dz", "dz", "dz", "2p", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "dz", "dz", "dz", "dz", "fl", "b1", "ee", "ee"], ["ee", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee"], ["ee", "b1", "fp", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-  },
-  16: {
-    margin: {
-      left: 72,
-      top: 0
-    },
-    map: [["ee", "ee", "b2", "fd", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"], ["ee", "ee", "b2", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "b2", "ee", "ee", "ee", "ee", "fl", "b2"], ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "ee", "1p", "1p", "ee", "ee", "b1", "b2"], ["ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "3p", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "sk", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "sw", "ee", "ee", "ee", "sk", "ee", "ee", "ee", "sw", "ee", "ee", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fl", "b2"], ["ee", "ee", "ee", "b2", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "b2", "b2", "b2", "ee", "ee", "b2", "ee", "ee", "2p", "ee", "ee", "b1", "b2"], ["jd", "jd", "jd", "b2", "ja", "ja", "ja", "b2", "1s", "1s", "1s", "b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "2p", "2p", "2p", "b2", "ee", "ee", "1p", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b1", "ee", "ee", "st", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"]]
-  },
-  17: {
-    margin: {
-      left: 72,
-      top: -72
-    },
-    map: [["st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["dz", "dz", "dz", "dz", "sk", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["dz", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"], ["dz", "dz", "dz", "fd", "fd", "fd", "fd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"], ["dz", "dz", "dz", "dz", "dz", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"], ["dz", "dz", "dz", "ee", "1p", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"], ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "3p", "3p", "3p", "3p", "1s", "1s", "1p", "1s", "1s", "2p", "1s", "1s", "3p", "3p", "b1", "ee", "b1", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "ee", "b1", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"], ["ee", "ee", "ee", "ee", "b1", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"], ["ee", "ee", "ee", "ee", "b1", "1p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "fd", "fd", "b1", "3p", "b1", "fd", "fd", "b1", "2p", "b1", "fd", "fd", "b1", "1p", "b1", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "fp", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fn", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "b1", "1p", "1p", "1p", "b1", "2p", "2p", "2p", "2p", "b1", "3p", "3p", "3p", "3p", "b1", "ee", "1s", "ee", "b1"]]
-  }
-};
-const collisionsLevel_1 = {
-  margin: {
-    left: 180,
-    top: 216
-  },
-  map: [["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "2p", "2p", "2p", "3p", "3p", "3p", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_2 = {
-  margin: {
-    left: 144,
-    top: 108
-  },
-  map: [["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "st", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "3p", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_3 = {
-  margin: {
-    left: 180,
-    top: 216
-  },
-  map: [["b1", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "b2", "b2", "b2", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "ee", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "b2", "b2", "b2", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "b1"], ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "b1"]]
-};
-const collisionsLevel_4 = {
-  margin: {
-    left: 430,
-    top: 36
-  },
-  map: [["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp"], ["b1", "3p", "3p", "3p", "b1", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "2p", "2p", "2p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "1p", "1p", "1p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "3p", "3p", "3p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "2p", "2p", "2p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "1p", "1p", "1p", "b1", "ee", "ee", "ee", "ee"], ["b1", "ee", "st", "ee", "b1", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_5 = {
-  margin: {
-    left: 108,
-    top: 72
-  },
-  map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p"], ["ee", "ee", "ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "sl", "sl", "sl", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_6 = {
-  margin: {
-    left: 144,
-    top: 108
-  },
-  map: [["ee", "ee", "fp", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "fn", "fn", "dz", "dz", "dz", "ee", "b2", "dz", "dz", "dz", "b2", "ee", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "ee", "b2", "dz", "dz", "dz", "dz", "dz", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "3p", "b2", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "1p", "1p", "1p", "1p", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "1p", "1p"], ["ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b2", "ee", "st", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee"]]
-};
-const collisionsLevel_7 = {
-  margin: {
-    left: 36,
-    top: 36
-  },
-  map: [["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "1s", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "1s", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "3p", "1p", "2p", "ee", "2p", "ee", "2p", "3p", "ee", "1p", "ee", "ee", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "b1", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee"], ["ee", "b1", "b1", "ee", "ee", "b1", "b2", "ee", "ee", "ee", "1p", "3p", "2p", "3p", "1p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "ee", "ee", "b1", "b1", "b2", "ee", "ee", "ee", "b2", "3p", "2p", "3p", "3p", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "b1", "b1", "ee", "b2", "2p", "1p", "3p", "b2", "b1", "b1", "b1", "sk", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp"], ["b1", "ee", "b1", "b1", "ee", "ee", "b2", "sw", "sw", "sw", "b2", "b1", "ee", "b1", "b1", "b1", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "sl", "sl"], ["b1", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "1p", "2p", "ee", "ee", "ee", "ee"], ["b1", "b1", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b1", "2p", "1p", "3p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-
-// export const collisionsLevel_LOL = {
-//   margin: {
-//     left: 108,
-//     top: 72,
-//   },
-//   map: [
-//     ["ee", "st", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["fn", "fn", "fn", "ee", "1p", "1p", "1p", "1p", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "fp"],
-//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "2p", "2p", "2p", "2p", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "fn", "fn"],
-//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
-//     ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p", "3p", "ee", "ee", "ee", "ee"]
-//  ]
+// function gameSoundEffects(item) {
+//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
+//     item.src_OGG.currentTime = 0;
+//     item.src_OGG.play();
+//   } else {
+//     item.src_MP3.currentTime = 0;
+//     item.src_MP3.play();
+//   }
 // }
 
-const collisionsLevel_8 = {
-  margin: {
-    left: 144,
-    top: 180
-  },
-  map: [["sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz"], ["sl", "fp", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["sl", "ee", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "st"], ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["2p", "2p", "2p", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"], ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "sl", "sl", "sl", "sl"]]
-};
-const collisionsLevel_9 = {
-  margin: {
-    left: 144,
-    top: 144
-  },
-  map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "3p", "3p", "3p"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ja", "ja", "ja", "ee", "ee", "ee", "2p", "2p", "2p", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_10 = {
-  margin: {
-    left: 144,
-    top: 72
-  },
-  map: [["ee", "ee", "ee", "ee", "ee", "jd", "jd", "jd", "jd", "ja", "ja", "jd", "jd", "jd", "jd", "ee", "ee", "ee", "b2", "ee", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "b2", "ee"], ["ee", "ja", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "2p", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "jd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "3p", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "b2", "ee"], ["ee", "ja", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ja", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "jd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "b2", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "ee"], ["ee", "ja", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_11 = {
-  margin: {
-    left: 144,
-    top: 72
-  },
-  map: [["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "3p", "3p", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "jd", "jd", "b1", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "ee", "ee", "jd", "jd", "ee", "ee", "ee", "b1", "ee", "b1"], ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "3p", "b1"], ["b1", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ja", "b1"], ["b1", "ja", "ja", "b1", "ee", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "sk", "ee", "ee", "ee", "b1", "ee", "b1"], ["b1", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "b1"], ["b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "sk", "sk", "sk", "b1", "2p", "b1"], ["b1", "jd", "jd", "b1", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "ja", "b1"], ["b1", "ee", "ee", "b1", "sk", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "st", "ee", "ee", "ee", "b1"], ["b1", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1"], ["b1", "ee", "ee", "1p", "ee", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fp", "b1", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "b1", "jd", "jd", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_12 = {
-  margin: {
-    left: 144,
-    top: 0
-  },
-  map: [["b2", "ee", "st", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "1p", "1p", "1p", "1p", "1p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "2p", "2p", "2p", "2p", "2p", "b2"], ["b2", "sw", "sw", "ee", "sw", "sw", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "sw", "sw", "sw", "ee", "sw", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ja", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "2p", "2p", "2p", "2p", "2p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "3p", "3p", "3p", "3p", "3p", "b2"], ["b2", "ee", "sw", "sw", "sw", "sw", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "sw", "ee", "sw", "sw", "sw", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "jd", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "b2"], ["b2", "3p", "3p", "3p", "3p", "3p", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "1p", "1p", "1p", "1p", "1p", "b2"], ["b2", "sw", "sw", "sw", "sw", "ee", "b2", "ee", "ee", "ee", "ja", "ja", "ee", "b2", "sw", "sw", "ee", "sw", "sw", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fp"], ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "b1", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2"]]
-};
-const collisionsLevel_13 = {
-  margin: {
-    left: 240,
-    top: 0
-  },
-  map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "1s", "1s", "1s", "ee", "ee", "ee", "1s", "1s", "ee", "ee", "ee", "eef", "1s", "1s", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee"], ["ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "b1", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_14 = {
-  margin: {
-    left: 72,
-    top: 36
-  },
-  map: [["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "b2"], ["b1", "3p", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "ee", "ee", "ee", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"], ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "3p", "3p", "3p", "b2"], ["b1", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "fn", "fn", "b2"], ["ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "dz", "dz", "1p", "dz", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "1p", "st", "dz", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2"]]
-};
-const collisionsLevel_15 = {
-  margin: {
-    left: 108,
-    top: 36
-  },
-  map: [["ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee"], ["ee", "ee", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee"], ["ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "ee", "st", "b1", "ee", "ee"], ["ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "ee", "ee"], ["ee", "ee", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "ee"], ["ee", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"], ["ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "ee", "2p", "ee", "fl", "ee"], ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "3p", "ee", "b1", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "ee", "ee", "b1", "ee", "b1", "b1", "ee", "ee", "ee"], ["ee", "b1", "b1", "b1", "b1", "3p", "3p", "b1", "b1", "b1", "3p", "3p", "b1", "b1", "b1", "3p", "3p", "b1", "ee", "b1", "b1", "b1", "ee", "ee"], ["ee", "b1", "ee", "2p", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "dz", "dz", "2p", "dz", "dz", "dz", "dz", "dz", "dz", "fl", "b1", "ee", "ee"], ["ee", "b1", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee", "ee"], ["ee", "b1", "fp", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["ee", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_16 = {
-  margin: {
-    left: 72,
-    top: 0
-  },
-  map: [["ee", "ee", "b2", "fd", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"], ["ee", "ee", "b2", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "b2", "ee", "ee", "ee", "ee", "fl", "b2"], ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "ee", "1p", "1p", "ee", "ee", "b1", "b2"], ["ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "3p", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "sk", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "sw", "ee", "ee", "ee", "sk", "ee", "ee", "ee", "sw", "ee", "ee", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fl", "b2"], ["ee", "ee", "ee", "b2", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "b2", "b2", "b2", "ee", "ee", "b2", "ee", "ee", "2p", "ee", "ee", "b1", "b2"], ["jd", "jd", "jd", "b2", "ja", "ja", "ja", "b2", "1s", "1s", "1s", "b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "2p", "2p", "2p", "b2", "ee", "ee", "1p", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "b2"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b1", "ee", "ee", "st", "ee", "ee", "ee", "ee"], ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"]]
-};
-const collisionsLevel_17 = {
-  margin: {
-    left: 72,
-    top: -72
-  },
-  map: [["st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["dz", "dz", "dz", "dz", "sk", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"], ["dz", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"], ["dz", "dz", "dz", "fd", "fd", "fd", "fd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"], ["dz", "dz", "dz", "dz", "dz", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"], ["dz", "dz", "dz", "ee", "1p", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"], ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "3p", "3p", "3p", "3p", "1s", "1s", "1p", "1s", "1s", "2p", "1s", "1s", "3p", "3p", "b1", "ee", "b1", "ee"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "ee", "b1", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"], ["ee", "ee", "ee", "ee", "b1", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"], ["ee", "ee", "ee", "ee", "b1", "1p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "fd", "fd", "b1", "3p", "b1", "fd", "fd", "b1", "2p", "b1", "fd", "fd", "b1", "1p", "b1", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "fp", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fn", "b1"], ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1"], ["ee", "ee", "ee", "ee", "ee", "ee", "b1", "1p", "1p", "1p", "b1", "2p", "2p", "2p", "2p", "b1", "3p", "3p", "3p", "3p", "b1", "ee", "1s", "ee", "b1"]]
-};
+// function gameSoundEffects(item) {
+//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
+//     audio.sound.src= item.src_MP3;
+//   } else {
+//     audio.sound.src= item.src_OGG;
+//   }
+//   audio.sound.currentTime = 0;
+//   audio.sound.play();
+// }
+
+// function gameSoundEffects(item) {
+//   item.currentTime = 0;
+//   item.play();
+// }
+
+// For music
+// let isPlayed = false;
+// function gameSoundEffects(item) {
+//   if(!isPlayed)
+//   item.currentTime = 0;
+//   item.play();
+//   isPlayed = true;
+// }
+
+
 
 /***/ }),
 
@@ -2813,17 +2613,17 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/41902777fb77a1d57149.jpg";
+module.exports = __webpack_require__.p + "41902777fb77a1d57149.jpg";
 
 /***/ }),
 
-/***/ "./assets/img/Background_images/bg_3.jpg":
+/***/ "./assets/img/Background_images/bg_1.jpg":
 /*!***********************************************!*\
-  !*** ./assets/img/Background_images/bg_3.jpg ***!
+  !*** ./assets/img/Background_images/bg_1.jpg ***!
   \***********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/019905a133fdd18a829c.jpg";
+module.exports = __webpack_require__.p + "8c8433101090cd8bc0bb.jpg";
 
 /***/ }),
 
@@ -2833,7 +2633,7 @@ module.exports = __webpack_require__.p + "assets/019905a133fdd18a829c.jpg";
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/caa8591cb3f3a1855c29.png";
+module.exports = __webpack_require__.p + "caa8591cb3f3a1855c29.png";
 
 /***/ }),
 
@@ -2843,7 +2643,7 @@ module.exports = __webpack_require__.p + "assets/caa8591cb3f3a1855c29.png";
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/61cdd2e0f3c3604e7b1f.png";
+module.exports = __webpack_require__.p + "61cdd2e0f3c3604e7b1f.png";
 
 /***/ }),
 
@@ -2853,7 +2653,7 @@ module.exports = __webpack_require__.p + "assets/61cdd2e0f3c3604e7b1f.png";
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/47bb81cb0aaa2c499d5c.png";
+module.exports = __webpack_require__.p + "47bb81cb0aaa2c499d5c.png";
 
 /***/ }),
 
@@ -2863,7 +2663,7 @@ module.exports = __webpack_require__.p + "assets/47bb81cb0aaa2c499d5c.png";
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/8a499ad60f919b1f6cad.png";
+module.exports = __webpack_require__.p + "8a499ad60f919b1f6cad.png";
 
 /***/ }),
 
@@ -2873,7 +2673,7 @@ module.exports = __webpack_require__.p + "assets/8a499ad60f919b1f6cad.png";
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/02bc1678beb112beb4a1.png";
+module.exports = __webpack_require__.p + "02bc1678beb112beb4a1.png";
 
 /***/ }),
 
@@ -2883,7 +2683,7 @@ module.exports = __webpack_require__.p + "assets/02bc1678beb112beb4a1.png";
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/4e23b39a2281ee54125f.png";
+module.exports = __webpack_require__.p + "4e23b39a2281ee54125f.png";
 
 /***/ }),
 
@@ -2893,7 +2693,7 @@ module.exports = __webpack_require__.p + "assets/4e23b39a2281ee54125f.png";
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/c53e7b3ac960db1762a9.png";
+module.exports = __webpack_require__.p + "c53e7b3ac960db1762a9.png";
 
 /***/ }),
 
@@ -2903,7 +2703,7 @@ module.exports = __webpack_require__.p + "assets/c53e7b3ac960db1762a9.png";
   \**************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/542a853a490865e4177b.png";
+module.exports = __webpack_require__.p + "542a853a490865e4177b.png";
 
 /***/ }),
 
@@ -2913,7 +2713,7 @@ module.exports = __webpack_require__.p + "assets/542a853a490865e4177b.png";
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/e361987edb2dc29e1508.png";
+module.exports = __webpack_require__.p + "e361987edb2dc29e1508.png";
 
 /***/ }),
 
@@ -2923,7 +2723,7 @@ module.exports = __webpack_require__.p + "assets/e361987edb2dc29e1508.png";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/38915aefe86632a9ac20.png";
+module.exports = __webpack_require__.p + "38915aefe86632a9ac20.png";
 
 /***/ }),
 
@@ -2933,7 +2733,7 @@ module.exports = __webpack_require__.p + "assets/38915aefe86632a9ac20.png";
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/befd1a46da1a01267d9e.png";
+module.exports = __webpack_require__.p + "befd1a46da1a01267d9e.png";
 
 /***/ }),
 
@@ -2943,7 +2743,7 @@ module.exports = __webpack_require__.p + "assets/befd1a46da1a01267d9e.png";
   \*********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/73ffdfeda1c0c3fa260e.png";
+module.exports = __webpack_require__.p + "73ffdfeda1c0c3fa260e.png";
 
 /***/ }),
 
@@ -2953,7 +2753,7 @@ module.exports = __webpack_require__.p + "assets/73ffdfeda1c0c3fa260e.png";
   \***********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/893ecde318d7755323b7.png";
+module.exports = __webpack_require__.p + "893ecde318d7755323b7.png";
 
 /***/ }),
 
@@ -2963,7 +2763,7 @@ module.exports = __webpack_require__.p + "assets/893ecde318d7755323b7.png";
   \***************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/c2b486028ea06a42538d.png";
+module.exports = __webpack_require__.p + "c2b486028ea06a42538d.png";
 
 /***/ }),
 
@@ -2973,7 +2773,7 @@ module.exports = __webpack_require__.p + "assets/c2b486028ea06a42538d.png";
   \*************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/a27c1909728c39bb81d1.png";
+module.exports = __webpack_require__.p + "a27c1909728c39bb81d1.png";
 
 /***/ }),
 
@@ -2983,7 +2783,7 @@ module.exports = __webpack_require__.p + "assets/a27c1909728c39bb81d1.png";
   \********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/15a754e2c1925bdc527f.png";
+module.exports = __webpack_require__.p + "15a754e2c1925bdc527f.png";
 
 /***/ }),
 
@@ -2993,7 +2793,7 @@ module.exports = __webpack_require__.p + "assets/15a754e2c1925bdc527f.png";
   \*************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/dd246bde66e7e6e5e3fc.png";
+module.exports = __webpack_require__.p + "dd246bde66e7e6e5e3fc.png";
 
 /***/ }),
 
@@ -3003,7 +2803,7 @@ module.exports = __webpack_require__.p + "assets/dd246bde66e7e6e5e3fc.png";
   \*************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/8227e458d9e6b45666dc.png";
+module.exports = __webpack_require__.p + "8227e458d9e6b45666dc.png";
 
 /***/ }),
 
@@ -3013,7 +2813,7 @@ module.exports = __webpack_require__.p + "assets/8227e458d9e6b45666dc.png";
   \**********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/171091192763139674e9.png";
+module.exports = __webpack_require__.p + "171091192763139674e9.png";
 
 /***/ }),
 
@@ -3023,7 +2823,7 @@ module.exports = __webpack_require__.p + "assets/171091192763139674e9.png";
   \***********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/4550e1c7d8d19a7959ef.png";
+module.exports = __webpack_require__.p + "4550e1c7d8d19a7959ef.png";
 
 /***/ }),
 
@@ -3033,7 +2833,7 @@ module.exports = __webpack_require__.p + "assets/4550e1c7d8d19a7959ef.png";
   \********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
+module.exports = __webpack_require__.p + "14db406580d82c54850b.png";
 
 /***/ }),
 
@@ -3043,7 +2843,7 @@ module.exports = __webpack_require__.p + "assets/14db406580d82c54850b.png";
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/cf7f7083ae6b5338384a.png";
+module.exports = __webpack_require__.p + "cf7f7083ae6b5338384a.png";
 
 /***/ }),
 
@@ -3053,7 +2853,7 @@ module.exports = __webpack_require__.p + "assets/cf7f7083ae6b5338384a.png";
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/ee2cf136916afa6626fe.png";
+module.exports = __webpack_require__.p + "ee2cf136916afa6626fe.png";
 
 /***/ }),
 
@@ -3063,7 +2863,7 @@ module.exports = __webpack_require__.p + "assets/ee2cf136916afa6626fe.png";
   \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/7eac2d1901ea34422f0e.png";
+module.exports = __webpack_require__.p + "7eac2d1901ea34422f0e.png";
 
 /***/ }),
 
@@ -3073,7 +2873,7 @@ module.exports = __webpack_require__.p + "assets/7eac2d1901ea34422f0e.png";
   \***********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/03857753acbdef4e6e04.png";
+module.exports = __webpack_require__.p + "03857753acbdef4e6e04.png";
 
 /***/ }),
 
@@ -3083,7 +2883,7 @@ module.exports = __webpack_require__.p + "assets/03857753acbdef4e6e04.png";
   \*****************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/62e7d0778000c13e26fd.png";
+module.exports = __webpack_require__.p + "62e7d0778000c13e26fd.png";
 
 /***/ }),
 
@@ -3093,7 +2893,7 @@ module.exports = __webpack_require__.p + "assets/62e7d0778000c13e26fd.png";
   \**********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
+module.exports = __webpack_require__.p + "c8662b60253954dfab65.png";
 
 /***/ }),
 
@@ -3103,7 +2903,7 @@ module.exports = __webpack_require__.p + "assets/c8662b60253954dfab65.png";
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
+module.exports = __webpack_require__.p + "ac9f21f4de237fa1c10a.png";
 
 /***/ }),
 
@@ -3113,7 +2913,7 @@ module.exports = __webpack_require__.p + "assets/ac9f21f4de237fa1c10a.png";
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
+module.exports = __webpack_require__.p + "f65321ba63f1ed1febd1.png";
 
 /***/ }),
 
@@ -3123,7 +2923,7 @@ module.exports = __webpack_require__.p + "assets/f65321ba63f1ed1febd1.png";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
+module.exports = __webpack_require__.p + "946da67f09f017070631.png";
 
 /***/ }),
 
@@ -3133,7 +2933,7 @@ module.exports = __webpack_require__.p + "assets/946da67f09f017070631.png";
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
+module.exports = __webpack_require__.p + "7532e8843b6f08c4c736.png";
 
 /***/ }),
 
@@ -3143,7 +2943,7 @@ module.exports = __webpack_require__.p + "assets/7532e8843b6f08c4c736.png";
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/a81ec16a567429e11f71.png";
+module.exports = __webpack_require__.p + "a81ec16a567429e11f71.png";
 
 /***/ }),
 
@@ -3153,7 +2953,7 @@ module.exports = __webpack_require__.p + "assets/a81ec16a567429e11f71.png";
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
+module.exports = __webpack_require__.p + "1319f38494e5186d7f18.png";
 
 /***/ }),
 
@@ -3163,7 +2963,7 @@ module.exports = __webpack_require__.p + "assets/1319f38494e5186d7f18.png";
   \*************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
+module.exports = __webpack_require__.p + "9bd291d54f54e255e917.png";
 
 /***/ }),
 
@@ -3173,7 +2973,7 @@ module.exports = __webpack_require__.p + "assets/9bd291d54f54e255e917.png";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
+module.exports = __webpack_require__.p + "4dafaeaded625dad6da0.png";
 
 /***/ }),
 
@@ -3183,7 +2983,7 @@ module.exports = __webpack_require__.p + "assets/4dafaeaded625dad6da0.png";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
+module.exports = __webpack_require__.p + "2d04ce6e355f376a0e0e.png";
 
 /***/ }),
 
@@ -3193,7 +2993,7 @@ module.exports = __webpack_require__.p + "assets/2d04ce6e355f376a0e0e.png";
   \**********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
+module.exports = __webpack_require__.p + "d8d99ee1b1eb3891ba28.png";
 
 /***/ }),
 
@@ -3203,7 +3003,7 @@ module.exports = __webpack_require__.p + "assets/d8d99ee1b1eb3891ba28.png";
   \*************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/868328e1d62559dea3d3.mp3";
+module.exports = __webpack_require__.p + "868328e1d62559dea3d3.mp3";
 
 /***/ }),
 
@@ -3213,7 +3013,7 @@ module.exports = __webpack_require__.p + "assets/868328e1d62559dea3d3.mp3";
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/315ce5bb8774f67f6a53.mp3";
+module.exports = __webpack_require__.p + "315ce5bb8774f67f6a53.mp3";
 
 /***/ }),
 
@@ -3223,7 +3023,7 @@ module.exports = __webpack_require__.p + "assets/315ce5bb8774f67f6a53.mp3";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/b070217cc3ec9826fd89.mp3";
+module.exports = __webpack_require__.p + "b070217cc3ec9826fd89.mp3";
 
 /***/ }),
 
@@ -3233,7 +3033,7 @@ module.exports = __webpack_require__.p + "assets/b070217cc3ec9826fd89.mp3";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/07b873397bd181f0fe5b.mp3";
+module.exports = __webpack_require__.p + "07b873397bd181f0fe5b.mp3";
 
 /***/ }),
 
@@ -3243,7 +3043,7 @@ module.exports = __webpack_require__.p + "assets/07b873397bd181f0fe5b.mp3";
   \*******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/173e28202170f19073b8.mp3";
+module.exports = __webpack_require__.p + "173e28202170f19073b8.mp3";
 
 /***/ }),
 
@@ -3253,7 +3053,7 @@ module.exports = __webpack_require__.p + "assets/173e28202170f19073b8.mp3";
   \********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/1dec2f6bcf25b798920b.mp3";
+module.exports = __webpack_require__.p + "1dec2f6bcf25b798920b.mp3";
 
 /***/ }),
 
@@ -3263,7 +3063,7 @@ module.exports = __webpack_require__.p + "assets/1dec2f6bcf25b798920b.mp3";
   \**********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/5c0e7724e5723b97e9be.mp3";
+module.exports = __webpack_require__.p + "5c0e7724e5723b97e9be.mp3";
 
 /***/ }),
 
@@ -3273,7 +3073,7 @@ module.exports = __webpack_require__.p + "assets/5c0e7724e5723b97e9be.mp3";
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/2517213c91f01c976f92.mp3";
+module.exports = __webpack_require__.p + "2517213c91f01c976f92.mp3";
 
 /***/ }),
 
@@ -3283,7 +3083,7 @@ module.exports = __webpack_require__.p + "assets/2517213c91f01c976f92.mp3";
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/a2a93b9461f413734ad7.mp3";
+module.exports = __webpack_require__.p + "a2a93b9461f413734ad7.mp3";
 
 /***/ }),
 
@@ -3293,7 +3093,7 @@ module.exports = __webpack_require__.p + "assets/a2a93b9461f413734ad7.mp3";
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/a2774fd0d75bdfeed2da.mp3";
+module.exports = __webpack_require__.p + "a2774fd0d75bdfeed2da.mp3";
 
 /***/ }),
 
@@ -3303,7 +3103,7 @@ module.exports = __webpack_require__.p + "assets/a2774fd0d75bdfeed2da.mp3";
   \**********************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/037494008090ce9e60f2.mp3";
+module.exports = __webpack_require__.p + "037494008090ce9e60f2.mp3";
 
 /***/ }),
 
@@ -3313,7 +3113,7 @@ module.exports = __webpack_require__.p + "assets/037494008090ce9e60f2.mp3";
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/87197dcb8811e09b73e1.mp3";
+module.exports = __webpack_require__.p + "87197dcb8811e09b73e1.mp3";
 
 /***/ }),
 
@@ -3323,7 +3123,7 @@ module.exports = __webpack_require__.p + "assets/87197dcb8811e09b73e1.mp3";
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/75e0f3d8b173961534ec.mp3";
+module.exports = __webpack_require__.p + "75e0f3d8b173961534ec.mp3";
 
 /***/ }),
 
@@ -3333,7 +3133,7 @@ module.exports = __webpack_require__.p + "assets/75e0f3d8b173961534ec.mp3";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/b6ba29659cf55d571cc0.mp3";
+module.exports = __webpack_require__.p + "b6ba29659cf55d571cc0.mp3";
 
 /***/ }),
 
@@ -3343,7 +3143,7 @@ module.exports = __webpack_require__.p + "assets/b6ba29659cf55d571cc0.mp3";
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/97462a60fa4b16083f2e.mp3";
+module.exports = __webpack_require__.p + "97462a60fa4b16083f2e.mp3";
 
 /***/ }),
 
@@ -3353,7 +3153,7 @@ module.exports = __webpack_require__.p + "assets/97462a60fa4b16083f2e.mp3";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/76d8a9edad64667bb800.mp3";
+module.exports = __webpack_require__.p + "76d8a9edad64667bb800.mp3";
 
 /***/ }),
 
@@ -3363,7 +3163,7 @@ module.exports = __webpack_require__.p + "assets/76d8a9edad64667bb800.mp3";
   \*******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/a2a5e45d00f4a784b94b.mp3";
+module.exports = __webpack_require__.p + "a2a5e45d00f4a784b94b.mp3";
 
 /***/ }),
 
@@ -3373,7 +3173,7 @@ module.exports = __webpack_require__.p + "assets/a2a5e45d00f4a784b94b.mp3";
   \*************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/409a03408bb32d1202d2.ogg";
+module.exports = __webpack_require__.p + "409a03408bb32d1202d2.ogg";
 
 /***/ }),
 
@@ -3383,7 +3183,7 @@ module.exports = __webpack_require__.p + "assets/409a03408bb32d1202d2.ogg";
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/9771e96a1d6912ab23c6.ogg";
+module.exports = __webpack_require__.p + "9771e96a1d6912ab23c6.ogg";
 
 /***/ }),
 
@@ -3393,7 +3193,7 @@ module.exports = __webpack_require__.p + "assets/9771e96a1d6912ab23c6.ogg";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/55972719deb5d18b267e.ogg";
+module.exports = __webpack_require__.p + "55972719deb5d18b267e.ogg";
 
 /***/ }),
 
@@ -3403,7 +3203,7 @@ module.exports = __webpack_require__.p + "assets/55972719deb5d18b267e.ogg";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/2dc046f6177bea7f2950.ogg";
+module.exports = __webpack_require__.p + "2dc046f6177bea7f2950.ogg";
 
 /***/ }),
 
@@ -3413,7 +3213,7 @@ module.exports = __webpack_require__.p + "assets/2dc046f6177bea7f2950.ogg";
   \*******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/9ea75121a93a42b1411e.ogg";
+module.exports = __webpack_require__.p + "9ea75121a93a42b1411e.ogg";
 
 /***/ }),
 
@@ -3423,7 +3223,7 @@ module.exports = __webpack_require__.p + "assets/9ea75121a93a42b1411e.ogg";
   \********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/b0867563ae4e9e18a2e8.ogg";
+module.exports = __webpack_require__.p + "b0867563ae4e9e18a2e8.ogg";
 
 /***/ }),
 
@@ -3433,7 +3233,7 @@ module.exports = __webpack_require__.p + "assets/b0867563ae4e9e18a2e8.ogg";
   \**********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/e6ae7ad1b65788f9dae5.ogg";
+module.exports = __webpack_require__.p + "e6ae7ad1b65788f9dae5.ogg";
 
 /***/ }),
 
@@ -3443,7 +3243,7 @@ module.exports = __webpack_require__.p + "assets/e6ae7ad1b65788f9dae5.ogg";
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/957cddacb1deaac79e00.ogg";
+module.exports = __webpack_require__.p + "957cddacb1deaac79e00.ogg";
 
 /***/ }),
 
@@ -3453,7 +3253,7 @@ module.exports = __webpack_require__.p + "assets/957cddacb1deaac79e00.ogg";
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/70068ae31959fab95e81.ogg";
+module.exports = __webpack_require__.p + "70068ae31959fab95e81.ogg";
 
 /***/ }),
 
@@ -3463,7 +3263,7 @@ module.exports = __webpack_require__.p + "assets/70068ae31959fab95e81.ogg";
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/9efb836c3a9ba68ca120.ogg";
+module.exports = __webpack_require__.p + "9efb836c3a9ba68ca120.ogg";
 
 /***/ }),
 
@@ -3473,7 +3273,7 @@ module.exports = __webpack_require__.p + "assets/9efb836c3a9ba68ca120.ogg";
   \**********************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/d1e681bf5a15caf9026f.ogg";
+module.exports = __webpack_require__.p + "d1e681bf5a15caf9026f.ogg";
 
 /***/ }),
 
@@ -3483,7 +3283,7 @@ module.exports = __webpack_require__.p + "assets/d1e681bf5a15caf9026f.ogg";
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/523646943918c59d2b3d.ogg";
+module.exports = __webpack_require__.p + "523646943918c59d2b3d.ogg";
 
 /***/ }),
 
@@ -3493,7 +3293,7 @@ module.exports = __webpack_require__.p + "assets/523646943918c59d2b3d.ogg";
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/de74680fa0d4fb3d8e14.ogg";
+module.exports = __webpack_require__.p + "de74680fa0d4fb3d8e14.ogg";
 
 /***/ }),
 
@@ -3503,7 +3303,7 @@ module.exports = __webpack_require__.p + "assets/de74680fa0d4fb3d8e14.ogg";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/c46e5b7d17520ff6935f.ogg";
+module.exports = __webpack_require__.p + "c46e5b7d17520ff6935f.ogg";
 
 /***/ }),
 
@@ -3513,7 +3313,7 @@ module.exports = __webpack_require__.p + "assets/c46e5b7d17520ff6935f.ogg";
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/4f6c0dc57802e6e026c6.ogg";
+module.exports = __webpack_require__.p + "4f6c0dc57802e6e026c6.ogg";
 
 /***/ }),
 
@@ -3523,7 +3323,7 @@ module.exports = __webpack_require__.p + "assets/4f6c0dc57802e6e026c6.ogg";
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/aaf531751543bc351744.ogg";
+module.exports = __webpack_require__.p + "aaf531751543bc351744.ogg";
 
 /***/ }),
 
@@ -3533,7 +3333,7 @@ module.exports = __webpack_require__.p + "assets/aaf531751543bc351744.ogg";
   \*******************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/8d6e93c66366655257dd.ogg";
+module.exports = __webpack_require__.p + "8d6e93c66366655257dd.ogg";
 
 /***/ }),
 
@@ -3543,7 +3343,7 @@ module.exports = __webpack_require__.p + "assets/8d6e93c66366655257dd.ogg";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/60db4a6c1bb2742d1f9c.mp3";
+module.exports = __webpack_require__.p + "60db4a6c1bb2742d1f9c.mp3";
 
 /***/ }),
 
@@ -3553,7 +3353,7 @@ module.exports = __webpack_require__.p + "assets/60db4a6c1bb2742d1f9c.mp3";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/4e1718e91aa4e1cca135.mp3";
+module.exports = __webpack_require__.p + "4e1718e91aa4e1cca135.mp3";
 
 /***/ }),
 
@@ -3563,7 +3363,7 @@ module.exports = __webpack_require__.p + "assets/4e1718e91aa4e1cca135.mp3";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/1afb1b0a35b44cdf1ff1.mp3";
+module.exports = __webpack_require__.p + "1afb1b0a35b44cdf1ff1.mp3";
 
 /***/ }),
 
@@ -3573,7 +3373,7 @@ module.exports = __webpack_require__.p + "assets/1afb1b0a35b44cdf1ff1.mp3";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/4dcabd1247bcf8d7ebcf.mp3";
+module.exports = __webpack_require__.p + "4dcabd1247bcf8d7ebcf.mp3";
 
 /***/ }),
 
@@ -3583,7 +3383,7 @@ module.exports = __webpack_require__.p + "assets/4dcabd1247bcf8d7ebcf.mp3";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/2c26659bbe1eda6e9e5d.ogg";
+module.exports = __webpack_require__.p + "2c26659bbe1eda6e9e5d.ogg";
 
 /***/ }),
 
@@ -3593,7 +3393,7 @@ module.exports = __webpack_require__.p + "assets/2c26659bbe1eda6e9e5d.ogg";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/d97f6fbd97ff9dc44f3f.ogg";
+module.exports = __webpack_require__.p + "d97f6fbd97ff9dc44f3f.ogg";
 
 /***/ }),
 
@@ -3603,7 +3403,7 @@ module.exports = __webpack_require__.p + "assets/d97f6fbd97ff9dc44f3f.ogg";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/91a16270795862ed0a69.ogg";
+module.exports = __webpack_require__.p + "91a16270795862ed0a69.ogg";
 
 /***/ }),
 
@@ -3613,7 +3413,7 @@ module.exports = __webpack_require__.p + "assets/91a16270795862ed0a69.ogg";
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "assets/c516101ffeada79f1199.ogg";
+module.exports = __webpack_require__.p + "c516101ffeada79f1199.ogg";
 
 /***/ })
 
