@@ -116,6 +116,12 @@ const fontSize = canvas.height / 5; // 10
                       // canvas.height = document.documentElement.clientHeight;
                       // });
 
+
+import { mySPA } from './js/SPA';
+document.addEventListener('DOMContentLoaded', mySPA.init('root', 'content'));
+
+
+
 canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
 canvas.height = 576 // 720 //window.innerHeight;
 export let requestAnim = window.requestAnimationFrame ||
@@ -206,7 +212,14 @@ export let platforms = [],
            parsedCollisions,
            player;
 
-requestLevelMap(`/src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+
+
+
+// requestLevelMap(`/src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+
+
+
+
 
 function setLevelMap(value) {
   levelMap = value;
@@ -260,7 +273,7 @@ let initStart = true;
                             let track = getRandomTrack(audio);
                             track.pause();
                             track = getRandomTrack(audio)
-                            track.play();
+                            // track.play();
                             track.onended = function() {
                               playNextTrack(track, audio);
                             }
