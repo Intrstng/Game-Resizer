@@ -1,18 +1,12 @@
 import './sass/styles.scss';
 
 import { mySPA } from './js/SPA';
-// imagePlatform.onload = function getSizes () {
-//   imagePlatform.width = imagePlatform.naturalWidth;
-//   imagePlatform.height = imagePlatform.naturalHeight;
-//}
 import { parseCollisitions } from './js/Collision';
 import { canvas, c } from './js/Canvas';
 import { createImage, Sprite } from './js/Utils';
 import { Player } from './js/Player';
-// import { levelMap } from './js/data/DescriptionForLevelMap';
 import { bulletController } from './js/Collision';
 import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from './js/data/Audio';
-
 import { Platform,
   OneStep,
   Fan,
@@ -78,37 +72,9 @@ document.addEventListener('DOMContentLoaded', mySPA.init('root', 'content'));
 
 
 
-
-
-
-
-// canvas.width = document.documentElement.clientWidth;
-// canvas.height = document.documentElement.clientHeight;
 const fontSize = canvas.height / 5; // 10
-                      // window.addEventListener('resize', () => {
-                      //   canvas.width = document.documentElement.clientWidth;
-                      //   canvas.height = document.documentElement.clientHeight;
-                      // });
-
-                      // function onResize( element, callback ){
-                      //   var elementHeight = element.height,
-                      //       elementWidth = element.width;
-                      //   setInterval(function(){
-                      //       if( element.height !== elementHeight || element.width !== elementWidth ){
-                      //         elementHeight = element.height;
-                      //         elementWidth = element.width;
-                      //         callback();
-                      //       }
-                      //   }, 300);
-                      // }
-
-                      // onResize(canvas, function() { 
-                      // canvas.width = document.documentElement.clientWidth;
-                      // canvas.height = document.documentElement.clientHeight;
-                      // });
-
-canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
-canvas.height = 576 // 720 //window.innerHeight;
+canvas.width = 1024 // 1280
+canvas.height = 576 // 720
 export let requestAnim = window.requestAnimationFrame ||
                   window.webkitRequestAnimationFrame ||
                   window.mozRequestAnimationFrame ||
@@ -117,30 +83,6 @@ export let requestAnim = window.requestAnimationFrame ||
                   function(callback) { window.setTimeout(callback, 1000 / 60); }
 
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
-
-
-
-
-
-
-
-
-// let game = [];
-
-// class Game {
-//   constructor(level) {
-//     this.level = level;
-//   }
-// }
-
-// function createNewGame(map) {
-//   Object.values(map).forEach(level => {
-//     game.push(new Game(level.id));
-//   })
-// }
-// console.log(game)
-
-
 
 
 function fullScreen(e, element) {
@@ -170,27 +112,10 @@ export let additionalElements = [
 ]
 
 
-// class Level {
-//   constructor(value) {
-//     this.stage =  value;
-//   }
-// }
-// export let level = new Level(1);
-
-
-
 export let level = 1;
 function increseLevel(obj) {
   return level >= Object.keys(obj).length ? level : ++level;
  }
-
-
-
-
-
-
-
-
 
 export let platforms = [],
            levelMap,
@@ -198,15 +123,9 @@ export let platforms = [],
            player;
 
 
-
-
-  // requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+   //requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
 
  
-
-
-
-
 function setLevelMap(value) {
   levelMap = value;
   console.log(levelMap)
@@ -256,13 +175,13 @@ let initStart = true;
 
 
 
-                            let track = getRandomTrack(audio);
-                            track.pause();
-                                        track = getRandomTrack(audio)
-                                        ///track.play();
-                            track.onended = function() {
-                              playNextTrack(track, audio);
-                            }
+let track = getRandomTrack(audio);
+track.pause();
+track = getRandomTrack(audio);
+  //track.play();
+track.onended = function() {
+  playNextTrack(track, audio);
+}
 
 
 function reloadGameplay() {
@@ -277,9 +196,6 @@ function reloadGameplay() {
       })
     })  
 }
-
-
-
 
 let levelOverlay = createImage(win);
 levelOverlay.width = canvas.width;
@@ -314,59 +230,43 @@ return player;
 
 
 function animate() {
-
   requestAnim(animate);
-  
   console.log('animation counter');
-
   additionalElements.forEach(element => element.draw());
-                              
+                
+  platforms.forEach(platform => platform.draw());
+  platforms.forEach(platform => platform.update());
+  platforms.forEach(platform => {
+    (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
+  
+  if (platform.type === 'platformOne' ||
+      platform.type === 'platformTwo' ||
+      platform.type === 'platformThree' ||
+      platform.type === 'deadSignalZone' ||
+      platform.type === 'flamethrowerLeft' ||
+      platform.type === 'flamethrowerRight' ||
+      platform.type === 'flamethrowerUp' ||
+      platform.type === 'flamethrowerDown') {
+        platform.collision();
+  }
+
+  if (platform.type === 'flamethrowerLeft' ||
+      platform.type === 'flamethrowerRight' ||
+      platform.type === 'flamethrowerUp' ||
+      platform.type === 'flamethrowerDown') {
+        platform.shoot();                      
+  }
+  });
                           
-                          platforms.forEach(platform => platform.draw());
-                          platforms.forEach(platform => platform.update());
-                          platforms.forEach(platform => {
-                            (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
-                          
-                          
-                          if (platform.type === 'platformOne' ||
-                          platform.type === 'platformTwo' ||
-                          platform.type === 'platformThree' ||
-                          platform.type === 'deadSignalZone' ||
-                          platform.type === 'flamethrowerLeft' ||
-                          platform.type === 'flamethrowerRight' ||
-                          platform.type === 'flamethrowerUp' ||
-                          platform.type === 'flamethrowerDown'
-                          ) {
-                            platform.collision();
-                          }
-                          
+  leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
+    return (platform.left <= player.left &&
+      (platform.top <= player.top &&
+      platform.bottom >= player.bottom)
+      );
+  })
+  leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1]
 
-                          if (platform.type === 'flamethrowerLeft' ||
-                          platform.type === 'flamethrowerRight' ||
-                          platform.type === 'flamethrowerUp' ||
-                          platform.type === 'flamethrowerDown') {
-                            platform.shoot();                      
-                          }
-                          
-                          });
-
-                          
-
-
-
-
-
-                          
-leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
-  return (platform.left <= player.left &&
-    (platform.top <= player.top &&
-    platform.bottom >= player.bottom)
-    );
-})
-leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1]
-
-
-                          player.update();
+  player.update();
 
 
   if (keys.right.pressed && (player.position.x + player.width) <= canvas.width) { // упор персонажа в правый край экрана
@@ -377,23 +277,20 @@ leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFro
     player.velocity.x = 0;
   }
 
-
-        
-if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
-  player.currentSprite = player.sprites.idle.right;
-} else if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'left') { // 10 - когда персонаж на земле
-  player.currentSprite = player.sprites.idle.left;
-}
+       
+  if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
+    player.currentSprite = player.sprites.idle.right;
+  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'left') { // 10 - когда персонаж на земле
+    player.currentSprite = player.sprites.idle.left;
+  }
 
 
     // Падение в пропасть (см. комментарии в player.update())
-      if (player.position.y > canvas.height) {
-// sawTrap.restore();
-                             //sawTrap2.restore(); // !!!!!!!!!!!!
-gameSoundEffects(audio.fallingInDepth2);
-keys.jumpToggleActive = !keys.jumpToggleActive;
-        init();
-      }
+    if (player.position.y > canvas.height) {
+      gameSoundEffects(audio.fallingInDepth2);
+      keys.jumpToggleActive = !keys.jumpToggleActive;
+      init();
+    }
 
 
 }

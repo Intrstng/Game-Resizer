@@ -1,3 +1,57 @@
+import {
+        platformImgSrc300,
+        heroIdleR,
+        heroIdleL,
+        heroRunR,
+        heroRunL,
+        heroJumpR,
+        heroJumpL,
+        heroFallR,
+        heroFallL,
+        heroDeath,
+        backgroundImg,
+        win,
+        platformSolid,
+        platformOneStep,
+        platformOneStepExplosion,
+        platformJump,
+        platformJumpDisabled,
+        platformOne,
+        platformTwo,
+        platformThree,
+        platformOneDisabled,
+        platformTwoDisabled,
+        platformThreeDisabled,
+        saw,
+        fan,
+        spike,
+        deadSignalZone,
+        deadSignalZoneHover,
+        flamethrowerLeft,
+        flamethrowerRight,
+        flamethrowerUp,
+        flamethrowerDown,
+        fireballUp,
+        fireballDown,
+        fireballLeft,
+        fireballRight,
+        brick_1,
+        brick_2,
+        finish,
+        arrows,
+        spaceImg,
+        cloud_1,
+        cloud_2,
+        cloud_3,
+        cloud_4,
+        fKeyImg,
+        mKeyImg,
+        errorImg,
+        birdFlyingImg,
+        logoImg_1,
+        logoImg_2,
+} from './Assets';
+
 export const mySPA = (function() {
 
   function View() {
@@ -24,13 +78,13 @@ export const mySPA = (function() {
           <section class="${className} controls">
             <h2 class="controls__title">Controls:</h2>
             <div class="controls__container">
-              <img class="controls__img-key" src="/assets/img/SPA/arrows.png" alt="control arrows">
+              <img class="controls__img-key" src="${arrows}" alt="control arrows">
                 <p class="controls__text">Press Left and Right arrows to control character movement.<br>Press press Up arrow to jump.</p>
-                  <img class="controls__img-key" src="/assets/img/SPA/space.png" alt="space key">
+                  <img class="controls__img-key" src="${spaceImg}" alt="space key">
                     <p class="controls__text">Press Space to toggle the active and inactive state of the platform <span>One / Two / Three</span></p>
-                      <img class="controls__img-letter" src="/assets/img/SPA/m.png" alt="m key">
+                      <img class="controls__img-letter" src="${mKeyImg}" alt="m key">
                         <p class="controls__text">Press <span>M</span> to return to the menu</p>
-                          <img class="controls__img-letter" src="/assets/img/SPA/f.png" alt="m key">
+                          <img class="controls__img-letter" src="${fKeyImg}" alt="m key">
                             <p class="controls__text">Press <span>F</span> to open the game in full screen</p>      
             </div>
           </section>
@@ -116,7 +170,7 @@ export const mySPA = (function() {
       render: (className = 'container') => {
         return `
           <section class="${className} error">
-            <img class="error__img" src="/assets/img/SPA/404.png" alt="error 404">
+            <img class="error__img" src="${errorImg}" alt="error 404">
             <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
           </section>
         `;
@@ -212,18 +266,18 @@ export const mySPA = (function() {
         app.className = 'game-app';
         app.innerHTML = `
         <header class="header">
-          <img class="cloud-1" src="/assets/img/SPA/cloud_1.png"  alt="cloud first">
-          <img class="cloud-2" src="/assets/img/SPA/cloud_2.png"  alt="cloud second">
-          <img class="cloud-3" src="/assets/img/SPA/cloud_3.png"  alt="cloud third">
-          <img class="cloud-4" src="/assets/img/SPA/cloud_4.png"  alt="cloud fourth">
+          <img class="cloud-1" src="${cloud_1}"  alt="cloud first">
+          <img class="cloud-2" src="${cloud_2}"  alt="cloud second">
+          <img class="cloud-3" src="${cloud_3}"  alt="cloud third">
+          <img class="cloud-4" src="${cloud_4}"  alt="cloud fourth">
             <div class="header__wrapper">
-              <img class="header__logo" src="/assets/img/SPA/logo.png" alt="logo">
+              <img class="header__logo" src="${logoImg_1}" alt="logo">
                 <div class="header__logo-box">
-                  <img class="header__logo-2" src="/assets/img/SPA/logo_2.png" alt="logo small">
+                  <img class="header__logo-2" src="${logoImg_2}" alt="logo small">
                     <p class="header__title">Platform traveller</p>
                 </div>
                   <div class="bird-container">
-                    <img class="bird" src="/assets/img/SPA/flying.gif" alt="bird">
+                    <img class="bird" src="${birdFlyingImg}" alt="bird">
                   </div>
                       <nav id="root" class="header__nav nav">
                         <ul class="nav__list">

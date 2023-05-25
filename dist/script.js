@@ -38,15 +38,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Levels__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/Levels */ "./src/js/Levels.js");
 
 
-// imagePlatform.onload = function getSizes () {
-//   imagePlatform.width = imagePlatform.naturalWidth;
-//   imagePlatform.height = imagePlatform.naturalHeight;
-//}
 
 
 
 
-// import { levelMap } from './js/data/DescriptionForLevelMap';
 
 
 
@@ -56,54 +51,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', _js_SPA__WEBPACK_IMPORTED_MODULE_1__.mySPA.init('root', 'content'));
-
-// canvas.width = document.documentElement.clientWidth;
-// canvas.height = document.documentElement.clientHeight;
 const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height / 5; // 10
-// window.addEventListener('resize', () => {
-//   canvas.width = document.documentElement.clientWidth;
-//   canvas.height = document.documentElement.clientHeight;
-// });
-
-// function onResize( element, callback ){
-//   var elementHeight = element.height,
-//       elementWidth = element.width;
-//   setInterval(function(){
-//       if( element.height !== elementHeight || element.width !== elementWidth ){
-//         elementHeight = element.height;
-//         elementWidth = element.width;
-//         callback();
-//       }
-//   }, 300);
-// }
-
-// onResize(canvas, function() { 
-// canvas.width = document.documentElement.clientWidth;
-// canvas.height = document.documentElement.clientHeight;
-// });
-
-_js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width = 1024; // 1280 //window.innerWidth; // canvas.width = innerWidth;
-_js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height = 576; // 720 //window.innerHeight;
+_js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width = 1024; // 1280
+_js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height = 576; // 720
 let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
   window.setTimeout(callback, 1000 / 60);
 };
 window.addEventListener('keydown', e => fullScreen(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas));
-
-// let game = [];
-
-// class Game {
-//   constructor(level) {
-//     this.level = level;
-//   }
-// }
-
-// function createNewGame(map) {
-//   Object.values(map).forEach(level => {
-//     game.push(new Game(level.id));
-//   })
-// }
-// console.log(game)
-
 function fullScreen(e, element) {
   if (e.code === 'KeyF') {
     if (element.requestFullscreen) {
@@ -121,14 +75,6 @@ let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
 let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_4__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height))];
-
-// class Level {
-//   constructor(value) {
-//     this.stage =  value;
-//   }
-// }
-// export let level = new Level(1);
-
 let level = 1;
 function increseLevel(obj) {
   return level >= Object.keys(obj).length ? level : ++level;
@@ -138,7 +84,7 @@ let platforms = [],
   parsedCollisions,
   player;
 
-// requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+//requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
 
 function setLevelMap(value) {
   levelMap = value;
@@ -181,7 +127,7 @@ function flamethrowerShootSoundIntervalInit() {
 let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
 track.pause();
 track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
-///track.play();
+//track.play();
 track.onended = function () {
   (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
 };
@@ -264,8 +210,6 @@ function animate() {
 
   // Падение в пропасть (см. комментарии в player.update())
   if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height) {
-    // sawTrap.restore();
-    //sawTrap2.restore(); // !!!!!!!!!!!!
     (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fallingInDepth2);
     _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive;
     init();
@@ -345,11 +289,19 @@ class AdditionalElements {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "arrows": () => (/* reexport default export from named module */ _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__),
 /* harmony export */   "backgroundImg": () => (/* reexport default export from named module */ _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__),
+/* harmony export */   "birdFlyingImg": () => (/* reexport default export from named module */ _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__),
 /* harmony export */   "brick_1": () => (/* reexport default export from named module */ _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__),
 /* harmony export */   "brick_2": () => (/* reexport default export from named module */ _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__),
+/* harmony export */   "cloud_1": () => (/* reexport default export from named module */ _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__),
+/* harmony export */   "cloud_2": () => (/* reexport default export from named module */ _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__),
+/* harmony export */   "cloud_3": () => (/* reexport default export from named module */ _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__),
+/* harmony export */   "cloud_4": () => (/* reexport default export from named module */ _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__),
 /* harmony export */   "deadSignalZone": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__),
 /* harmony export */   "deadSignalZoneHover": () => (/* reexport default export from named module */ _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__),
+/* harmony export */   "errorImg": () => (/* reexport default export from named module */ _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__),
+/* harmony export */   "fKeyImg": () => (/* reexport default export from named module */ _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__),
 /* harmony export */   "fan": () => (/* reexport default export from named module */ _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__),
 /* harmony export */   "finish": () => (/* reexport default export from named module */ _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__),
 /* harmony export */   "fireballDown": () => (/* reexport default export from named module */ _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__),
@@ -369,6 +321,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "heroJumpR": () => (/* reexport default export from named module */ _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__),
 /* harmony export */   "heroRunL": () => (/* reexport default export from named module */ _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__),
 /* harmony export */   "heroRunR": () => (/* reexport default export from named module */ _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__),
+/* harmony export */   "logoImg_1": () => (/* reexport default export from named module */ _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__),
+/* harmony export */   "logoImg_2": () => (/* reexport default export from named module */ _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__),
+/* harmony export */   "mKeyImg": () => (/* reexport default export from named module */ _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__),
 /* harmony export */   "platformImgSrc300": () => (/* reexport default export from named module */ _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__),
 /* harmony export */   "platformJump": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__),
 /* harmony export */   "platformJumpDisabled": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__),
@@ -382,6 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "platformTwo": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__),
 /* harmony export */   "platformTwoDisabled": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__),
 /* harmony export */   "saw": () => (/* reexport default export from named module */ _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__),
+/* harmony export */   "spaceImg": () => (/* reexport default export from named module */ _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__),
 /* harmony export */   "spike": () => (/* reexport default export from named module */ _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__),
 /* harmony export */   "win": () => (/* reexport default export from named module */ _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__)
 /* harmony export */ });
@@ -424,39 +380,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
 /* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
 /* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
-// const platformImgSrc300 = '../assets/img/Platforms/platform.png';
-// const heroIdleR = '../assets/img/Hero/Idle_right.png';
-// const heroIdleL = '../assets/img/Hero/Idle_left.png';
-// const heroRunR = '../assets/img/Hero/Run_right.png';
-// const heroRunL = '../assets/img/Hero/Run_left.png';
-// const heroJumpR = '../assets/img/Hero/Jump_right.png';
-// const heroJumpL = '../assets/img/Hero/Jump_left.png';
-// const heroFallR = '../assets/img/Hero/Fall_right.png';
-// const heroFallL = '../assets/img/Hero/Fall_left.png';
-// const heroDeath = '../assets/img/Hero/Player_death.png';
-// const backgroundImg = '../assets/img/Background_images/bg_2.jpg';
-// const platformSolid = '../assets/img/Platforms/Platform_solid.png';
-// const platformOneStep = '../assets/img/Platforms/Platform_oneStep.png';
-// const platformOneStepExplosion = '../assets/img/Platforms/Platform_oneStep_Explosion.png';
-// const platformJump = '../assets/img/Platforms/Platform_jump.png';
-// const platformJumpDisabled = '../assets/img/Platforms/Platform_jump_disabled.png';
-// const platformOne = '../assets/img/Platforms/Platform_one.png';
-// const platformTwo = '../assets/img/Platforms/Platform_two.png';
-// const platformThree = '../assets/img/Platforms/Platform_three.png';
-// const platformOneDisabled = '../assets/img/Platforms/Platform_one_disabled.png';
-// const platformTwoDisabled = '../assets/img/Platforms/Platform_two_disabled.png';
-// const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.png';
-// const saw = '../assets/img/Traps/Saw.png';
-// const fan = '../assets/img/Traps/Fan.png';
-// const spike = '../assets/img/Traps/Platform_spikes.png';
-// const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
-// const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
-// const flamethrowerLeft = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerRight = '../assets/img/Traps/Flamethrower_right.png';
-// const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
+/* harmony import */ var _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../../../assets/img/SPA/arrows.png */ "./assets/img/SPA/arrows.png");
+/* harmony import */ var _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../../assets/img/SPA/space.png */ "./assets/img/SPA/space.png");
+/* harmony import */ var _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_1.png */ "./assets/img/SPA/cloud_1.png");
+/* harmony import */ var _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_2.png */ "./assets/img/SPA/cloud_2.png");
+/* harmony import */ var _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_3.png */ "./assets/img/SPA/cloud_3.png");
+/* harmony import */ var _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_4.png */ "./assets/img/SPA/cloud_4.png");
+/* harmony import */ var _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../../../assets/img/SPA/f.png */ "./assets/img/SPA/f.png");
+/* harmony import */ var _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../../../assets/img/SPA/m.png */ "./assets/img/SPA/m.png");
+/* harmony import */ var _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../../../assets/img/SPA/404.png */ "./assets/img/SPA/404.png");
+/* harmony import */ var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../../../assets/img/SPA/flying.gif */ "./assets/img/SPA/flying.gif");
+/* harmony import */ var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../../../assets/img/SPA/logo.png */ "./assets/img/SPA/logo.png");
+/* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1336,7 +1282,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
-/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 /* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/data/Audio */ "./src/js/data/Audio.js");
 
 
@@ -1376,22 +1322,22 @@ class Player {
     this.completeLevel = false;
     this.sprites = {
       idle: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
       },
       run: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
       },
       jump: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
       },
       fall: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
       },
-      death: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
+      death: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
     };
     this.currentSprite = this.sprites.idle.right;
   }
@@ -1673,6 +1619,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "mySPA": () => (/* binding */ mySPA)
 /* harmony export */ });
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
+
 const mySPA = function () {
   function View() {
     let myContainerBtns = null;
@@ -1698,13 +1646,13 @@ const mySPA = function () {
           <section class="${className} controls">
             <h2 class="controls__title">Controls:</h2>
             <div class="controls__container">
-              <img class="controls__img-key" src="/assets/img/SPA/arrows.png" alt="control arrows">
+              <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.arrows}" alt="control arrows">
                 <p class="controls__text">Press Left and Right arrows to control character movement.<br>Press press Up arrow to jump.</p>
-                  <img class="controls__img-key" src="/assets/img/SPA/space.png" alt="space key">
+                  <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.spaceImg}" alt="space key">
                     <p class="controls__text">Press Space to toggle the active and inactive state of the platform <span>One / Two / Three</span></p>
-                      <img class="controls__img-letter" src="/assets/img/SPA/m.png" alt="m key">
+                      <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.mKeyImg}" alt="m key">
                         <p class="controls__text">Press <span>M</span> to return to the menu</p>
-                          <img class="controls__img-letter" src="/assets/img/SPA/f.png" alt="m key">
+                          <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.fKeyImg}" alt="m key">
                             <p class="controls__text">Press <span>F</span> to open the game in full screen</p>      
             </div>
           </section>
@@ -1790,7 +1738,7 @@ const mySPA = function () {
         let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
         return `
           <section class="${className} error">
-            <img class="error__img" src="/assets/img/SPA/404.png" alt="error 404">
+            <img class="error__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.errorImg}" alt="error 404">
             <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
           </section>
         `;
@@ -1872,18 +1820,18 @@ const mySPA = function () {
       app.className = 'game-app';
       app.innerHTML = `
         <header class="header">
-          <img class="cloud-1" src="/assets/img/SPA/cloud_1.png"  alt="cloud first">
-          <img class="cloud-2" src="/assets/img/SPA/cloud_2.png"  alt="cloud second">
-          <img class="cloud-3" src="/assets/img/SPA/cloud_3.png"  alt="cloud third">
-          <img class="cloud-4" src="/assets/img/SPA/cloud_4.png"  alt="cloud fourth">
+          <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}"  alt="cloud first">
+          <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}"  alt="cloud second">
+          <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}"  alt="cloud third">
+          <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}"  alt="cloud fourth">
             <div class="header__wrapper">
-              <img class="header__logo" src="/assets/img/SPA/logo.png" alt="logo">
+              <img class="header__logo" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoImg_1}" alt="logo">
                 <div class="header__logo-box">
-                  <img class="header__logo-2" src="/assets/img/SPA/logo_2.png" alt="logo small">
+                  <img class="header__logo-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoImg_2}" alt="logo small">
                     <p class="header__title">Platform traveller</p>
                 </div>
                   <div class="bird-container">
-                    <img class="bird" src="/assets/img/SPA/flying.gif" alt="bird">
+                    <img class="bird" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.birdFlyingImg}" alt="bird">
                   </div>
                       <nav id="root" class="header__nav nav">
                         <ul class="nav__list">
@@ -3120,6 +3068,126 @@ module.exports = __webpack_require__.p + "ee2cf136916afa6626fe.png";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "7eac2d1901ea34422f0e.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/404.png":
+/*!********************************!*\
+  !*** ./assets/img/SPA/404.png ***!
+  \********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "d6ae460aef8c7a5e09aa.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/arrows.png":
+/*!***********************************!*\
+  !*** ./assets/img/SPA/arrows.png ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "585f4dd8a44c4c6ef29f.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/cloud_1.png":
+/*!************************************!*\
+  !*** ./assets/img/SPA/cloud_1.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "b8c2cb7fc7c5ccc4c2c8.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/cloud_2.png":
+/*!************************************!*\
+  !*** ./assets/img/SPA/cloud_2.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "038295bf2462c5284db2.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/cloud_3.png":
+/*!************************************!*\
+  !*** ./assets/img/SPA/cloud_3.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "6c0cfb1374a4eb5e33a3.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/cloud_4.png":
+/*!************************************!*\
+  !*** ./assets/img/SPA/cloud_4.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "0a68175f43cec8b1a194.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/f.png":
+/*!******************************!*\
+  !*** ./assets/img/SPA/f.png ***!
+  \******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "dafb6d4501e1437d44c2.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/flying.gif":
+/*!***********************************!*\
+  !*** ./assets/img/SPA/flying.gif ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "19a24757711822d420cd.gif";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/logo.png":
+/*!*********************************!*\
+  !*** ./assets/img/SPA/logo.png ***!
+  \*********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "9ded7098db0de0ee5f14.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/logo_2.png":
+/*!***********************************!*\
+  !*** ./assets/img/SPA/logo_2.png ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "101bca4fe3b9730ef925.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/m.png":
+/*!******************************!*\
+  !*** ./assets/img/SPA/m.png ***!
+  \******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "5b88f8c92d3dbe18357c.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/space.png":
+/*!**********************************!*\
+  !*** ./assets/img/SPA/space.png ***!
+  \**********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "750a10492757e1a067d8.png";
 
 /***/ }),
 

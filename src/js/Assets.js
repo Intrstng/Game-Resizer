@@ -1,37 +1,3 @@
-// const platformImgSrc300 = '../assets/img/Platforms/platform.png';
-// const heroIdleR = '../assets/img/Hero/Idle_right.png';
-// const heroIdleL = '../assets/img/Hero/Idle_left.png';
-// const heroRunR = '../assets/img/Hero/Run_right.png';
-// const heroRunL = '../assets/img/Hero/Run_left.png';
-// const heroJumpR = '../assets/img/Hero/Jump_right.png';
-// const heroJumpL = '../assets/img/Hero/Jump_left.png';
-// const heroFallR = '../assets/img/Hero/Fall_right.png';
-// const heroFallL = '../assets/img/Hero/Fall_left.png';
-// const heroDeath = '../assets/img/Hero/Player_death.png';
-// const backgroundImg = '../assets/img/Background_images/bg_2.jpg';
-// const platformSolid = '../assets/img/Platforms/Platform_solid.png';
-// const platformOneStep = '../assets/img/Platforms/Platform_oneStep.png';
-// const platformOneStepExplosion = '../assets/img/Platforms/Platform_oneStep_Explosion.png';
-// const platformJump = '../assets/img/Platforms/Platform_jump.png';
-// const platformJumpDisabled = '../assets/img/Platforms/Platform_jump_disabled.png';
-// const platformOne = '../assets/img/Platforms/Platform_one.png';
-// const platformTwo = '../assets/img/Platforms/Platform_two.png';
-// const platformThree = '../assets/img/Platforms/Platform_three.png';
-// const platformOneDisabled = '../assets/img/Platforms/Platform_one_disabled.png';
-// const platformTwoDisabled = '../assets/img/Platforms/Platform_two_disabled.png';
-// const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.png';
-// const saw = '../assets/img/Traps/Saw.png';
-// const fan = '../assets/img/Traps/Fan.png';
-// const spike = '../assets/img/Traps/Platform_spikes.png';
-// const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
-// const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
-// const flamethrowerLeft = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerRight = '../assets/img/Traps/Flamethrower_right.png';
-// const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
-// const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
-
 import platformImgSrc300 from '/assets/img/Platforms/platform.png';
 import heroIdleR from '/assets/img/Hero/Idle_right.png';
 import heroIdleL from '/assets/img/Hero/Idle_left.png';
@@ -72,6 +38,19 @@ import fireballDown from '/assets/img/Traps/Fireball_down.png';
 import fireballLeft from '/assets/img/Traps/Fireball_left.png';
 import fireballRight from '/assets/img/Traps/Fireball_right.png';
 
+import arrows from '/assets/img/SPA/arrows.png';
+import spaceImg from '/assets/img/SPA/space.png';
+import cloud_1 from '/assets/img/SPA/cloud_1.png';
+import cloud_2 from '/assets/img/SPA/cloud_2.png';
+import cloud_3 from '/assets/img/SPA/cloud_3.png';
+import cloud_4 from '/assets/img/SPA/cloud_4.png';
+import fKeyImg from '/assets/img/SPA/f.png';
+import mKeyImg from '/assets/img/SPA/m.png';
+import errorImg from '/assets/img/SPA/404.png';
+import birdFlyingImg from '/assets/img/SPA/flying.gif';
+import logoImg_1 from '/assets/img/SPA/logo.png';
+import logoImg_2 from '/assets/img/SPA/logo_2.png';
+
 export { platformImgSrc300,
         heroIdleR,
         heroIdleL,
@@ -111,4 +90,16 @@ export { platformImgSrc300,
         brick_1,
         brick_2,
         finish,
+        arrows,
+        spaceImg,
+        cloud_1,
+        cloud_2,
+        cloud_3,
+        cloud_4,
+        fKeyImg,
+        mKeyImg,
+        errorImg,
+        birdFlyingImg,
+        logoImg_1,
+        logoImg_2,
       }

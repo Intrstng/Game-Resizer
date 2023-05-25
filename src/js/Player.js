@@ -36,7 +36,7 @@ import {
   flamethrowerDown,
   brick_1,
   brick_2,
-      } from '../js/Assets';
+      } from './Assets';
 import { platforms, intersection, level } from '../index';
 import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from '../js/data/Audio';
 
