@@ -1,4 +1,5 @@
 .level {
+  margin-bottom: 4rem;
   &__title {
     margin-bottom: 3rem;
     @extend %font-notes;
@@ -64,11 +65,5 @@
       @include width-height(6rem);
       font-size: 3rem;
     }
-  }
-}
-
-@include screen-and-mobile {
-  .level {
-    margin-left: 3rem;
   }
 }

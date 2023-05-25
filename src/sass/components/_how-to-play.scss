@@ -1,5 +1,6 @@
 .controls {
   width: 80%;
+  margin-bottom: 4rem;
   &__container {
     margin: 0 auto;
     @include flex(flex, space-between, center);
@@ -33,6 +34,7 @@
 @include screen-and-small-desktop {
   .controls {
     width: 70%;
+    margin-bottom: 5rem;
     &__title {
       font-size: 1.6rem;
       margin-bottom: 3rem;
@@ -56,7 +58,6 @@
 @include screen-and-tablet {
   .controls {
     width: 95%;
-    padding-bottom: 4rem;
     &__img-key {
       width: 12rem;
     }

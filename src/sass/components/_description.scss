@@ -1,4 +1,5 @@
 .description {
+  margin-bottom: 4rem;
   p {
     margin: 0 0 0.8rem;
     text-indent: 2rem;
@@ -17,7 +18,7 @@
     margin: 0 auto;
     padding: 2rem;
     @extend %font-text;
-    font-size: 2.3rem;
+    font-size: 2.1rem;
     color:$color-link-light;
     border: 0.3rem solid $color-line-light;
     border-radius: 3rem;
@@ -57,7 +58,9 @@
 @include screen-and-mobile {
   .description {
     &__content {
-      margin-left: 1rem;
+      width: 100%;
+      line-height: 1.9rem;
+      font-size: 1.3rem;
     }
   }
 }

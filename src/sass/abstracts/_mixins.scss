@@ -30,6 +30,10 @@
   #{$property}: $value;
 }
 
+@mixin media-greater-desktop {
+  @media (min-width: $desktop-width) { @content; }
+}
+
 @mixin media-desktop {
   @media (max-width: $desktop-width) { @content; }
 }

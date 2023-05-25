@@ -53,21 +53,33 @@ body {
   display: none;
 }
 
+@include media-greater-desktop {
+  html {
+    font-size: 54%;
+  }
+}
+
 @include media-desktop {
   html {
-    font-size: 62.5%;
+    font-size: 54%;
   }
 }
 
 @include media-small-desktop {
   html {
-    font-size: 62.5%;
+    font-size: 55%;
+  }
+}
+
+@include media-tablet {
+  html {
+    font-size: 50%;
   }
 }
 
 @include media-mobile {
   html {
-    font-size: 50%;
+    font-size: 41%;
   }
 }
 
