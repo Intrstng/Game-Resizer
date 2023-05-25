@@ -13,7 +13,7 @@ module.exports = (env, options) => {
     output: {
       filename: 'script.js',
       path: path.join(__dirname, '/dist'),
-      assetModuleFilename: 'assets/[hash][ext]'
+      assetModuleFilename: '[hash][ext]'
     },
     mode: isProduction ? 'production' : 'development',
     devtool: /* isProduction ? 'none' :  */'source-map', // BREAKING CHANGE since webpack 5: The devtool option is more strict.

@@ -1,0 +1,75 @@
+.controls {
+  width: 80%;
+  margin-bottom: 4rem;
+  &__container {
+    margin: 0 auto;
+    @include flex(flex, space-between, center);
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+  &__title {
+    margin-bottom: 5rem;
+    @extend %font-notes;
+    font-size: 2rem;
+    font-weight: normal;
+    color: $color-link-dark;
+    letter-spacing: 0.2rem;
+  }
+  &__img-key {
+    width: 20rem;
+  }
+  &__img-letter {
+    width: 6rem;
+    margin-left: 7.2rem;
+  }
+  &__text {
+    width: 70%;
+    @extend %font-notes;
+    letter-spacing: 0.2rem;
+    font-weight: normal;
+    color: $color-light-bg;
+  }
+}
+
+@include screen-and-small-desktop {
+  .controls {
+    width: 70%;
+    margin-bottom: 5rem;
+    &__title {
+      font-size: 1.6rem;
+      margin-bottom: 3rem;
+    }
+    &__img-key {
+      width: 15rem;
+    }
+    &__img-letter {
+      width: 4.5rem;
+      margin-left: 5.5rem;
+    }
+    &__text {
+      width: 60%;
+      letter-spacing: 0.2rem;
+      font-weight: normal;
+      color: $color-light-bg;
+    }
+  }
+}
+
+@include screen-and-tablet {
+  .controls {
+    width: 95%;
+    &__img-key {
+      width: 12rem;
+    }
+    &__img-letter {
+      width: 3.5rem;
+      margin-left: 4.5rem;
+    }
+    &__text {
+      width: 50%;
+      font-size: 1.2rem;
+      letter-spacing: 0.2rem;
+      font-weight: normal;
+    }
+  }
+}

@@ -1,0 +1,201 @@
+.header {
+  flex-shrink: 0;
+  @include width-height(100%, 50rem);
+  &__wrapper {
+    width: 140rem;
+    margin: 0 auto;
+    padding: 0 10rem;
+    @include flex(flex, space-between, center);
+    flex-direction: column;
+  }
+  &__logo-box {
+    position: relative;
+    width: 100%;
+    }
+  &__logo {
+    margin-top: 3.5rem;
+    @include width-height(10rem, 8rem);
+  }
+  &__logo-2 {
+    position: absolute;
+    @include width-height(4.7rem);
+    @include top-right(8.5rem, 16.5rem);
+  }
+  &__title {
+    @extend %font-title;
+    font-size: 8rem;
+    @include width-height(100%, 10rem);
+    margin: 10rem 0 14rem;
+    text-align: center;
+    color: $color-font;
+  }
+  &__nav {
+    width: 80%;
+    z-index: 2;
+  }
+  .nav {
+    &__list {
+      @include flex(flex, space-between, center);
+      flex-direction: row;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      @extend %font-primary;
+      letter-spacing: 0.2rem;
+      font-size: 4rem;
+      padding: 1rem 1rem;
+      border-top: 0.3rem $color-line solid;
+      border-bottom: 0.3rem $color-line solid;
+      z-index: 3;
+    }
+    &__item {
+      margin-bottom: 1rem;
+      z-index: 2;
+      cursor: pointer;
+    }
+    &__link {
+      color: $color-link-light;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 2rem;
+    }
+    &__link.active {
+      color: $color-span;
+    }
+    
+    &__item:hover a {
+      color: $color-link-hover;
+    }
+    &__btn {
+      @include width-height(20rem, 4rem);
+      padding: 1rem 4rem;
+      @extend %font-primary;
+      font-size: 2rem;
+      letter-spacing: 0.2rem;
+      background-color: $color-line-light;
+      background-image: linear-gradient(to bottom, $color-line-light, $color-btn);
+      color: $color-link-light;
+      text-align: center;
+      text-decoration: none;
+    }
+    &__btn {
+      &_hover{
+        &:hover {
+          cursor: pointer;
+          background-image: none;
+        }
+      }
+    }
+  }
+}
+
+@include media-small-desktop {
+  .header{
+    &__wrapper {
+      width: 70rem;
+    }
+    &__logo {
+    @include width-height(8rem, 6rem);
+    }
+    &__logo-2 {
+    @include width-height(4rem);
+    @include top-right(10rem, 2rem);
+    }
+    &__title {
+    margin-bottom: 20rem;
+    }
+  }
+}
+
+@include media-tablet {
+  .header {
+    &__wrapper {
+      width: 39rem;
+      padding: 1rem;
+    }
+    &__logo {
+      margin-bottom: 7rem;
+      @include width-height(5rem, 4rem);
+    }
+    &__logo-2 {
+      @include width-height(2.25rem);
+      @include top-right(-0.5rem, 6rem);
+    }
+    &__title {
+      margin: 0 0 4rem;
+      font-size: 4.5rem;
+    }
+  }
+}
+
+@include screen-and-small-desktop {
+  .header {
+    @include width-height(100%, 55rem);
+    flex-shrink: 0;
+    &__nav {
+      width: 105%;
+    }
+    .nav {
+      &__list {
+        padding: 0.5rem 1rem;
+        border-top: 0.2rem $color-line solid;
+        border-bottom: 0.2rem $color-line solid;
+      }
+      &__item a {
+          font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+@include screen-and-tablet {
+  .header {
+    @include width-height(100%, 53.5rem);
+    .nav{
+      &__list {
+        @include flex(flex, center, center);
+        flex-direction: column;
+        margin: 0 auto;
+        width: 34rem;
+        font-size: 1.2rem;
+        border-top: none;
+      }
+      &__item {
+        margin-top: 2rem;
+      }
+      &__item:last-child {
+        margin-bottom: 2rem;
+      }
+      &__item a {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+@include screen-and-small-desktop {
+  .nav {
+    &__btn {
+      @include width-height(20rem, 3.6rem);
+      padding: 1rem;
+      margin-bottom: 2rem;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@include screen-and-mobile {
+  .header {
+    @include width-height(100%, 51rem);
+    &__logo {
+      margin-bottom: 4rem;
+    }
+    &__title {
+      max-width: 34rem;
+      margin: 0 auto 3rem;
+    }
+    &__logo-2 {
+      @include top-right(0, 5.5rem);
+    }
+  }
+}

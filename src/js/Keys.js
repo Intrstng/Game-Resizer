@@ -26,6 +26,7 @@ const keys = {
   deadSignalZone: false,
 };
                                                 // let hiddenPlatformsArr = []
+                                                
 const keyDownHandler = (e) => {
   console.log(e.code)
   if (e.repeat == false) {

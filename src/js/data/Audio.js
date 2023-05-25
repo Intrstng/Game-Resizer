@@ -1,3 +1,5 @@
+// import blockHit_MP3 from '/assets/sounds/effects/mp3/block_hit.mp3';
+// import blockHit_OGG from '/assets/sounds/effects/ogg/block_hit.ogg';
 import blockHit_MP3 from '../../../assets/sounds/effects/mp3/block_hit.mp3';
 import blockHit_OGG from '../../../assets/sounds/effects/ogg/block_hit.ogg';
 import bottomHit_MP3 from '../../../assets/sounds/effects/mp3/bottom_hit.mp3';
@@ -45,7 +47,7 @@ import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
 import { createImage, randomNumber } from '../Utils';
 
 let volumeEffects = 1;
-let volumeMusic = 1;
+let volumeMusic = 0.8;
 
 const audio = {
   isCanPlay: new Audio(),
@@ -157,8 +159,8 @@ const audio = {
   },
 }
 
+let source = null;
  // Choose supported source and preload
- let source = null;
 ;(function() {
   if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
     source = 'src_MP3';
@@ -166,7 +168,7 @@ const audio = {
       source = 'src_OGG';
     }
   for (let sound in audio) {
-    if (audio[sound]?.src_MP3 && audio[sound]?.src_OGG) {
+    if (sound != 'isCanPlay') {
       let { src_MP3: mp3, src_OGG: ogg } = audio[sound];
         mp3.play();
         mp3.pause();
@@ -184,10 +186,14 @@ function gameSoundEffects(item) {
 
 function getRandomTrack(playlist) {
   let tracksList = [];
+  let track;
   for (let sound in playlist) {
     sound.includes('track') && tracksList.push(playlist[sound]);
   }
-  return tracksList[randomNumber(0, tracksList.length - 1)][source];
+  track = tracksList[randomNumber(0, tracksList.length - 1)][source];
+  track.currentTime = 0;
+  track.volume = volumeMusic;
+  return track;
 }
 
 const playNextTrack = (currentTrack, playlist) => {
@@ -200,16 +206,67 @@ const playNextTrack = (currentTrack, playlist) => {
     track[source] === currentTrack && (currentTrackNumber = index);
   });
   currentTrackNumber < (tracksList.length - 1) ? currentTrackNumber++ : currentTrackNumber = 0;
+              tracksList[currentTrackNumber][source].currentTime = 0;
+              tracksList[currentTrackNumber][source].volume = volumeMusic;
   tracksList[currentTrackNumber][source].play();
   tracksList[currentTrackNumber][source].onended = function() {
     playNextTrack(tracksList[currentTrackNumber][source], audio);
   }
 }
 
-export { audio,
-  gameSoundEffects,
-  getRandomTrack,
-  playNextTrack,
-  volumeEffects,
-  volumeMusic,
-}
+// item[source].currentTime = 0;
+// item[source].volume = item.volume;
+
+
+
+
+
+
+
+// function gameSoundEffects(item) {
+//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
+//     item.src_OGG.currentTime = 0;
+//     item.src_OGG.play();
+//   } else {
+//     item.src_MP3.currentTime = 0;
+//     item.src_MP3.play();
+//   }
+// }
+
+
+ 
+// function gameSoundEffects(item) {
+//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
+//     audio.sound.src= item.src_MP3;
+//   } else {
+//     audio.sound.src= item.src_OGG;
+//   }
+//   audio.sound.currentTime = 0;
+//   audio.sound.play();
+// }
+
+
+// function gameSoundEffects(item) {
+//   item.currentTime = 0;
+//   item.play();
+// }
+
+// For music
+// let isPlayed = false;
+// function gameSoundEffects(item) {
+//   if(!isPlayed)
+//   item.currentTime = 0;
+//   item.play();
+//   isPlayed = true;
+// }
+
+
+
+
+
+
+
+
+
+
+export { audio, gameSoundEffects, getRandomTrack, playNextTrack }
