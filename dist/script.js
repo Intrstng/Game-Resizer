@@ -65,6 +65,15 @@ let timerShoot_1 = null;
 let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
+
+///////////////////////////////////////////////////////////
+
+const ajaxHandlerScript = "https://fe.it-academy.by/AjaxStringStorage2.php";
+let updatePassword;
+const stringName = 'surname_namegame_visits';
+
+////////////////////////////////////////////////////////////
+
 let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 let level = 1;
 function increseLevel(obj) {
@@ -118,21 +127,22 @@ function setVolumeRangeHandlers() {
     });
   }
 }
-main && (window.onload = setVolumeRangeHandlers());
+main && window.addEventListener('load', setVolumeRangeHandlers);
 main && window.addEventListener('hashchange', setVolumeRangeHandlers);
 document.getElementById('mute-btn').addEventListener('click', _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.muteSound);
 let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
 track.pause();
 track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
 let isInitMusicPlay = false;
-function playMusic() {
-  if (!isInitMusicPlay) {
-    track.play();
+function playMusic(e) {
+  if (e.target.closest('#select-lvl')) {
+    if (!isInitMusicPlay) {
+      track.play();
+    }
+    isInitMusicPlay = true;
   }
-  isInitMusicPlay = true;
 }
-const selectLvlBtn = document.getElementById('select-lvl');
-main && selectLvlBtn.addEventListener('click', playMusic);
+window.addEventListener('click', playMusic);
 track.onended = function () {
   (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
 };
@@ -242,25 +252,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Canvas__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Canvas */ "./src/js/Canvas.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-// import { canvas, c } from './Canvas';
-
-// export class AdditionalElements {
-//   constructor (posX, posY, image) {
-//     this.position = {
-//       x: posX,
-//       y: posY
-//     }
-//     this.image = image;
-//     this.width = image.width;
-//     this.height = image.height;   
-//   }
-//   draw() {
-//     c.drawImage(this.image, this.position.x, this.position.y)
-//     // c.fillStyle = ('green');
-//     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
-//   }
-// }
-
 
 
 
@@ -330,6 +321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "logoImg_1": () => (/* reexport default export from named module */ _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__),
 /* harmony export */   "logoImg_2": () => (/* reexport default export from named module */ _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__),
 /* harmony export */   "mKeyImg": () => (/* reexport default export from named module */ _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__),
+/* harmony export */   "muteOff": () => (/* reexport default export from named module */ _assets_img_SPA_mute_off_png__WEBPACK_IMPORTED_MODULE_51__),
+/* harmony export */   "muteOn": () => (/* reexport default export from named module */ _assets_img_SPA_mute_on_png__WEBPACK_IMPORTED_MODULE_52__),
 /* harmony export */   "platformImgSrc300": () => (/* reexport default export from named module */ _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__),
 /* harmony export */   "platformJump": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__),
 /* harmony export */   "platformJumpDisabled": () => (/* reexport default export from named module */ _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__),
@@ -398,6 +391,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/flying.gif */ "./assets/img/SPA/flying.gif");
 /* harmony import */ var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/logo.png */ "./assets/img/SPA/logo.png");
 /* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
+/* harmony import */ var _assets_img_SPA_mute_off_png__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/mute_off.png */ "./assets/img/SPA/mute_off.png");
+/* harmony import */ var _assets_img_SPA_mute_on_png__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/mute_on.png */ "./assets/img/SPA/mute_on.png");
+
+
 
 
 
@@ -1823,9 +1820,8 @@ const mySPA = function () {
 
     main: function () {},
     initBuildHtml: function () {
-      const app = document.createElement('div');
-      app.id = 'game-app';
-      app.className = 'game-app';
+      const app = document.getElementById('app');
+      app.className = 'app';
       app.innerHTML = `
         <header class="header">
           <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
@@ -1862,338 +1858,9 @@ const mySPA = function () {
         </header>
           <main id="content" class="content">
           </main>`;
-      document.body.prepend(app);
     }
   };
 }();
-
-// import {
-//   platformImgSrc300,
-//   heroIdleR,
-//   heroIdleL,
-//   heroRunR,
-//   heroRunL,
-//   heroJumpR,
-//   heroJumpL,
-//   heroFallR,
-//   heroFallL,
-//   heroDeath,
-//   backgroundImg,
-//   win,
-//   platformSolid,
-//   platformOneStep,
-//   platformOneStepExplosion,
-//   platformJump,
-//   platformJumpDisabled,
-//   platformOne,
-//   platformTwo,
-//   platformThree,
-//   platformOneDisabled,
-//   platformTwoDisabled,
-//   platformThreeDisabled,
-//   saw,
-//   fan,
-//   spike,
-//   deadSignalZone,
-//   deadSignalZoneHover,
-//   flamethrowerLeft,
-//   flamethrowerRight,
-//   flamethrowerUp,
-//   flamethrowerDown,
-//   fireballUp,
-//   fireballDown,
-//   fireballLeft,
-//   fireballRight,
-//   brick_1,
-//   brick_2,
-//   finish,
-//   arrows,
-//   spaceImg,
-//   cloud_1,
-//   cloud_2,
-//   cloud_3,
-//   cloud_4,
-//   fKeyImg,
-//   mKeyImg,
-//   errorImg,
-//   birdFlyingImg,
-//   logoImg_1,
-//   logoImg_2,
-// } from './Assets';
-// import { volumeEffects } from './data/Audio';
-// import { volumeMusic } from './data/Audio';
-
-// export const mySPA = (function() {
-
-// function View() {
-// let myContainerBtns = null;
-// let myContainerShow = null;
-
-// const HomeComponent = {
-// id: 'main',
-// title: 'Greeting',
-// render: (className = 'content__text') => {
-//   return `
-//   <section class="${className} greeting">
-//     <h2 class="greeting__text">
-//     Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
-//   </section>`
-// }
-// };
-
-// const HowToPlayComponent = {
-// id: 'howtoplay',
-// title: 'How to play',
-// render: (className = 'container') => {
-//   return `
-//     <section class="${className} controls">
-//       <h2 class="controls__title">Controls:</h2>
-//       <div class="controls__container">
-//         <img class="controls__img-key" src="${arrows}" alt="control arrows">
-//           <p class="controls__text">Press Left and Right arrows to control character movement.<br>Press press Up arrow to jump.</p>
-//             <img class="controls__img-key" src="${spaceImg}" alt="space key">
-//               <p class="controls__text">Press Space to toggle the active and inactive state of the platform <span>One / Two / Three</span></p>
-//                 <img class="controls__img-letter" src="${mKeyImg}" alt="m key">
-//                   <p class="controls__text">Press <span>M</span> to return to the menu</p>
-//                     <img class="controls__img-letter" src="${fKeyImg}" alt="m key">
-//                       <p class="controls__text">Press <span>F</span> to open the game in full screen</p>      
-//       </div>
-//     </section>
-//   `;
-// }
-// };
-
-// const SettingsComponent = {
-// id: 'settings',
-// title: 'Settings',
-// render: (className = 'container') => {
-//   return `
-//     <section class="${className} settings">
-//       <h2 class="settings__title">Audio settings:</h2>
-//         <div class="settings__slider-box">
-//           <label for="volume-sounds">Sound effects</label>
-//           <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
-//             min="0.1" max="1" value="0.8" step="0.1">   
-//               <label for="volume-music">Music</label>
-//               <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
-//                 min="0.1" max="1" value="0.7" step="0.1">
-//         </div>
-//     </section>
-//   `;
-// }
-// };
-
-// const DescriptionComponent = {
-// id: 'description',
-// title: 'Description',
-// render: (className = 'container') => {
-//   return `
-//     <section class="${className} description">
-//       <h2 class="description__title">Tutorial:</h2>
-//         <div class="description__content">
-//           <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
-//           <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
-//           <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
-//           <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
-//           <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
-//           <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
-//           <p>Are you ready to take on the challenge?</p>
-//         </div>
-//     </section>
-//   `;
-// }
-// };
-
-// const StartComponent = {
-// id: 'game',
-// title: 'Start game',
-// render: (className = "container") => {
-//   return `
-//     <section class="${className} level">
-//       <h2 class="level__title">Select level:</h2>
-//       <div class="level__list">
-//         <button class="level__item level__item_hover level__item_active level__item_disabled">1</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>2</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>3</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>4</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>5</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>6</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>7</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>8</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>9</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>10</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>11</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>12</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>13</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>14</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>15</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>16</button>
-//         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>17</button>
-//       </div>
-//     </section>
-//   `;
-// }
-// };
-
-// const ErrorComponent = {
-// id: 'error',
-// title: '404',
-// render: (className = 'container') => {
-//   return `
-//     <section class="${className} error">
-//       <img class="error__img" src="${errorImg}" alt="error 404">
-//       <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
-//     </section>
-//   `;
-// }
-// };
-
-// const router = {
-// main: HomeComponent,
-// howtoplay: HowToPlayComponent,
-// settings: SettingsComponent,
-// description: DescriptionComponent,
-// game: StartComponent,
-// default: HomeComponent,
-// error: ErrorComponent
-// };
-
-// this.init = function(container_btns, container_show) {
-// myContainerBtns = container_btns;
-// myContainerShow = container_show;
-// }
-
-// this.updateButtons = function(currentPage) {
-// const menuLinks = myContainerBtns.querySelectorAll('.nav__link');
-// const state = `#${currentPage}`;
-
-// for (let link of menuLinks) {
-//   state === link.getAttribute('href') ? link.classList.add('active') : link.classList.remove('active');
-//   this.addVolumeHandlers(link);
-// }
-// }
-
-// this.addVolumeHandlers = function(link) {
-// if (link.id === 'settings-btn') {
-//   this.setVolumeRangeHandlers();
-// }
-// }
-
-// this.setVolumeRangeHandlers = function() {
-// const main = document.getElementById('content');
-// const volumeRangeSound = main.querySelector('#volume-snd');
-// const volumeRangeMusic = main.querySelector('#volume-msc');
-// if (volumeRangeSound || volumeRangeMusic) {
-//   volumeRangeSound.addEventListener('change', () => {
-//     volumeEffects = volumeRangeSound.value;
-//   });
-//   volumeRangeMusic.addEventListener('change', () => {
-//     volumeMusic = volumeRangeMusic.value;
-//   });
-// }
-// }
-// this.renderContent = function(hashPageName) {
-// let routeName = 'default';
-
-// if (hashPageName.length > 0) {
-//   routeName = hashPageName in router ? hashPageName : 'error';
-// }
-
-// window.document.title = router[routeName].title;
-// myContainerShow.innerHTML = router[routeName].render(`${routeName}-page`);
-// this.updateButtons(router[routeName].id);
-// }
-// };
-
-// function Model () {
-// let myView = null;
-
-// this.init = function(view) {
-//   myView = view;
-// }
-
-// this.updateState = function(hashPageName) {
-//   myView.renderContent(hashPageName);
-// }
-// }
-
-// function Controller () {
-// let myContainer = null;
-// let myModel = null;
-
-// this.init = function(container, model) {
-//   myContainer = container;
-//   myModel = model;
-//   window.addEventListener('hashchange', this.updateState);
-//   this.updateState();
-// }
-
-// this.updateState = function() {
-//   const hashPageName = location.hash.slice(1).toLowerCase();
-//   myModel.updateState(hashPageName);
-// }
-// };
-
-// /* Init */
-// return {
-// init: function(container_btns, container_show) {
-//   this.initBuildHtml();
-//   this.main();
-//   const view = new View();
-//   const model = new Model();
-//   const controller = new Controller();
-
-//   view.init(document.getElementById(container_btns), document.getElementById(container_show));
-//   model.init(view);
-//   controller.init(document.getElementById(container_btns), model); // можно передавать только model
-// },
-
-// main: function() {
-// },
-
-// initBuildHtml: function() {
-//   const app = document.createElement('div');
-//   app.id = 'game-app';
-//   app.className = 'game-app';
-//   app.innerHTML = `
-//   <header class="header">
-//     <img class="cloud-1" src="${cloud_1}" alt="cloud first">
-//     <img class="cloud-2" src="${cloud_2}" alt="cloud second">
-//     <img class="cloud-3" src="${cloud_3}" alt="cloud third">
-//     <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
-//       <div class="header__wrapper">
-//         <img class="header__logo" src="${logoImg_1}" alt="logo">
-//           <div class="header__logo-box">
-//             <img class="header__logo-2" src="${logoImg_2}" alt="logo small">
-//               <p class="header__title">Platform traveller</p>
-//           </div>
-//             <div class="bird-container">
-//               <img class="bird" src="${birdFlyingImg}" alt="bird">
-//             </div>
-//                 <nav id="root" class="header__nav nav">
-//                   <ul class="nav__list">
-//                     <li class="nav__item">
-//                       <a href="#howtoplay" class="nav__link">How to play</a>
-//                     </li>
-//                       <li class="nav__item">
-//                         <a href="#settings" id="settings-btn" class="nav__link">Settings</a>
-//                       </li>
-//                         <li class="nav__item">
-//                           <a href="#description" class="nav__link">Description</a>
-//                         </li>
-//                           <li class="nav__item">
-//                             <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
-//                           </li>
-//                     </ul>
-//                 </nav>
-//       </div>
-//   </header>
-//     <main id="content" class="content">
-//     </main>`;
-//   document.body.prepend(app);
-// }
-// };
-// }());
 
 /***/ }),
 
@@ -2299,10 +1966,6 @@ class Flamethrower {
     this.currentSprite = this.sprites.idle;
   }
   draw() {
-    // c.strokeStyle = "yellow";
-    // c.strokeRect(this.position.x, this.position.y, this.width, this.height);
-    // c.fillStyle = "black";
-    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
     if (!this.currentSprite.loaded) return;
     this.frames++;
     if (this.frames > this.frequency) this.frames = 0;
@@ -2313,7 +1976,7 @@ class Flamethrower {
   shoot() {
     const delay = this.delay;
     let bullet_X, bullet_Y;
-    //Bullet position x/y axes
+    // Bullet position x/y axes
     switch (this.type) {
       case 'flamethrowerLeft':
         bullet_X = this.position.x - this.caliber / 3; // bullet_X = this.position.x - this.caliber;
@@ -2439,7 +2102,6 @@ class BulletController {
     this.timerTillNextBullet--;
   }
   draw() {
-    // if (!this.currentSprite.loaded) return;
     this.bullets.forEach(bullet => {
       if (this.isBulletOffScreen(bullet)) {
         const index = this.bullets.indexOf(bullet);
@@ -2522,250 +2184,8 @@ class Bullet {
       _index__WEBPACK_IMPORTED_MODULE_1__.player.die();
     }
   }
-  // collisionWithBlocks() {
-  //   this.platforms.forEach((block) => {
-  //     if (this.position.x <= block.right &&
-  //       this.position.x + this.width >= block.left &&
-  //       this.position.y <= block.bottom &&
-  //       this.position.y + this.height > block.top) {
-  //     }
-  //   })
-
-  // }
-  // destroy() {
-  //   console.log('Ouch!')
-  // }
-
-  // collideWith(sprite) {
-  //   if (
-  //     this.x < sprite.x + sprite.width &&
-  //     this.x + this.width > sprite.x &&
-  //     this.y < sprite.y + sprite.height &&
-  //     this.y + this.height > sprite.y
-  //   ) {
-  //     sprite.takeDamage();
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }
 
-
-
-// import { canvas, c } from './Canvas';
-
-// import { Platform,
-//   OneStep,
-//   Fan,
-//   JumpToggleActive,
-//   JumpToggleDisabled,
-//   PlatformOne,
-//   PlatformTwo,
-//   PlatformThree,
-//   DeadSignal,
-// } from './Platform';
-// import { platformImgSrc300,
-//   heroIdleR,
-//   heroIdleL,
-//   heroRunR,
-//   heroRunL,
-//   heroJumpR,
-//   heroJumpL,
-//   heroFallR,
-//   heroFallL,
-//   heroDeath,
-//   backgroundImg,
-//   platformSolid,
-//   platformOneStep,
-//   platformOneStepExplosion,
-//   platformJump,
-//   platformJumpDisabled,
-//   platformOne,
-//   platformTwo,
-//   platformThree,
-//   platformOneDisabled,
-//   platformTwoDisabled,
-//   platformThreeDisabled,
-//   saw,
-//   fan,
-//   spike,
-//   deadSignalZone,
-//   deadSignalZoneHover,
-//   flamethrowerLeft,
-//   flamethrowerRight,
-//   // flamethrowerUp,
-//   // flamethrowerDown,
-//    flamethrowerVertical,
-
-//       } from './Assets';
-
-// class PlatformSpikes extends Platform {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'spikes';
-//   }
-//   collision() {
-//   // Player - platform collision (player is above the spike platform)
-//     if (player.position.y + player.height <= this.position.y &&
-//       player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-//       // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-//       player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-//       player.position.x <= this.position.x + this.width - player.width / 3) { 
-//       player.die();
-//     }
-//     // Player - platform collision (player is under the platform)
-//     if (player.position.y <= this.position.y + this.height &&
-//       player.position.y + player.height + player.velocity.y >= this.position.y &&
-//       player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-//       player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
-//         player.die();
-//     }
-//   }
-// }
-
-// class Saw extends PlatformSpikes {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'saw';
-//     this.frequency = 23;
-//   }
-// }
-
-// class Bullet {
-//   constructor(flamethrowerPos_X, flamethrowerPos_Y, flamethrowerWidth, flamethrowerHeight, flamethrowerType, image) {
-//     this.position = {
-//       x: null,
-//       y: null //canvas.height / 2
-//     }
-//     this.velocity = {
-//       x: null,  // 0
-//       y: null   // 1
-//     }
-//     this.width = 15 //image.width;
-//     this.height = 15 //image.height;
-//     this.bulletSpeed = 1;
-//     // Bullet position x/y axes
-//     switch(flamethrowerType) {
-//       case 'flamethrowerLeft': this.position.x = flamethrowerPos_X;
-//         break;
-//       case 'flamethrowerRight': this.position.x = flamethrowerPos_X + flamethrowerWidth;
-//         break;
-//       case 'flamethrowerUp':
-//       case 'flamethrowerDown': this.position.x = flamethrowerPos_X + flamethrowerWidth / 2;
-//         break;
-//     }
-//     switch(flamethrowerType) {
-//       case 'flamethrowerLeft':
-//       case 'flamethrowerRight': this.position.y = flamethrowerPos_Y + flamethrowerHeight / 2;
-//         break;
-//       case 'flamethrowerUp': this.position.y = flamethrowerPos_Y;
-//         break;
-//       case 'flamethrowerDown': this.position.y = flamethrowerPos_X + flamethrowerHeight;
-//         break;
-//     }
-//     // Bullet velocity x/y axes
-//     switch(flamethrowerType) {
-//       case 'flamethrowerLeft': this.velocity.x = -this.bulletSpeed;
-//         break;
-//       case 'flamethrowerRight': this.velocity.x = this.bulletSpeed;
-//         break;
-//       case 'flamethrowerUp':
-//       case 'flamethrowerDown': this.velocity.x = 0;
-//         break;
-//     }
-//     switch(flamethrowerType) {
-//       case 'flamethrowerLeft':
-//       case 'flamethrowerRight': this.velocity.y = 0;
-//         break;
-//       case 'flamethrowerUp': this.velocity.y = -this.bulletSpeed;
-//         break;
-//       case 'flamethrowerDown': this.velocity.y = this.bulletSpeed;
-//         break;
-//     }
-//     this.frames = 0;
-//     this.frequency = 28;
-//     this.sprites = {
-//       idle: this.image,
-//     }
-//     this.currentSprite = this.sprites.idle;
-//     this.type = 'bullet';
-//   }
-
-// draw() {
-//   // c.clearRect(this.position.x, this.position.y, this.width, this.height);
-//   console.log('Shoot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-//   c.fillStyle = 'black';
-//   c.fillRect(this.position.x, this.position.y, this.width, this.height);
-//   //c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
-// }
-// update() {
-//   this.frames++;
-//   if (this.frames > this.frequency) this.frames = 0;
-//   this.position.x += this.velocity.x;
-//   console.log(this.position.x)
-//   //this.draw();
-// }
-// }
-
-// let bullet;
-
-// class Flamethrower extends PlatformSpikes {
-
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'flamethrower';
-//     this.frequency = 79;
-//     this.bullets = [];
-//   }
-//   shoot() {
-//     //this.update();
-//     setInterval(() => this.bullets.push(new Bullet(this.left, this.right, this.width, this.height, this.type, saw)), 1000);
-//     //this.bullets.forEach((bullet) => bullet.update());
-//   }
-// }
-
-// class FlamethrowerLeft extends Flamethrower {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'flamethrowerLeft';
-//   }
-// }
-
-// class FlamethrowerRight extends Flamethrower {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'flamethrowerRight';
-//   }
-// }
-
-// class FlamethrowerVertical extends Flamethrower {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'flamethrowerVertical';
-//   }
-// }
-
-// class FlamethrowerUp extends Flamethrower {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'flamethrowerUp';
-//   }
-// }
-
-// class FlamethrowerDown extends Flamethrower {
-//   constructor(posX, posY, image) {
-//     super(posX, posY, image);
-//     this.type = 'flamethrowerDown';
-//   }
-// }
-
-// export {
-//   PlatformSpikes,
-//   Saw,
-//   FlamethrowerLeft,
-//   FlamethrowerRight,
-//   FlamethrowerVertical,
-// }
 
 /***/ }),
 
@@ -2845,7 +2265,7 @@ function setLocalStorage(item_1, item_2) {
   }
 }
 function getLocalStorage(key, value) {
-  return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.5;
+  return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
 function changeMuteIcon() {
   const muteIcon = document.getElementById('mute-btn');
@@ -3094,7 +2514,6 @@ let source = null;
 })();
 function gameSoundEffects(item) {
   item[source].currentTime = 0;
-  item[source].volume = item.volume;
   item[source].play();
 }
 function getRandomTrack(playlist) {
@@ -3125,212 +2544,17 @@ const playNextTrack = (currentTrack, playlist) => {
     playNextTrack(tracksList[currentTrackNumber][source], audio);
   };
 };
-function muteSound() {
-  for (let sound in audio) {
-    if (audio?.[sound]?.[source]) {
-      audio[sound][source].muted === false ? audio[sound][source].muted = true : audio[sound][source].muted = false;
+function muteSound(e) {
+  if (e.target.closest('#mute-btn')) {
+    for (let sound in audio) {
+      if (audio?.[sound]?.[source]) {
+        audio[sound][source].muted === false ? audio[sound][source].muted = true : audio[sound][source].muted = false;
+      }
     }
+    (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.changeMuteIcon)();
   }
-  (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.changeMuteIcon)();
 }
 
-
-// import blockHit_MP3 from '../../../assets/sounds/effects/mp3/block_hit.mp3';
-// import blockHit_OGG from '../../../assets/sounds/effects/ogg/block_hit.ogg';
-// import bottomHit_MP3 from '../../../assets/sounds/effects/mp3/bottom_hit.mp3';
-// import bottomHit_OGG from '../../../assets/sounds/effects/ogg/bottom_hit.ogg';
-// import choose_MP3 from '../../../assets/sounds/effects/mp3/choose.mp3';
-// import choose_OGG from '../../../assets/sounds/effects/ogg/choose.ogg';
-// import explosionBlock_MP3 from '../../../assets/sounds/effects/mp3/explosion_block.mp3';
-// import explosionBlock_OGG from '../../../assets/sounds/effects/ogg/explosion_block.ogg';
-// import fallingInDepth_MP3 from '../../../assets/sounds/effects/mp3/falling_in_depth.mp3';
-// import fallingInDepth_OGG from '../../../assets/sounds/effects/ogg/falling_in_depth.ogg';
-// import fallingInDepth2_MP3 from '../../../assets/sounds/effects/mp3/falling_in_depth_2.mp3';
-// import fallingInDepth2_OGG from '../../../assets/sounds/effects/ogg/falling_in_depth_2.ogg';
-// import fire_MP3 from '../../../assets/sounds/effects/mp3/fire.mp3';
-// import fire_OGG from '../../../assets/sounds/effects/ogg/fire.ogg';
-// import heroDeath_MP3 from '../../../assets/sounds/effects/mp3/hero_death.mp3';
-// import heroDeath_OGG from '../../../assets/sounds/effects/ogg/hero_death.ogg';
-// import jump_MP3 from '../../../assets/sounds/effects/mp3/jump.mp3';
-// import jump_OGG from '../../../assets/sounds/effects/ogg/jump.ogg';
-// import jumpOnSpaceToggledPlatform_MP3 from '../../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3';
-// import jumpOnSpaceToggledPlatform_OGG from '../../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg';
-// import nextLevel_MP3 from '../../../assets/sounds/effects/mp3/next_level.mp3';
-// import nextLevel_OGG from '../../../assets/sounds/effects/ogg/next_level.ogg';
-// import ok_MP3 from '../../../assets/sounds/effects/mp3/ok.mp3';
-// import ok_OGG from '../../../assets/sounds/effects/ogg/ok.ogg';
-// import select_MP3 from '../../../assets/sounds/effects/mp3/select.mp3';
-// import select_OGG from '../../../assets/sounds/effects/ogg/select.ogg';
-// import teleport_MP3 from '../../../assets/sounds/effects/mp3/teleport.mp3';
-// import teleport_OGG from '../../../assets/sounds/effects/ogg/teleport.ogg';
-// import toggle_MP3 from '../../../assets/sounds/effects/mp3/toggle.mp3';
-// import toggle_OGG from '../../../assets/sounds/effects/ogg/toggle.ogg';
-// import toggleDisabled_MP3 from '../../../assets/sounds/effects/mp3/toggle_disabled.mp3';
-// import toggleDisabled_OGG from '../../../assets/sounds/effects/ogg/toggle_disabled.ogg';
-// import error_MP3 from '../../../assets/sounds/effects/mp3/error.mp3';
-// import error_OGG from '../../../assets/sounds/effects/ogg/error.ogg';
-
-// import track_1_MP3 from '../../../assets/sounds/music/mp3/track_1.mp3';
-// import track_1_OGG from '../../../assets/sounds/music/ogg/track_1.ogg';
-// import track_2_MP3 from '../../../assets/sounds/music/mp3/track_2.mp3';
-// import track_2_OGG from '../../../assets/sounds/music/ogg/track_2.ogg';
-// import track_3_MP3 from '../../../assets/sounds/music/mp3/track_3.mp3';
-// import track_3_OGG from '../../../assets/sounds/music/ogg/track_3.ogg';
-// import track_4_MP3 from '../../../assets/sounds/music/mp3/track_4.mp3';
-// import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
-
-// import { createImage, randomNumber } from '../Utils';
-
-// let volumeEffects = 1;
-// let volumeMusic = 0.8;
-
-// const audio = {
-//   isCanPlay: new Audio(),
-//   blockHit: {
-//     src_MP3: new Audio(blockHit_MP3),
-//     src_OGG: new Audio(blockHit_OGG),
-//     volume: volumeEffects,
-//   },
-//   bottomHit: {
-//     src_MP3: new Audio(bottomHit_MP3),
-//     src_OGG: new Audio(bottomHit_OGG),
-//     volume: volumeEffects,
-//   },
-//   choose: {
-//     src_MP3: new Audio(choose_MP3),
-//     src_OGG: new Audio(choose_OGG),
-//     volume: volumeEffects,
-//   },
-//   explosionBlock: {
-//     src_MP3: new Audio(explosionBlock_MP3),
-//     src_OGG: new Audio(explosionBlock_OGG),
-//     volume: volumeEffects,
-//   },
-//   fallingInDepth: {
-//     src_MP3: new Audio(fallingInDepth_MP3),
-//     src_OGG: new Audio(fallingInDepth_OGG),
-//     volume: volumeEffects,
-//   },
-//   fallingInDepth2: {
-//     src_MP3: new Audio(fallingInDepth2_MP3),
-//     src_OGG: new Audio(fallingInDepth2_OGG),
-//     volume: volumeEffects,
-//   },
-//   fire: {
-//     src_MP3: new Audio(fire_MP3),
-//     src_OGG: new Audio(fire_OGG),
-//     volume: volumeEffects,
-//   },
-//   heroDeath: {
-//     src_MP3: new Audio(heroDeath_MP3),
-//     src_OGG: new Audio(heroDeath_OGG),
-//     volume: volumeEffects,
-//   },
-//   jump: {
-//     src_MP3: new Audio(jump_MP3),
-//     src_OGG: new Audio(jump_OGG),
-//     volume: volumeEffects,
-//   },
-//   jumpOnSpaceToggledPlatform: {
-//     src_MP3: new Audio(jumpOnSpaceToggledPlatform_MP3),
-//     src_OGG: new Audio(jumpOnSpaceToggledPlatform_OGG),
-//     volume: volumeEffects / 2,
-//   },
-//   nextLevel: {
-//     src_MP3: new Audio(nextLevel_MP3),
-//     src_OGG: new Audio(nextLevel_OGG),
-//     volume: volumeEffects,
-//   },
-//   ok: {
-//     src_MP3: new Audio(ok_MP3),
-//     src_OGG: new Audio(ok_OGG),
-//     volume: volumeEffects,
-//   },
-//   select: {
-//     src_MP3: new Audio(select_MP3),
-//     src_OGG: new Audio(select_OGG),
-//     volume: volumeEffects,
-//   },
-//   teleport: {
-//     src_MP3: new Audio(teleport_MP3),
-//     src_OGG: new Audio(teleport_OGG),
-//     volume: volumeEffects,
-//   },
-//   toggle: {
-//     src_MP3: new Audio(toggle_MP3),
-//     src_OGG: new Audio(toggle_OGG),
-//     volume: volumeEffects,
-//   },
-//   toggleDisabled: {
-//     src_MP3: new Audio(toggleDisabled_MP3),
-//     src_OGG: new Audio(toggleDisabled_OGG),
-//     volume: volumeEffects,
-//   },
-//   error: {
-//     src_MP3: new Audio(error_MP3),
-//     src_OGG: new Audio(error_OGG),
-//     volume: volumeEffects,
-//   },
-
-//   track_1: {
-//     src_MP3: new Audio(track_1_MP3),
-//     src_OGG: new Audio(track_1_OGG),
-//     volume: volumeMusic,
-//   },
-//   track_2: {
-//     src_MP3: new Audio(track_2_MP3),
-//     src_OGG: new Audio(track_2_OGG),
-//     volume: volumeMusic,
-//   },
-//   track_3: {
-//     src_MP3: new Audio(track_3_MP3),
-//     src_OGG: new Audio(track_3_OGG),
-//     volume: volumeMusic,
-//   },
-//   track_4: {
-//     src_MP3: new Audio(track_4_MP3),
-//     src_OGG: new Audio(track_4_OGG),
-//     volume: volumeMusic,
-//   },
-// }
-
-// function gameSoundEffects(item, source) {
-//   item[source].currentTime = 0;
-//   item[source].volume = item.volume;
-//   item[source].play();
-// }
-
-// function getRandomTrack(playlist, source) {
-//   let tracksList = [];
-//   let track;
-//   for (let sound in playlist) {
-//     sound.includes('track') && tracksList.push(playlist[sound]);
-//   }
-//   track = tracksList[randomNumber(0, tracksList.length - 1)][source];
-//   track.currentTime = 0;
-//   track.volume = volumeMusic;
-//   return track;
-// }
-
-// const playNextTrack = (currentTrack, playlist, source) => {
-//   let tracksList = [];
-//   let currentTrackNumber = null;
-//   for (let sound in playlist) {
-//     sound.includes('track') && tracksList.push(playlist[sound]);
-//   }
-//   tracksList.forEach((track, index) => {
-//     track[source] === currentTrack && (currentTrackNumber = index);
-//   });
-//   currentTrackNumber < (tracksList.length - 1) ? currentTrackNumber++ : currentTrackNumber = 0;
-//   tracksList[currentTrackNumber][source].currentTime = 0;
-//   tracksList[currentTrackNumber][source].volume = volumeMusic;
-//   tracksList[currentTrackNumber][source].play();
-//   tracksList[currentTrackNumber][source].onended = function() {
-//     playNextTrack(tracksList[currentTrackNumber][source], audio);
-//   }
-// }
-
-// export { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic }
 
 /***/ }),
 
@@ -3713,6 +2937,26 @@ module.exports = __webpack_require__.p + "101bca4fe3b9730ef925.png";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "5b88f8c92d3dbe18357c.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/mute_off.png":
+/*!*************************************!*\
+  !*** ./assets/img/SPA/mute_off.png ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "84acc7ea18786d322299.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/mute_on.png":
+/*!************************************!*\
+  !*** ./assets/img/SPA/mute_on.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "cf701a267920e02b7a95.png";
 
 /***/ }),
 

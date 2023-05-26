@@ -1,6 +1,5 @@
 import { platforms } from '../index';
 
-
 export function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, callback_5) {
   fetch(url)
     .then(response => {  

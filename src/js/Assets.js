@@ -50,6 +50,8 @@ import errorImg from '/assets/img/SPA/404.png';
 import birdFlyingImg from '/assets/img/SPA/flying.gif';
 import logoImg_1 from '/assets/img/SPA/logo.png';
 import logoImg_2 from '/assets/img/SPA/logo_2.png';
+import muteOff from '/assets/img/SPA/mute_off.png';
+import muteOn from '/assets/img/SPA/mute_on.png';
 
 export { platformImgSrc300,
         heroIdleR,
@@ -102,4 +104,6 @@ export { platformImgSrc300,
         birdFlyingImg,
         logoImg_1,
         logoImg_2,
+        muteOff,
+        muteOn
       }

@@ -93,10 +93,23 @@ export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
 
+///////////////////////////////////////////////////////////
+
+
+const ajaxHandlerScript="https://fe.it-academy.by/AjaxStringStorage2.php";
+let updatePassword;
+const stringName='surname_namegame_visits';
 
 
 
 
+
+
+
+
+
+
+////////////////////////////////////////////////////////////
 
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
@@ -138,8 +151,6 @@ function createPlayer(levelMap, platforms) {
 
 export let initStart = true;
 
-
-
 // Получение значений с input type='range' volume
 const main = document.getElementById('content');
 export function setVolumeRangeHandlers() {
@@ -170,10 +181,28 @@ export function setVolumeRangeHandlers() {
       }
       setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
     });
+  }
 }
-}
-main && (window.onload = setVolumeRangeHandlers());
+main && window.addEventListener('load', setVolumeRangeHandlers);
 main && window.addEventListener('hashchange', setVolumeRangeHandlers);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,14 +216,17 @@ track.pause();
 track = getRandomTrack(audio);
 
  let isInitMusicPlay = false;
- function playMusic() {
-   if (!isInitMusicPlay) {
-     track.play();
-   }
-   isInitMusicPlay = true;
+ function playMusic(e) {
+  if (e.target.closest('#select-lvl')) {
+    if (!isInitMusicPlay) {
+      track.play();
+    }
+    isInitMusicPlay = true;
+  }
  }
- const selectLvlBtn = document.getElementById('select-lvl');
- main && selectLvlBtn.addEventListener('click', playMusic);
+window.addEventListener('click', playMusic);
+
+
 
 
 

@@ -141,11 +141,11 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom &&
             this.bottom >= platform.top) {
-              if (this.velocity.x < 0) {// moving left       // <= -2
+              if (this.velocity.x < 0) { // moving left       // <= -2
                 this.left = platform.right + 0.1;
                 break;
               }
-              if (this.velocity.x > 0) {// moving right      // <= 2
+              if (this.velocity.x > 0) { // moving right      // <= 2
                 this.left = platform.left - this.width - 0.1;
                 break;
               }
@@ -158,11 +158,11 @@ export class Player {
           this.right >= platform.left &&
           this.top <= platform.bottom &&
           this.bottom >= platform.top) {
-            if (this.velocity.x < 0) {// moving left       // <= -2
+            if (this.velocity.x < 0) { // moving left       // <= -2
               this.left = platform.right + 0.1;
               break;
             }
-            if (this.velocity.x > 0) {// moving right      // <= 2
+            if (this.velocity.x > 0) { // moving right      // <= 2
               this.left = platform.left - this.width - 0.1;
               break;
             }
@@ -175,11 +175,11 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom &&
             this.bottom >= platform.top) {
-              if (this.velocity.x < 0) {// moving left       // <= -2
+              if (this.velocity.x < 0) { // moving left       // <= -2
                 this.left = platform.right + 0.1;
                 break;
               }
-              if (this.velocity.x > 0) {// moving right      // <= 2
+              if (this.velocity.x > 0) { // moving right      // <= 2
                 this.left = platform.left - this.width - 0.1;
                 break;
               }
@@ -213,14 +213,14 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom &&
             this.bottom >= platform.top) {
-              if (this.velocity.x < 0) {// moves left       // <= -2
+              if (this.velocity.x < 0) { // moves left       // <= -2
                 this.left = platform.right + 0.1;
                 keys.left.pressed = false;   
                 platform.hits++;
                 platform.destroy();
                 break;
               }
-              if (this.velocity.x > 0) {// moves right      // <= 2
+              if (this.velocity.x > 0) { // moves right      // <= 2
                 this.left = platform.left - this.width - 0.1;
                 keys.right.pressed = false;      
                 platform.hits++;
@@ -268,13 +268,13 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom &&
             this.bottom >= platform.top) {
-              if (this.velocity.y < 0) {// moving up  // -0.25
+              if (this.velocity.y < 0) { // moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
                 this.alive && gameSoundEffects(audio.bottomHit);
                 break;
               }
-              if (this.velocity.y > 0) {// falling down  // 0.25
+              if (this.velocity.y > 0) { // falling down  // 0.25
                 this.velocity.y = 0;
                 this.top = platform.top - this.height - 0.1;
                 break;
@@ -288,13 +288,13 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom - this.height / 4 && // - this.height / 4 (поправка на прозрачность спрайта героя)
             this.bottom >= platform.top) {
-              if (this.velocity.y < 0) {// moving up  // -0.25
+              if (this.velocity.y < 0) { // moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
                 this.alive && gameSoundEffects(audio.bottomHit);
                 break;
               }
-              if (this.velocity.y > 0) {// falling down  // 0.25
+              if (this.velocity.y > 0) { // falling down  // 0.25
                 this.velocity.y = 0;
                 this.top = platform.top - this.height - 0.1;
                 this.alive && gameSoundEffects(audio.bottomHit);
@@ -309,12 +309,12 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom &&
             this.bottom >= platform.top) {
-              if (this.velocity.y < 0) {// moving up  // -0.25
+              if (this.velocity.y < 0) { // moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
                 break;
               }
-              if (this.velocity.y > 0) {// falling down  // 0.25
+              if (this.velocity.y > 0) { // falling down  // 0.25
                 this.velocity.y = 0;
                 this.top = platform.top - this.height - 0.1;
                 break;
@@ -329,7 +329,7 @@ export class Player {
             this.right >= platform.left &&
             this.top <= platform.bottom &&
             this.bottom >= platform.top) {
-              if (this.velocity.y < 0) {// moving up  // -0.25
+              if (this.velocity.y < 0) { // moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
                 keys.up.pressed = false;      
@@ -337,7 +337,7 @@ export class Player {
                 platform.destroy();
                 break;
               }
-              if (this.velocity.y > 0) {// falling down  // 0.25
+              if (this.velocity.y > 0) { // falling down  // 0.25
                 this.velocity.y = -this.jumpHeight; // 0
                 keys.up.pressed = false;      
                 platform.hits++;

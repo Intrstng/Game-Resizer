@@ -17,7 +17,6 @@ function randomNumber(min = 0, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
-
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {
     timerShoot_2 = setTimeout(soundFire, delay);
@@ -34,7 +33,6 @@ function flamethrowerShootSoundIntervalInit() {
         platform.type === 'flamethrowerUp' ||
         platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
     })
-    
     if (platforms.some(platform => {
       return (platform.type === 'flamethrowerLeft' ||
       platform.type === 'flamethrowerRight' ||
@@ -69,7 +67,7 @@ function setLocalStorage(item_1, item_2) {
 
 function getLocalStorage(key, value) {
   return (localStorage.length !== 0) ?
-    JSON.parse(localStorage.getItem(key))[value] : 0.5;
+    JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
 
 function changeMuteIcon() {
@@ -77,6 +75,5 @@ function changeMuteIcon() {
   muteIcon.classList.toggle('mute_off');
   muteIcon.classList.toggle('mute_on');
 }
-
 
 export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, fullScreen, setLocalStorage, getLocalStorage, changeMuteIcon };
