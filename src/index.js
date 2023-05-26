@@ -3,10 +3,10 @@
 import { mySPA } from './js/SPA';
 import { parseCollisitions } from './js/Collision';
 import { canvas, c } from './js/Canvas';
-import { createImage, flamethrowerShootSoundIntervalInit } from './js/Utils';
+import { createImage, flamethrowerShootSoundIntervalInit, fullScreen, setLocalStorage, getLocalStorage } from './js/Utils';
 import { Player } from './js/Player';
 import { bulletController } from './js/Collision';
-import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from './js/data/Audio';
+import { audio, source, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic, muteSound } from './js/data/Audio';
 import { Platform,
   OneStep,
   Fan,
@@ -82,20 +82,10 @@ export let requestAnim = window.requestAnimationFrame ||
                   window.msRequestAnimationFrame ||
                   function(callback) { window.setTimeout(callback, 1000 / 60); }
 
-//window.addEventListener('keydown', (e) => fullScreen(e, canvas));
+window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
 
-function fullScreen(e, element) {
-  if (e.code === 'KeyF') {
-    if(element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if(element.webkitrequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if(element.mozRequestFullscreen) {
-      element.mozRequestFullScreen();
-    }
-  }
-}
+
 
 let leftNeighboorBlockFromHeroArr = [];
 export let timerShoot_1 = null;
@@ -103,24 +93,8 @@ export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
 
-export let source = null;
- // Choose supported source and preload
-;(function() {
-  if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
-    source = 'src_MP3';
-    } else {
-      source = 'src_OGG';
-    }
-  for (let sound in audio) {
-    if (audio?.[sound]?.[source]) {
-      let { src_MP3: mp3, src_OGG: ogg } = audio[sound];
-        mp3.play();
-        mp3.pause();
-        ogg.play();
-        ogg.pause();
-      }
-    }
-})();
+
+
 
 
 
@@ -201,20 +175,11 @@ export function setVolumeRangeHandlers() {
 main && (window.onload = setVolumeRangeHandlers());
 main && window.addEventListener('hashchange', setVolumeRangeHandlers);
 
-function setLocalStorage(item_1, item_2) {
-  if (('localStorage' in window) && (window.localStorage !== null)) {
-    let soundSettings = {
-      soundEffects: item_1,
-      musicEffects: item_2,
-    }
-  localStorage.setItem('settings', JSON.stringify(soundSettings));
-  }
-}
 
-export function getLocalStorage(key, value) {
-  return (localStorage.length !== 0) ?
-    JSON.parse(localStorage.getItem(key))[value] : 0.5;
-}
+
+document.getElementById('mute-btn').addEventListener('click', muteSound);
+
+
 
 
 let track = getRandomTrack(audio);

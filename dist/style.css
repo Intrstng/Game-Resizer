@@ -389,7 +389,7 @@ html, .header .nav__list, .header .nav__btn {
 .controls__title, .controls__text, .settings__title, .settings__slider-box label, .description__title, .level__title {
   font-family: 'Russo One', sans-serif; }
 
-body, .level__item {
+body, .level__item, .header #mute-btn {
   transition: all, 0.25s, ease; }
 
 html {
@@ -869,6 +869,22 @@ body {
   flex-shrink: 0;
   width: 100%;
   height: 50rem; }
+  .header #mute-btn {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    top: 5rem;
+    right: 5rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer; }
+  .header .mute_off {
+    background-image: url(84acc7ea18786d322299.png); }
+  .header .mute_on {
+    background-image: url(cf701a267920e02b7a95.png); }
+  .header .mute_hover:hover {
+    transform: scale(1.05); }
   .header__wrapper {
     width: 140rem;
     margin: 0 auto;
@@ -957,6 +973,11 @@ body {
     margin-bottom: 20rem; } }
 
 @media (max-width: 640px) {
+  .header #mute-btn {
+    width: 3rem;
+    height: 3rem;
+    top: 4rem;
+    right: 4rem; }
   .header__wrapper {
     width: 39rem;
     padding: 1rem; }

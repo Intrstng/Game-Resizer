@@ -1,4 +1,27 @@
 .header {
+  #mute-btn {
+    position: absolute;
+    @include width-height(4rem);
+    @include top-right(5rem);
+    @extend %transition-all;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+  }
+  .mute {
+    &_off {
+      @include background-img('mute_off.png');
+    }
+    &_on {
+      @include background-img('mute_on.png');
+    }
+    &_hover {
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
   flex-shrink: 0;
   @include width-height(100%, 50rem);
   &__wrapper {
@@ -109,6 +132,10 @@
 
 @include media-tablet {
   .header {
+    #mute-btn {
+      @include width-height(3rem);
+      @include top-right(4rem);
+    }
     &__wrapper {
       width: 39rem;
       padding: 1rem;

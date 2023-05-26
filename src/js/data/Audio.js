@@ -1,5 +1,3 @@
-// import blockHit_MP3 from '/assets/sounds/effects/mp3/block_hit.mp3';
-// import blockHit_OGG from '/assets/sounds/effects/ogg/block_hit.ogg';
 import blockHit_MP3 from '../../../assets/sounds/effects/mp3/block_hit.mp3';
 import blockHit_OGG from '../../../assets/sounds/effects/ogg/block_hit.ogg';
 import bottomHit_MP3 from '../../../assets/sounds/effects/mp3/bottom_hit.mp3';
@@ -45,8 +43,7 @@ import track_4_MP3 from '../../../assets/sounds/music/mp3/track_4.mp3';
 import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
 
 import { createImage, randomNumber } from '../Utils';
-import { source, getLocalStorage } from '../../index';
-
+import { getLocalStorage, changeMuteIcon } from '../Utils';
 
 export let volumeEffects = getLocalStorage('settings', 'soundEffects');
 export let volumeMusic = getLocalStorage('settings', 'musicEffects');
@@ -162,6 +159,24 @@ const audio = {
   },
 }
 
+let source = null;
+ // Choose supported source and preload
+ ;(function() {
+  if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
+    source = 'src_MP3';
+    } else {
+      source = 'src_OGG';
+    }
+  for (let sound in audio) {
+    if (audio?.[sound]?.[source]) {
+      let { src_MP3: mp3, src_OGG: ogg } = audio[sound];
+        mp3.play();
+        mp3.pause();
+        ogg.play();
+        ogg.pause();
+      }
+    }
+})();
 
 
 function gameSoundEffects(item) {
@@ -200,62 +215,21 @@ const playNextTrack = (currentTrack, playlist) => {
   }
 }
 
-// item[source].currentTime = 0;
-// item[source].volume = item.volume;
+function muteSound() {
+    for (let sound in audio) {
+      if (audio?.[sound]?.[source]) {
+        audio[sound][source].muted === false ?
+        audio[sound][source].muted = true :
+        audio[sound][source].muted = false;
+      }
+    }
+  changeMuteIcon();
+}
 
 
 
 
-
-
-
-// function gameSoundEffects(item) {
-//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
-//     item.src_OGG.currentTime = 0;
-//     item.src_OGG.play();
-//   } else {
-//     item.src_MP3.currentTime = 0;
-//     item.src_MP3.play();
-//   }
-// }
-
-
- 
-// function gameSoundEffects(item) {
-//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
-//     audio.sound.src= item.src_MP3;
-//   } else {
-//     audio.sound.src= item.src_OGG;
-//   }
-//   audio.sound.currentTime = 0;
-//   audio.sound.play();
-// }
-
-
-// function gameSoundEffects(item) {
-//   item.currentTime = 0;
-//   item.play();
-// }
-
-// For music
-// let isPlayed = false;
-// function gameSoundEffects(item) {
-//   if(!isPlayed)
-//   item.currentTime = 0;
-//   item.play();
-//   isPlayed = true;
-// }
-
-
-
-
-
-
-
-
-
-
-export { audio, gameSoundEffects, getRandomTrack, playNextTrack }
+export { audio, source, gameSoundEffects, getRandomTrack, playNextTrack, muteSound }
 
 
 

@@ -12,7 +12,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "additionalElements": () => (/* binding */ additionalElements),
 /* harmony export */   "completeLevel": () => (/* binding */ completeLevel),
-/* harmony export */   "getLocalStorage": () => (/* binding */ getLocalStorage),
 /* harmony export */   "init": () => (/* binding */ init),
 /* harmony export */   "initStart": () => (/* binding */ initStart),
 /* harmony export */   "leftNeighboorBlockFromHero": () => (/* binding */ leftNeighboorBlockFromHero),
@@ -23,7 +22,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "player": () => (/* binding */ player),
 /* harmony export */   "requestAnim": () => (/* binding */ requestAnim),
 /* harmony export */   "setVolumeRangeHandlers": () => (/* binding */ setVolumeRangeHandlers),
-/* harmony export */   "source": () => (/* binding */ source),
 /* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
 /* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
 /* harmony export */ });
@@ -61,47 +59,12 @@ _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720
 let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
   window.setTimeout(callback, 1000 / 60);
 };
-
-//window.addEventListener('keydown', (e) => fullScreen(e, canvas));
-
-function fullScreen(e, element) {
-  if (e.code === 'KeyF') {
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.webkitrequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if (element.mozRequestFullscreen) {
-      element.mozRequestFullScreen();
-    }
-  }
-}
+window.addEventListener('keydown', e => (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.fullScreen)(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas));
 let leftNeighboorBlockFromHeroArr = [];
 let timerShoot_1 = null;
 let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
-let source = null;
-// Choose supported source and preload
-;
-(function () {
-  if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
-    source = 'src_MP3';
-  } else {
-    source = 'src_OGG';
-  }
-  for (let sound in _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio) {
-    if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[source]) {
-      let {
-        src_MP3: mp3,
-        src_OGG: ogg
-      } = _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound];
-      mp3.play();
-      mp3.pause();
-      ogg.play();
-      ogg.pause();
-    }
-  }
-})();
 let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 let level = 1;
 function increseLevel(obj) {
@@ -139,36 +102,25 @@ function setVolumeRangeHandlers() {
   if (volumeRangeSound || volumeRangeMusic) {
     volumeRangeSound.addEventListener('change', () => {
       for (let sound in _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio) {
-        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[source] && sound != 'track_1' && sound != 'track_2' && sound != 'track_3' && sound != 'track_4') {
-          _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound][source].volume = volumeRangeSound.value;
+        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source] && sound != 'track_1' && sound != 'track_2' && sound != 'track_3' && sound != 'track_4') {
+          _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound][_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source].volume = volumeRangeSound.value;
         }
       }
-      setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
+      (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.setLocalStorage)(volumeRangeSound.value, volumeRangeMusic.value);
     });
     volumeRangeMusic.addEventListener('change', () => {
       for (let sound in _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio) {
-        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
-          _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound][source].volume = volumeRangeMusic.value;
+        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
+          _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound][_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source].volume = volumeRangeMusic.value;
         }
       }
-      setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
+      (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.setLocalStorage)(volumeRangeSound.value, volumeRangeMusic.value);
     });
   }
 }
 main && (window.onload = setVolumeRangeHandlers());
 main && window.addEventListener('hashchange', setVolumeRangeHandlers);
-function setLocalStorage(item_1, item_2) {
-  if ('localStorage' in window && window.localStorage !== null) {
-    let soundSettings = {
-      soundEffects: item_1,
-      musicEffects: item_2
-    };
-    localStorage.setItem('settings', JSON.stringify(soundSettings));
-  }
-}
-function getLocalStorage(key, value) {
-  return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.5;
-}
+document.getElementById('mute-btn').addEventListener('click', _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.muteSound);
 let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
 track.pause();
 track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
@@ -395,57 +347,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "spike": () => (/* reexport default export from named module */ _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__),
 /* harmony export */   "win": () => (/* reexport default export from named module */ _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__)
 /* harmony export */ });
-/* harmony import */ var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/img/Platforms/platform.png */ "./assets/img/Platforms/platform.png");
-/* harmony import */ var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/img/Hero/Idle_right.png */ "./assets/img/Hero/Idle_right.png");
-/* harmony import */ var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/img/Hero/Idle_left.png */ "./assets/img/Hero/Idle_left.png");
-/* harmony import */ var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/img/Hero/Run_right.png */ "./assets/img/Hero/Run_right.png");
-/* harmony import */ var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/img/Hero/Run_left.png */ "./assets/img/Hero/Run_left.png");
-/* harmony import */ var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/img/Hero/Jump_right.png */ "./assets/img/Hero/Jump_right.png");
-/* harmony import */ var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../assets/img/Hero/Jump_left.png */ "./assets/img/Hero/Jump_left.png");
-/* harmony import */ var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../assets/img/Hero/Fall_right.png */ "./assets/img/Hero/Fall_right.png");
-/* harmony import */ var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../assets/img/Hero/Fall_left.png */ "./assets/img/Hero/Fall_left.png");
-/* harmony import */ var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../assets/img/Hero/Player_death.png */ "./assets/img/Hero/Player_death.png");
-/* harmony import */ var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../assets/img/Background_images/bg_1.jpg */ "./assets/img/Background_images/bg_1.jpg");
-/* harmony import */ var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../assets/img/Background_images/Win_4.jpg */ "./assets/img/Background_images/Win_4.jpg");
-/* harmony import */ var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_solid.png */ "./assets/img/Platforms/Platform_solid.png");
-/* harmony import */ var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_oneStep.png */ "./assets/img/Platforms/Platform_oneStep.png");
-/* harmony import */ var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_oneStep_Explosion.png */ "./assets/img/Platforms/Platform_oneStep_Explosion.png");
-/* harmony import */ var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_jump.png */ "./assets/img/Platforms/Platform_jump.png");
-/* harmony import */ var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_jump_disabled.png */ "./assets/img/Platforms/Platform_jump_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_one.png */ "./assets/img/Platforms/Platform_one.png");
-/* harmony import */ var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_two.png */ "./assets/img/Platforms/Platform_two.png");
-/* harmony import */ var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_three.png */ "./assets/img/Platforms/Platform_three.png");
-/* harmony import */ var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_one_disabled.png */ "./assets/img/Platforms/Platform_one_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_two_disabled.png */ "./assets/img/Platforms/Platform_two_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../assets/img/Platforms/Platform_three_disabled.png */ "./assets/img/Platforms/Platform_three_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../assets/img/Platforms/Finish_T_L.png */ "./assets/img/Platforms/Finish_T_L.png");
-/* harmony import */ var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../assets/img/Platforms/brick_1.png */ "./assets/img/Platforms/brick_1.png");
-/* harmony import */ var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../assets/img/Platforms/brick_2.png */ "./assets/img/Platforms/brick_2.png");
-/* harmony import */ var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../assets/img/Traps/Saw.png */ "./assets/img/Traps/Saw.png");
-/* harmony import */ var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../assets/img/Traps/Fan.png */ "./assets/img/Traps/Fan.png");
-/* harmony import */ var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../assets/img/Traps/Platform_spikes.png */ "./assets/img/Traps/Platform_spikes.png");
-/* harmony import */ var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../assets/img/Traps/Dead_signal_zone.png */ "./assets/img/Traps/Dead_signal_zone.png");
-/* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
-/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
-/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
-/* harmony import */ var _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../assets/img/SPA/arrows.png */ "./assets/img/SPA/arrows.png");
-/* harmony import */ var _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../assets/img/SPA/space.png */ "./assets/img/SPA/space.png");
-/* harmony import */ var _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../assets/img/SPA/cloud_1.png */ "./assets/img/SPA/cloud_1.png");
-/* harmony import */ var _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../assets/img/SPA/cloud_2.png */ "./assets/img/SPA/cloud_2.png");
-/* harmony import */ var _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../assets/img/SPA/cloud_3.png */ "./assets/img/SPA/cloud_3.png");
-/* harmony import */ var _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../assets/img/SPA/cloud_4.png */ "./assets/img/SPA/cloud_4.png");
-/* harmony import */ var _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../assets/img/SPA/f.png */ "./assets/img/SPA/f.png");
-/* harmony import */ var _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../assets/img/SPA/m.png */ "./assets/img/SPA/m.png");
-/* harmony import */ var _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../assets/img/SPA/404.png */ "./assets/img/SPA/404.png");
-/* harmony import */ var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../assets/img/SPA/flying.gif */ "./assets/img/SPA/flying.gif");
-/* harmony import */ var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../assets/img/SPA/logo.png */ "./assets/img/SPA/logo.png");
-/* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
+/* harmony import */ var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/platform.png */ "./assets/img/Platforms/platform.png");
+/* harmony import */ var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Idle_right.png */ "./assets/img/Hero/Idle_right.png");
+/* harmony import */ var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Idle_left.png */ "./assets/img/Hero/Idle_left.png");
+/* harmony import */ var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Run_right.png */ "./assets/img/Hero/Run_right.png");
+/* harmony import */ var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Run_left.png */ "./assets/img/Hero/Run_left.png");
+/* harmony import */ var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Jump_right.png */ "./assets/img/Hero/Jump_right.png");
+/* harmony import */ var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Jump_left.png */ "./assets/img/Hero/Jump_left.png");
+/* harmony import */ var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Fall_right.png */ "./assets/img/Hero/Fall_right.png");
+/* harmony import */ var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Fall_left.png */ "./assets/img/Hero/Fall_left.png");
+/* harmony import */ var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../../assets/img/Hero/Player_death.png */ "./assets/img/Hero/Player_death.png");
+/* harmony import */ var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../../assets/img/Background_images/bg_1.jpg */ "./assets/img/Background_images/bg_1.jpg");
+/* harmony import */ var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../../../assets/img/Background_images/Win_4.jpg */ "./assets/img/Background_images/Win_4.jpg");
+/* harmony import */ var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_solid.png */ "./assets/img/Platforms/Platform_solid.png");
+/* harmony import */ var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_oneStep.png */ "./assets/img/Platforms/Platform_oneStep.png");
+/* harmony import */ var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_oneStep_Explosion.png */ "./assets/img/Platforms/Platform_oneStep_Explosion.png");
+/* harmony import */ var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_jump.png */ "./assets/img/Platforms/Platform_jump.png");
+/* harmony import */ var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_jump_disabled.png */ "./assets/img/Platforms/Platform_jump_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_one.png */ "./assets/img/Platforms/Platform_one.png");
+/* harmony import */ var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_two.png */ "./assets/img/Platforms/Platform_two.png");
+/* harmony import */ var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_three.png */ "./assets/img/Platforms/Platform_three.png");
+/* harmony import */ var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_one_disabled.png */ "./assets/img/Platforms/Platform_one_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_two_disabled.png */ "./assets/img/Platforms/Platform_two_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Platform_three_disabled.png */ "./assets/img/Platforms/Platform_three_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/Finish_T_L.png */ "./assets/img/Platforms/Finish_T_L.png");
+/* harmony import */ var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/brick_1.png */ "./assets/img/Platforms/brick_1.png");
+/* harmony import */ var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../../../../assets/img/Platforms/brick_2.png */ "./assets/img/Platforms/brick_2.png");
+/* harmony import */ var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Saw.png */ "./assets/img/Traps/Saw.png");
+/* harmony import */ var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Fan.png */ "./assets/img/Traps/Fan.png");
+/* harmony import */ var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Platform_spikes.png */ "./assets/img/Traps/Platform_spikes.png");
+/* harmony import */ var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Dead_signal_zone.png */ "./assets/img/Traps/Dead_signal_zone.png");
+/* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
+/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
+/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../../../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
+/* harmony import */ var _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/arrows.png */ "./assets/img/SPA/arrows.png");
+/* harmony import */ var _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/space.png */ "./assets/img/SPA/space.png");
+/* harmony import */ var _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/cloud_1.png */ "./assets/img/SPA/cloud_1.png");
+/* harmony import */ var _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/cloud_2.png */ "./assets/img/SPA/cloud_2.png");
+/* harmony import */ var _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/cloud_3.png */ "./assets/img/SPA/cloud_3.png");
+/* harmony import */ var _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/cloud_4.png */ "./assets/img/SPA/cloud_4.png");
+/* harmony import */ var _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/f.png */ "./assets/img/SPA/f.png");
+/* harmony import */ var _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/m.png */ "./assets/img/SPA/m.png");
+/* harmony import */ var _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/404.png */ "./assets/img/SPA/404.png");
+/* harmony import */ var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/flying.gif */ "./assets/img/SPA/flying.gif");
+/* harmony import */ var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/logo.png */ "./assets/img/SPA/logo.png");
+/* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../../../../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
 
 
 
@@ -1674,7 +1626,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "mySPA": () => (/* binding */ mySPA)
 /* harmony export */ });
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../index */ "./src/index.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 
 
 const mySPA = function () {
@@ -1726,10 +1678,10 @@ const mySPA = function () {
               <div class="settings__slider-box">
                 <label for="volume-sounds">Sound effects</label>
                 <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
-                  min="0" max="1" value="${(0,_index__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'soundEffects')}" step="0.1">   
+                  min="0" max="1" value="${(0,_Utils__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'soundEffects')}" step="0.1">   
                     <label for="volume-music">Music</label>
                     <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
-                      min="0" max="1" value="${(0,_index__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'musicEffects')}" step="0.1">
+                      min="0" max="1" value="${(0,_Utils__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'musicEffects')}" step="0.1">
               </div>
           </section>
         `;
@@ -1880,6 +1832,7 @@ const mySPA = function () {
           <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
           <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}" alt="cloud third">
           <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}" alt="cloud fourth">
+          <div id="mute-btn" class="mute mute_off mute_hover"></div>
             <div class="header__wrapper">
               <img class="header__logo" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoImg_1}" alt="logo">
                 <div class="header__logo-box">
@@ -2824,9 +2777,13 @@ class Bullet {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "changeMuteIcon": () => (/* binding */ changeMuteIcon),
 /* harmony export */   "createImage": () => (/* binding */ createImage),
 /* harmony export */   "flamethrowerShootSoundIntervalInit": () => (/* binding */ flamethrowerShootSoundIntervalInit),
-/* harmony export */   "randomNumber": () => (/* binding */ randomNumber)
+/* harmony export */   "fullScreen": () => (/* binding */ fullScreen),
+/* harmony export */   "getLocalStorage": () => (/* binding */ getLocalStorage),
+/* harmony export */   "randomNumber": () => (/* binding */ randomNumber),
+/* harmony export */   "setLocalStorage": () => (/* binding */ setLocalStorage)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
@@ -2867,6 +2824,34 @@ function flamethrowerShootSoundIntervalInit() {
     }
   }
 }
+function fullScreen(e, element) {
+  if (e.code === 'KeyF') {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.webkitrequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.mozRequestFullscreen) {
+      element.mozRequestFullScreen();
+    }
+  }
+}
+function setLocalStorage(item_1, item_2) {
+  if ('localStorage' in window && window.localStorage !== null) {
+    let soundSettings = {
+      soundEffects: item_1,
+      musicEffects: item_2
+    };
+    localStorage.setItem('settings', JSON.stringify(soundSettings));
+  }
+}
+function getLocalStorage(key, value) {
+  return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.5;
+}
+function changeMuteIcon() {
+  const muteIcon = document.getElementById('mute-btn');
+  muteIcon.classList.toggle('mute_off');
+  muteIcon.classList.toggle('mute_on');
+}
 
 
 /***/ }),
@@ -2882,7 +2867,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "audio": () => (/* binding */ audio),
 /* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects),
 /* harmony export */   "getRandomTrack": () => (/* binding */ getRandomTrack),
+/* harmony export */   "muteSound": () => (/* binding */ muteSound),
 /* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack),
+/* harmony export */   "source": () => (/* binding */ source),
 /* harmony export */   "volumeEffects": () => (/* binding */ volumeEffects),
 /* harmony export */   "volumeMusic": () => (/* binding */ volumeMusic)
 /* harmony export */ });
@@ -2929,9 +2916,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_4.mp3 */ "./assets/sounds/music/mp3/track_4.mp3");
 /* harmony import */ var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_4.ogg */ "./assets/sounds/music/ogg/track_4.ogg");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../Utils */ "./src/js/Utils.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../index */ "./src/index.js");
-// import blockHit_MP3 from '/assets/sounds/effects/mp3/block_hit.mp3';
-// import blockHit_OGG from '/assets/sounds/effects/ogg/block_hit.ogg';
 
 
 
@@ -2976,8 +2960,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let volumeEffects = (0,_index__WEBPACK_IMPORTED_MODULE_43__.getLocalStorage)('settings', 'soundEffects');
-let volumeMusic = (0,_index__WEBPACK_IMPORTED_MODULE_43__.getLocalStorage)('settings', 'musicEffects');
+let volumeEffects = (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.getLocalStorage)('settings', 'soundEffects');
+let volumeMusic = (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.getLocalStorage)('settings', 'musicEffects');
 const audio = {
   isCanPlay: new Audio(),
   blockHit: {
@@ -3086,10 +3070,32 @@ const audio = {
     volume: volumeMusic
   }
 };
+let source = null;
+// Choose supported source and preload
+;
+(function () {
+  if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
+    source = 'src_MP3';
+  } else {
+    source = 'src_OGG';
+  }
+  for (let sound in audio) {
+    if (audio?.[sound]?.[source]) {
+      let {
+        src_MP3: mp3,
+        src_OGG: ogg
+      } = audio[sound];
+      mp3.play();
+      mp3.pause();
+      ogg.play();
+      ogg.pause();
+    }
+  }
+})();
 function gameSoundEffects(item) {
-  item[_index__WEBPACK_IMPORTED_MODULE_43__.source].currentTime = 0;
-  item[_index__WEBPACK_IMPORTED_MODULE_43__.source].volume = item.volume;
-  item[_index__WEBPACK_IMPORTED_MODULE_43__.source].play();
+  item[source].currentTime = 0;
+  item[source].volume = item.volume;
+  item[source].play();
 }
 function getRandomTrack(playlist) {
   let tracksList = [];
@@ -3097,7 +3103,7 @@ function getRandomTrack(playlist) {
   for (let sound in playlist) {
     sound.includes('track') && tracksList.push(playlist[sound]);
   }
-  track = tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][_index__WEBPACK_IMPORTED_MODULE_43__.source];
+  track = tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
   track.currentTime = 0;
   track.volume = volumeMusic;
   return track;
@@ -3109,54 +3115,24 @@ const playNextTrack = (currentTrack, playlist) => {
     sound.includes('track') && tracksList.push(playlist[sound]);
   }
   tracksList.forEach((track, index) => {
-    track[_index__WEBPACK_IMPORTED_MODULE_43__.source] === currentTrack && (currentTrackNumber = index);
+    track[source] === currentTrack && (currentTrackNumber = index);
   });
   currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
-  tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].currentTime = 0;
-  tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].volume = volumeMusic;
-  tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].play();
-  tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].onended = function () {
-    playNextTrack(tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source], audio);
+  tracksList[currentTrackNumber][source].currentTime = 0;
+  tracksList[currentTrackNumber][source].volume = volumeMusic;
+  tracksList[currentTrackNumber][source].play();
+  tracksList[currentTrackNumber][source].onended = function () {
+    playNextTrack(tracksList[currentTrackNumber][source], audio);
   };
 };
-
-// item[source].currentTime = 0;
-// item[source].volume = item.volume;
-
-// function gameSoundEffects(item) {
-//   if (audio.isCanPlay.canPlayType('audio/ogg') === 'probably') {
-//     item.src_OGG.currentTime = 0;
-//     item.src_OGG.play();
-//   } else {
-//     item.src_MP3.currentTime = 0;
-//     item.src_MP3.play();
-//   }
-// }
-
-// function gameSoundEffects(item) {
-//   if (audio.sound.canPlayType("audio/mpeg")=="probably") {
-//     audio.sound.src= item.src_MP3;
-//   } else {
-//     audio.sound.src= item.src_OGG;
-//   }
-//   audio.sound.currentTime = 0;
-//   audio.sound.play();
-// }
-
-// function gameSoundEffects(item) {
-//   item.currentTime = 0;
-//   item.play();
-// }
-
-// For music
-// let isPlayed = false;
-// function gameSoundEffects(item) {
-//   if(!isPlayed)
-//   item.currentTime = 0;
-//   item.play();
-//   isPlayed = true;
-// }
-
+function muteSound() {
+  for (let sound in audio) {
+    if (audio?.[sound]?.[source]) {
+      audio[sound][source].muted === false ? audio[sound][source].muted = true : audio[sound][source].muted = false;
+    }
+  }
+  (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.changeMuteIcon)();
+}
 
 
 // import blockHit_MP3 from '../../../assets/sounds/effects/mp3/block_hit.mp3';

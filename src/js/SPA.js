@@ -51,7 +51,7 @@ import {
         logoImg_1,
         logoImg_2,
 } from './Assets';
-import { getLocalStorage } from '../index';
+import { getLocalStorage } from './Utils';
 
 export const mySPA = (function() {
 
@@ -271,6 +271,7 @@ export const mySPA = (function() {
           <img class="cloud-2" src="${cloud_2}" alt="cloud second">
           <img class="cloud-3" src="${cloud_3}" alt="cloud third">
           <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
+          <div id="mute-btn" class="mute mute_off mute_hover"></div>
             <div class="header__wrapper">
               <img class="header__logo" src="${logoImg_1}" alt="logo">
                 <div class="header__logo-box">
