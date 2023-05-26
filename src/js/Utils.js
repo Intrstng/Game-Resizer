@@ -1,51 +1,53 @@
+import { platforms, initStart } from '../index';
+import { gameSoundEffects } from './data/Audio';
+
 function createImage(src, width, height) {
   const image = new Image();
-
-                              image.onload = () => {
-                                image.loaded = true;
-                              }
-                              image.loaded = false;
-
+  image.onload = () => {
+    image.loaded = true;
+  }
+  image.loaded = false;
   image.src = src;
   image.width = width;
   image.height = height;
   return image;
 }
 
-
 function randomNumber(min = 0, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
-class VolumeController {
-  constructor() {
-    this.volumeEffects = 1;
-    this.volumeMusic = 0.8;
-  }
 
-  changeVolumeEffectsLevel(value) {
-    this.volumeEffects = value;
-  }
-
-  changeVolumevolumeMusicLevel(value) {
-    this.volumeMusic = value;
-  }
+function fireSoundInterval(delay) {
+  timerShoot_1 = setTimeout(function soundFire() {
+    timerShoot_2 = setTimeout(soundFire, delay);
+    gameSoundEffects(audio.fire);
+  }, delay); 
 }
 
-export { createImage, randomNumber };
+function flamethrowerShootSoundIntervalInit() {
+  if (initStart) {
+    let flamethrowerShootDelay = null;
+    platforms.forEach(platform => {
+      ( platform.type === 'flamethrowerLeft' ||
+        platform.type === 'flamethrowerRight' ||
+        platform.type === 'flamethrowerUp' ||
+        platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
+    })
+    
+    if (platforms.some(platform => {
+      return (platform.type === 'flamethrowerLeft' ||
+      platform.type === 'flamethrowerRight' ||
+      platform.type === 'flamethrowerUp' ||
+      platform.type === 'flamethrowerDown')})) {
+        fireSoundInterval(flamethrowerShootDelay * 8);
+    }
+  }
+ }
 
-// export class Sprite {
-//   constructor ({ position, imageSrc }) {
-//     this.position = position;
-//     this.image = new Image();
-//     this.image.onload = () => {
-//       this.loaded = true;
-//     }
-//     this.image.src = imageSrc;
-//     this.loaded = false;
-//   }
-//   draw() {
-//                                 if (!this.loaded) return; // if (!this.currentSprite) return;
-//     c.drawImage(this.image, this.position.x, this.position.y)
-//   }
-// }
+
+
+
+
+
+export { createImage, randomNumber, flamethrowerShootSoundIntervalInit };

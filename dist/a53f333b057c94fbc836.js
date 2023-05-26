@@ -15,52 +15,56 @@
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */"additionalElements": () => /* binding */additionalElements,
         /* harmony export */"completeLevel": () => /* binding */completeLevel,
+        /* harmony export */"getLocalStorage": () => /* binding */getLocalStorage,
         /* harmony export */"init": () => /* binding */init,
+        /* harmony export */"initStart": () => /* binding */initStart,
         /* harmony export */"leftNeighboorBlockFromHero": () => /* binding */leftNeighboorBlockFromHero,
         /* harmony export */"level": () => /* binding */level,
         /* harmony export */"levelMap": () => /* binding */levelMap,
+        /* harmony export */"main": () => /* binding */main,
         /* harmony export */"parsedCollisions": () => /* binding */parsedCollisions,
         /* harmony export */"platforms": () => /* binding */platforms,
         /* harmony export */"player": () => /* binding */player,
         /* harmony export */"requestAnim": () => /* binding */requestAnim,
+        /* harmony export */"source": () => /* binding */source,
         /* harmony export */"timerShoot_1": () => /* binding */timerShoot_1,
         /* harmony export */"timerShoot_2": () => /* binding */timerShoot_2
         /* harmony export */
       });
       /* harmony import */
-      var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./sass/styles.scss */"./src/sass/styles.scss");
+      var _js_SPA__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./js/SPA */"./src/js/SPA.js");
       /* harmony import */
-      var _js_SPA__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./js/SPA */"./src/js/SPA.js");
+      var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ./js/Collision */"./src/js/Collision.js");
       /* harmony import */
-      var _js_Collision__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./js/Collision */"./src/js/Collision.js");
+      var _js_Canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./js/Canvas */"./src/js/Canvas.js");
       /* harmony import */
-      var _js_Canvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./js/Canvas */"./src/js/Canvas.js");
+      var _js_Utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./js/Utils */"./src/js/Utils.js");
       /* harmony import */
-      var _js_Utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./js/Utils */"./src/js/Utils.js");
+      var _js_Player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./js/Player */"./src/js/Player.js");
       /* harmony import */
-      var _js_Player__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./js/Player */"./src/js/Player.js");
+      var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./js/data/Audio */"./src/js/data/Audio.js");
       /* harmony import */
-      var _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ./js/data/Audio */"./src/js/data/Audio.js");
+      var _js_Platform__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ./js/Platform */"./src/js/Platform.js");
       /* harmony import */
-      var _js_Platform__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ./js/Platform */"./src/js/Platform.js");
+      var _js_Traps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ./js/Traps */"./src/js/Traps.js");
       /* harmony import */
-      var _js_Traps__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ./js/Traps */"./src/js/Traps.js");
+      var _js_Assets__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ./js/Assets */"./src/js/Assets.js");
       /* harmony import */
-      var _js_Assets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ./js/Assets */"./src/js/Assets.js");
+      var _js_Keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ./js/Keys */"./src/js/Keys.js");
       /* harmony import */
-      var _js_Keys__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./js/Keys */"./src/js/Keys.js");
+      var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./js/AdditionalElements */"./src/js/AdditionalElements.js");
       /* harmony import */
-      var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ./js/AdditionalElements */"./src/js/AdditionalElements.js");
-      /* harmony import */
-      var _js_Levels__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ./js/Levels */"./src/js/Levels.js");
-      document.addEventListener('DOMContentLoaded', _js_SPA__WEBPACK_IMPORTED_MODULE_1__.mySPA.init('root', 'content'));
-      const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height / 5; // 10
-      _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width = 1024; // 1280
-      _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height = 576; // 720
+      var _js_Levels__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ./js/Levels */"./src/js/Levels.js");
+      //import './sass/styles.scss';  // прописано в Webpack entry points
+
+      document.addEventListener('DOMContentLoaded', _js_SPA__WEBPACK_IMPORTED_MODULE_0__.mySPA.init('root', 'content'));
+      const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 5; // 10
+      _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280
+      _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720
       let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
         window.setTimeout(callback, 1000 / 60);
       };
-      window.addEventListener('keydown', e => fullScreen(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas));
+      window.addEventListener('keydown', e => fullScreen(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas));
       function fullScreen(e, element) {
         if (e.code === 'KeyF') {
           if (element.requestFullscreen) {
@@ -77,7 +81,29 @@
       let timerShoot_2 = null;
       let leftNeighboorBlockFromHero = null;
       let completeLevel = false;
-      let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_4__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height))];
+      let source = null;
+      // Choose supported source and preload
+      ;
+      (function () {
+        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
+          source = 'src_MP3';
+        } else {
+          source = 'src_OGG';
+        }
+        for (let sound in _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio) {
+          if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[source]) {
+            let {
+              src_MP3: mp3,
+              src_OGG: ogg
+            } = _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound];
+            mp3.play();
+            mp3.pause();
+            ogg.play();
+            ogg.pause();
+          }
+        }
+      })();
+      let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
       let level = 1;
       function increseLevel(obj) {
         return level >= Object.keys(obj).length ? level : ++level;
@@ -87,7 +113,7 @@
         parsedCollisions,
         player;
 
-      // requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+      //requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
 
       function setLevelMap(value) {
         levelMap = value;
@@ -98,7 +124,7 @@
         levelMap.map.forEach((row, index_Y) => {
           row.forEach((cell, index_X) => {
             if (cell === 'st') {
-              player = new _js_Player__WEBPACK_IMPORTED_MODULE_5__.Player({
+              player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
                 platforms
               }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top);
             }
@@ -106,67 +132,73 @@
         });
         return player;
       }
-      function fireSoundInterval(delay) {
-        timerShoot_1 = setTimeout(function soundFire() {
-          timerShoot_2 = setTimeout(soundFire, delay);
-          (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fire);
-        }, delay);
-      }
       let initStart = true;
-      function flamethrowerShootSoundIntervalInit() {
-        if (initStart) {
-          let flamethrowerShootDelay = null;
-          platforms.forEach(platform => {
-            (platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
-          });
-          if (platforms.some(platform => {
-            return platform.type === 'flamethrowerLeft' || platform.type === 'flamethrowerRight' || platform.type === 'flamethrowerUp' || platform.type === 'flamethrowerDown';
-          })) {
-            fireSoundInterval(flamethrowerShootDelay * 8);
-          }
+
+      // Получение значений с input type='range' volume
+      const main = document.getElementById('content');
+      main && (window.onload = (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.setVolumeRangeHandlers)());
+      main && window.addEventListener('hashchange', _js_Utils__WEBPACK_IMPORTED_MODULE_3__.setVolumeRangeHandlers);
+      function setLocalStorage(item_1, item_2) {
+        if ('localStorage' in window && window.localStorage !== null) {
+          let soundSettings = {
+            soundEffects: item_1,
+            musicEffects: item_2
+          };
+          localStorage.setItem('settings', JSON.stringify(soundSettings));
         }
-        initStart = false;
       }
-      let track = (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+      function getLocalStorage(key, value) {
+        return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.5;
+      }
+      let track = (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
       track.pause();
-      track = (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
-      //track.play();
+      track = (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
+      let isInitMusicPlay = false;
+      function playMusic() {
+        if (!isInitMusicPlay) {
+          track.play();
+        }
+        isInitMusicPlay = true;
+      }
+      const selectLvlBtn = document.getElementById('select-lvl');
+      main && selectLvlBtn.addEventListener('click', playMusic);
       track.onended = function () {
-        (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio);
+        (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
       };
       function reloadGameplay() {
-        additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_11__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_4__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height))];
+        additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
         platforms.forEach(platform => {
           platform.type === 'oneStep' && platform.restore();
         });
         levelMap.map.forEach((row, index_Y) => {
           row.forEach((cell, index_X) => {
-            cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_5__.Player({
+            cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_4__.Player({
               platforms
             }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top));
           });
         });
       }
-      let levelOverlay = (0, _js_Utils__WEBPACK_IMPORTED_MODULE_4__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_9__.win);
-      levelOverlay.width = _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width;
-      levelOverlay.height = _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height;
+      let levelOverlay = (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.win);
+      levelOverlay.width = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width;
+      levelOverlay.height = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height;
       function init() {
-        flamethrowerShootSoundIntervalInit();
+        (0, _js_Utils__WEBPACK_IMPORTED_MODULE_3__.flamethrowerShootSoundIntervalInit)();
+        initStart = false;
         player.velocity.y = 1;
         player.alive = true;
-        _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.spaceToggleCounter = 1;
+        _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.spaceToggleCounter = 1;
         if (player.completeLevel) {
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.save();
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.fillStyle = 'rgb(247, 251, 254)';
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height / 2);
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.drawImage(levelOverlay, 0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height);
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.fillStyle = 'rgb(21, 173, 188)';
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.font = `normal ${fontSize}px Rubik Iso`;
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.textBaseline = 'middle';
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.textAlign = 'center';
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.style.letterSpacing = `${fontSize / 20}px`;
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.fillText('Next level', _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height / 2);
-          _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.c.restore();
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.save();
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(247, 251, 254)';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillRect(0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.drawImage(levelOverlay, 0, 0, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillStyle = 'rgb(21, 173, 188)';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.font = `normal ${fontSize}px Rubik Iso`;
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textBaseline = 'middle';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.textAlign = 'center';
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.style.letterSpacing = `${fontSize / 20}px`;
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.fillText('Next level', _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width / 2, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 2);
+          _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.c.restore();
           setTimeout(() => reloadGameplay(), 1250);
           player.completeLevel = false;
         } else {
@@ -194,35 +226,35 @@
         });
         leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
         player.update();
-        if (_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.width) {
+        if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && player.position.x + player.width <= _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width) {
           // упор персонажа в правый край экрана
           player.velocity.x = 2;
-        } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && player.position.x >= 0) {
+        } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && player.position.x >= 0) {
           // упор персонажа в левый край экрана
           player.velocity.x = -2;
         } else {
           player.velocity.x = 0;
         }
-        if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'right') {
+        if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'right') {
           // 10 - когда персонаж на земле
           player.currentSprite = player.sprites.idle.right;
-        } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.lastPressed === 'left') {
+        } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.lastPressed === 'left') {
           // 10 - когда персонаж на земле
           player.currentSprite = player.sprites.idle.left;
         }
 
         // Падение в пропасть (см. комментарии в player.update())
-        if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_3__.canvas.height) {
-          (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio.fallingInDepth2);
-          _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_10__.keys.jumpToggleActive;
+        if (player.position.y > _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height) {
+          (0, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio.fallingInDepth2);
+          _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_9__.keys.jumpToggleActive;
           init();
         }
       }
       // init();
       // animate();
 
-      window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keyDownHandler);
-      window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_10__.keyUpHandler);
+      window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyDownHandler);
+      window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyUpHandler);
 
       /***/
     },
@@ -301,11 +333,19 @@
       __webpack_require__.r(__webpack_exports__);
       /* harmony export */
       __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */"arrows": () => /* reexport default export from named module */_assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__,
         /* harmony export */"backgroundImg": () => /* reexport default export from named module */_assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__,
+        /* harmony export */"birdFlyingImg": () => /* reexport default export from named module */_assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__,
         /* harmony export */"brick_1": () => /* reexport default export from named module */_assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__,
         /* harmony export */"brick_2": () => /* reexport default export from named module */_assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__,
+        /* harmony export */"cloud_1": () => /* reexport default export from named module */_assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__,
+        /* harmony export */"cloud_2": () => /* reexport default export from named module */_assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__,
+        /* harmony export */"cloud_3": () => /* reexport default export from named module */_assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__,
+        /* harmony export */"cloud_4": () => /* reexport default export from named module */_assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__,
         /* harmony export */"deadSignalZone": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__,
         /* harmony export */"deadSignalZoneHover": () => /* reexport default export from named module */_assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__,
+        /* harmony export */"errorImg": () => /* reexport default export from named module */_assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__,
+        /* harmony export */"fKeyImg": () => /* reexport default export from named module */_assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__,
         /* harmony export */"fan": () => /* reexport default export from named module */_assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__,
         /* harmony export */"finish": () => /* reexport default export from named module */_assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__,
         /* harmony export */"fireballDown": () => /* reexport default export from named module */_assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__,
@@ -325,6 +365,9 @@
         /* harmony export */"heroJumpR": () => /* reexport default export from named module */_assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__,
         /* harmony export */"heroRunL": () => /* reexport default export from named module */_assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__,
         /* harmony export */"heroRunR": () => /* reexport default export from named module */_assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__,
+        /* harmony export */"logoImg_1": () => /* reexport default export from named module */_assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__,
+        /* harmony export */"logoImg_2": () => /* reexport default export from named module */_assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__,
+        /* harmony export */"mKeyImg": () => /* reexport default export from named module */_assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__,
         /* harmony export */"platformImgSrc300": () => /* reexport default export from named module */_assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__,
         /* harmony export */"platformJump": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__,
         /* harmony export */"platformJumpDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__,
@@ -338,121 +381,113 @@
         /* harmony export */"platformTwo": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__,
         /* harmony export */"platformTwoDisabled": () => /* reexport default export from named module */_assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__,
         /* harmony export */"saw": () => /* reexport default export from named module */_assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__,
+        /* harmony export */"spaceImg": () => /* reexport default export from named module */_assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__,
         /* harmony export */"spike": () => /* reexport default export from named module */_assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__,
         /* harmony export */"win": () => /* reexport default export from named module */_assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__
         /* harmony export */
       });
       /* harmony import */
-      var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../../../assets/img/Platforms/platform.png */"./assets/img/Platforms/platform.png");
+      var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../../assets/img/Platforms/platform.png */"./assets/img/Platforms/platform.png");
       /* harmony import */
-      var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ../../../../assets/img/Hero/Idle_right.png */"./assets/img/Hero/Idle_right.png");
+      var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ../../assets/img/Hero/Idle_right.png */"./assets/img/Hero/Idle_right.png");
       /* harmony import */
-      var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../../../assets/img/Hero/Idle_left.png */"./assets/img/Hero/Idle_left.png");
+      var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ../../assets/img/Hero/Idle_left.png */"./assets/img/Hero/Idle_left.png");
       /* harmony import */
-      var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../../../../assets/img/Hero/Run_right.png */"./assets/img/Hero/Run_right.png");
+      var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ../../assets/img/Hero/Run_right.png */"./assets/img/Hero/Run_right.png");
       /* harmony import */
-      var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../../../../assets/img/Hero/Run_left.png */"./assets/img/Hero/Run_left.png");
+      var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../../assets/img/Hero/Run_left.png */"./assets/img/Hero/Run_left.png");
       /* harmony import */
-      var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../../../../assets/img/Hero/Jump_right.png */"./assets/img/Hero/Jump_right.png");
+      var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../../assets/img/Hero/Jump_right.png */"./assets/img/Hero/Jump_right.png");
       /* harmony import */
-      var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../../../../assets/img/Hero/Jump_left.png */"./assets/img/Hero/Jump_left.png");
+      var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../../assets/img/Hero/Jump_left.png */"./assets/img/Hero/Jump_left.png");
       /* harmony import */
-      var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ../../../../assets/img/Hero/Fall_right.png */"./assets/img/Hero/Fall_right.png");
+      var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ../../assets/img/Hero/Fall_right.png */"./assets/img/Hero/Fall_right.png");
       /* harmony import */
-      var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ../../../../assets/img/Hero/Fall_left.png */"./assets/img/Hero/Fall_left.png");
+      var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ../../assets/img/Hero/Fall_left.png */"./assets/img/Hero/Fall_left.png");
       /* harmony import */
-      var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ../../../../assets/img/Hero/Player_death.png */"./assets/img/Hero/Player_death.png");
+      var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ../../assets/img/Hero/Player_death.png */"./assets/img/Hero/Player_death.png");
       /* harmony import */
-      var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ../../../../assets/img/Background_images/bg_1.jpg */"./assets/img/Background_images/bg_1.jpg");
+      var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ../../assets/img/Background_images/bg_1.jpg */"./assets/img/Background_images/bg_1.jpg");
       /* harmony import */
-      var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ../../../../assets/img/Background_images/Win_4.jpg */"./assets/img/Background_images/Win_4.jpg");
+      var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ../../assets/img/Background_images/Win_4.jpg */"./assets/img/Background_images/Win_4.jpg");
       /* harmony import */
-      var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_solid.png */"./assets/img/Platforms/Platform_solid.png");
+      var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_solid.png */"./assets/img/Platforms/Platform_solid.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_oneStep.png */"./assets/img/Platforms/Platform_oneStep.png");
+      var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_oneStep.png */"./assets/img/Platforms/Platform_oneStep.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_oneStep_Explosion.png */"./assets/img/Platforms/Platform_oneStep_Explosion.png");
+      var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_oneStep_Explosion.png */"./assets/img/Platforms/Platform_oneStep_Explosion.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_jump.png */"./assets/img/Platforms/Platform_jump.png");
+      var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_jump.png */"./assets/img/Platforms/Platform_jump.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_jump_disabled.png */"./assets/img/Platforms/Platform_jump_disabled.png");
+      var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_jump_disabled.png */"./assets/img/Platforms/Platform_jump_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_one.png */"./assets/img/Platforms/Platform_one.png");
+      var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_one.png */"./assets/img/Platforms/Platform_one.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_two.png */"./assets/img/Platforms/Platform_two.png");
+      var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_two.png */"./assets/img/Platforms/Platform_two.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_three.png */"./assets/img/Platforms/Platform_three.png");
+      var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_three.png */"./assets/img/Platforms/Platform_three.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_one_disabled.png */"./assets/img/Platforms/Platform_one_disabled.png");
+      var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_one_disabled.png */"./assets/img/Platforms/Platform_one_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_two_disabled.png */"./assets/img/Platforms/Platform_two_disabled.png");
+      var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_two_disabled.png */"./assets/img/Platforms/Platform_two_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Platform_three_disabled.png */"./assets/img/Platforms/Platform_three_disabled.png");
+      var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__( /*! ../../assets/img/Platforms/Platform_three_disabled.png */"./assets/img/Platforms/Platform_three_disabled.png");
       /* harmony import */
-      var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__( /*! ../../../../assets/img/Platforms/Finish_T_L.png */"./assets/img/Platforms/Finish_T_L.png");
+      var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__( /*! ../../assets/img/Platforms/Finish_T_L.png */"./assets/img/Platforms/Finish_T_L.png");
       /* harmony import */
-      var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__( /*! ../../../../assets/img/Platforms/brick_1.png */"./assets/img/Platforms/brick_1.png");
+      var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__( /*! ../../assets/img/Platforms/brick_1.png */"./assets/img/Platforms/brick_1.png");
       /* harmony import */
-      var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__( /*! ../../../../assets/img/Platforms/brick_2.png */"./assets/img/Platforms/brick_2.png");
+      var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__( /*! ../../assets/img/Platforms/brick_2.png */"./assets/img/Platforms/brick_2.png");
       /* harmony import */
-      var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__( /*! ../../../../assets/img/Traps/Saw.png */"./assets/img/Traps/Saw.png");
+      var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__( /*! ../../assets/img/Traps/Saw.png */"./assets/img/Traps/Saw.png");
       /* harmony import */
-      var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fan.png */"./assets/img/Traps/Fan.png");
+      var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__( /*! ../../assets/img/Traps/Fan.png */"./assets/img/Traps/Fan.png");
       /* harmony import */
-      var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__( /*! ../../../../assets/img/Traps/Platform_spikes.png */"./assets/img/Traps/Platform_spikes.png");
+      var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__( /*! ../../assets/img/Traps/Platform_spikes.png */"./assets/img/Traps/Platform_spikes.png");
       /* harmony import */
-      var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__( /*! ../../../../assets/img/Traps/Dead_signal_zone.png */"./assets/img/Traps/Dead_signal_zone.png");
+      var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__( /*! ../../assets/img/Traps/Dead_signal_zone.png */"./assets/img/Traps/Dead_signal_zone.png");
       /* harmony import */
-      var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__( /*! ../../../../assets/img/Traps/Dead_signal_zone_hover.png */"./assets/img/Traps/Dead_signal_zone_hover.png");
+      var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__( /*! ../../assets/img/Traps/Dead_signal_zone_hover.png */"./assets/img/Traps/Dead_signal_zone_hover.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_left.png */"./assets/img/Traps/Flamethrower_left.png");
+      var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__( /*! ../../assets/img/Traps/Flamethrower_left.png */"./assets/img/Traps/Flamethrower_left.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_right.png */"./assets/img/Traps/Flamethrower_right.png");
+      var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__( /*! ../../assets/img/Traps/Flamethrower_right.png */"./assets/img/Traps/Flamethrower_right.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_up.png */"./assets/img/Traps/Flamethrower_up.png");
+      var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__( /*! ../../assets/img/Traps/Flamethrower_up.png */"./assets/img/Traps/Flamethrower_up.png");
       /* harmony import */
-      var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__( /*! ../../../../assets/img/Traps/Flamethrower_down.png */"./assets/img/Traps/Flamethrower_down.png");
+      var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__( /*! ../../assets/img/Traps/Flamethrower_down.png */"./assets/img/Traps/Flamethrower_down.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_up.png */"./assets/img/Traps/Fireball_up.png");
+      var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__( /*! ../../assets/img/Traps/Fireball_up.png */"./assets/img/Traps/Fireball_up.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_down.png */"./assets/img/Traps/Fireball_down.png");
+      var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__( /*! ../../assets/img/Traps/Fireball_down.png */"./assets/img/Traps/Fireball_down.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_left.png */"./assets/img/Traps/Fireball_left.png");
+      var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__( /*! ../../assets/img/Traps/Fireball_left.png */"./assets/img/Traps/Fireball_left.png");
       /* harmony import */
-      var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__( /*! ../../../../assets/img/Traps/Fireball_right.png */"./assets/img/Traps/Fireball_right.png");
-      // const platformImgSrc300 = '../assets/img/Platforms/platform.png';
-      // const heroIdleR = '../assets/img/Hero/Idle_right.png';
-      // const heroIdleL = '../assets/img/Hero/Idle_left.png';
-      // const heroRunR = '../assets/img/Hero/Run_right.png';
-      // const heroRunL = '../assets/img/Hero/Run_left.png';
-      // const heroJumpR = '../assets/img/Hero/Jump_right.png';
-      // const heroJumpL = '../assets/img/Hero/Jump_left.png';
-      // const heroFallR = '../assets/img/Hero/Fall_right.png';
-      // const heroFallL = '../assets/img/Hero/Fall_left.png';
-      // const heroDeath = '../assets/img/Hero/Player_death.png';
-      // const backgroundImg = '../assets/img/Background_images/bg_2.jpg';
-      // const platformSolid = '../assets/img/Platforms/Platform_solid.png';
-      // const platformOneStep = '../assets/img/Platforms/Platform_oneStep.png';
-      // const platformOneStepExplosion = '../assets/img/Platforms/Platform_oneStep_Explosion.png';
-      // const platformJump = '../assets/img/Platforms/Platform_jump.png';
-      // const platformJumpDisabled = '../assets/img/Platforms/Platform_jump_disabled.png';
-      // const platformOne = '../assets/img/Platforms/Platform_one.png';
-      // const platformTwo = '../assets/img/Platforms/Platform_two.png';
-      // const platformThree = '../assets/img/Platforms/Platform_three.png';
-      // const platformOneDisabled = '../assets/img/Platforms/Platform_one_disabled.png';
-      // const platformTwoDisabled = '../assets/img/Platforms/Platform_two_disabled.png';
-      // const platformThreeDisabled = '../assets/img/Platforms/Platform_three_disabled.png';
-      // const saw = '../assets/img/Traps/Saw.png';
-      // const fan = '../assets/img/Traps/Fan.png';
-      // const spike = '../assets/img/Traps/Platform_spikes.png';
-      // const deadSignalZone = '../assets/img/Traps/Dead_signal_zone.png';
-      // const deadSignalZoneHover = '../assets/img/Traps/Dead_signal_zone_hover.png';
-      // const flamethrowerLeft = '../assets/img/Traps/Flamethrower_left.png';
-      // const flamethrowerRight = '../assets/img/Traps/Flamethrower_right.png';
-      // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
-      // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
-      // const flamethrowerUp = '../assets/img/Traps/Flamethrower_left.png';
-      // const flamethrowerDown = '../assets/img/Traps/Flamethrower_left.png';
+      var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__( /*! ../../assets/img/Traps/Fireball_right.png */"./assets/img/Traps/Fireball_right.png");
+      /* harmony import */
+      var _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__( /*! ../../assets/img/SPA/arrows.png */"./assets/img/SPA/arrows.png");
+      /* harmony import */
+      var _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__( /*! ../../assets/img/SPA/space.png */"./assets/img/SPA/space.png");
+      /* harmony import */
+      var _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__( /*! ../../assets/img/SPA/cloud_1.png */"./assets/img/SPA/cloud_1.png");
+      /* harmony import */
+      var _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__( /*! ../../assets/img/SPA/cloud_2.png */"./assets/img/SPA/cloud_2.png");
+      /* harmony import */
+      var _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__( /*! ../../assets/img/SPA/cloud_3.png */"./assets/img/SPA/cloud_3.png");
+      /* harmony import */
+      var _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__( /*! ../../assets/img/SPA/cloud_4.png */"./assets/img/SPA/cloud_4.png");
+      /* harmony import */
+      var _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__( /*! ../../assets/img/SPA/f.png */"./assets/img/SPA/f.png");
+      /* harmony import */
+      var _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__( /*! ../../assets/img/SPA/m.png */"./assets/img/SPA/m.png");
+      /* harmony import */
+      var _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__( /*! ../../assets/img/SPA/404.png */"./assets/img/SPA/404.png");
+      /* harmony import */
+      var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__( /*! ../../assets/img/SPA/flying.gif */"./assets/img/SPA/flying.gif");
+      /* harmony import */
+      var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__( /*! ../../assets/img/SPA/logo.png */"./assets/img/SPA/logo.png");
+      /* harmony import */
+      var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__( /*! ../../assets/img/SPA/logo_2.png */"./assets/img/SPA/logo_2.png");
 
       /***/
     },
@@ -1317,7 +1352,7 @@
       /* harmony import */
       var _Keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./Keys */"./src/js/Keys.js");
       /* harmony import */
-      var _js_Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../js/Assets */"./src/js/Assets.js");
+      var _Assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
       /* harmony import */
       var _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../js/data/Audio */"./src/js/data/Audio.js");
       class Player {
@@ -1351,22 +1386,22 @@
           this.completeLevel = false;
           this.sprites = {
             idle: {
-              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
-              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroIdleL, 32, 32)
             },
             run: {
-              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
-              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroRunL, 32, 32)
             },
             jump: {
-              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
-              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroJumpL, 32, 32)
             },
             fall: {
-              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
-              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
+              right: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallR, 32, 32),
+              left: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroFallL, 32, 32)
             },
-            death: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
+            death: (0, _Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_4__.heroDeath, 32, 32)
           };
           this.currentSprite = this.sprites.idle.right;
         }
@@ -1653,6 +1688,10 @@
         /* harmony export */"mySPA": () => /* binding */mySPA
         /* harmony export */
       });
+      /* harmony import */
+      var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./Assets */"./src/js/Assets.js");
+      /* harmony import */
+      var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! ../index */"./src/index.js");
       const mySPA = function () {
         function View() {
           let myContainerBtns = null;
@@ -1678,13 +1717,13 @@
           <section class="${className} controls">
             <h2 class="controls__title">Controls:</h2>
             <div class="controls__container">
-              <img class="controls__img-key" src="/assets/img/SPA/arrows.png" alt="control arrows">
+              <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.arrows}" alt="control arrows">
                 <p class="controls__text">Press Left and Right arrows to control character movement.<br>Press press Up arrow to jump.</p>
-                  <img class="controls__img-key" src="/assets/img/SPA/space.png" alt="space key">
+                  <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.spaceImg}" alt="space key">
                     <p class="controls__text">Press Space to toggle the active and inactive state of the platform <span>One / Two / Three</span></p>
-                      <img class="controls__img-letter" src="/assets/img/SPA/m.png" alt="m key">
+                      <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.mKeyImg}" alt="m key">
                         <p class="controls__text">Press <span>M</span> to return to the menu</p>
-                          <img class="controls__img-letter" src="/assets/img/SPA/f.png" alt="m key">
+                          <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.fKeyImg}" alt="m key">
                             <p class="controls__text">Press <span>F</span> to open the game in full screen</p>      
             </div>
           </section>
@@ -1702,10 +1741,10 @@
               <div class="settings__slider-box">
                 <label for="volume-sounds">Sound effects</label>
                 <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
-                  min="0.1" max="1" value="0.8" step="0.1">   
+                  min="0" max="1" value="${(0, _index__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'soundEffects')}" step="0.1">   
                     <label for="volume-music">Music</label>
                     <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
-                      min="0.1" max="1" value="0.7" step="0.1">
+                      min="0" max="1" value="${(0, _index__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'musicEffects')}" step="0.1">
               </div>
           </section>
         `;
@@ -1720,13 +1759,13 @@
           <section class="${className} description">
             <h2 class="description__title">Tutorial:</h2>
               <div class="description__content">
-                  <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
-                  <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
-                  <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
-                  <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
-                  <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
-                  <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
-                  <p>Are you ready to take on the challenge?</p>
+                <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
+                <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
+                <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
+                <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
+                <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
+                <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
+                <p>Are you ready to take on the challenge?</p>
               </div>
           </section>
         `;
@@ -1770,7 +1809,7 @@
               let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
               return `
           <section class="${className} error">
-            <img class="error__img" src="/assets/img/SPA/404.png" alt="error 404">
+            <img class="error__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.errorImg}" alt="error 404">
             <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
           </section>
         `;
@@ -1852,18 +1891,18 @@
             app.className = 'game-app';
             app.innerHTML = `
         <header class="header">
-          <img class="cloud-1" src="/assets/img/SPA/cloud_1.png"  alt="cloud first">
-          <img class="cloud-2" src="/assets/img/SPA/cloud_2.png"  alt="cloud second">
-          <img class="cloud-3" src="/assets/img/SPA/cloud_3.png"  alt="cloud third">
-          <img class="cloud-4" src="/assets/img/SPA/cloud_4.png"  alt="cloud fourth">
+          <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
+          <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
+          <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}" alt="cloud third">
+          <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}" alt="cloud fourth">
             <div class="header__wrapper">
-              <img class="header__logo" src="/assets/img/SPA/logo.png" alt="logo">
+              <img class="header__logo" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoImg_1}" alt="logo">
                 <div class="header__logo-box">
-                  <img class="header__logo-2" src="/assets/img/SPA/logo_2.png" alt="logo small">
+                  <img class="header__logo-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoImg_2}" alt="logo small">
                     <p class="header__title">Platform traveller</p>
                 </div>
                   <div class="bird-container">
-                    <img class="bird" src="/assets/img/SPA/flying.gif" alt="bird">
+                    <img class="bird" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.birdFlyingImg}" alt="bird">
                   </div>
                       <nav id="root" class="header__nav nav">
                         <ul class="nav__list">
@@ -1871,13 +1910,13 @@
                             <a href="#howtoplay" class="nav__link">How to play</a>
                           </li>
                             <li class="nav__item">
-                              <a href="#settings" class="nav__link">Settings</a>
+                              <a href="#settings" id="settings-btn" class="nav__link">Settings</a>
                             </li>
                               <li class="nav__item">
                                 <a href="#description" class="nav__link">Description</a>
                               </li>
                                 <li class="nav__item">
-                                  <a href="#game" class="nav__btn nav__btn_hover nav__link">Select level</a>
+                                  <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
                                 </li>
                           </ul>
                       </nav>
@@ -1889,6 +1928,334 @@
           }
         };
       }();
+
+      // import {
+      //   platformImgSrc300,
+      //   heroIdleR,
+      //   heroIdleL,
+      //   heroRunR,
+      //   heroRunL,
+      //   heroJumpR,
+      //   heroJumpL,
+      //   heroFallR,
+      //   heroFallL,
+      //   heroDeath,
+      //   backgroundImg,
+      //   win,
+      //   platformSolid,
+      //   platformOneStep,
+      //   platformOneStepExplosion,
+      //   platformJump,
+      //   platformJumpDisabled,
+      //   platformOne,
+      //   platformTwo,
+      //   platformThree,
+      //   platformOneDisabled,
+      //   platformTwoDisabled,
+      //   platformThreeDisabled,
+      //   saw,
+      //   fan,
+      //   spike,
+      //   deadSignalZone,
+      //   deadSignalZoneHover,
+      //   flamethrowerLeft,
+      //   flamethrowerRight,
+      //   flamethrowerUp,
+      //   flamethrowerDown,
+      //   fireballUp,
+      //   fireballDown,
+      //   fireballLeft,
+      //   fireballRight,
+      //   brick_1,
+      //   brick_2,
+      //   finish,
+      //   arrows,
+      //   spaceImg,
+      //   cloud_1,
+      //   cloud_2,
+      //   cloud_3,
+      //   cloud_4,
+      //   fKeyImg,
+      //   mKeyImg,
+      //   errorImg,
+      //   birdFlyingImg,
+      //   logoImg_1,
+      //   logoImg_2,
+      // } from './Assets';
+      // import { volumeEffects } from './data/Audio';
+      // import { volumeMusic } from './data/Audio';
+
+      // export const mySPA = (function() {
+
+      // function View() {
+      // let myContainerBtns = null;
+      // let myContainerShow = null;
+
+      // const HomeComponent = {
+      // id: 'main',
+      // title: 'Greeting',
+      // render: (className = 'content__text') => {
+      //   return `
+      //   <section class="${className} greeting">
+      //     <h2 class="greeting__text">
+      //     Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
+      //   </section>`
+      // }
+      // };
+
+      // const HowToPlayComponent = {
+      // id: 'howtoplay',
+      // title: 'How to play',
+      // render: (className = 'container') => {
+      //   return `
+      //     <section class="${className} controls">
+      //       <h2 class="controls__title">Controls:</h2>
+      //       <div class="controls__container">
+      //         <img class="controls__img-key" src="${arrows}" alt="control arrows">
+      //           <p class="controls__text">Press Left and Right arrows to control character movement.<br>Press press Up arrow to jump.</p>
+      //             <img class="controls__img-key" src="${spaceImg}" alt="space key">
+      //               <p class="controls__text">Press Space to toggle the active and inactive state of the platform <span>One / Two / Three</span></p>
+      //                 <img class="controls__img-letter" src="${mKeyImg}" alt="m key">
+      //                   <p class="controls__text">Press <span>M</span> to return to the menu</p>
+      //                     <img class="controls__img-letter" src="${fKeyImg}" alt="m key">
+      //                       <p class="controls__text">Press <span>F</span> to open the game in full screen</p>      
+      //       </div>
+      //     </section>
+      //   `;
+      // }
+      // };
+
+      // const SettingsComponent = {
+      // id: 'settings',
+      // title: 'Settings',
+      // render: (className = 'container') => {
+      //   return `
+      //     <section class="${className} settings">
+      //       <h2 class="settings__title">Audio settings:</h2>
+      //         <div class="settings__slider-box">
+      //           <label for="volume-sounds">Sound effects</label>
+      //           <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
+      //             min="0.1" max="1" value="0.8" step="0.1">   
+      //               <label for="volume-music">Music</label>
+      //               <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
+      //                 min="0.1" max="1" value="0.7" step="0.1">
+      //         </div>
+      //     </section>
+      //   `;
+      // }
+      // };
+
+      // const DescriptionComponent = {
+      // id: 'description',
+      // title: 'Description',
+      // render: (className = 'container') => {
+      //   return `
+      //     <section class="${className} description">
+      //       <h2 class="description__title">Tutorial:</h2>
+      //         <div class="description__content">
+      //           <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
+      //           <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
+      //           <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
+      //           <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
+      //           <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
+      //           <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
+      //           <p>Are you ready to take on the challenge?</p>
+      //         </div>
+      //     </section>
+      //   `;
+      // }
+      // };
+
+      // const StartComponent = {
+      // id: 'game',
+      // title: 'Start game',
+      // render: (className = "container") => {
+      //   return `
+      //     <section class="${className} level">
+      //       <h2 class="level__title">Select level:</h2>
+      //       <div class="level__list">
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled">1</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>2</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>3</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>4</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>5</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>6</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>7</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>8</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>9</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>10</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>11</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>12</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>13</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>14</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>15</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>16</button>
+      //         <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>17</button>
+      //       </div>
+      //     </section>
+      //   `;
+      // }
+      // };
+
+      // const ErrorComponent = {
+      // id: 'error',
+      // title: '404',
+      // render: (className = 'container') => {
+      //   return `
+      //     <section class="${className} error">
+      //       <img class="error__img" src="${errorImg}" alt="error 404">
+      //       <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
+      //     </section>
+      //   `;
+      // }
+      // };
+
+      // const router = {
+      // main: HomeComponent,
+      // howtoplay: HowToPlayComponent,
+      // settings: SettingsComponent,
+      // description: DescriptionComponent,
+      // game: StartComponent,
+      // default: HomeComponent,
+      // error: ErrorComponent
+      // };
+
+      // this.init = function(container_btns, container_show) {
+      // myContainerBtns = container_btns;
+      // myContainerShow = container_show;
+      // }
+
+      // this.updateButtons = function(currentPage) {
+      // const menuLinks = myContainerBtns.querySelectorAll('.nav__link');
+      // const state = `#${currentPage}`;
+
+      // for (let link of menuLinks) {
+      //   state === link.getAttribute('href') ? link.classList.add('active') : link.classList.remove('active');
+      //   this.addVolumeHandlers(link);
+      // }
+      // }
+
+      // this.addVolumeHandlers = function(link) {
+      // if (link.id === 'settings-btn') {
+      //   this.setVolumeRangeHandlers();
+      // }
+      // }
+
+      // this.setVolumeRangeHandlers = function() {
+      // const main = document.getElementById('content');
+      // const volumeRangeSound = main.querySelector('#volume-snd');
+      // const volumeRangeMusic = main.querySelector('#volume-msc');
+      // if (volumeRangeSound || volumeRangeMusic) {
+      //   volumeRangeSound.addEventListener('change', () => {
+      //     volumeEffects = volumeRangeSound.value;
+      //   });
+      //   volumeRangeMusic.addEventListener('change', () => {
+      //     volumeMusic = volumeRangeMusic.value;
+      //   });
+      // }
+      // }
+      // this.renderContent = function(hashPageName) {
+      // let routeName = 'default';
+
+      // if (hashPageName.length > 0) {
+      //   routeName = hashPageName in router ? hashPageName : 'error';
+      // }
+
+      // window.document.title = router[routeName].title;
+      // myContainerShow.innerHTML = router[routeName].render(`${routeName}-page`);
+      // this.updateButtons(router[routeName].id);
+      // }
+      // };
+
+      // function Model () {
+      // let myView = null;
+
+      // this.init = function(view) {
+      //   myView = view;
+      // }
+
+      // this.updateState = function(hashPageName) {
+      //   myView.renderContent(hashPageName);
+      // }
+      // }
+
+      // function Controller () {
+      // let myContainer = null;
+      // let myModel = null;
+
+      // this.init = function(container, model) {
+      //   myContainer = container;
+      //   myModel = model;
+      //   window.addEventListener('hashchange', this.updateState);
+      //   this.updateState();
+      // }
+
+      // this.updateState = function() {
+      //   const hashPageName = location.hash.slice(1).toLowerCase();
+      //   myModel.updateState(hashPageName);
+      // }
+      // };
+
+      // /* Init */
+      // return {
+      // init: function(container_btns, container_show) {
+      //   this.initBuildHtml();
+      //   this.main();
+      //   const view = new View();
+      //   const model = new Model();
+      //   const controller = new Controller();
+
+      //   view.init(document.getElementById(container_btns), document.getElementById(container_show));
+      //   model.init(view);
+      //   controller.init(document.getElementById(container_btns), model); // можно передавать только model
+      // },
+
+      // main: function() {
+      // },
+
+      // initBuildHtml: function() {
+      //   const app = document.createElement('div');
+      //   app.id = 'game-app';
+      //   app.className = 'game-app';
+      //   app.innerHTML = `
+      //   <header class="header">
+      //     <img class="cloud-1" src="${cloud_1}" alt="cloud first">
+      //     <img class="cloud-2" src="${cloud_2}" alt="cloud second">
+      //     <img class="cloud-3" src="${cloud_3}" alt="cloud third">
+      //     <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
+      //       <div class="header__wrapper">
+      //         <img class="header__logo" src="${logoImg_1}" alt="logo">
+      //           <div class="header__logo-box">
+      //             <img class="header__logo-2" src="${logoImg_2}" alt="logo small">
+      //               <p class="header__title">Platform traveller</p>
+      //           </div>
+      //             <div class="bird-container">
+      //               <img class="bird" src="${birdFlyingImg}" alt="bird">
+      //             </div>
+      //                 <nav id="root" class="header__nav nav">
+      //                   <ul class="nav__list">
+      //                     <li class="nav__item">
+      //                       <a href="#howtoplay" class="nav__link">How to play</a>
+      //                     </li>
+      //                       <li class="nav__item">
+      //                         <a href="#settings" id="settings-btn" class="nav__link">Settings</a>
+      //                       </li>
+      //                         <li class="nav__item">
+      //                           <a href="#description" class="nav__link">Description</a>
+      //                         </li>
+      //                           <li class="nav__item">
+      //                             <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
+      //                           </li>
+      //                     </ul>
+      //                 </nav>
+      //       </div>
+      //   </header>
+      //     <main id="content" class="content">
+      //     </main>`;
+      //   document.body.prepend(app);
+      // }
+      // };
+      // }());
 
       /***/
     },
@@ -2472,60 +2839,8 @@
       !*** ./src/js/Utils.js ***!
       \*************************/
     /***/
-    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export */
-      __webpack_require__.d(__webpack_exports__, {
-        /* harmony export */"createImage": () => /* binding */createImage,
-        /* harmony export */"randomNumber": () => /* binding */randomNumber
-        /* harmony export */
-      });
-      function createImage(src, width, height) {
-        const image = new Image();
-        image.onload = () => {
-          image.loaded = true;
-        };
-        image.loaded = false;
-        image.src = src;
-        image.width = width;
-        image.height = height;
-        return image;
-      }
-      function randomNumber() {
-        let min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-        let max = arguments.length > 1 ? arguments[1] : undefined;
-        return Math.floor(min + Math.random() * (max + 1 - min));
-      }
-      class VolumeController {
-        constructor() {
-          this.volumeEffects = 1;
-          this.volumeMusic = 0.8;
-        }
-        changeVolumeEffectsLevel(value) {
-          this.volumeEffects = value;
-        }
-        changeVolumevolumeMusicLevel(value) {
-          this.volumeMusic = value;
-        }
-      }
-
-      // export class Sprite {
-      //   constructor ({ position, imageSrc }) {
-      //     this.position = position;
-      //     this.image = new Image();
-      //     this.image.onload = () => {
-      //       this.loaded = true;
-      //     }
-      //     this.image.src = imageSrc;
-      //     this.loaded = false;
-      //   }
-      //   draw() {
-      //                                 if (!this.loaded) return; // if (!this.currentSprite) return;
-      //     c.drawImage(this.image, this.position.x, this.position.y)
-      //   }
-      // }
+    () => {
+      throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Game\\src\\js\\Utils.js: `setVolumeRangeHandlers` has already been exported. Exported identifiers must be unique. (87:72)\n\n  85 |\n  86 |\n> 87 | export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, setVolumeRangeHandlers };\n     |                                                                         ^\n    at instantiate (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:653:32)\n    at constructor (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:946:12)\n    at Parser.raise (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:3270:19)\n    at Parser.checkDuplicateExports (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13908:14)\n    at Parser.checkExport (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13850:16)\n    at Parser.parseExport (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13651:12)\n    at Parser.parseStatementContent (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12661:27)\n    at Parser.parseStatementLike (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12549:17)\n    at Parser.parseModuleItem (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13121:36)\n    at Parser.parseBlockBody (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:13114:10)\n    at Parser.parseProgram (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12437:10)\n    at Parser.parseTopLevel (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:12427:25)\n    at Parser.parse (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14245:10)\n    at parse (C:\\Game\\node_modules\\@babel\\parser\\lib\\index.js:14286:38)\n    at parser (C:\\Game\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Game\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Game\\node_modules\\@babel\\core\\lib\\transformation\\index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (C:\\Game\\node_modules\\@babel\\core\\lib\\transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (C:\\Game\\node_modules\\gensync\\index.js:261:32)\n    at C:\\Game\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (C:\\Game\\node_modules\\gensync\\index.js:223:11)");
 
       /***/
     },
@@ -2544,7 +2859,9 @@
         /* harmony export */"audio": () => /* binding */audio,
         /* harmony export */"gameSoundEffects": () => /* binding */gameSoundEffects,
         /* harmony export */"getRandomTrack": () => /* binding */getRandomTrack,
-        /* harmony export */"playNextTrack": () => /* binding */playNextTrack
+        /* harmony export */"playNextTrack": () => /* binding */playNextTrack,
+        /* harmony export */"volumeEffects": () => /* binding */volumeEffects,
+        /* harmony export */"volumeMusic": () => /* binding */volumeMusic
         /* harmony export */
       });
       /* harmony import */
@@ -2633,11 +2950,13 @@
       var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__( /*! ../../../assets/sounds/music/ogg/track_4.ogg */"./assets/sounds/music/ogg/track_4.ogg");
       /* harmony import */
       var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__( /*! ../Utils */"./src/js/Utils.js");
+      /* harmony import */
+      var _index__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__( /*! ../../index */"./src/index.js");
       // import blockHit_MP3 from '/assets/sounds/effects/mp3/block_hit.mp3';
       // import blockHit_OGG from '/assets/sounds/effects/ogg/block_hit.ogg';
 
-      let volumeEffects = 1;
-      let volumeMusic = 0.8;
+      let volumeEffects = (0, _index__WEBPACK_IMPORTED_MODULE_43__.getLocalStorage)('settings', 'soundEffects');
+      let volumeMusic = (0, _index__WEBPACK_IMPORTED_MODULE_43__.getLocalStorage)('settings', 'musicEffects');
       const audio = {
         isCanPlay: new Audio(),
         blockHit: {
@@ -2746,32 +3065,10 @@
           volume: volumeMusic
         }
       };
-      let source = null;
-      // Choose supported source and preload
-      ;
-      (function () {
-        if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
-          source = 'src_MP3';
-        } else {
-          source = 'src_OGG';
-        }
-        for (let sound in audio) {
-          if (sound != 'isCanPlay') {
-            let {
-              src_MP3: mp3,
-              src_OGG: ogg
-            } = audio[sound];
-            mp3.play();
-            mp3.pause();
-            ogg.play();
-            ogg.pause();
-          }
-        }
-      })();
       function gameSoundEffects(item) {
-        item[source].currentTime = 0;
-        item[source].volume = item.volume;
-        item[source].play();
+        item[_index__WEBPACK_IMPORTED_MODULE_43__.source].currentTime = 0;
+        item[_index__WEBPACK_IMPORTED_MODULE_43__.source].volume = item.volume;
+        item[_index__WEBPACK_IMPORTED_MODULE_43__.source].play();
       }
       function getRandomTrack(playlist) {
         let tracksList = [];
@@ -2779,7 +3076,7 @@
         for (let sound in playlist) {
           sound.includes('track') && tracksList.push(playlist[sound]);
         }
-        track = tracksList[(0, _Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
+        track = tracksList[(0, _Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][_index__WEBPACK_IMPORTED_MODULE_43__.source];
         track.currentTime = 0;
         track.volume = volumeMusic;
         return track;
@@ -2791,14 +3088,14 @@
           sound.includes('track') && tracksList.push(playlist[sound]);
         }
         tracksList.forEach((track, index) => {
-          track[source] === currentTrack && (currentTrackNumber = index);
+          track[_index__WEBPACK_IMPORTED_MODULE_43__.source] === currentTrack && (currentTrackNumber = index);
         });
         currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
-        tracksList[currentTrackNumber][source].currentTime = 0;
-        tracksList[currentTrackNumber][source].volume = volumeMusic;
-        tracksList[currentTrackNumber][source].play();
-        tracksList[currentTrackNumber][source].onended = function () {
-          playNextTrack(tracksList[currentTrackNumber][source], audio);
+        tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].currentTime = 0;
+        tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].volume = volumeMusic;
+        tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].play();
+        tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source].onended = function () {
+          playNextTrack(tracksList[currentTrackNumber][_index__WEBPACK_IMPORTED_MODULE_43__.source], audio);
         };
       };
 
@@ -2839,6 +3136,203 @@
       //   isPlayed = true;
       // }
 
+      // import blockHit_MP3 from '../../../assets/sounds/effects/mp3/block_hit.mp3';
+      // import blockHit_OGG from '../../../assets/sounds/effects/ogg/block_hit.ogg';
+      // import bottomHit_MP3 from '../../../assets/sounds/effects/mp3/bottom_hit.mp3';
+      // import bottomHit_OGG from '../../../assets/sounds/effects/ogg/bottom_hit.ogg';
+      // import choose_MP3 from '../../../assets/sounds/effects/mp3/choose.mp3';
+      // import choose_OGG from '../../../assets/sounds/effects/ogg/choose.ogg';
+      // import explosionBlock_MP3 from '../../../assets/sounds/effects/mp3/explosion_block.mp3';
+      // import explosionBlock_OGG from '../../../assets/sounds/effects/ogg/explosion_block.ogg';
+      // import fallingInDepth_MP3 from '../../../assets/sounds/effects/mp3/falling_in_depth.mp3';
+      // import fallingInDepth_OGG from '../../../assets/sounds/effects/ogg/falling_in_depth.ogg';
+      // import fallingInDepth2_MP3 from '../../../assets/sounds/effects/mp3/falling_in_depth_2.mp3';
+      // import fallingInDepth2_OGG from '../../../assets/sounds/effects/ogg/falling_in_depth_2.ogg';
+      // import fire_MP3 from '../../../assets/sounds/effects/mp3/fire.mp3';
+      // import fire_OGG from '../../../assets/sounds/effects/ogg/fire.ogg';
+      // import heroDeath_MP3 from '../../../assets/sounds/effects/mp3/hero_death.mp3';
+      // import heroDeath_OGG from '../../../assets/sounds/effects/ogg/hero_death.ogg';
+      // import jump_MP3 from '../../../assets/sounds/effects/mp3/jump.mp3';
+      // import jump_OGG from '../../../assets/sounds/effects/ogg/jump.ogg';
+      // import jumpOnSpaceToggledPlatform_MP3 from '../../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3';
+      // import jumpOnSpaceToggledPlatform_OGG from '../../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg';
+      // import nextLevel_MP3 from '../../../assets/sounds/effects/mp3/next_level.mp3';
+      // import nextLevel_OGG from '../../../assets/sounds/effects/ogg/next_level.ogg';
+      // import ok_MP3 from '../../../assets/sounds/effects/mp3/ok.mp3';
+      // import ok_OGG from '../../../assets/sounds/effects/ogg/ok.ogg';
+      // import select_MP3 from '../../../assets/sounds/effects/mp3/select.mp3';
+      // import select_OGG from '../../../assets/sounds/effects/ogg/select.ogg';
+      // import teleport_MP3 from '../../../assets/sounds/effects/mp3/teleport.mp3';
+      // import teleport_OGG from '../../../assets/sounds/effects/ogg/teleport.ogg';
+      // import toggle_MP3 from '../../../assets/sounds/effects/mp3/toggle.mp3';
+      // import toggle_OGG from '../../../assets/sounds/effects/ogg/toggle.ogg';
+      // import toggleDisabled_MP3 from '../../../assets/sounds/effects/mp3/toggle_disabled.mp3';
+      // import toggleDisabled_OGG from '../../../assets/sounds/effects/ogg/toggle_disabled.ogg';
+      // import error_MP3 from '../../../assets/sounds/effects/mp3/error.mp3';
+      // import error_OGG from '../../../assets/sounds/effects/ogg/error.ogg';
+
+      // import track_1_MP3 from '../../../assets/sounds/music/mp3/track_1.mp3';
+      // import track_1_OGG from '../../../assets/sounds/music/ogg/track_1.ogg';
+      // import track_2_MP3 from '../../../assets/sounds/music/mp3/track_2.mp3';
+      // import track_2_OGG from '../../../assets/sounds/music/ogg/track_2.ogg';
+      // import track_3_MP3 from '../../../assets/sounds/music/mp3/track_3.mp3';
+      // import track_3_OGG from '../../../assets/sounds/music/ogg/track_3.ogg';
+      // import track_4_MP3 from '../../../assets/sounds/music/mp3/track_4.mp3';
+      // import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
+
+      // import { createImage, randomNumber } from '../Utils';
+
+      // let volumeEffects = 1;
+      // let volumeMusic = 0.8;
+
+      // const audio = {
+      //   isCanPlay: new Audio(),
+      //   blockHit: {
+      //     src_MP3: new Audio(blockHit_MP3),
+      //     src_OGG: new Audio(blockHit_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   bottomHit: {
+      //     src_MP3: new Audio(bottomHit_MP3),
+      //     src_OGG: new Audio(bottomHit_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   choose: {
+      //     src_MP3: new Audio(choose_MP3),
+      //     src_OGG: new Audio(choose_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   explosionBlock: {
+      //     src_MP3: new Audio(explosionBlock_MP3),
+      //     src_OGG: new Audio(explosionBlock_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   fallingInDepth: {
+      //     src_MP3: new Audio(fallingInDepth_MP3),
+      //     src_OGG: new Audio(fallingInDepth_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   fallingInDepth2: {
+      //     src_MP3: new Audio(fallingInDepth2_MP3),
+      //     src_OGG: new Audio(fallingInDepth2_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   fire: {
+      //     src_MP3: new Audio(fire_MP3),
+      //     src_OGG: new Audio(fire_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   heroDeath: {
+      //     src_MP3: new Audio(heroDeath_MP3),
+      //     src_OGG: new Audio(heroDeath_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   jump: {
+      //     src_MP3: new Audio(jump_MP3),
+      //     src_OGG: new Audio(jump_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   jumpOnSpaceToggledPlatform: {
+      //     src_MP3: new Audio(jumpOnSpaceToggledPlatform_MP3),
+      //     src_OGG: new Audio(jumpOnSpaceToggledPlatform_OGG),
+      //     volume: volumeEffects / 2,
+      //   },
+      //   nextLevel: {
+      //     src_MP3: new Audio(nextLevel_MP3),
+      //     src_OGG: new Audio(nextLevel_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   ok: {
+      //     src_MP3: new Audio(ok_MP3),
+      //     src_OGG: new Audio(ok_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   select: {
+      //     src_MP3: new Audio(select_MP3),
+      //     src_OGG: new Audio(select_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   teleport: {
+      //     src_MP3: new Audio(teleport_MP3),
+      //     src_OGG: new Audio(teleport_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   toggle: {
+      //     src_MP3: new Audio(toggle_MP3),
+      //     src_OGG: new Audio(toggle_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   toggleDisabled: {
+      //     src_MP3: new Audio(toggleDisabled_MP3),
+      //     src_OGG: new Audio(toggleDisabled_OGG),
+      //     volume: volumeEffects,
+      //   },
+      //   error: {
+      //     src_MP3: new Audio(error_MP3),
+      //     src_OGG: new Audio(error_OGG),
+      //     volume: volumeEffects,
+      //   },
+
+      //   track_1: {
+      //     src_MP3: new Audio(track_1_MP3),
+      //     src_OGG: new Audio(track_1_OGG),
+      //     volume: volumeMusic,
+      //   },
+      //   track_2: {
+      //     src_MP3: new Audio(track_2_MP3),
+      //     src_OGG: new Audio(track_2_OGG),
+      //     volume: volumeMusic,
+      //   },
+      //   track_3: {
+      //     src_MP3: new Audio(track_3_MP3),
+      //     src_OGG: new Audio(track_3_OGG),
+      //     volume: volumeMusic,
+      //   },
+      //   track_4: {
+      //     src_MP3: new Audio(track_4_MP3),
+      //     src_OGG: new Audio(track_4_OGG),
+      //     volume: volumeMusic,
+      //   },
+      // }
+
+      // function gameSoundEffects(item, source) {
+      //   item[source].currentTime = 0;
+      //   item[source].volume = item.volume;
+      //   item[source].play();
+      // }
+
+      // function getRandomTrack(playlist, source) {
+      //   let tracksList = [];
+      //   let track;
+      //   for (let sound in playlist) {
+      //     sound.includes('track') && tracksList.push(playlist[sound]);
+      //   }
+      //   track = tracksList[randomNumber(0, tracksList.length - 1)][source];
+      //   track.currentTime = 0;
+      //   track.volume = volumeMusic;
+      //   return track;
+      // }
+
+      // const playNextTrack = (currentTrack, playlist, source) => {
+      //   let tracksList = [];
+      //   let currentTrackNumber = null;
+      //   for (let sound in playlist) {
+      //     sound.includes('track') && tracksList.push(playlist[sound]);
+      //   }
+      //   tracksList.forEach((track, index) => {
+      //     track[source] === currentTrack && (currentTrackNumber = index);
+      //   });
+      //   currentTrackNumber < (tracksList.length - 1) ? currentTrackNumber++ : currentTrackNumber = 0;
+      //   tracksList[currentTrackNumber][source].currentTime = 0;
+      //   tracksList[currentTrackNumber][source].volume = volumeMusic;
+      //   tracksList[currentTrackNumber][source].play();
+      //   tracksList[currentTrackNumber][source].onended = function() {
+      //     playNextTrack(tracksList[currentTrackNumber][source], audio);
+      //   }
+      // }
+
+      // export { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic }
+
       /***/
     },
 
@@ -2847,8 +3341,11 @@
       !*** ./src/sass/styles.scss ***!
       \******************************/
     /***/
-    () => {
-      throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nHookWebpackError: Cannot find module './assets/img/SPA/bg1.jpg'\n    at tryRunOrWebpackError (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\HookWebpackError.js:88:9)\n    at __webpack_require_module__ (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5060:12)\n    at __webpack_require__ (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5017:18)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5088:20\n    at symbolIterator (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3485:9)\n    at timesSync (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:2297:7)\n    at Object.eachLimit (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3463:5)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:4960:16\n    at symbolIterator (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3485:9)\n    at timesSync (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:2297:7)\n    at Object.eachLimit (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3463:5)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:4928:15\n    at symbolIterator (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3485:9)\n    at timesSync (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:2297:7)\n    at Object.eachLimit (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3463:5)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:4893:14\n    at processQueue (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\util\\processAsyncTree.js:55:4)\n    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)\n-- inner error --\nError: Cannot find module './assets/img/SPA/bg1.jpg'\n    at webpackMissingModule (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\css-loader\\dist\\cjs.js!D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\sass-loader\\dist\\cjs.js!D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\src\\sass\\styles.scss:22:113)\n    at Module.<anonymous> (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\css-loader\\dist\\cjs.js!D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\sass-loader\\dist\\cjs.js!D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\src\\sass\\styles.scss:22:212)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\javascript\\JavascriptModulesPlugin.js:438:10\n    at Hook.eval [as call] (eval at create (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\tapable\\lib\\HookCodeFactory.js:19:10), <anonymous>:7:1)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5062:39\n    at tryRunOrWebpackError (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\HookWebpackError.js:83:7)\n    at __webpack_require_module__ (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5060:12)\n    at __webpack_require__ (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5017:18)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:5088:20\n    at symbolIterator (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3485:9)\n    at timesSync (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:2297:7)\n    at Object.eachLimit (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3463:5)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:4960:16\n    at symbolIterator (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3485:9)\n    at timesSync (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:2297:7)\n    at Object.eachLimit (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3463:5)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:4928:15\n    at symbolIterator (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3485:9)\n    at timesSync (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:2297:7)\n    at Object.eachLimit (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\neo-async\\async.js:3463:5)\n    at D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\Compilation.js:4893:14\n    at processQueue (D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\webpack\\lib\\util\\processAsyncTree.js:55:4)\n    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)\n\nGenerated code for D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\css-loader\\dist\\cjs.js!D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\node_modules\\sass-loader\\dist\\cjs.js!D:\\Projects\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\Game\\src\\sass\\styles.scss\n 1 | __webpack_require__.r(__webpack_exports__);\n 2 | /* harmony export */ __webpack_require__.d(__webpack_exports__, {\n 3 | /* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n 4 | /* harmony export */ });\n 5 | /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ \"D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\node_modules\\\\css-loader\\\\dist\\\\runtime\\\\sourceMaps.js\");\n 6 | /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n 7 | /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\node_modules\\\\css-loader\\\\dist\\\\runtime\\\\api.js\");\n 8 | /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n 9 | /* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_normalize_css_normalize_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!../../node_modules/normalize.css/normalize.css */ \"D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\node_modules\\\\css-loader\\\\dist\\\\cjs.js!D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\node_modules\\\\normalize.css\\\\normalize.css\");\n10 | /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ \"D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\node_modules\\\\css-loader\\\\dist\\\\runtime\\\\getUrl.js\");\n11 | /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3__);\n12 | // Imports\n13 | \n14 | \n15 | \n16 | \n17 | var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../assets/fonts/RubikIso-Regular.ttf */ \"asset/resource|D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\assets\\\\fonts\\\\RubikIso-Regular.ttf\"), __webpack_require__.b);\n18 | var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../assets/fonts/Ranchers-Regular.ttf */ \"asset/resource|D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\assets\\\\fonts\\\\Ranchers-Regular.ttf\"), __webpack_require__.b);\n19 | var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../assets/fonts/Righteous-Regular.ttf */ \"asset/resource|D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\assets\\\\fonts\\\\Righteous-Regular.ttf\"), __webpack_require__.b);\n20 | var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../assets/fonts/RussoOne-Regular.ttf */ \"asset/resource|D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\assets\\\\fonts\\\\RussoOne-Regular.ttf\"), __webpack_require__.b);\n21 | var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../assets/fonts/UbuntuCondensed-Regular.ttf */ \"asset/resource|D:\\\\Projects\\\\25.0 BAD - Combine Game and SPA. Complete SCSS and adaptive\\\\Game\\\\assets\\\\fonts\\\\UbuntuCondensed-Regular.ttf\"), __webpack_require__.b);\n22 | var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ Object(function webpackMissingModule() { var e = new Error(\"Cannot find module './assets/img/SPA/bg1.jpg'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), __webpack_require__.b);\n23 | var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n24 | ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_node_modules_normalize_css_normalize_css__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\n25 | var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_0___);\n26 | var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_1___);\n27 | var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_2___);\n28 | var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_3___);\n29 | var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_4___);\n30 | var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_5___);\n31 | // Module\n32 | ___CSS_LOADER_EXPORT___.push([module.id, \"@font-face {\\n  font-family: 'Rubik Iso';\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_0___ + \"); }\\n\\n@font-face {\\n  font-family: 'Ranchers';\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_1___ + \"); }\\n\\n@font-face {\\n  font-family: 'Righteous';\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_2___ + \"); }\\n\\n@font-face {\\n  font-family: 'Russo One';\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_3___ + \"); }\\n\\n@font-face {\\n  font-family: 'Ubuntu Condensed';\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_4___ + \"); }\\n\\nhtml, .header .nav__list, .header .nav__btn {\\n  font-family: 'Ranchers', cursive; }\\n\\n.greeting__text {\\n  font-family: 'Righteous', cursive; }\\n\\n.level__item, .header__title {\\n  font-family: 'Rubik Iso', cursive; }\\n\\n.description__content {\\n  font-family: 'Ubuntu Condensed', sans-serif; }\\n\\n.controls__title, .controls__text, .settings__title, .settings__slider-box label, .description__title, .level__title {\\n  font-family: 'Russo One', sans-serif; }\\n\\nbody, .level__item {\\n  transition: all, 0.25s, ease; }\\n\\nhtml {\\n  box-sizing: border-box;\\n  overflow: hidden; }\\n\\n* {\\n  box-sizing: border-box;\\n  outline: none;\\n  margin: 0;\\n  padding: 0; }\\n\\nhtml {\\n  font-size: 62.5%; }\\n\\nh2 {\\n  font-weight: normal; }\\n\\nbody {\\n  position: relative;\\n  height: 100vh;\\n  font-size: 1.4rem;\\n  display: \\\"flex\\\";\\n  justify-content: none;\\n  align-items: none;\\n  flex-direction: column;\\n  background-color: #0857a1;\\n  background-image: url(\" + ___CSS_LOADER_URL_REPLACEMENT_5___ + \");\\n  background-position: center center;\\n  background-repeat: no-repeat;\\n  background-size: cover;\\n  overflow: hidden; }\\n\\n.hidden {\\n  display: none; }\\n\\n@media (min-width: 1400px) {\\n  html {\\n    font-size: 54%; } }\\n\\n@media (max-width: 1400px) {\\n  html {\\n    font-size: 54%; } }\\n\\n@media (max-width: 1140px) {\\n  html {\\n    font-size: 55%; } }\\n\\n@media (max-width: 640px) {\\n  html {\\n    font-size: 50%; } }\\n\\n@media (max-width: 390px) {\\n  html {\\n    font-size: 41%; } }\\n\\n@media only screen and (max-width: 640px) {\\n  body {\\n    background-attachment: fixed;\\n    overflow: auto; } }\\n\\n.bird-container {\\n  position: relative;\\n  margin: -15rem auto 0;\\n  width: 74rem;\\n  height: 6.4rem;\\n  left: 2rem; }\\n  .bird-container .bird {\\n    position: absolute;\\n    width: 7.8rem;\\n    height: 6.3rem;\\n    top: 0;\\n    left: 0;\\n    z-index: 4;\\n    animation: birdAnim 16s linear infinite; }\\n\\n@keyframes birdAnim {\\n  0% {\\n    top: _;\\n    left: 100%;\\n    transform: scaleX(1); }\\n  25% {\\n    top: 100%;\\n    left: _;\\n    transform: scaleX(1); }\\n  49% {\\n    top: 0%;\\n    left: 0%;\\n    transform: scaleX(1); }\\n  50% {\\n    top: 0%;\\n    left: 0%;\\n    transform: scaleX(-1); }\\n  75% {\\n    top: 75%;\\n    left: 0%;\\n    transform: scaleX(-1); }\\n  100% {\\n    top: 0%;\\n    left: 100%;\\n    transform: scaleX(-1); } }\\n\\n@media only screen and (max-width: 1140px) {\\n  .bird-container {\\n    margin: -11rem auto 0;\\n    width: 50rem;\\n    height: 6.4rem; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .bird-container {\\n    display: none; } }\\n\\n.header .cloud-1,\\n.header .cloud-2,\\n.header .cloud-3,\\n.header .cloud-4 {\\n  width: 100%;\\n  position: absolute;\\n  -webkit-select: none;\\n  -moz-select: none;\\n  -ms-select: none;\\n  select: none;\\n  pointer-events: none; }\\n\\n.header .cloud-1 {\\n  top: -20rem;\\n  left: 0;\\n  -webkit-animation: cloudAnim 30s infinite linear;\\n  -moz-animation: cloudAnim 30s infinite linear;\\n  animation: cloudAnim 30s infinite linear; }\\n\\n.header .cloud-2 {\\n  top: -10rem;\\n  left: 0;\\n  -webkit-animation: cloudAnim 110s infinite linear;\\n  -moz-animation: cloudAnim 110s infinite linear;\\n  animation: cloudAnim 110s infinite linear; }\\n\\n.header .cloud-3 {\\n  top: -20rem;\\n  left: 0;\\n  -webkit-animation: cloudAnim 70s infinite linear;\\n  -moz-animation: cloudAnim 70s infinite linear;\\n  animation: cloudAnim 70s infinite linear; }\\n\\n.header .cloud-4 {\\n  top: -20rem;\\n  left: 0;\\n  -webkit-animation: cloudAnim 90s infinite linear;\\n  -moz-animation: cloudAnim 90s infinite linear;\\n  animation: cloudAnim 90s infinite linear; }\\n\\n@keyframes cloudAnim {\\n  from {\\n    -webkit-transform: translateX(100%);\\n    -ms-transform: translateX(100%);\\n    -o-transform: translateX(100%);\\n    transform: translateX(100%); }\\n  to {\\n    -webkit-transform: translateX(-100%);\\n    -ms-transform: translateX(-100%);\\n    -o-transform: translateX(-100%);\\n    transform: translateX(-100%); } }\\n\\n@media (max-width: 1400px) {\\n  .header .cloud-1,\\n  .header .cloud-3,\\n  .header .cloud-4 {\\n    top: 0rem;\\n    left: 0; }\\n  .header .cloud-2 {\\n    top: 0rem;\\n    left: 0; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .header .cloud-1,\\n  .header .cloud-2,\\n  .header .cloud-3,\\n  .header .cloud-4 {\\n    display: none; } }\\n\\n.greeting__text {\\n  margin: 0 0 7rem;\\n  padding: 0 8rem;\\n  color: rgba(59, 59, 59, 0.8);\\n  font-size: 2.5rem;\\n  line-height: 2.4rem;\\n  line-height: 3.5rem;\\n  word-spacing: 0.5rem;\\n  text-align: center; }\\n\\n@media only screen and (max-width: 1140px) {\\n  .greeting__text {\\n    margin-top: 0;\\n    font-size: 2rem;\\n    line-height: 2.4rem;\\n    padding: 0 10rem; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .greeting__text {\\n    font-size: 1.2rem;\\n    line-height: 1.4rem;\\n    margin-bottom: 4rem; }\\n  .greeting__link {\\n    width: 80%; } }\\n\\n.controls {\\n  width: 80%;\\n  margin-bottom: 4rem; }\\n  .controls__container {\\n    margin: 0 auto;\\n    display: flex;\\n    justify-content: space-between;\\n    align-items: center;\\n    flex-wrap: wrap;\\n    gap: 3rem; }\\n  .controls__title {\\n    margin-bottom: 5rem;\\n    font-size: 2rem;\\n    font-weight: normal;\\n    color: rgba(59, 59, 59, 0.9);\\n    letter-spacing: 0.2rem; }\\n  .controls__img-key {\\n    width: 20rem; }\\n  .controls__img-letter {\\n    width: 6rem;\\n    margin-left: 7.2rem; }\\n  .controls__text {\\n    width: 70%;\\n    letter-spacing: 0.2rem;\\n    font-weight: normal;\\n    color: rgba(255, 255, 255, 0.8); }\\n\\n@media only screen and (max-width: 1140px) {\\n  .controls {\\n    width: 70%;\\n    margin-bottom: 5rem; }\\n    .controls__title {\\n      font-size: 1.6rem;\\n      margin-bottom: 3rem; }\\n    .controls__img-key {\\n      width: 15rem; }\\n    .controls__img-letter {\\n      width: 4.5rem;\\n      margin-left: 5.5rem; }\\n    .controls__text {\\n      width: 60%;\\n      letter-spacing: 0.2rem;\\n      font-weight: normal;\\n      color: rgba(255, 255, 255, 0.8); } }\\n\\n@media only screen and (max-width: 640px) {\\n  .controls {\\n    width: 95%; }\\n    .controls__img-key {\\n      width: 12rem; }\\n    .controls__img-letter {\\n      width: 3.5rem;\\n      margin-left: 4.5rem; }\\n    .controls__text {\\n      width: 50%;\\n      font-size: 1.2rem;\\n      letter-spacing: 0.2rem;\\n      font-weight: normal; } }\\n\\n.settings__title {\\n  margin: 0 auto 3.5rem;\\n  font-size: 2rem;\\n  font-weight: normal;\\n  color: rgba(59, 59, 59, 0.9);\\n  letter-spacing: 0.2rem; }\\n\\n.settings__slider-box {\\n  width: 25rem;\\n  color: rgba(59, 59, 59, 0.7); }\\n  .settings__slider-box label {\\n    font-size: 1.6rem;\\n    letter-spacing: 0.2rem; }\\n\\n.settings__slider {\\n  -webkit-appearance: none;\\n  appearance: none;\\n  width: 100%;\\n  height: 2.3rem;\\n  background: lightgray;\\n  outline: none;\\n  opacity: 0.7;\\n  -webkit-transition: 0.2s;\\n  transition: 0.2s;\\n  transition: opacity 0.2s;\\n  margin: 1.6rem 0 2rem; }\\n  .settings__slider::-webkit-slider-thumb {\\n    -webkit-appearance: none;\\n    appearance: none;\\n    width: 2.3rem;\\n    height: 2.3rem;\\n    background-color: #ff8a00;\\n    background-image: linear-gradient(to bottom, #ff8a00, #ffc300);\\n    cursor: pointer; }\\n  .settings__slider::-moz-range-thumb {\\n    width: 2.3rem;\\n    height: 2.3rem;\\n    background-color: #ff8a00;\\n    background-image: linear-gradient(to bottom, #ff8a00, #ffc300);\\n    cursor: pointer; }\\n  .settings__slider_hover:hover {\\n    opacity: 1; }\\n\\n@media only screen and (max-width: 1140px) {\\n  .settings__title {\\n    font-size: 1.6rem; }\\n  .settings__slider-box label {\\n    font-size: 1.4rem; }\\n  .settings__slider {\\n    width: 80%;\\n    height: 2rem; }\\n    .settings__slider::-webkit-slider-thumb {\\n      width: 2rem;\\n      height: 2rem; }\\n    .settings__slider::-moz-range-thumb {\\n      width: 2rem;\\n      height: 2rem; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .settings {\\n    margin-left: 5rem; }\\n    .settings__title {\\n      margin-bottom: 3rem; }\\n    .settings__slider {\\n      margin: 1rem auto; } }\\n\\n@media only screen and (max-width: 390px) {\\n  .settings {\\n    margin-left: 5rem; }\\n    .settings__title {\\n      margin-bottom: 3rem; }\\n    .settings__slider {\\n      margin: 1rem auto; } }\\n\\n.description {\\n  margin-bottom: 4rem; }\\n  .description p {\\n    margin: 0 0 0.8rem;\\n    text-indent: 2rem; }\\n  .description__title {\\n    margin-bottom: 2rem;\\n    text-align: center;\\n    font-size: 2rem;\\n    font-weight: normal;\\n    color: rgba(59, 59, 59, 0.9);\\n    letter-spacing: 0.2rem; }\\n  .description__content {\\n    width: 80%;\\n    margin: 0 auto;\\n    padding: 2rem;\\n    font-size: 2.1rem;\\n    color: rgba(59, 59, 59, 0.8);\\n    border: 0.3rem solid rgba(255, 138, 0, 0.7);\\n    border-radius: 3rem;\\n    line-height: 3rem; }\\n    .description__content span {\\n      font-weight: bold;\\n      color: #0857a1; }\\n\\n@media only screen and (max-width: 1140px) {\\n  .description__title {\\n    font-size: 1.6rem; }\\n  .description__content {\\n    width: 75%;\\n    padding: 1.5rem;\\n    font-size: 1.6rem;\\n    line-height: 2.4rem;\\n    margin-bottom: 4rem; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .description__content {\\n    width: 95%;\\n    padding: 1rem;\\n    font-size: 1.4rem; } }\\n\\n@media only screen and (max-width: 390px) {\\n  .description__content {\\n    width: 100%;\\n    line-height: 1.9rem;\\n    font-size: 1.3rem; } }\\n\\n.level {\\n  margin-bottom: 4rem; }\\n  .level__title {\\n    margin-bottom: 3rem;\\n    font-size: 2rem;\\n    font-weight: normal;\\n    color: rgba(59, 59, 59, 0.9);\\n    letter-spacing: 0.2rem;\\n    text-align: center; }\\n  .level__list {\\n    display: grid;\\n    grid-template-columns: repeat(5, 1fr);\\n    grid-template-rows: repeat(4, 1fr);\\n    gap: 2rem; }\\n  .level__item {\\n    width: 8rem;\\n    height: 8rem;\\n    display: flex;\\n    justify-content: center;\\n    align-items: center;\\n    cursor: pointer;\\n    color: rgba(255, 255, 255, 0.8);\\n    border: 0.3rem solid rgba(255, 255, 255, 0.8);\\n    background-color: transparent;\\n    border-radius: 1rem;\\n    font-size: 4rem;\\n    letter-spacing: 0.2rem;\\n    transition: transform 0.25s ease,\\r opacity 0.25 ease; }\\n    .level__item_hover:hover {\\n      transform: scale(1.05);\\n      opacity: 0.9; }\\n    .level__item_active:active {\\n      transform: scale(0.95);\\n      color: rgba(59, 59, 59, 0.8);\\n      border: 0.3rem solid rgba(59, 59, 59, 0.7); }\\n    .level__item_disabled:disabled {\\n      transform: none;\\n      color: rgba(59, 59, 59, 0.7);\\n      border: 0.3rem solid rgba(255, 255, 255, 0.4); }\\n\\n@media only screen and (max-width: 1140px) {\\n  .level__title {\\n    font-size: 1.6rem; }\\n  .level__list {\\n    grid-template-columns: repeat(4, 1fr);\\n    grid-template-rows: repeat(5, 1fr); }\\n  .level__item {\\n    width: 6rem;\\n    height: 6rem;\\n    font-size: 3rem; } }\\n\\n.error__img {\\n  display: block;\\n  margin: 0 auto 1.6rem;\\n  width: 80%;\\n  height: auto;\\n  font-size: 0;\\n  border-radius: 3rem; }\\n\\n.error__msg {\\n  font-family: 'Arial', sans-serif;\\n  color: white;\\n  text-align: center; }\\n\\n.error__msg span {\\n  color: red; }\\n\\n.error__msg a {\\n  text-align: center;\\n  color: #ffbb00; }\\n\\n@media (max-width: 1140px) {\\n  .error__img {\\n    width: 70%;\\n    height: auto;\\n    border-radius: 2rem; }\\n  .error__msg {\\n    font-size: 1.2rem; } }\\n\\n@media (max-width: 640px) {\\n  .error__img {\\n    margin-bottom: 1.2rem; }\\n  .error__msg {\\n    font-size: 0.9rem; } }\\n\\n@media (max-width: 390px) {\\n  .error__msg {\\n    font-size: 0.7rem; } }\\n\\n.header {\\n  flex-shrink: 0;\\n  width: 100%;\\n  height: 50rem; }\\n  .header__wrapper {\\n    width: 140rem;\\n    margin: 0 auto;\\n    padding: 0 10rem;\\n    display: flex;\\n    justify-content: space-between;\\n    align-items: center;\\n    flex-direction: column; }\\n  .header__logo-box {\\n    position: relative;\\n    width: 100%; }\\n  .header__logo {\\n    margin-top: 3.5rem;\\n    width: 10rem;\\n    height: 8rem; }\\n  .header__logo-2 {\\n    position: absolute;\\n    width: 4.7rem;\\n    height: 4.7rem;\\n    top: 8.5rem;\\n    right: 16.5rem; }\\n  .header__title {\\n    font-size: 8rem;\\n    width: 100%;\\n    height: 10rem;\\n    margin: 10rem 0 14rem;\\n    text-align: center;\\n    color: rgba(91, 91, 91, 0.9); }\\n  .header__nav {\\n    width: 80%;\\n    z-index: 2; }\\n  .header .nav__list {\\n    display: flex;\\n    justify-content: space-between;\\n    align-items: center;\\n    flex-direction: row;\\n    margin: 0;\\n    padding: 0;\\n    list-style: none;\\n    letter-spacing: 0.2rem;\\n    font-size: 4rem;\\n    padding: 1rem 1rem;\\n    border-top: 0.3rem #ffbb00 solid;\\n    border-bottom: 0.3rem #ffbb00 solid;\\n    z-index: 3; }\\n  .header .nav__item {\\n    margin-bottom: 1rem;\\n    z-index: 2;\\n    cursor: pointer; }\\n  .header .nav__link {\\n    color: rgba(59, 59, 59, 0.8);\\n    text-transform: uppercase;\\n    text-decoration: none;\\n    font-size: 2rem; }\\n  .header .nav__link.active {\\n    color: #0857a1; }\\n  .header .nav__item:hover a {\\n    color: #529c30; }\\n  .header .nav__btn {\\n    width: 20rem;\\n    height: 4rem;\\n    padding: 1rem 4rem;\\n    font-size: 2rem;\\n    letter-spacing: 0.2rem;\\n    background-color: rgba(255, 138, 0, 0.7);\\n    background-image: linear-gradient(to bottom, rgba(255, 138, 0, 0.7), #ffc300);\\n    color: rgba(59, 59, 59, 0.8);\\n    text-align: center;\\n    text-decoration: none; }\\n  .header .nav__btn_hover:hover {\\n    cursor: pointer;\\n    background-image: none; }\\n\\n@media (max-width: 1140px) {\\n  .header__wrapper {\\n    width: 70rem; }\\n  .header__logo {\\n    width: 8rem;\\n    height: 6rem; }\\n  .header__logo-2 {\\n    width: 4rem;\\n    height: 4rem;\\n    top: 10rem;\\n    right: 2rem; }\\n  .header__title {\\n    margin-bottom: 20rem; } }\\n\\n@media (max-width: 640px) {\\n  .header__wrapper {\\n    width: 39rem;\\n    padding: 1rem; }\\n  .header__logo {\\n    margin-bottom: 7rem;\\n    width: 5rem;\\n    height: 4rem; }\\n  .header__logo-2 {\\n    width: 2.25rem;\\n    height: 2.25rem;\\n    top: -0.5rem;\\n    right: 6rem; }\\n  .header__title {\\n    margin: 0 0 4rem;\\n    font-size: 4.5rem; } }\\n\\n@media only screen and (max-width: 1140px) {\\n  .header {\\n    width: 100%;\\n    height: 55rem;\\n    flex-shrink: 0; }\\n    .header__nav {\\n      width: 105%; }\\n    .header .nav__list {\\n      padding: 0.5rem 1rem;\\n      border-top: 0.2rem #ffbb00 solid;\\n      border-bottom: 0.2rem #ffbb00 solid; }\\n    .header .nav__item a {\\n      font-size: 1.4rem; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .header {\\n    width: 100%;\\n    height: 53.5rem; }\\n    .header .nav__list {\\n      display: flex;\\n      justify-content: center;\\n      align-items: center;\\n      flex-direction: column;\\n      margin: 0 auto;\\n      width: 34rem;\\n      font-size: 1.2rem;\\n      border-top: none; }\\n    .header .nav__item {\\n      margin-top: 2rem; }\\n    .header .nav__item:last-child {\\n      margin-bottom: 2rem; }\\n    .header .nav__item a {\\n      font-size: 1.6rem; } }\\n\\n@media only screen and (max-width: 1140px) {\\n  .nav__btn {\\n    width: 20rem;\\n    height: 3.6rem;\\n    padding: 1rem;\\n    margin-bottom: 2rem;\\n    font-size: 1.4rem; } }\\n\\n@media only screen and (max-width: 390px) {\\n  .header {\\n    width: 100%;\\n    height: 51rem; }\\n    .header__logo {\\n      margin-bottom: 4rem; }\\n    .header__title {\\n      max-width: 34rem;\\n      margin: 0 auto 3rem; }\\n    .header__logo-2 {\\n      top: 0;\\n      right: 5.5rem; } }\\n\\n.content {\\n  margin: 0 auto;\\n  padding: 0 15rem;\\n  position: relative;\\n  display: flex;\\n  justify-content: flex-start;\\n  align-items: center;\\n  flex-direction: column;\\n  flex: 1 0 auto;\\n  width: 140rem;\\n  height: auto;\\n  z-index: 1; }\\n\\n@media (max-width: 1140px) {\\n  .content {\\n    width: 70rem; } }\\n\\n@media (max-width: 640px) {\\n  .content {\\n    width: 32rem;\\n    margin: 0 auto; } }\\n\\n@media only screen and (max-width: 1140px) {\\n  .content {\\n    padding: 0;\\n    min-height: 10rem; } }\\n\\n@media only screen and (max-width: 640px) {\\n  .content {\\n    margin-top: 0;\\n    width: 34rem;\\n    padding: 0;\\n    margin-bottom: 0; } }\\n\", \"\",{\"version\":3,\"sources\":[\"webpack://./src/sass/abstracts/_fonts.scss\",\"webpack://./src/sass/abstracts/_placeholders.scss\",\"webpack://./src/sass/base/_base.scss\",\"webpack://./src/sass/abstracts/_mixins.scss\",\"webpack://./src/sass/abstracts/_constants.scss\",\"webpack://./src/sass/base/_animated.scss\",\"webpack://./src/sass/components/_greeting.scss\",\"webpack://./src/sass/components/_how-to-play.scss\",\"webpack://./src/sass/components/_settings.scss\",\"webpack://./src/sass/components/_description.scss\",\"webpack://./src/sass/components/_select-level.scss\",\"webpack://./src/sass/components/_error.scss\",\"webpack://./src/sass/layouts/_header.scss\",\"webpack://./src/sass/layouts/_main.scss\"],\"names\":[],\"mappings\":\"AAAA;EACE,wBAAwB;EACxB,4CAA8C,EAAA;;AAEhD;EACE,uBAAuB;EACvB,4CAA8C,EAAA;;AAEhD;EACE,wBAAwB;EACxB,4CAA+C,EAAA;;AAEjD;EACE,wBAAwB;EACxB,4CAA8C,EAAA;;AAEhD;EACE,+BAA+B;EAC/B,4CAAqD,EAAA;;ACdvD;EACE,gCAAgC,EAAA;;AAGlC;EACE,iCAAiC,EAAA;;AAGnC;EACE,iCAAiC,EAAA;;AAGnC;EACE,2CAA2C,EAAA;;AAG7C;EACE,oCAAoC,EAAA;;AAGtC;EACE,4BAA4B,EAAA;;ACzB9B;EACE,sBAAsB;EACtB,gBAAgB,EAAA;;AAkBlB;EACE,sBAAsB;EACtB,aAAa;EACb,SAAS;EACT,UAAU,EAAA;;AAxBZ;EA6BE,gBAAgB,EAAA;;AAGlB;EACE,mBAAmB,EAAA;;AAGrB;EACE,kBAAkB;EAClB,aAAa;EACb,iBAAiB;ECtCjB,eDuCoB;ECtCpB,qBAF0C;EAG1C,iBAH8D;EDyC9D,sBAAsB;EACtB,yBEtC0B;EDkB1B,yDAA8C;EDuB9C,kCAAkC;EAClC,4BAA4B;EAC5B,sBAAsB;EACtB,gBAAgB,EAAA;;AAGlB;EACE,aAAa,EAAA;;ACnBb;EDjCF;IAyDI,cAAc,EAAA,EACf;;ACrBD;EDrCF;IA+DI,cAAc,EAAA,EACf;;ACvBD;EDzCF;IAqEI,cAAc,EAAA,EACf;;ACzBD;ED7CF;IA2EI,cAAc,EAAA,EACf;;AC3BD;EDjDF;IAiFI,cAAc,EAAA,EACf;;ACzBD;EDrBF;IAmDI,4BAA4B;IAC5B,cAAc,EAAA,EACf;;AGxFH;EACE,kBAAkB;EAClB,qBAAqB;EFIrB,YEH2B;EFI3B,cEJmC;EACnC,UAAU,EAAA;EAJZ;IAMI,kBAAkB;IFApB,aEC8B;IFA9B,cEAsC;IFItC,MEHqB;IFIrB,OEJwB;IACtB,UAAU;IACV,uCAAuC,EAAA;;AAI3C;EACE;IFJA,MEKqB;IFJrB,UEI2B;IACzB,oBAAoB,EAAA;EAEtB;IFRA,SESwB;IFRxB,OEQ0B;IACxB,oBAAoB,EAAA;EAEtB;IFZA,OEasB;IFZtB,QEY0B;IACxB,oBAAoB,EAAA;EAEtB;IFhBA,OEiBsB;IFhBtB,QEgB0B;IACxB,qBAAqB,EAAA;EAEvB;IFpBA,QEqBuB;IFpBvB,QEoB2B;IACzB,qBAAqB,EAAA;EAEvB;IFxBA,OEyBsB;IFxBtB,UEwB4B;IACxB,qBAAqB,EAAA,EAAA;;AFezB;EEpDF;IA2CI,qBAAqB;IFrCvB,YEsC6B;IFrC7B,cEqCqC,EAAA,EACpC;;AFWD;EExDF;IAkDI,aAAa,EAAA,EACd;;AAIH;;;;EAKI,WAAW;EACX,kBAAkB;EFnClB,oBEoC8B;EFpC9B,iBEoC8B;EFpC9B,gBEoC8B;EFlChC,YEkCgC;EAC9B,oBAAoB,EAAA;;AARxB;EF5CE,WEuD0B;EFtD1B,OEsD6B;EFxC3B,gDEyCwD;EFzCxD,6CEyCwD;EFvC1D,wCEuC0D,EAAA;;AAZ5D;EF5CE,WE2D0B;EF1D1B,OE0D6B;EF5C3B,iDE6CyD;EF7CzD,8CE6CyD;EF3C3D,yCE2C2D,EAAA;;AAhB7D;EF5CE,WE+D0B;EF9D1B,OE8D6B;EFhD3B,gDEiDwD;EFjDxD,6CEiDwD;EF/C1D,wCE+C0D,EAAA;;AApB5D;EF5CE,WEmE0B;EFlE1B,OEkE6B;EFpD3B,gDEqDwD;EFrDxD,6CEqDwD;EFnD1D,wCEmD0D,EAAA;;AAI5D;EACE;IF1DE,mCE2D2C;IF3D3C,+BE2D2C;IF3D3C,8BE2D2C;IFzD7C,2BEyD6C,EAAA;EAE7C;IF7DE,oCE8D4C;IF9D5C,gCE8D4C;IF9D5C,+BE8D4C;IF5D9C,4BE4D8C,EAAA,EAAA;;AFpD9C;EEyDA;;;IFlFA,SEsF0B;IFrF1B,OEqF6B,EAAA;EA1C/B;IF5CE,SEyF0B;IFxF1B,OEwF6B,EAAA,EAC1B;;AF7CH;EEDF;;;;IAwDQ,aAAa,EAAA,EACd;;AChHL;EACE,gBAAgB;EAChB,eAAe;EAEf,4BFOoC;EENpC,iBAAiB;EACjB,mBAAmB;EACnB,mBAAmB;EACnB,oBAAoB;EACpB,kBAAkB,EAAA;;AH2CpB;EGpDA;IAgBI,aAAa;IACb,eAAe;IACf,mBAAmB;IACnB,gBAAgB,EAAA,EACjB;;AHoCH;EGxDA;IA2BE,iBAAiB;IACjB,mBAAmB;IACnB,mBAAmB,EAAA;EAEnB;IACE,UAAU,EAAA,EACX;;AClCL;EACE,UAAU;EACV,mBAAmB,EAAA;EACnB;IACE,cAAc;IJHhB,aIIoB;IJHpB,8BIGmC;IJFnC,mBIE2C;IACzC,eAAe;IACf,SAAS,EAAA;EAEX;IACE,mBAAmB;IAEnB,eAAe;IACf,mBAAmB;IACnB,4BHDmC;IGEnC,sBAAsB,EAAA;EAExB;IACE,YAAY,EAAA;EAEd;IACE,WAAW;IACX,mBAAmB,EAAA;EAErB;IACE,UAAU;IAEV,sBAAsB;IACtB,mBAAmB;IACnB,+BH3BqC,EAAA;;ADmDvC;EIrDF;IAmCI,UAAU;IACV,mBAAmB,EAAA;IA3BrB;MA6BI,iBAAiB;MACjB,mBAAmB,EAAA;IAtBvB;MAyBI,YAAY,EAAA;IAtBhB;MAyBI,aAAa;MACb,mBAAmB,EAAA;IAtBvB;MAyBI,UAAU;MACV,sBAAsB;MACtB,mBAAmB;MACnB,+BHlDmC,EAAA,EGmDpC;;AJIH;EIzDF;IA2DI,UAAU,EAAA;IA1CZ;MA4CI,YAAY,EAAA;IAzChB;MA4CI,aAAa;MACb,mBAAmB,EAAA;IAzCvB;MA4CI,UAAU;MACV,iBAAiB;MACjB,sBAAsB;MACtB,mBAAmB,EAAA,EACpB;;ACvEH;EACE,qBAAqB;EAErB,eAAe;EACf,mBAAmB;EACnB,4BJOmC;EINnC,sBAAsB,EAAA;;AAExB;EACE,YAAY;EACZ,4BJAgC,EAAA;EIFjC;IAKG,iBAAiB;IACjB,sBAAsB,EAAA;;AAG1B;ELSE,wBKRgC;ELUlC,gBKVkC;ELZlC,WKa4B;ELZ5B,cKYoC;EAClC,qBJXgC;EIYhC,aAAa;EACb,YAAY;ELIZ,wBKHiC;ELKnC,gBKLmC;EACjC,wBAAwB;EACxB,qBAAqB,EAAA;EARtB;ILSC,wBKCkC;ILCpC,gBKDoC;ILrBpC,aKsBgC;ILrBhC,cKqBgC;IAC5B,yBJtB4B;IIuB5B,8DAA0E;IAC1E,eAAe,EAAA;EAdlB;ILXD,aK4BgC;IL3BhC,cK2BgC;IAC5B,yBJ5B4B;II6B5B,8DAA0E;IAC1E,eAAe,EAAA;EAEhB;IAEG,UAAU,EAAA;;ALWhB;EKpDA;IAkDI,iBAAiB,EAAA;EA1CpB;IA8CK,iBAAiB,EAAA;EArCvB;ILXA,UKoD6B;ILnD7B,YKmDmC,EAAA;IAzClC;MLXD,WKsDgC;MLrDhC,YKqDgC,EAAA;IA3C/B;MLXD,WKyDgC;MLxDhC,YKwDgC,EAAA,EAC3B;;ALRL;EKcA;IACE,iBAAiB,EAAA;IAvEnB;MAyEI,mBAAmB,EAAA;IAxDvB;MA2DI,iBAAiB,EAAA,EAClB;;ALjBH;EKUA;IAaE,iBAAiB,EAAA;IAnFnB;MAqFI,mBAAmB,EAAA;IApEvB;MAuEI,iBAAiB,EAAA,EAClB;;AC1FL;EACE,mBAAmB,EAAA;EADrB;IAGI,kBAAkB;IAClB,iBAAiB,EAAA;EAEnB;IACE,mBAAmB;IACnB,kBAAkB;IAElB,eAAe;IACf,mBAAmB;IACnB,4BLCmC;IKAnC,sBAAsB,EAAA;EAExB;IACE,UAAU;IACV,cAAc;IACd,aAAa;IAEb,iBAAiB;IACjB,4BLToC;IKUpC,2CLfqC;IKgBrC,mBAAmB;IACnB,iBAAiB,EAAA;IATlB;MAWG,iBAAiB;MACjB,cLvBsB,EAAA;;ADiD1B;EM/CA;IA6BI,iBAAiB,EAAA;EApBrB;IAuBI,UAAU;IACV,eAAe;IACf,iBAAiB;IACjB,mBAAmB;IACnB,mBAAmB,EAAA,EACpB;;ANcH;EM1CA;IAmCI,UAAU;IACV,aAAa;IACb,iBAAiB,EAAA,EAClB;;ANQH;EM9CA;IA6CI,WAAW;IACX,mBAAmB;IACnB,iBAAiB,EAAA,EAClB;;AC/DL;EACE,mBAAmB,EAAA;EACnB;IACE,mBAAmB;IAEnB,eAAe;IACf,mBAAmB;IACnB,4BNMmC;IMLnC,sBAAsB;IACtB,kBAAkB,EAAA;EAEpB;IACE,aAAa;IACb,qCAAqC;IACrC,kCAAkC;IAClC,SAAS,EAAA;EAEX;IPVA,WOW4B;IPV5B,YOU4B;IPjB5B,aOkBoB;IPjBpB,uBOiB4B;IPhB5B,mBOgBoC;IAElC,eAAe;IACf,+BNpBqC;IMqBrC,6CNrBqC;IMsBrC,6BAA4B;IAC5B,mBAAmB;IAEnB,eAAe;IACf,sBAAsB;IACtB,oDAC6B,EAAA;IAC5B;MAEG,sBAAsB;MACtB,YAAY,EAAA;IAGf;MAEG,sBAAsB;MACtB,4BN5BgC;MM6BhC,0CN9B4B,EAAA;IMiC/B;MAEG,eAAe;MACf,4BNpC4B;MMqC5B,6CN7CiC,EAAA;;ADkDvC;EOnDA;IAuDI,iBAAiB,EAAA;EA9CrB;IAiDI,qCAAqC;IACrC,kCAAkC,EAAA;EA5CtC;IPVA,WOyD8B;IPxD9B,YOwD8B;IAC1B,eAAe,EAAA,EAChB;;ACjEH;EACE,cAAc;EACd,qBAAqB;ERIvB,UQH2B;ERI3B,YQJiC;EAC/B,YAAY;EACZ,mBAAmB,EAAA;;AAErB;EACE,gCAAgC;EAChC,YPV4B;EOW5B,kBAAkB,EAAA;;AAEpB;EACE,UPGwB,EAAA;;AOD1B;EACE,kBAAkB;EAClB,cPZyB,EAAA;;ADmC3B;EQxCA;IRMA,UQkB6B;IRjB7B,YQiBmC;IAC/B,mBAAmB,EAAA;EAlBvB;IAqBI,iBAAiB,EAAA,EAClB;;AReH;EQ5CA;IAoCI,qBAAqB,EAAA;EA7BzB;IAgCI,iBAAiB,EAAA,EAClB;;ARQH;EQzCA;IAwCI,iBAAiB,EAAA,EAClB;;ACjDL;EACE,cAAc;ETMd,WSL0B;ETM1B,aSNiC,EAAA;EACjC;IACE,aAAa;IACb,cAAc;IACd,gBAAgB;ITLlB,aSMoB;ITLpB,8BSKmC;ITJnC,mBSI2C;IACzC,sBAAsB,EAAA;EAExB;IACE,kBAAkB;IAClB,WAAW,EAAA;EAEb;IACE,kBAAkB;ITRpB,YSS6B;ITR7B,YSQmC,EAAA;EAEnC;IACE,kBAAkB;ITZpB,aSa8B;ITZ9B,cSY8B;ITH9B,WSI2B;ITH3B,cSGoC,EAAA;EAEpC;IAEE,eAAe;ITlBjB,WSmB4B;ITlB5B,aSkBmC;IACjC,qBAAqB;IACrB,kBAAkB;IAClB,4BRxB8B,EAAA;EQ0BhC;IACE,UAAU;IACV,UAAU,EAAA;EAjCd;ITCE,aSoCsB;ITnCtB,8BSmCqC;ITlCrC,mBSkC6C;IACzC,mBAAmB;IACnB,SAAS;IACT,UAAU;IACV,gBAAgB;IAEhB,sBAAsB;IACtB,eAAe;IACf,kBAAkB;IAClB,gCAAoC;IACpC,mCAAuC;IACvC,UAAU,EAAA;EAhDhB;IAmDM,mBAAmB;IACnB,UAAU;IACV,eAAe,EAAA;EArDrB;IAwDM,4BR5CkC;IQ6ClC,yBAAyB;IACzB,qBAAqB;IACrB,eAAe,EAAA;EA3DrB;IA8DM,cR1DsB,EAAA;EQJ5B;IAkEM,cRpD6B,EAAA;EQdnC;ITOE,YS8D+B;IT7D/B,YS6DqC;IACjC,kBAAkB;IAElB,eAAe;IACf,sBAAsB;IACtB,wCRnEmC;IQoEnC,6EAA2E;IAC3E,4BRhEkC;IQiElC,kBAAkB;IAClB,qBAAqB,EAAA;EA9E3B;IAmFU,eAAe;IACf,sBAAsB,EAAA;;AT3C9B;EStCA;IA2FI,YAAY,EAAA;EAhFhB;ITPA,WS0F4B;ITzF5B,YSyFkC,EAAA;EA/ElC;ITXA,WS6F4B;IT5F5B,YS4F4B;ITnF5B,USoF0B;ITnF1B,WSmFgC,EAAA;EA9EhC;IAiFE,oBAAoB,EAAA,EACnB;;AT5DH;ES1CA;IA6GI,YAAY;IACZ,aAAa,EAAA;EAnGjB;IAsGI,mBAAmB;IT7GvB,WS8G8B;IT7G9B,YS6GoC,EAAA;EAnGpC;ITXA,cSiHiC;IThHjC,eSgHiC;ITvGjC,YSwG8B;ITvG9B,WSuGoC,EAAA;EAlGpC;IAqGI,gBAAgB;IAChB,iBAAiB,EAAA,EAClB;;ATzEH;ESrDF;ITOE,WS6H4B;IT5H5B,aS4HmC;IACjC,cAAc,EAAA;IAtGhB;MAwGI,WAAW,EAAA;IAvIjB;MA2IQ,oBAAoB;MACpB,gCAAoC;MACpC,mCAAuC,EAAA;IAV7C;MAaQ,iBAAiB,EAAA,EACpB;;ATxFL;ESzDF;ITOE,WSiJ4B;IThJ5B,eSgJqC,EAAA;IAxJvC;MTCE,aS0JwB;MTzJxB,uBSyJgC;MTxJhC,mBSwJwC;MAClC,sBAAsB;MACtB,cAAc;MACd,YAAY;MACZ,iBAAiB;MACjB,gBAAgB,EAAA;IAhKxB;MAmKQ,gBAAgB,EAAA;IAZtB;MAeM,mBAAmB,EAAA;IAnCzB;MAsCM,iBAAiB,EAAA,EAClB;;ATrHL;ES4HE;IT1KF,YS2K+B;IT1K/B,cS0KuC;IACnC,aAAa;IACb,mBAAmB;IACnB,iBAAiB,EAAA,EAClB;;ATzHH;ES7DF;ITOE,WSqL4B;ITpL5B,aSoLmC,EAAA;IA9KnC;MAgLI,mBAAmB,EAAA;IAvKvB;MA0KI,gBAAgB;MAChB,mBAAmB,EAAA;IAhLvB;MTDA,MSoLwB;MTnLxB,aSmLgC,EAAA,EAC7B;;ACtML;EACE,cAAc;EACd,gBAAgB;EAChB,kBAAkB;EVFlB,aUGkB;EVFlB,2BUE8B;EVD9B,mBUCsC;EACtC,sBAAsB;EACtB,cAAc;EVCd,aUA4B;EVC5B,YUDkC;EAClC,UAAU,EAAA;;AViCV;EUzCF;IAaI,YAAY,EAAA,EACb;;AV+BD;EU7CF;IAkBI,YAAY;IACZ,cAAc,EAAA,EACf;;AViCD;EUrDF;IAyBI,UAAU;IACV,iBAAiB,EAAA,EAClB;;AV8BD;EUzDF;IAgCI,aAAa;IACb,YAAY;IACZ,UAAU;IACV,gBAAgB,EAAA,EACjB\",\"sourcesContent\":[\"@font-face {\\r\\n  font-family: 'Rubik Iso';\\r\\n  src: url(\\\"/assets/fonts/RubikIso-Regular.ttf\\\");\\r\\n}\\r\\n@font-face {\\r\\n  font-family: 'Ranchers';\\r\\n  src: url(\\\"/assets/fonts/Ranchers-Regular.ttf\\\");\\r\\n}\\r\\n@font-face {\\r\\n  font-family: 'Righteous';\\r\\n  src: url(\\\"/assets/fonts/Righteous-Regular.ttf\\\");\\r\\n}\\r\\n@font-face {\\r\\n  font-family: 'Russo One';\\r\\n  src: url(\\\"/assets/fonts/RussoOne-Regular.ttf\\\");\\r\\n}\\r\\n@font-face {\\r\\n  font-family: 'Ubuntu Condensed';\\r\\n  src: url(\\\"/assets/fonts/UbuntuCondensed-Regular.ttf\\\");\\r\\n}\",\"%font-standart {\\r\\n  font-family: 'Arial', sans-serif;\\r\\n}\\r\\n\\r\\n%font-primary {\\r\\n  font-family: 'Ranchers', cursive;\\r\\n}\\r\\n\\r\\n%font-additional {\\r\\n  font-family: 'Righteous', cursive;\\r\\n}\\r\\n\\r\\n%font-title {\\r\\n  font-family: 'Rubik Iso', cursive;\\r\\n}\\r\\n\\r\\n%font-text {\\r\\n  font-family: 'Ubuntu Condensed', sans-serif;\\r\\n}\\r\\n\\r\\n%font-notes {\\r\\n  font-family: 'Russo One', sans-serif;\\r\\n}\\r\\n\\r\\n%transition-all {\\r\\n  transition: all, 0.25s, ease;\\r\\n}\",\"html {\\r\\n  box-sizing: border-box;\\r\\n  overflow: hidden;\\r\\n}\\r\\n\\r\\n///////////////////////////////////////////////////////////////////////////////////\\r\\n\\r\\n// Add styles for canvas\\r\\n// body {\\r\\n//   margin: 0 auto;\\r\\n//   display: flex;\\r\\n//   justify-content: center;\\r\\n//   align-items: center;\\r\\n//   width: 100vh;\\r\\n//   height: 100vh;\\r\\n//   // background-color: rgb(191, 20, 20);\\r\\n// }\\r\\n\\r\\n////////////////////////////////////////////////////////////////////////////////////\\r\\n\\r\\n* {\\r\\n  box-sizing: border-box;\\r\\n  outline: none;\\r\\n  margin: 0;\\r\\n  padding: 0;\\r\\n}\\r\\n\\r\\nhtml {\\r\\n  @extend %font-primary;\\r\\n  font-size: 62.5%;\\r\\n}\\r\\n\\r\\nh2 {\\r\\n  font-weight: normal;\\r\\n}\\r\\n\\r\\nbody {\\r\\n  position: relative;\\r\\n  height: 100vh;\\r\\n  font-size: 1.4rem;\\r\\n  @include flex('flex');\\r\\n  flex-direction: column;\\r\\n  background-color: $color-span;\\r\\n  @include background-img('bg1.jpg');\\r\\n  @extend %transition-all;\\r\\n  background-position: center center;\\r\\n  background-repeat: no-repeat;\\r\\n  background-size: cover;\\r\\n  overflow: hidden;\\r\\n}\\r\\n\\r\\n.hidden {\\r\\n  display: none;\\r\\n}\\r\\n\\r\\n@include media-greater-desktop {\\r\\n  html {\\r\\n    font-size: 54%;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-desktop {\\r\\n  html {\\r\\n    font-size: 54%;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-small-desktop {\\r\\n  html {\\r\\n    font-size: 55%;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-tablet {\\r\\n  html {\\r\\n    font-size: 50%;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-mobile {\\r\\n  html {\\r\\n    font-size: 41%;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  body {\\r\\n    background-attachment: fixed;\\r\\n    overflow: auto;\\r\\n  }\\r\\n}\",\"@mixin flex($display, $justify-content: none, $align-items: none) {\\r\\n  display: $display;\\r\\n  justify-content: $justify-content;\\r\\n  align-items: $align-items;\\r\\n}\\r\\n\\r\\n@mixin width-height($width, $height: $width) {\\r\\n  width: $width;\\r\\n  height: $height;\\r\\n}\\r\\n\\r\\n@mixin top-left($top: none, $left: $top) {\\r\\n  top: $top;\\r\\n  left: $left;\\r\\n}\\r\\n\\r\\n@mixin top-right($top: none, $right: $top) {\\r\\n  top: $top;\\r\\n  right: $right;\\r\\n}\\r\\n\\r\\n@mixin background-img($imgpath) {\\r\\n  background-image: url($path-assets + $imgpath);\\r\\n}\\r\\n\\r\\n@mixin prefix ($property, $value, $prefixes:()) {\\r\\n  @each $prefix in $prefixes {\\r\\n    #{'-' + $prefix + '-' + $property}: $value;\\r\\n  }\\r\\n  #{$property}: $value;\\r\\n}\\r\\n\\r\\n@mixin media-greater-desktop {\\r\\n  @media (min-width: $desktop-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin media-desktop {\\r\\n  @media (max-width: $desktop-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin media-small-desktop {\\r\\n  @media (max-width: $small-desktop-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin media-tablet {\\r\\n  @media (max-width: $tablet-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin media-mobile {\\r\\n  @media (max-width: $mobile-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin screen-and-small-desktop {\\r\\n  @media only screen and (max-width: $small-desktop-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin screen-and-tablet {\\r\\n  @media only screen and (max-width: $tablet-width) { @content; }\\r\\n}\\r\\n\\r\\n@mixin screen-and-mobile {\\r\\n  @media only screen and (max-width: $mobile-width) { @content; }\\r\\n}\",\"$color-light: rgb(255, 255, 255);\\r\\n$color-black: rgb(0, 0, 0);\\r\\n$color-light-bg: rgba(255, 255, 255, 0.8);\\r\\n$color-disabled: rgba(255, 255, 255, 0.4);\\r\\n$color-span: rgb(8, 87, 161);\\r\\n$color-font: rgba(91, 91, 91, 0.9);\\r\\n$color-line: rgb(255, 187, 0);\\r\\n$color-line-light: rgba(255, 138, 0, 0.7);\\r\\n$color-line-dark: rgb(255, 138, 0);\\r\\n$color-btn: rgb(255, 195, 0);\\r\\n$color-slider-bg: rgb(211, 211, 211);\\r\\n$color-slider: rgba(59, 59, 59, 0.7);\\r\\n$color-link-light: rgba(59, 59, 59, 0.8);\\r\\n$color-link-dark: rgba(59, 59, 59, 0.9);\\r\\n$color-link-hover: rgb(82, 156, 48);\\r\\n$color-form-hover: rgb(36, 76, 18);\\r\\n$color-form-title: rgb(42, 29, 12);\\r\\n$color-error: rgb(255, 0, 0);\\r\\n$color-form: rgb(42, 29, 12);\\r\\n\\r\\n$path-assets: \\\"./assets/img/SPA/\\\";\\r\\n\\r\\n$desktop-width: 1400px;\\r\\n$small-desktop-width: 1140px;\\r\\n$tablet-width: 640px;\\r\\n$mobile-width: 390px;\",\"// Bird\\r\\n.bird-container {\\r\\n  position: relative;\\r\\n  margin: -15rem auto 0;\\r\\n  @include width-height(74rem, 6.4rem);\\r\\n  left: 2rem;\\r\\n  .bird {\\r\\n    position: absolute;\\r\\n    @include width-height(7.8rem, 6.3rem);\\r\\n    @include top-left(0, 0);\\r\\n    z-index: 4;\\r\\n    animation: birdAnim 16s linear infinite;\\r\\n  }\\r\\n}\\r\\n\\r\\n@keyframes birdAnim {\\r\\n  0% {\\r\\n    @include top-left(_, 100%);\\r\\n    transform: scaleX(1);\\r\\n  }\\r\\n  25% {\\r\\n    @include top-left(100%,_);\\r\\n    transform: scaleX(1);\\r\\n  }\\r\\n  49% {\\r\\n    @include top-left(0%, 0%);\\r\\n    transform: scaleX(1);\\r\\n  }\\r\\n  50% {\\r\\n    @include top-left(0%, 0%);\\r\\n    transform: scaleX(-1);\\r\\n  }\\r\\n  75% {\\r\\n    @include top-left(75%, 0%);\\r\\n    transform: scaleX(-1);\\r\\n  }\\r\\n  100% {\\r\\n    @include top-left(0%, 100%);\\r\\n      transform: scaleX(-1);\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .bird-container {\\r\\n    margin: -11rem auto 0;\\r\\n    @include width-height(50rem, 6.4rem);\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .bird-container {\\r\\n    display: none;\\r\\n  }\\r\\n}\\r\\n\\r\\n// Clouds\\r\\n.header {\\r\\n  .cloud-1,\\r\\n  .cloud-2,\\r\\n  .cloud-3,\\r\\n  .cloud-4 {\\r\\n    width: 100%;\\r\\n    position: absolute;\\r\\n    @include prefix(select, (none), webkit moz ms);\\r\\n    pointer-events: none;\\r\\n  }\\r\\n  .cloud-1 {\\r\\n    @include top-left(-20rem, 0);\\r\\n    @include prefix(animation, cloudAnim 30s infinite linear, webkit moz);\\r\\n  }\\r\\n  .cloud-2 {\\r\\n    @include top-left(-10rem, 0);\\r\\n    @include prefix(animation, cloudAnim 110s infinite linear, webkit moz);\\r\\n  }\\r\\n  .cloud-3 {\\r\\n    @include top-left(-20rem, 0);\\r\\n    @include prefix(animation, cloudAnim 70s infinite linear, webkit moz);\\r\\n  }\\r\\n  .cloud-4 {\\r\\n    @include top-left(-20rem, 0);\\r\\n    @include prefix(animation, cloudAnim 90s infinite linear, webkit moz);\\r\\n  }\\r\\n}\\r\\n\\r\\n@keyframes cloudAnim {\\r\\n  from {\\r\\n    @include prefix(transform, translateX(100%), webkit ms o);\\r\\n  }\\r\\n  to {\\r\\n    @include prefix(transform, translateX(-100%), webkit ms o);\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-desktop {\\r\\n  .header {\\r\\n    .cloud-1,\\r\\n    .cloud-3,\\r\\n    .cloud-4 {\\r\\n      @include top-left(0rem, 0);\\r\\n    }\\r\\n    .cloud-2 {\\r\\n      @include top-left(0rem, 0);\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .header {\\r\\n    .cloud-1,\\r\\n    .cloud-2,\\r\\n    .cloud-3,\\r\\n    .cloud-4 {\\r\\n        display: none;\\r\\n      }\\r\\n  }\\r\\n}\",\".greeting {\\r\\n  &__text {\\r\\n    margin: 0 0 7rem;\\r\\n    padding: 0 8rem;\\r\\n    @extend %font-additional;\\r\\n    color:$color-link-light;\\r\\n    font-size: 2.5rem;\\r\\n    line-height: 2.4rem;\\r\\n    line-height: 3.5rem;\\r\\n    word-spacing: 0.5rem;\\r\\n    text-align: center;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .greeting {\\r\\n    &__text {\\r\\n      margin-top: 0;\\r\\n      font-size: 2rem;\\r\\n      line-height: 2.4rem;\\r\\n      padding: 0 10rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .greeting {\\r\\n    &__text {\\r\\n    font-size: 1.2rem;\\r\\n    line-height: 1.4rem;\\r\\n    margin-bottom: 4rem;\\r\\n    }\\r\\n    &__link {\\r\\n      width: 80%;\\r\\n    }\\r\\n  }\\r\\n}\",\".controls {\\r\\n  width: 80%;\\r\\n  margin-bottom: 4rem;\\r\\n  &__container {\\r\\n    margin: 0 auto;\\r\\n    @include flex(flex, space-between, center);\\r\\n    flex-wrap: wrap;\\r\\n    gap: 3rem;\\r\\n  }\\r\\n  &__title {\\r\\n    margin-bottom: 5rem;\\r\\n    @extend %font-notes;\\r\\n    font-size: 2rem;\\r\\n    font-weight: normal;\\r\\n    color: $color-link-dark;\\r\\n    letter-spacing: 0.2rem;\\r\\n  }\\r\\n  &__img-key {\\r\\n    width: 20rem;\\r\\n  }\\r\\n  &__img-letter {\\r\\n    width: 6rem;\\r\\n    margin-left: 7.2rem;\\r\\n  }\\r\\n  &__text {\\r\\n    width: 70%;\\r\\n    @extend %font-notes;\\r\\n    letter-spacing: 0.2rem;\\r\\n    font-weight: normal;\\r\\n    color: $color-light-bg;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .controls {\\r\\n    width: 70%;\\r\\n    margin-bottom: 5rem;\\r\\n    &__title {\\r\\n      font-size: 1.6rem;\\r\\n      margin-bottom: 3rem;\\r\\n    }\\r\\n    &__img-key {\\r\\n      width: 15rem;\\r\\n    }\\r\\n    &__img-letter {\\r\\n      width: 4.5rem;\\r\\n      margin-left: 5.5rem;\\r\\n    }\\r\\n    &__text {\\r\\n      width: 60%;\\r\\n      letter-spacing: 0.2rem;\\r\\n      font-weight: normal;\\r\\n      color: $color-light-bg;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .controls {\\r\\n    width: 95%;\\r\\n    &__img-key {\\r\\n      width: 12rem;\\r\\n    }\\r\\n    &__img-letter {\\r\\n      width: 3.5rem;\\r\\n      margin-left: 4.5rem;\\r\\n    }\\r\\n    &__text {\\r\\n      width: 50%;\\r\\n      font-size: 1.2rem;\\r\\n      letter-spacing: 0.2rem;\\r\\n      font-weight: normal;\\r\\n    }\\r\\n  }\\r\\n}\",\".settings {\\r\\n  &__title {\\r\\n    margin: 0 auto 3.5rem;\\r\\n    @extend %font-notes;\\r\\n    font-size: 2rem;\\r\\n    font-weight: normal;\\r\\n    color: $color-link-dark;\\r\\n    letter-spacing: 0.2rem;\\r\\n  }\\r\\n  &__slider-box {\\r\\n    width: 25rem;\\r\\n    color: $color-slider;\\r\\n    label {\\r\\n      @extend %font-notes;\\r\\n      font-size: 1.6rem;\\r\\n      letter-spacing: 0.2rem;\\r\\n    }\\r\\n  }\\r\\n  &__slider {\\r\\n    @include prefix(appearance, none, webkit);\\r\\n    @include width-height(100%, 2.3rem);\\r\\n    background: $color-slider-bg;\\r\\n    outline: none;\\r\\n    opacity: 0.7;\\r\\n    @include prefix (transition, 0.2s, webkit);\\r\\n    transition: opacity 0.2s;\\r\\n    margin: 1.6rem 0 2rem;\\r\\n    &::-webkit-slider-thumb {\\r\\n      @include prefix(appearance, none, webkit);\\r\\n      @include width-height(2.3rem);\\r\\n      background-color: $color-line-dark;\\r\\n      background-image: linear-gradient(to bottom, $color-line-dark, $color-btn);\\r\\n      cursor: pointer;\\r\\n    }\\r\\n    &::-moz-range-thumb {\\r\\n      @include width-height(2.3rem);\\r\\n      background-color: $color-line-dark;\\r\\n      background-image: linear-gradient(to bottom, $color-line-dark, $color-btn);\\r\\n      cursor: pointer;\\r\\n    }\\r\\n    &_hover {\\r\\n      &:hover {\\r\\n        opacity: 1;\\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .settings {\\r\\n    &__title {\\r\\n      font-size: 1.6rem;\\r\\n    }\\r\\n    &__slider-box {\\r\\n      label {\\r\\n        font-size: 1.4rem;\\r\\n      }\\r\\n    }\\r\\n    &__slider {\\r\\n      @include width-height(80%, 2rem);\\r\\n      &::-webkit-slider-thumb {\\r\\n        @include width-height(2rem);\\r\\n      }\\r\\n      &::-moz-range-thumb {\\r\\n        @include width-height(2rem);\\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .settings {\\r\\n    margin-left: 5rem;\\r\\n    &__title {\\r\\n      margin-bottom: 3rem;\\r\\n    }\\r\\n    &__slider {\\r\\n      margin: 1rem auto;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-mobile {\\r\\n  .settings {\\r\\n    margin-left: 5rem;\\r\\n    &__title {\\r\\n      margin-bottom: 3rem;\\r\\n    }\\r\\n    &__slider {\\r\\n      margin: 1rem auto;\\r\\n    }\\r\\n  }\\r\\n}\",\".description {\\r\\n  margin-bottom: 4rem;\\r\\n  p {\\r\\n    margin: 0 0 0.8rem;\\r\\n    text-indent: 2rem;\\r\\n  }\\r\\n  &__title {\\r\\n    margin-bottom: 2rem;\\r\\n    text-align: center;\\r\\n    @extend %font-notes;\\r\\n    font-size: 2rem;\\r\\n    font-weight: normal;\\r\\n    color: $color-link-dark;\\r\\n    letter-spacing: 0.2rem;\\r\\n  }\\r\\n  &__content {\\r\\n    width: 80%;\\r\\n    margin: 0 auto;\\r\\n    padding: 2rem;\\r\\n    @extend %font-text;\\r\\n    font-size: 2.1rem;\\r\\n    color:$color-link-light;\\r\\n    border: 0.3rem solid $color-line-light;\\r\\n    border-radius: 3rem;\\r\\n    line-height: 3rem;\\r\\n    span {\\r\\n      font-weight: bold;\\r\\n      color: $color-span;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .description {\\r\\n    &__title {\\r\\n      font-size: 1.6rem;\\r\\n    }\\r\\n    &__content {\\r\\n      width: 75%;\\r\\n      padding: 1.5rem;\\r\\n      font-size: 1.6rem;\\r\\n      line-height: 2.4rem;\\r\\n      margin-bottom: 4rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .description {\\r\\n    &__content {\\r\\n      width: 95%;\\r\\n      padding: 1rem;\\r\\n      font-size: 1.4rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-mobile {\\r\\n  .description {\\r\\n    &__content {\\r\\n      width: 100%;\\r\\n      line-height: 1.9rem;\\r\\n      font-size: 1.3rem;\\r\\n    }\\r\\n  }\\r\\n}\",\".level {\\r\\n  margin-bottom: 4rem;\\r\\n  &__title {\\r\\n    margin-bottom: 3rem;\\r\\n    @extend %font-notes;\\r\\n    font-size: 2rem;\\r\\n    font-weight: normal;\\r\\n    color: $color-link-dark;\\r\\n    letter-spacing: 0.2rem;\\r\\n    text-align: center;\\r\\n  }\\r\\n  &__list {\\r\\n    display: grid;\\r\\n    grid-template-columns: repeat(5, 1fr);\\r\\n    grid-template-rows: repeat(4, 1fr);\\r\\n    gap: 2rem;\\r\\n  }\\r\\n  &__item {\\r\\n    @include width-height(8rem);\\r\\n    @include flex(flex, center, center);\\r\\n    @extend %transition-all;\\r\\n    cursor: pointer;\\r\\n    color: $color-light-bg;\\r\\n    border: 0.3rem solid $color-light-bg;\\r\\n    background-color:transparent;\\r\\n    border-radius: 1rem;\\r\\n    @extend %font-title;\\r\\n    font-size: 4rem;\\r\\n    letter-spacing: 0.2rem;\\r\\n    transition: transform 0.25s ease,\\r\\n                opacity 0.25 ease;\\r\\n    &_hover {\\r\\n      &:hover {\\r\\n        transform: scale(1.05);\\r\\n        opacity: 0.9;\\r\\n      }\\r\\n    }\\r\\n    &_active {\\r\\n      &:active {\\r\\n        transform: scale(0.95);\\r\\n        color: $color-link-light;\\r\\n        border: 0.3rem solid $color-slider;\\r\\n      }\\r\\n    } \\r\\n    &_disabled {\\r\\n      &:disabled {\\r\\n        transform: none;\\r\\n        color:$color-slider;\\r\\n        border: 0.3rem solid $color-disabled;\\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .level {\\r\\n    &__title {\\r\\n      font-size: 1.6rem;\\r\\n    }\\r\\n    &__list {\\r\\n      grid-template-columns: repeat(4, 1fr);\\r\\n      grid-template-rows: repeat(5, 1fr);\\r\\n    }\\r\\n    &__item {\\r\\n      @include width-height(6rem);\\r\\n      font-size: 3rem;\\r\\n    }\\r\\n  }\\r\\n}\",\".error {\\r\\n  &__img {\\r\\n    display: block;\\r\\n    margin: 0 auto 1.6rem;\\r\\n    @include width-height(80%, auto);\\r\\n    font-size: 0;\\r\\n    border-radius: 3rem;\\r\\n  }\\r\\n  &__msg {\\r\\n    font-family: 'Arial', sans-serif;\\r\\n    color: $color-light;\\r\\n    text-align: center;\\r\\n  }\\r\\n  &__msg span {\\r\\n    color: $color-error;\\r\\n  }\\r\\n  &__msg a {\\r\\n    text-align: center;\\r\\n    color: $color-line;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-small-desktop {\\r\\n  .error {\\r\\n    &__img {\\r\\n      @include width-height(70%, auto);\\r\\n      border-radius: 2rem;\\r\\n    }\\r\\n    &__msg {\\r\\n      font-size: 1.2rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-tablet {\\r\\n  .error {\\r\\n    &__img {\\r\\n      margin-bottom: 1.2rem;\\r\\n    }\\r\\n    &__msg {\\r\\n      font-size: 0.9rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-mobile {\\r\\n  .error {\\r\\n    &__msg {\\r\\n      font-size: 0.7rem;\\r\\n    }\\r\\n  }\\r\\n}\",\".header {\\r\\n  flex-shrink: 0;\\r\\n  @include width-height(100%, 50rem);\\r\\n  &__wrapper {\\r\\n    width: 140rem;\\r\\n    margin: 0 auto;\\r\\n    padding: 0 10rem;\\r\\n    @include flex(flex, space-between, center);\\r\\n    flex-direction: column;\\r\\n  }\\r\\n  &__logo-box {\\r\\n    position: relative;\\r\\n    width: 100%;\\r\\n    }\\r\\n  &__logo {\\r\\n    margin-top: 3.5rem;\\r\\n    @include width-height(10rem, 8rem);\\r\\n  }\\r\\n  &__logo-2 {\\r\\n    position: absolute;\\r\\n    @include width-height(4.7rem);\\r\\n    @include top-right(8.5rem, 16.5rem);\\r\\n  }\\r\\n  &__title {\\r\\n    @extend %font-title;\\r\\n    font-size: 8rem;\\r\\n    @include width-height(100%, 10rem);\\r\\n    margin: 10rem 0 14rem;\\r\\n    text-align: center;\\r\\n    color: $color-font;\\r\\n  }\\r\\n  &__nav {\\r\\n    width: 80%;\\r\\n    z-index: 2;\\r\\n  }\\r\\n  .nav {\\r\\n    &__list {\\r\\n      @include flex(flex, space-between, center);\\r\\n      flex-direction: row;\\r\\n      margin: 0;\\r\\n      padding: 0;\\r\\n      list-style: none;\\r\\n      @extend %font-primary;\\r\\n      letter-spacing: 0.2rem;\\r\\n      font-size: 4rem;\\r\\n      padding: 1rem 1rem;\\r\\n      border-top: 0.3rem $color-line solid;\\r\\n      border-bottom: 0.3rem $color-line solid;\\r\\n      z-index: 3;\\r\\n    }\\r\\n    &__item {\\r\\n      margin-bottom: 1rem;\\r\\n      z-index: 2;\\r\\n      cursor: pointer;\\r\\n    }\\r\\n    &__link {\\r\\n      color: $color-link-light;\\r\\n      text-transform: uppercase;\\r\\n      text-decoration: none;\\r\\n      font-size: 2rem;\\r\\n    }\\r\\n    &__link.active {\\r\\n      color: $color-span;\\r\\n    }\\r\\n    \\r\\n    &__item:hover a {\\r\\n      color: $color-link-hover;\\r\\n    }\\r\\n    &__btn {\\r\\n      @include width-height(20rem, 4rem);\\r\\n      padding: 1rem 4rem;\\r\\n      @extend %font-primary;\\r\\n      font-size: 2rem;\\r\\n      letter-spacing: 0.2rem;\\r\\n      background-color: $color-line-light;\\r\\n      background-image: linear-gradient(to bottom, $color-line-light, $color-btn);\\r\\n      color: $color-link-light;\\r\\n      text-align: center;\\r\\n      text-decoration: none;\\r\\n    }\\r\\n    &__btn {\\r\\n      &_hover{\\r\\n        &:hover {\\r\\n          cursor: pointer;\\r\\n          background-image: none;\\r\\n        }\\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-small-desktop {\\r\\n  .header{\\r\\n    &__wrapper {\\r\\n      width: 70rem;\\r\\n    }\\r\\n    &__logo {\\r\\n    @include width-height(8rem, 6rem);\\r\\n    }\\r\\n    &__logo-2 {\\r\\n    @include width-height(4rem);\\r\\n    @include top-right(10rem, 2rem);\\r\\n    }\\r\\n    &__title {\\r\\n    margin-bottom: 20rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include media-tablet {\\r\\n  .header {\\r\\n    &__wrapper {\\r\\n      width: 39rem;\\r\\n      padding: 1rem;\\r\\n    }\\r\\n    &__logo {\\r\\n      margin-bottom: 7rem;\\r\\n      @include width-height(5rem, 4rem);\\r\\n    }\\r\\n    &__logo-2 {\\r\\n      @include width-height(2.25rem);\\r\\n      @include top-right(-0.5rem, 6rem);\\r\\n    }\\r\\n    &__title {\\r\\n      margin: 0 0 4rem;\\r\\n      font-size: 4.5rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .header {\\r\\n    @include width-height(100%, 55rem);\\r\\n    flex-shrink: 0;\\r\\n    &__nav {\\r\\n      width: 105%;\\r\\n    }\\r\\n    .nav {\\r\\n      &__list {\\r\\n        padding: 0.5rem 1rem;\\r\\n        border-top: 0.2rem $color-line solid;\\r\\n        border-bottom: 0.2rem $color-line solid;\\r\\n      }\\r\\n      &__item a {\\r\\n          font-size: 1.4rem;\\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .header {\\r\\n    @include width-height(100%, 53.5rem);\\r\\n    .nav{\\r\\n      &__list {\\r\\n        @include flex(flex, center, center);\\r\\n        flex-direction: column;\\r\\n        margin: 0 auto;\\r\\n        width: 34rem;\\r\\n        font-size: 1.2rem;\\r\\n        border-top: none;\\r\\n      }\\r\\n      &__item {\\r\\n        margin-top: 2rem;\\r\\n      }\\r\\n      &__item:last-child {\\r\\n        margin-bottom: 2rem;\\r\\n      }\\r\\n      &__item a {\\r\\n        font-size: 1.6rem;\\r\\n      }\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .nav {\\r\\n    &__btn {\\r\\n      @include width-height(20rem, 3.6rem);\\r\\n      padding: 1rem;\\r\\n      margin-bottom: 2rem;\\r\\n      font-size: 1.4rem;\\r\\n    }\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-mobile {\\r\\n  .header {\\r\\n    @include width-height(100%, 51rem);\\r\\n    &__logo {\\r\\n      margin-bottom: 4rem;\\r\\n    }\\r\\n    &__title {\\r\\n      max-width: 34rem;\\r\\n      margin: 0 auto 3rem;\\r\\n    }\\r\\n    &__logo-2 {\\r\\n      @include top-right(0, 5.5rem);\\r\\n    }\\r\\n  }\\r\\n}\",\".content {\\r\\n  margin: 0 auto;\\r\\n  padding: 0 15rem;\\r\\n  position: relative;\\r\\n  @include flex(flex, flex-start, center);\\r\\n  flex-direction: column;\\r\\n  flex: 1 0 auto;\\r\\n  @include width-height(140rem, auto);\\r\\n  z-index: 1;\\r\\n}\\r\\n\\r\\n@include media-small-desktop {\\r\\n  .content {\\r\\n    width: 70rem;\\r\\n  }\\r\\n}\\r\\n@include media-tablet {\\r\\n  .content {\\r\\n    width: 32rem;\\r\\n    margin: 0 auto;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-small-desktop {\\r\\n  .content {\\r\\n    padding: 0;\\r\\n    min-height: 10rem;\\r\\n  }\\r\\n}\\r\\n\\r\\n@include screen-and-tablet {\\r\\n  .content {\\r\\n    margin-top: 0;\\r\\n    width: 34rem;\\r\\n    padding: 0;\\r\\n    margin-bottom: 0;\\r\\n  }\\r\\n}\"],\"sourceRoot\":\"\"}]);\n33 | // Exports\n34 | /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n35 | ");
+    (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      // extracted by mini-css-extract-plugin
 
       /***/
     },
@@ -3187,6 +3684,162 @@
       "use strict";
 
       module.exports = __webpack_require__.p + "7eac2d1901ea34422f0e.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/404.png":
+    /*!********************************!*\
+      !*** ./assets/img/SPA/404.png ***!
+      \********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "d6ae460aef8c7a5e09aa.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/arrows.png":
+    /*!***********************************!*\
+      !*** ./assets/img/SPA/arrows.png ***!
+      \***********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "585f4dd8a44c4c6ef29f.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/cloud_1.png":
+    /*!************************************!*\
+      !*** ./assets/img/SPA/cloud_1.png ***!
+      \************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "b8c2cb7fc7c5ccc4c2c8.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/cloud_2.png":
+    /*!************************************!*\
+      !*** ./assets/img/SPA/cloud_2.png ***!
+      \************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "038295bf2462c5284db2.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/cloud_3.png":
+    /*!************************************!*\
+      !*** ./assets/img/SPA/cloud_3.png ***!
+      \************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "6c0cfb1374a4eb5e33a3.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/cloud_4.png":
+    /*!************************************!*\
+      !*** ./assets/img/SPA/cloud_4.png ***!
+      \************************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "0a68175f43cec8b1a194.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/f.png":
+    /*!******************************!*\
+      !*** ./assets/img/SPA/f.png ***!
+      \******************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "dafb6d4501e1437d44c2.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/flying.gif":
+    /*!***********************************!*\
+      !*** ./assets/img/SPA/flying.gif ***!
+      \***********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "19a24757711822d420cd.gif";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/logo.png":
+    /*!*********************************!*\
+      !*** ./assets/img/SPA/logo.png ***!
+      \*********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "9ded7098db0de0ee5f14.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/logo_2.png":
+    /*!***********************************!*\
+      !*** ./assets/img/SPA/logo_2.png ***!
+      \***********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "101bca4fe3b9730ef925.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/m.png":
+    /*!******************************!*\
+      !*** ./assets/img/SPA/m.png ***!
+      \******************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "5b88f8c92d3dbe18357c.png";
+
+      /***/
+    },
+
+    /***/"./assets/img/SPA/space.png":
+    /*!**********************************!*\
+      !*** ./assets/img/SPA/space.png ***!
+      \**********************************/
+    /***/
+    (module, __unused_webpack_exports, __webpack_require__) => {
+      "use strict";
+
+      module.exports = __webpack_require__.p + "750a10492757e1a067d8.png";
 
       /***/
     },
