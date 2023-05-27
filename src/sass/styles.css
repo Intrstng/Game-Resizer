@@ -19,7 +19,11 @@
   font-family: "Ubuntu Condensed";
   src: url("/assets/fonts/UbuntuCondensed-Regular.ttf");
 }
-.header .nav__btn, .header .nav__list, html {
+#login {
+  font-family: "Arial", sans-serif;
+}
+
+.header .nav__btn, .header .nav__list, .buttonBlue, html {
   font-family: "Ranchers", cursive;
 }
 
@@ -39,7 +43,7 @@
   font-family: "Russo One", sans-serif;
 }
 
-.header #mute-btn, .level__item, body {
+.header #mute-btn, .logout-btn, .button, .level__item, body {
   transition: all, 0.25s, ease;
 }
 
@@ -590,6 +594,123 @@ body {
     font-size: 0.7rem;
   }
 }
+#login {
+  background-color: rgba(59, 59, 59, 0.7);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  z-index: 15;
+}
+#login form {
+  text-align: center;
+  width: 38rem;
+  margin: 30vh auto 0;
+  padding: 4rem 2rem 2rem 2rem;
+  border: 0.1rem solid rgb(255, 255, 255);
+  border-radius: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0.1rem 0.1rem 0, rgba(0, 0, 0, 0.09) 0 0.1rem 0.2rem 0;
+}
+#login form .group {
+  position: relative;
+  margin-bottom: 4rem;
+}
+#login form .group label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.6rem;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 0.5rem;
+  top: -2.5rem;
+  transition: all 0.2s ease;
+}
+#login form .group .input-login {
+  font-size: 1.6rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  display: block;
+  background: rgb(255, 255, 255);
+  color: rgb(99, 99, 99);
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 0.1rem solid rgb(117, 117, 117);
+  opacity: 0.7;
+  font-style: italic;
+}
+#login form .group .input-login_:focus {
+  outline: none;
+}
+#login form .errorlabel {
+  font-size: 1.4rem;
+  padding: 1rem 1rem 1rem 0.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  display: block;
+  background: rgb(255, 255, 255);
+  color: rgb(153, 153, 153);
+  letter-spacing: 0.2rem;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 0.1rem solid rgb(255, 0, 0);
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  margin: 0.3rem 0 1rem 0;
+  width: 100%;
+  vertical-align: middle;
+  color: rgb(255, 255, 255);
+  font-size: 1.8rem;
+  line-height: 2rem;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 0.2rem solid rgb(49, 96, 182);
+  cursor: pointer;
+}
+.button:focus {
+  outline: 0;
+}
+
+.buttonBlue {
+  background: rgb(74, 137, 220);
+  text-shadow: 0.1rem 0.1rem 0 rgba(39, 110, 204, 0.5);
+}
+.buttonBlue:hover {
+  background: rgb(49, 96, 182);
+}
+
+.logout-btn {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  top: 5rem;
+  right: 5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.logout-btn img {
+  width: 4rem;
+  height: 4rem;
+  font-size: 0;
+}
+.logout-btn_hover:hover {
+  transform: scale(1.05);
+}
+
 .header {
   flex-shrink: 0;
   width: 100%;
@@ -599,7 +720,7 @@ body {
   position: absolute;
   width: 4rem;
   height: 4rem;
-  top: 5rem;
+  top: 10rem;
   right: 5rem;
   background-position: center center;
   background-repeat: no-repeat;

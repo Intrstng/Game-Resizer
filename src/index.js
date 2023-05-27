@@ -94,20 +94,83 @@ export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
 
 ///////////////////////////////////////////////////////////
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyCJcFPDHK_OR1wHZuJH79VCPO0NWdLJaUY",
+  authDomain: "platform-traveller.firebaseapp.com",
+  projectId: "platform-traveller",
+  storageBucket: "platform-traveller.appspot.com",
+  messagingSenderId: "531732691588",
+  appId: "1:531732691588:web:9772eb1de30516e1ede0d1",
+  measurementId: "G-ZN6EW32BEQ"
+};
 
-const ajaxHandlerScript="https://fe.it-academy.by/AjaxStringStorage2.php";
-let updatePassword;
-const stringName='surname_namegame_visits';
+// Init Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth();
 
+// New Registration  
+document.getElementById('btnRegister').addEventListener('click', function() {
+  const email =  document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const errorMsgFeild = document.getElementById('errorLoginMessage');
+  // For new registration
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user.email.split('@').slice(0, 1)[0];
+    errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+    errorMsgFeild.textContent = `${user}, registration successfull! Please login.`;
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    errorMsgFeild.style.color = 'rgb(255, 0, 0)';
+    errorMsgFeild.textContent = (`Registration unsuccessfull: ${errorCode}`);
+  });		  		  
+});
 
+// Login  
+document.getElementById('btnLogin').addEventListener('click', function() {
+  const email =  document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const errorMsgFeild = document.getElementById('errorLoginMessage');
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+    errorMsgFeild.textContent = `${user.email.split('@').slice(0, 1)[0]}, login successfull!`;
+    document.getElementById('btnLogout').style.display = 'block';
+    document.getElementById('login').style.display = 'none';
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    errorMsgFeild.style.color = 'rgb(255, 0, 0)';
+    errorMsgFeild.textContent = (`Login unsuccessfull: ${errorCode}`);
+  });		  		  
+});
 
+// Logout
 
-
-
-
-
-
+document.getElementById('btnLogout').addEventListener('click', function() {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    console.log('Sign-out successful.');
+    alert('Sign-out successful.');
+    document.getElementById('btnLogout').style.display = 'none';
+    document.getElementById('login').style.display = 'block';
+  }).catch((error) => {
+    // An error happened.
+    console.log('An error happened.');
+  });		  		  
+});
 
 ////////////////////////////////////////////////////////////
 
@@ -127,7 +190,7 @@ export let platforms = [],
            player;
 
 
-requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+//requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
 
  
 function setLevelMap(value) {
@@ -206,7 +269,7 @@ main && window.addEventListener('hashchange', setVolumeRangeHandlers);
 
 
 
-document.getElementById('mute-btn').addEventListener('click', muteSound);
+                                  //document.getElementById('mute-btn').addEventListener('click', muteSound);
 
 
 
@@ -346,3 +409,7 @@ function animate() {
 
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
+
+window.onbeforeunload = function () {
+  return "Вы точно хотите покинуть страницу?";
+};
