@@ -12546,9 +12546,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
 /* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
 /* harmony import */ var _js_Levels__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/Levels */ "./src/js/Levels.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/esm/index.esm.js");
-/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! firebase/analytics */ "./node_modules/firebase/analytics/dist/esm/index.esm.js");
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/esm/index.esm.js");
+/* harmony import */ var _js_Login__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/Login */ "./src/js/Login.js");
 //import './sass/styles.scss';  // прописано в Webpack entry points
 
 
@@ -12564,7 +12562,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-document.addEventListener('DOMContentLoaded', _js_SPA__WEBPACK_IMPORTED_MODULE_0__.mySPA.init('root', 'content'));
+
+//document.addEventListener('DOMContentLoaded', mySPA.init('root', 'content'));
+
 const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 5; // 10
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720
@@ -12581,76 +12581,88 @@ let completeLevel = false;
 ///////////////////////////////////////////////////////////
 
 
+_js_Login__WEBPACK_IMPORTED_MODULE_12__.logInApp.init('app');
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCJcFPDHK_OR1wHZuJH79VCPO0NWdLJaUY",
-  authDomain: "platform-traveller.firebaseapp.com",
-  projectId: "platform-traveller",
-  storageBucket: "platform-traveller.appspot.com",
-  messagingSenderId: "531732691588",
-  appId: "1:531732691588:web:9772eb1de30516e1ede0d1",
-  measurementId: "G-ZN6EW32BEQ"
-};
+//// Чтобы заработало: 
+//// закоментировать logInApp.init('app');  и  import { logInApp } from './js/Login';
+//// раскоментировать HTML и код ниже
 
-// Init Firebase
-const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_12__.initializeApp)(firebaseConfig);
-const analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_13__.getAnalytics)(app);
-const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_14__.getAuth)();
+//             import { initializeApp } from 'firebase/app';
+//             import { getAnalytics } from 'firebase/analytics';
+//             import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-// New Registration  
-document.getElementById('btnRegister').addEventListener('click', function () {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const errorMsgFeild = document.getElementById('errorLoginMessage');
-  // For new registration
-  (0,firebase_auth__WEBPACK_IMPORTED_MODULE_14__.createUserWithEmailAndPassword)(auth, email, password).then(userCredential => {
-    // Signed in 
-    const user = userCredential.user.email.split('@').slice(0, 1)[0];
-    errorMsgFeild.style.color = 'rgb(153, 153, 153)';
-    errorMsgFeild.textContent = `${user}, registration successfull! Please login.`;
-  }).catch(error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    errorMsgFeild.style.color = 'rgb(255, 0, 0)';
-    errorMsgFeild.textContent = `Registration unsuccessfull: ${errorCode}`;
-  });
-});
+//             const firebaseConfig = {
+//               apiKey: "AIzaSyCJcFPDHK_OR1wHZuJH79VCPO0NWdLJaUY",
+//               authDomain: "platform-traveller.firebaseapp.com",
+//               projectId: "platform-traveller",
+//               storageBucket: "platform-traveller.appspot.com",
+//               messagingSenderId: "531732691588",
+//               appId: "1:531732691588:web:9772eb1de30516e1ede0d1",
+//               measurementId: "G-ZN6EW32BEQ"
+//             };
 
-// Login  
-document.getElementById('btnLogin').addEventListener('click', function () {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const errorMsgFeild = document.getElementById('errorLoginMessage');
-  (0,firebase_auth__WEBPACK_IMPORTED_MODULE_14__.signInWithEmailAndPassword)(auth, email, password).then(userCredential => {
-    // Signed in 
-    const user = userCredential.user;
-    errorMsgFeild.style.color = 'rgb(153, 153, 153)';
-    errorMsgFeild.textContent = `${user.email.split('@').slice(0, 1)[0]}, login successfull!`;
-    document.getElementById('btnLogout').style.display = 'block';
-    document.getElementById('login').style.display = 'none';
-  }).catch(error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    errorMsgFeild.style.color = 'rgb(255, 0, 0)';
-    errorMsgFeild.textContent = `Login unsuccessfull: ${errorCode}`;
-  });
-});
+//             // Init Firebase
+//             const app = initializeApp(firebaseConfig);
+//             const analytics = getAnalytics(app);
+//             const auth = getAuth();
 
-// Logout
+// // New Registration  
+// document.getElementById('btnRegister').addEventListener('click', function() {
+//                   const email =  document.getElementById('email').value;
+//                   const password = document.getElementById('password').value;
+//                   const errorMsgFeild = document.getElementById('errorLoginMessage');
+//                   // For new registration
+//                   createUserWithEmailAndPassword(auth, email, password)
+//                   .then((userCredential) => {
+//                     // Signed in 
+//                     const user = userCredential.user.email.split('@').slice(0, 1)[0];
+//                     errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+//                     errorMsgFeild.textContent = `${user}, registration successfull! Please login.`;
+//                   })
+//                   .catch((error) => {
+//                     const errorCode = error.code;
+//                     const errorMessage = error.message;
+//                                     errorMsgFeild.style.color = 'rgb(255, 0, 0)';
+//                                     errorMsgFeild.textContent = `Registration unsuccessfull: ${errorCode}`;
+//                   });		  		  
+// });
 
-document.getElementById('btnLogout').addEventListener('click', function () {
-  (0,firebase_auth__WEBPACK_IMPORTED_MODULE_14__.signOut)(auth).then(() => {
-    // Sign-out successful.
-    console.log('Sign-out successful.');
-    alert('Sign-out successful.');
-    document.getElementById('btnLogout').style.display = 'none';
-    document.getElementById('login').style.display = 'block';
-  }).catch(error => {
-    // An error happened.
-    console.log('An error happened.');
-  });
-});
+// // Login
+// document.getElementById('btnLogin').addEventListener('click', function() {
+//                       const email =  document.getElementById('email').value;
+//                       const password = document.getElementById('password').value;
+//                       const errorMsgFeild = document.getElementById('errorLoginMessage');
+//                       signInWithEmailAndPassword(auth, email, password)
+//                       .then((userCredential) => {
+//                         // Signed in 
+//                         const user = userCredential.user;
+//                         errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+//                         errorMsgFeild.textContent = `${user.email.split('@').slice(0, 1)[0]}, login successfull!`;
+//                         document.getElementById('btnLogout').style.display = 'block';
+//                         document.getElementById('login').style.display = 'none';
+//                       })
+//                       .catch((error) => {
+//                                             const errorCode = error.code;
+//                                             const errorMessage = error.message;
+//                                             errorMsgFeild.style.color = 'rgb(255, 0, 0)';
+//                                             errorMsgFeild.textContent = `Login unsuccessfull: ${errorCode}`;
+//                       });		  		  
+// });
+
+// // Logout
+
+// document.getElementById('btnLogout').addEventListener('click', function() {
+//                       signOut(auth).then(() => {
+//                         // Sign-out successful.
+//                         console.log('Sign-out successful.');
+//                         alert('Sign-out successful.');
+//                         document.getElementById('btnLogout').style.display = 'none';
+//                         document.getElementById('login').style.display = 'block';
+//                       }).catch((error) => {
+//                         // An error happened.
+//                         console.log('An error happened.');
+//                       });		  		  
+// });
 
 ////////////////////////////////////////////////////////////
 
@@ -12820,9 +12832,10 @@ function animate() {
 
 window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyDownHandler);
 window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_9__.keyUpHandler);
-window.onbeforeunload = function () {
-  return "Вы точно хотите покинуть страницу?";
-};
+
+// window.onbeforeunload = function () {
+//   return "Вы точно хотите покинуть страницу?";
+// };
 
 /***/ }),
 
@@ -12907,6 +12920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "heroRunR": () => (/* reexport default export from named module */ _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__),
 /* harmony export */   "logoImg_1": () => (/* reexport default export from named module */ _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__),
 /* harmony export */   "logoImg_2": () => (/* reexport default export from named module */ _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__),
+/* harmony export */   "logoutImg": () => (/* reexport default export from named module */ _assets_img_SPA_logout_png__WEBPACK_IMPORTED_MODULE_53__),
 /* harmony export */   "mKeyImg": () => (/* reexport default export from named module */ _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__),
 /* harmony export */   "muteOff": () => (/* reexport default export from named module */ _assets_img_SPA_mute_off_png__WEBPACK_IMPORTED_MODULE_51__),
 /* harmony export */   "muteOn": () => (/* reexport default export from named module */ _assets_img_SPA_mute_on_png__WEBPACK_IMPORTED_MODULE_52__),
@@ -12980,6 +12994,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
 /* harmony import */ var _assets_img_SPA_mute_off_png__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ../../../../assets/img/SPA/mute_off.png */ "./assets/img/SPA/mute_off.png");
 /* harmony import */ var _assets_img_SPA_mute_on_png__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ../../../../assets/img/SPA/mute_on.png */ "./assets/img/SPA/mute_on.png");
+/* harmony import */ var _assets_img_SPA_logout_png__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ../../../../assets/img/SPA/logout.png */ "./assets/img/SPA/logout.png");
+
 
 
 
@@ -13239,6 +13255,42 @@ function parseCollisitions(levelMap, platforms) {
 
 /***/ }),
 
+/***/ "./src/js/Firebase.js":
+/*!****************************!*\
+  !*** ./src/js/Firebase.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "analytics": () => (/* binding */ analytics),
+/* harmony export */   "app": () => (/* binding */ app),
+/* harmony export */   "auth": () => (/* binding */ auth)
+/* harmony export */ });
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/esm/index.esm.js");
+/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/analytics */ "./node_modules/firebase/analytics/dist/esm/index.esm.js");
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/esm/index.esm.js");
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCJcFPDHK_OR1wHZuJH79VCPO0NWdLJaUY",
+  authDomain: "platform-traveller.firebaseapp.com",
+  projectId: "platform-traveller",
+  storageBucket: "platform-traveller.appspot.com",
+  messagingSenderId: "531732691588",
+  appId: "1:531732691588:web:9772eb1de30516e1ede0d1",
+  measurementId: "G-ZN6EW32BEQ"
+};
+
+// Init Firebase
+const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);
+const analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_1__.getAnalytics)(app);
+const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)();
+
+
+/***/ }),
+
 /***/ "./src/js/Keys.js":
 /*!************************!*\
   !*** ./src/js/Keys.js ***!
@@ -13384,6 +13436,175 @@ function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, ca
     response.json().then(map => callback_1(map, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(data => callback_2(data, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(player => callback_3(player, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(init => callback_4(init, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(animate => callback_5(animate, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).catch(err => console.error('Fetch Error - levels map load failed', err));
   });
 }
+
+/***/ }),
+
+/***/ "./src/js/Login.js":
+/*!*************************!*\
+  !*** ./src/js/Login.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "logInApp": () => (/* binding */ logInApp)
+/* harmony export */ });
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/esm/index.esm.js");
+/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/analytics */ "./node_modules/firebase/analytics/dist/esm/index.esm.js");
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/esm/index.esm.js");
+/* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Firebase */ "./src/js/Firebase.js");
+/* harmony import */ var _SPA__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SPA */ "./src/js/SPA.js");
+
+
+
+
+
+
+const logInApp = function () {
+  function View() {
+    let appContainer = null,
+      errorMsgFeild = null,
+      logoutBtn = null,
+      loginContainer = null;
+    this.init = function (app) {
+      appContainer = app;
+      this.showLoginForm();
+      errorMsgFeild = app.querySelector('#errorLoginMessage');
+      logoutBtn = app.querySelector('#btnLogout');
+      loginContainer = app.querySelector('#login');
+    };
+    this.showLoginForm = function () {
+      appContainer.innerHTML = `
+      <div id="login" class="login">
+        <form id="login-form">
+          <div class="group">
+            <label for="email">Email</label>
+            <input id="email" class="input-login" name="email" type="email" autocomplete="on">
+          </div>
+            <div class="group">
+              <label for="password">Password</label>
+              <input id="password" class="input-login" name="password" type="password" autocomplete="off">
+            </div>
+              <div id="loginMessage" class="group">
+                <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
+              </div>
+                <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
+                  <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
+        </form>
+      </div>
+        <button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoutImg}" alt="logout"></button>`;
+    };
+    this.loginSuccess = function (msg) {
+      errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+      errorMsgFeild.textContent = `${msg}, login successfull!`;
+    };
+    this.loginError = function (error) {
+      errorMsgFeild.style.color = 'rgb(255, 0, 0)';
+      errorMsgFeild.textContent = `Login unsuccessfull: ${error}`;
+    };
+    this.registerSuccess = function (msg) {
+      errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+      errorMsgFeild.textContent = `${msg}, registration successfull! Please login.`;
+    };
+    this.registerError = function (error) {
+      errorMsgFeild.style.color = 'rgb(255, 0, 0)';
+      errorMsgFeild.textContent = `Registration unsuccessfull: ${error}`;
+    };
+    this.showForm = function () {
+      alert('Sign-out successful.');
+      logoutBtn.style.display = 'none';
+      loginContainer.style.display = 'block';
+    };
+    this.hideForm = function () {
+      logoutBtn.style.display = 'block';
+      loginContainer.style.display = 'none';
+    };
+    this.logoutError = function (err) {
+      console.log('An error happened.');
+    };
+  }
+  function Model() {
+    let myView = null;
+    this.init = function (view) {
+      myView = view;
+    };
+    this.login = function (email, pass) {
+      // Login
+      (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.signInWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_4__.auth, email, pass).then(userCredential => {
+        // Signed in 
+        const user = userCredential.user.email.split('@').slice(0, 1)[0];
+        myView.loginSuccess(user);
+        myView.hideForm();
+        _SPA__WEBPACK_IMPORTED_MODULE_5__.mySPA.init('root', 'content');
+      }).catch(error => {
+        myView.loginError(error.code);
+      });
+    };
+    this.register = function (email, pass) {
+      // For new registration
+      (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.createUserWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_4__.auth, email, pass).then(userCredential => {
+        // Signed in 
+        const user = userCredential.user.email.split('@').slice(0, 1)[0];
+        myView.registerSuccess(user);
+      }).catch(error => {
+        myView.registerError(error.code);
+      });
+    };
+    this.logout = function () {
+      (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.signOut)(_Firebase__WEBPACK_IMPORTED_MODULE_4__.auth).then(() => {
+        // Sign-out successful.
+        myView.showForm();
+      }).catch(error => {
+        // An error happened.
+        myView.logoutError(error);
+      });
+    };
+  }
+  function Controller() {
+    let myModel = null,
+      appContainer = null,
+      form = null;
+    this.init = function (app, model) {
+      myModel = model;
+      appContainer = app;
+      this.addEventListeners();
+    };
+    this.addEventListeners = function () {
+      appContainer.addEventListener('click', function (e) {
+        form = appContainer.querySelector('#login-form');
+        // loginBtn = appContainer.querySelector('#btnLogin');
+        // registerBtn = appContainer.querySelector('#btnRegister');
+
+        if (e.target && e.target.id === 'btnLogin') {
+          e.preventDefault();
+          e.stopPropagation();
+          myModel.login(appContainer.querySelector('#email').value, appContainer.querySelector('#password').value);
+        }
+        if (e.target && e.target.id === 'btnRegister') {
+          e.preventDefault();
+          e.stopPropagation();
+          myModel.register(appContainer.querySelector('#email').value, appContainer.querySelector('#password').value);
+        }
+        if (e.target && e.target.id === 'btnLogout') {
+          e.preventDefault();
+          e.stopPropagation();
+          myModel.logout();
+        }
+      });
+    };
+  }
+  return {
+    init: function (elem) {
+      const myView = new View();
+      const myModel = new Model();
+      const myController = new Controller();
+      myView.init(document.getElementById(elem));
+      myModel.init(myView);
+      myController.init(document.getElementById(elem), myModel);
+    }
+  };
+}();
 
 /***/ }),
 
@@ -15849,6 +16070,16 @@ module.exports = __webpack_require__.p + "9ded7098db0de0ee5f14.png";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "101bca4fe3b9730ef925.png";
+
+/***/ }),
+
+/***/ "./assets/img/SPA/logout.png":
+/*!***********************************!*\
+  !*** ./assets/img/SPA/logout.png ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "b47a16b15f6628f71fca.png";
 
 /***/ }),
 
