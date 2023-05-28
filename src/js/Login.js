@@ -16,12 +16,14 @@ export const logInApp = (function () {
     let appContainer = null,
         errorMsgFeild = null,
         logoutBtn = null,
+        muteBtn = null,
         loginContainer = null,
         content = null;
 
     this.init = function (app) {
       appContainer = app;
       this.showLoginForm();
+      muteBtn = document.querySelector('#mute-btn');
       errorMsgFeild = app.querySelector('#errorLoginMessage');
       logoutBtn = document.querySelector('#btnLogout');
       loginContainer = app.querySelector('#login');
@@ -53,6 +55,9 @@ export const logInApp = (function () {
       appContainer.innerHTML = content;
       const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${logoutImg}" alt="logout"></button>`;
       appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
+
+      const btnMuteHtml = `<div id="mute-btn" class="mute mute_off mute_hover" style="display: none"></div>`;
+      appContainer.insertAdjacentHTML('beforeBegin', btnMuteHtml);    
     };
 
     this.loginSuccess = function (msg) {
@@ -79,11 +84,13 @@ export const logInApp = (function () {
       alert('Sign-out successful.');
       logoutBtn.style.display = 'none';
       loginContainer.style.display = 'block';
+      muteBtn.style.display = 'none';
     };
 
     this.hideForm = function () {
       logoutBtn.style.display = 'block';
       loginContainer.style.display = 'none';
+      muteBtn.style.display = 'block';
     };
 
     this.logoutError = function (err) {
@@ -112,7 +119,7 @@ export const logInApp = (function () {
         myView.loginSuccess(user);
         setTimeout(() => {
           myView.hideForm();
-          mySPA.init('root', 'content');
+          mySPA.init('app', 'root', 'content');
         }, 750);  
       })
       .catch((error) => {

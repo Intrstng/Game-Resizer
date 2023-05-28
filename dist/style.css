@@ -392,7 +392,7 @@ html, .buttonBlue, .header__nav .nav__list, .header__nav .nav__btn {
 .controls__title, .controls__text, .settings__title, .settings__slider-box label, .description__title, .level__title {
   font-family: 'Russo One', sans-serif; }
 
-body, .level__item, .button, .logout-btn, .header__nav .mute {
+body, .level__item, .button, .logout-btn, .mute {
   transition: all, 0.25s, ease; }
 
 html {
@@ -413,8 +413,8 @@ h2 {
 
 body {
   position: relative;
-  height: 100vh;
   font-size: 1.4rem;
+  height: 100vh;
   display: flex;
   justify-content: none;
   align-items: none;
@@ -1051,7 +1051,7 @@ body {
 .header {
   flex-shrink: 0;
   width: 100%;
-  height: 50rem; }
+  height: 48rem; }
   .header__wrapper {
     width: 140rem;
     margin: 0 auto;
@@ -1083,22 +1083,6 @@ body {
   .header__nav {
     width: 80%;
     z-index: 2; }
-    .header__nav .mute {
-      position: absolute;
-      width: 4rem;
-      height: 4rem;
-      top: 10rem;
-      right: 5rem;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      cursor: pointer; }
-      .header__nav .mute_off {
-        background-image: url(84acc7ea18786d322299.png); }
-      .header__nav .mute_on {
-        background-image: url(cf701a267920e02b7a95.png); }
-      .header__nav .mute_hover:hover {
-        transform: scale(1.05); }
     .header__nav .nav__list {
       display: flex;
       justify-content: space-between;
@@ -1158,7 +1142,7 @@ body {
     margin-bottom: 20rem; } }
 
 @media (max-width: 640px) {
-  .header #mute-btn {
+  .header .mute {
     width: 3rem;
     height: 3rem;
     top: 8rem;
@@ -1182,7 +1166,7 @@ body {
 @media only screen and (max-width: 1140px) {
   .header {
     width: 100%;
-    height: 55rem;
+    height: 53rem;
     flex-shrink: 0; }
     .header__nav {
       width: 105%; }
@@ -1201,7 +1185,7 @@ body {
 @media only screen and (max-width: 640px) {
   .header {
     width: 100%;
-    height: 56.5rem; }
+    height: 54rem; }
     .header .nav__list {
       display: flex;
       justify-content: center;
@@ -1226,7 +1210,7 @@ body {
 @media only screen and (max-width: 390px) {
   .header {
     width: 100%;
-    height: 51rem; }
+    height: 49rem; }
     .header__logo {
       margin-bottom: 4rem; }
     .header__title {
@@ -1238,6 +1222,30 @@ body {
     .header .nav__btn {
       padding: 0.8rem;
       font-size: 1.4rem; } }
+
+.mute {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  top: 10rem;
+  right: 5rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer; }
+  .mute_off {
+    background-image: url(84acc7ea18786d322299.png); }
+  .mute_on {
+    background-image: url(cf701a267920e02b7a95.png); }
+  .mute_hover:hover {
+    transform: scale(1.05); }
+
+@media (max-width: 640px) {
+  .mute {
+    width: 3rem;
+    height: 3rem;
+    top: 8rem;
+    right: 4rem; } }
 
 .content {
   margin: 0 auto;
@@ -1272,6 +1280,9 @@ body {
     width: 34rem;
     padding: 0;
     margin-bottom: 0; } }
+
+.game-bgnd {
+  background-image: none; }
 
 
 /*# sourceMappingURL=style.css.map*/

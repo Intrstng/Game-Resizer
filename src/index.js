@@ -113,16 +113,21 @@ export let platforms = [],
            player;
 
 
+
+
+
+
+           
 //requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
 
  
-function setLevelMap(value) {
+export function setLevelMap(value) {
   levelMap = value;
   console.log(levelMap)
   return levelMap;
 }
 
-function createPlayer(levelMap, platforms) {
+export function createPlayer(levelMap, platforms) {
   levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
     if (cell === 'st') {
@@ -188,7 +193,7 @@ return player;
 }                      
 
 
-function animate() {
+export function animate() {
   requestAnim(animate);
   console.log('animation counter');
   additionalElements.forEach(element => element.draw());
