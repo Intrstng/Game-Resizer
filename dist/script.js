@@ -13339,10 +13339,12 @@ const logInApp = function () {
       errorMsgFeild = null,
       logoutBtn = null,
       muteBtn = null,
+      firstShow = null,
       loginContainer = null,
       content = null;
-    this.init = function (app) {
+    this.init = function (app, state) {
       appContainer = app;
+      firstShow = state;
       this.showLoginForm();
       muteBtn = document.querySelector('#mute-btn');
       errorMsgFeild = app.querySelector('#errorLoginMessage');
@@ -13350,6 +13352,7 @@ const logInApp = function () {
       loginContainer = app.querySelector('#login');
     };
     this.showLoginForm = function () {
+      const erorrMsg = firstShow ? 'Enter the data' : 'Sign-out successful.';
       content = `<div id="login" class="login">
                   <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
                     <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
@@ -13365,7 +13368,7 @@ const logInApp = function () {
                                 <input id="password" class="input-login" name="password" type="password" autocomplete="off">
                               </div>
                                 <div id="loginMessage" class="group">
-                                  <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
+                                  <div id="errorLoginMessage" class="errorlabel">${erorrMsg}</div>
                                 </div>
                                   <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
                                     <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
@@ -13394,7 +13397,6 @@ const logInApp = function () {
       errorMsgFeild.textContent = `Registration unsuccessfull: ${error}`;
     };
     this.showForm = function () {
-      alert('Sign-out successful.');
       logoutBtn.style.display = 'none';
       loginContainer.style.display = 'block';
       muteBtn.style.display = 'none';
@@ -13498,7 +13500,10 @@ const logInApp = function () {
           if (e.target && e.target.id === 'btnLogoutImg') {
             e.preventDefault();
             e.stopPropagation();
-            myModel.logout();
+            let isLeave = confirm('Do you really want to leave the page? Loss of progress is possible.'); // в идеале переместить во View (если бы confirm можно было стилизовать и изменять его содержимое)
+            if (isLeave) {
+              myModel.logout();
+            }
           }
         });
       }
@@ -13506,14 +13511,14 @@ const logInApp = function () {
     };
   }
   return {
-    init: function (elem, firstStart) {
-      // firstStart - is a flag when login popup shows at first time (used for: not to add handler to logoutBtn at second login popup show)
+    init: function (elem, state) {
+      // state - is a first start flag - when login popup is showing for the first time (used for: not to add handler to logoutBtn during second login popup show, and to show logout message)
       const myView = new View();
       const myModel = new Model();
       const myController = new Controller();
-      myView.init(document.getElementById(elem));
+      myView.init(document.getElementById(elem), state);
       myModel.init(myView);
-      myController.init(document.getElementById(elem), myModel, firstStart);
+      myController.init(document.getElementById(elem), myModel, state);
     }
   };
 }();
