@@ -38,7 +38,7 @@ body {
   position: relative;
   height: 100vh;
   font-size: 1.4rem;
-  @include flex('flex');
+  @include flex(flex);
   flex-direction: column;
   background-color: $color-span;
   @include background-img('bg1.jpg');

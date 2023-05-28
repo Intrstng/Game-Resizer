@@ -213,17 +213,5 @@ const playNextTrack = (currentTrack, playlist) => {
   }
 }
 
-function muteSound(e) {
-  if (e.target.closest('#mute-btn')) {
-    for (let sound in audio) {
-      if (audio?.[sound]?.[source]) {
-        audio[sound][source].muted === false ?
-        audio[sound][source].muted = true :
-        audio[sound][source].muted = false;
-      }
-    }
-    changeMuteIcon();
-  }
-}
 
-export { audio, source, gameSoundEffects, getRandomTrack, playNextTrack, muteSound }
+export { audio, source, gameSoundEffects, getRandomTrack, playNextTrack/* , muteSound */ }

@@ -12578,94 +12578,7 @@ let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
 
-///////////////////////////////////////////////////////////
-
-
 _js_Login__WEBPACK_IMPORTED_MODULE_12__.logInApp.init('app');
-
-//// Чтобы заработало: 
-//// закоментировать logInApp.init('app');  и  import { logInApp } from './js/Login';
-//// раскоментировать HTML и код ниже
-
-//             import { initializeApp } from 'firebase/app';
-//             import { getAnalytics } from 'firebase/analytics';
-//             import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-
-//             const firebaseConfig = {
-//               apiKey: "AIzaSyCJcFPDHK_OR1wHZuJH79VCPO0NWdLJaUY",
-//               authDomain: "platform-traveller.firebaseapp.com",
-//               projectId: "platform-traveller",
-//               storageBucket: "platform-traveller.appspot.com",
-//               messagingSenderId: "531732691588",
-//               appId: "1:531732691588:web:9772eb1de30516e1ede0d1",
-//               measurementId: "G-ZN6EW32BEQ"
-//             };
-
-//             // Init Firebase
-//             const app = initializeApp(firebaseConfig);
-//             const analytics = getAnalytics(app);
-//             const auth = getAuth();
-
-// // New Registration  
-// document.getElementById('btnRegister').addEventListener('click', function() {
-//                   const email =  document.getElementById('email').value;
-//                   const password = document.getElementById('password').value;
-//                   const errorMsgFeild = document.getElementById('errorLoginMessage');
-//                   // For new registration
-//                   createUserWithEmailAndPassword(auth, email, password)
-//                   .then((userCredential) => {
-//                     // Signed in 
-//                     const user = userCredential.user.email.split('@').slice(0, 1)[0];
-//                     errorMsgFeild.style.color = 'rgb(153, 153, 153)';
-//                     errorMsgFeild.textContent = `${user}, registration successfull! Please login.`;
-//                   })
-//                   .catch((error) => {
-//                     const errorCode = error.code;
-//                     const errorMessage = error.message;
-//                                     errorMsgFeild.style.color = 'rgb(255, 0, 0)';
-//                                     errorMsgFeild.textContent = `Registration unsuccessfull: ${errorCode}`;
-//                   });		  		  
-// });
-
-// // Login
-// document.getElementById('btnLogin').addEventListener('click', function() {
-//                       const email =  document.getElementById('email').value;
-//                       const password = document.getElementById('password').value;
-//                       const errorMsgFeild = document.getElementById('errorLoginMessage');
-//                       signInWithEmailAndPassword(auth, email, password)
-//                       .then((userCredential) => {
-//                         // Signed in 
-//                         const user = userCredential.user;
-//                         errorMsgFeild.style.color = 'rgb(153, 153, 153)';
-//                         errorMsgFeild.textContent = `${user.email.split('@').slice(0, 1)[0]}, login successfull!`;
-//                         document.getElementById('btnLogout').style.display = 'block';
-//                         document.getElementById('login').style.display = 'none';
-//                       })
-//                       .catch((error) => {
-//                                             const errorCode = error.code;
-//                                             const errorMessage = error.message;
-//                                             errorMsgFeild.style.color = 'rgb(255, 0, 0)';
-//                                             errorMsgFeild.textContent = `Login unsuccessfull: ${errorCode}`;
-//                       });		  		  
-// });
-
-// // Logout
-
-// document.getElementById('btnLogout').addEventListener('click', function() {
-//                       signOut(auth).then(() => {
-//                         // Sign-out successful.
-//                         console.log('Sign-out successful.');
-//                         alert('Sign-out successful.');
-//                         document.getElementById('btnLogout').style.display = 'none';
-//                         document.getElementById('login').style.display = 'block';
-//                       }).catch((error) => {
-//                         // An error happened.
-//                         console.log('An error happened.');
-//                       });		  		  
-// });
-
-////////////////////////////////////////////////////////////
-
 let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 let level = 1;
 function increseLevel(obj) {
@@ -12723,25 +12636,6 @@ function setVolumeRangeHandlers() {
 }
 main && window.addEventListener('load', setVolumeRangeHandlers);
 main && window.addEventListener('hashchange', setVolumeRangeHandlers);
-
-//document.getElementById('mute-btn').addEventListener('click', muteSound);
-
-let track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
-track.pause();
-track = (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.getRandomTrack)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
-let isInitMusicPlay = false;
-function playMusic(e) {
-  if (e.target.closest('#select-lvl')) {
-    if (!isInitMusicPlay) {
-      track.play();
-    }
-    isInitMusicPlay = true;
-  }
-}
-window.addEventListener('click', playMusic);
-track.onended = function () {
-  (0,_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.playNextTrack)(track, _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio);
-};
 function reloadGameplay() {
   additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
   platforms.forEach(platform => {
@@ -13461,6 +13355,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const logInApp = function () {
   function View() {
     let appContainer = null,
@@ -13477,21 +13372,25 @@ const logInApp = function () {
     this.showLoginForm = function () {
       appContainer.innerHTML = `
       <div id="login" class="login">
-        <form id="login-form">
-          <div class="group">
-            <label for="email">Email</label>
-            <input id="email" class="input-login" name="email" type="email" autocomplete="on">
-          </div>
-            <div class="group">
-              <label for="password">Password</label>
-              <input id="password" class="input-login" name="password" type="password" autocomplete="off">
-            </div>
-              <div id="loginMessage" class="group">
-                <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
-              </div>
-                <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
-                  <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
-        </form>
+        <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
+          <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
+            <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}" alt="cloud third">
+              <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}" alt="cloud fourth">
+                <form id="login-form">
+                  <div class="group">
+                    <label for="email">Email</label>
+                    <input id="email" class="input-login" name="email" type="email" autocomplete="on">
+                  </div>
+                    <div class="group">
+                      <label for="password">Password</label>
+                      <input id="password" class="input-login" name="password" type="password" autocomplete="off">
+                    </div>
+                      <div id="loginMessage" class="group">
+                        <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
+                      </div>
+                        <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
+                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
+                </form>
       </div>
         <button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoutImg}" alt="logout"></button>`;
     };
@@ -13522,6 +13421,10 @@ const logInApp = function () {
     };
     this.logoutError = function (err) {
       console.log('An error happened.');
+    };
+    this.updateUserMsg = function () {
+      errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+      errorMsgFeild.textContent = `Complete data entry...`;
     };
   }
   function Model() {
@@ -13560,6 +13463,9 @@ const logInApp = function () {
         myView.logoutError(error);
       });
     };
+    this.updateUserMsg = function () {
+      myView.updateUserMsg();
+    };
   }
   function Controller() {
     let myModel = null,
@@ -13573,9 +13479,6 @@ const logInApp = function () {
     this.addEventListeners = function () {
       appContainer.addEventListener('click', function (e) {
         form = appContainer.querySelector('#login-form');
-        // loginBtn = appContainer.querySelector('#btnLogin');
-        // registerBtn = appContainer.querySelector('#btnRegister');
-
         if (e.target && e.target.id === 'btnLogin') {
           e.preventDefault();
           e.stopPropagation();
@@ -13590,6 +13493,11 @@ const logInApp = function () {
           e.preventDefault();
           e.stopPropagation();
           myModel.logout();
+        }
+      });
+      appContainer.addEventListener('input', function (e) {
+        if (e.target && e.target.id === 'email' || e.target && e.target.id === 'password') {
+          myModel.updateUserMsg();
         }
       });
     };
@@ -14432,12 +14340,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
+/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+
 
 
 const mySPA = function () {
   function View() {
-    let myContainerBtns = null;
-    let myContainerShow = null;
+    let myContainerBtns = null,
+      myContainerShow = null,
+      muteBtn = null;
     const HomeComponent = {
       id: 'main',
       title: 'Greeting',
@@ -14569,6 +14480,7 @@ const mySPA = function () {
     this.init = function (container_btns, container_show) {
       myContainerBtns = container_btns;
       myContainerShow = container_show;
+      muteBtn = myContainerBtns.querySelector('#mute-btn');
     };
     this.updateButtons = function (currentPage) {
       const menuLinks = myContainerBtns.querySelectorAll('.nav__link');
@@ -14586,29 +14498,105 @@ const mySPA = function () {
       myContainerShow.innerHTML = router[routeName].render(`${routeName}-page`);
       this.updateButtons(router[routeName].id);
     };
+    this.changeMuteIcon = function () {
+      muteBtn.classList.toggle('mute_off');
+      muteBtn.classList.toggle('mute_on');
+    };
   }
   ;
   function Model() {
-    let myView = null;
+    let myView = null,
+      track = null,
+      isInitMusicPlay = false,
+      soundSettings = {};
     this.init = function (view) {
       myView = view;
     };
     this.updateState = function (hashPageName) {
       myView.renderContent(hashPageName);
     };
+    this.playSound = function () {
+      if (!isInitMusicPlay) {
+        track = (0,_data_Audio__WEBPACK_IMPORTED_MODULE_2__.getRandomTrack)(_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio);
+        track.pause();
+        track.play();
+      }
+      isInitMusicPlay = true;
+      this.playNextTrack(track);
+    };
+    this.playNextTrack = function (src) {
+      src.onended = function () {
+        (0,_data_Audio__WEBPACK_IMPORTED_MODULE_2__.playNextTrack)(src, _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio);
+      };
+    };
+    this.muteSound = function () {
+      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source]) {
+          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted === false ? _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted = true : _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted = false;
+        }
+      }
+      myView.changeMuteIcon();
+    };
+    this.setLocalStorage = function (key, value) {
+      if ('localStorage' in window && window.localStorage !== null) {
+        soundSettings[key] = value;
+        localStorage.setItem('settings', JSON.stringify(soundSettings));
+      }
+    };
+    this.setSoundsVolume = function (value) {
+      console.log(value);
+      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && sound != 'track_1' && sound != 'track_2' && sound != 'track_3' && sound != 'track_4') {
+          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].volume = value;
+        }
+      }
+      this.setLocalStorage('soundEffects', value);
+    };
+    this.setMusicVolume = function (value) {
+      console.log(value);
+      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
+          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].volume = value;
+        }
+      }
+      this.setLocalStorage('musicEffects', value);
+    };
   }
   function Controller() {
-    let myContainer = null;
-    let myModel = null;
-    this.init = function (container, model) {
-      myContainer = container;
+    let myContainerNav = null,
+      myContainerMain = null,
+      myModel = null;
+    this.init = function (container_1, container_2, model) {
+      myContainerNav = container_1;
+      myContainerMain = container_2;
       myModel = model;
       window.addEventListener('hashchange', this.updateState);
       this.updateState();
+      this.addEventListeners();
     };
     this.updateState = function () {
       const hashPageName = location.hash.slice(1).toLowerCase();
       myModel.updateState(hashPageName);
+    };
+    this.addEventListeners = function () {
+      myContainerNav.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'mute-btn') {
+          myModel.muteSound();
+        }
+        if (e.target && e.target.id === 'select-lvl') {
+          myModel.playSound();
+        }
+      });
+      myContainerMain.addEventListener('change', function (e) {
+        if (e.target && e.target.id === 'volume-snd') {
+          // sound effects volume
+          myModel.setSoundsVolume(e.target.value);
+        }
+        if (e.target && e.target.id === 'volume-msc') {
+          // music volume
+          myModel.setMusicVolume(e.target.value);
+        }
+      });
     };
   }
   ;
@@ -14621,9 +14609,9 @@ const mySPA = function () {
       const view = new View();
       const model = new Model();
       const controller = new Controller();
-      view.init(document.getElementById(container_btns), document.getElementById(container_show));
+      view.init(document.getElementById(container_btns), document.getElementById(container_show)); // контейнер с <nav> и контейнер с <main>
       model.init(view);
-      controller.init(document.getElementById(container_btns), model); // можно передавать только model
+      controller.init(document.getElementById(container_btns), document.getElementById(container_show), model); //  контейнер с <nav>, контейнер с <main> и модель (можно сюда еще передать mySPA, audio, source)
     },
 
     main: function () {},
@@ -14636,7 +14624,6 @@ const mySPA = function () {
           <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
           <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}" alt="cloud third">
           <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}" alt="cloud fourth">
-          <div id="mute-btn" class="mute mute_off mute_hover"></div>
             <div class="header__wrapper">
               <img class="header__logo" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoImg_1}" alt="logo">
                 <div class="header__logo-box">
@@ -14661,6 +14648,7 @@ const mySPA = function () {
                                   <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
                                 </li>
                           </ul>
+                            <div id="mute-btn" class="mute mute_off mute_hover"></div>
                       </nav>
             </div>
         </header>
@@ -15005,7 +14993,6 @@ class Bullet {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "changeMuteIcon": () => (/* binding */ changeMuteIcon),
 /* harmony export */   "createImage": () => (/* binding */ createImage),
 /* harmony export */   "flamethrowerShootSoundIntervalInit": () => (/* binding */ flamethrowerShootSoundIntervalInit),
 /* harmony export */   "fullScreen": () => (/* binding */ fullScreen),
@@ -15075,11 +15062,13 @@ function setLocalStorage(item_1, item_2) {
 function getLocalStorage(key, value) {
   return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
-function changeMuteIcon() {
+
+/* function changeMuteIcon() {
   const muteIcon = document.getElementById('mute-btn');
   muteIcon.classList.toggle('mute_off');
   muteIcon.classList.toggle('mute_on');
-}
+} */
+
 
 
 /***/ }),
@@ -15095,7 +15084,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "audio": () => (/* binding */ audio),
 /* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects),
 /* harmony export */   "getRandomTrack": () => (/* binding */ getRandomTrack),
-/* harmony export */   "muteSound": () => (/* binding */ muteSound),
 /* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack),
 /* harmony export */   "source": () => (/* binding */ source),
 /* harmony export */   "volumeEffects": () => (/* binding */ volumeEffects),
@@ -15352,16 +15340,6 @@ const playNextTrack = (currentTrack, playlist) => {
     playNextTrack(tracksList[currentTrackNumber][source], audio);
   };
 };
-function muteSound(e) {
-  if (e.target.closest('#mute-btn')) {
-    for (let sound in audio) {
-      if (audio?.[sound]?.[source]) {
-        audio[sound][source].muted === false ? audio[sound][source].muted = true : audio[sound][source].muted = false;
-      }
-    }
-    (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.changeMuteIcon)();
-  }
-}
 
 
 /***/ }),

@@ -51,10 +51,11 @@ import {
         logoImg_1,
         logoImg_2,
 } from './Assets';
-import { setLocalStorage, getLocalStorage } from './Utils';
-import { audio, source, getRandomTrack, playNextTrack } from './data/Audio';
+import { getLocalStorage } from './Utils';
+import { audio, source } from './data/Audio';
 
 export const mySPA = (function() {
+
   function View() {
     let myContainerBtns = null,
         myContainerShow = null,
@@ -216,6 +217,18 @@ export const mySPA = (function() {
       this.updateButtons(router[routeName].id);
     }
 
+    this.muteSound = function(e) {
+        if (e.target.closest('#mute-btn')) {
+          for (let sound in audio) {
+            if (audio?.[sound]?.[source]) {
+              audio[sound][source].muted === false ?
+              audio[sound][source].muted = true :
+              audio[sound][source].muted = false;
+            }
+          }
+          //this.changeMuteIcon();
+        }
+    }
     this.changeMuteIcon = function() {
       muteBtn.classList.toggle('mute_off');
       muteBtn.classList.toggle('mute_on');
@@ -223,10 +236,7 @@ export const mySPA = (function() {
   };
 
   function Model () {
-      let myView = null,
-          track = null,
-          isInitMusicPlay = false,
-          soundSettings = {};
+      let myView = null;
 
       this.init = function(view) {
         myView = view;
@@ -236,82 +246,20 @@ export const mySPA = (function() {
         myView.renderContent(hashPageName);
       }
 
-      this.playSound = function() {
-        if (!isInitMusicPlay) {
-          track = getRandomTrack(audio);
-          track.pause();
-          track.play();
-        }
-        isInitMusicPlay = true;
-        this.playNextTrack(track);
-      }
-
-      this.playNextTrack = function(src) {
-        src.onended = function() {
-          playNextTrack(src, audio);
-        }
-      }
-
       this.muteSound = function() {
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]) {
-            audio[sound][source].muted === false ?
-            audio[sound][source].muted = true :
-            audio[sound][source].muted = false;
-          }
-        }
-        myView.changeMuteIcon();
+        myView.muteSound();
       }
-
-      this.setLocalStorage = function (key, value) {
-        if (('localStorage' in window) && (window.localStorage !== null)) {
-          soundSettings[key] = value;
-          localStorage.setItem('settings', JSON.stringify(soundSettings));
-        }
-      }
-
-      this.setSoundsVolume = function(value) {
-        console.log(value);
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]
-            && (sound != 'track_1' &&
-                sound != 'track_2' &&
-                sound != 'track_3' &&
-                sound != 'track_4')) {
-            audio[sound][source].volume = value;
-          }
-        }
-        this.setLocalStorage('soundEffects', value);
-      }
-
-      this.setMusicVolume = function(value) {
-        console.log(value);
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]
-            && (sound === 'track_1' ||
-                sound === 'track_2' ||
-                sound === 'track_3' ||
-                sound === 'track_4')) {
-            audio[sound][source].volume = value;
-          }
-        }
-        this.setLocalStorage('musicEffects', value);
-      }
-
   }
 
   function Controller () {
-      let myContainerNav = null,
-          myContainerMain = null,
-          myModel = null;
+      let myContainer = null;
+      let myModel = null;
 
-      this.init = function(container_1, container_2, model) {
-        myContainerNav = container_1;
-        myContainerMain = container_2;
+      this.init = function(container, model) {
+        myContainer = container;
         myModel = model;
         window.addEventListener('hashchange', this.updateState);
         this.updateState();
-        this.addEventListeners();
       }
 
       this.updateState = function() {
@@ -319,25 +267,11 @@ export const mySPA = (function() {
         myModel.updateState(hashPageName);
       }
 
-      this.addEventListeners = function() {
-        myContainerNav.addEventListener('click', function (e) {
-          if (e.target && e.target.id === 'mute-btn') {
-            myModel.muteSound();
-          }
-          if (e.target && e.target.id === 'select-lvl') {
-            myModel.playSound();
-          }
-        });
-
-        myContainerMain.addEventListener('change', function (e) {
-          if (e.target && e.target.id === 'volume-snd') { // sound effects volume
-            myModel.setSoundsVolume(e.target.value);
-          }
-          if (e.target && e.target.id === 'volume-msc') { // music volume
-            myModel.setMusicVolume(e.target.value);
-          }
-        });
-      };
+      myContainer.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'mute-btn') {
+          myModel.muteSound();
+        }
+      });
   };
 
   /* Init */
@@ -349,9 +283,9 @@ export const mySPA = (function() {
         const model = new Model();
         const controller = new Controller();
 
-        view.init(document.getElementById(container_btns), document.getElementById(container_show)); // контейнер с <nav> и контейнер с <main>
+        view.init(document.getElementById(container_btns), document.getElementById(container_show));
         model.init(view);
-        controller.init(document.getElementById(container_btns), document.getElementById(container_show), model); //  контейнер с <nav>, контейнер с <main> и модель (можно сюда еще передать mySPA, audio, source)
+        controller.init(document.getElementById(container_btns), model); // можно передавать только model
       },
 
       main: function() {
@@ -377,20 +311,20 @@ export const mySPA = (function() {
                   </div>
                       <nav id="root" class="header__nav nav">
                         <ul class="nav__list">
-                          <li class="nav__item">
+                          <li class="nav__item nav__item_hover">
                             <a href="#howtoplay" class="nav__link">How to play</a>
                           </li>
-                            <li class="nav__item">
+                            <li class="nav__item nav__item_hover">
                               <a href="#settings" id="settings-btn" class="nav__link">Settings</a>
                             </li>
-                              <li class="nav__item">
+                              <li class="nav__item nav__item_hover">
                                 <a href="#description" class="nav__link">Description</a>
                               </li>
-                                <li class="nav__item">
+                                <li class="nav__item nav__item_hover">
                                   <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
                                 </li>
                           </ul>
-                            <div id="mute-btn" class="mute mute_off mute_hover"></div>
+                          <div id="mute-btn" class="mute mute_off mute_hover"></div>
                       </nav>
             </div>
         </header>

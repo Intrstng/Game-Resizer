@@ -4,6 +4,11 @@ import { getAnalytics } from 'firebase/analytics';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app, analytics, auth } from './Firebase';
 import { mySPA } from './SPA';
+import { cloud_1,
+         cloud_2,
+         cloud_3,
+         cloud_4
+        } from './Assets';
 
 export const logInApp = (function () {
   function View() {
@@ -23,21 +28,25 @@ export const logInApp = (function () {
     this.showLoginForm = function () {
       appContainer.innerHTML = `
       <div id="login" class="login">
-        <form id="login-form">
-          <div class="group">
-            <label for="email">Email</label>
-            <input id="email" class="input-login" name="email" type="email" autocomplete="on">
-          </div>
-            <div class="group">
-              <label for="password">Password</label>
-              <input id="password" class="input-login" name="password" type="password" autocomplete="off">
-            </div>
-              <div id="loginMessage" class="group">
-                <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
-              </div>
-                <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
-                  <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
-        </form>
+        <img class="cloud-1" src="${cloud_1}" alt="cloud first">
+          <img class="cloud-2" src="${cloud_2}" alt="cloud second">
+            <img class="cloud-3" src="${cloud_3}" alt="cloud third">
+              <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
+                <form id="login-form">
+                  <div class="group">
+                    <label for="email">Email</label>
+                    <input id="email" class="input-login" name="email" type="email" autocomplete="on">
+                  </div>
+                    <div class="group">
+                      <label for="password">Password</label>
+                      <input id="password" class="input-login" name="password" type="password" autocomplete="off">
+                    </div>
+                      <div id="loginMessage" class="group">
+                        <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
+                      </div>
+                        <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
+                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
+                </form>
       </div>
         <button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img src="${logoutImg}" alt="logout"></button>`;
     };
@@ -75,6 +84,11 @@ export const logInApp = (function () {
 
     this.logoutError = function (err) {
       console.log('An error happened.');
+    }
+
+    this.updateUserMsg = function () {
+      errorMsgFeild.style.color = 'rgb(153, 153, 153)';
+      errorMsgFeild.textContent = `Complete data entry...`;
     }
   }
 
@@ -122,6 +136,10 @@ export const logInApp = (function () {
         myView.logoutError(error);
       });		  	
     };
+
+    this.updateUserMsg = function () {
+      myView.updateUserMsg();
+    };
   }
 
   function Controller() {
@@ -132,15 +150,12 @@ export const logInApp = (function () {
     this.init = function (app, model) {
       myModel = model;
       appContainer = app;
-
       this.addEventListeners();
     };
 
     this.addEventListeners = function() {
       appContainer.addEventListener('click', function (e) {
         form = appContainer.querySelector('#login-form');
-        // loginBtn = appContainer.querySelector('#btnLogin');
-        // registerBtn = appContainer.querySelector('#btnRegister');
 
         if (e.target && e.target.id === 'btnLogin') {
           e.preventDefault();
@@ -165,7 +180,13 @@ export const logInApp = (function () {
           e.stopPropagation();
           myModel.logout();
         }
+      });
 
+      appContainer.addEventListener('input', function (e) {
+        if (e.target && e.target.id === 'email' ||
+            e.target && e.target.id === 'password') {
+          myModel.updateUserMsg();
+        }
       });
     };
   }

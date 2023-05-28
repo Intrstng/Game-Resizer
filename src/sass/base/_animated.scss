@@ -53,7 +53,69 @@
   }
 }
 
-// Clouds
+// Clouds Login page
+.login {
+  .cloud-1,
+  .cloud-2,
+  .cloud-3,
+  .cloud-4 {
+    width: 100%;
+    position: absolute;
+    @include prefix(select, (none), webkit moz ms);
+    pointer-events: none;
+  }
+  .cloud-1 {
+    @include top-left(-20rem, 0);
+    @include prefix(animation, cloudAnim 30s infinite linear, webkit moz);
+  }
+  .cloud-2 {
+    @include top-left(-10rem, 0);
+    @include prefix(animation, cloudAnim 110s infinite linear, webkit moz);
+  }
+  .cloud-3 {
+    @include top-left(-20rem, 0);
+    @include prefix(animation, cloudAnim 70s infinite linear, webkit moz);
+  }
+  .cloud-4 {
+    @include top-left(-20rem, 0);
+    @include prefix(animation, cloudAnim 90s infinite linear, webkit moz);
+  }
+}
+
+@keyframes cloudAnim {
+  from {
+    @include prefix(transform, translateX(100%), webkit ms o);
+  }
+  to {
+    @include prefix(transform, translateX(-100%), webkit ms o);
+  }
+}
+
+@include media-desktop {
+  .login {
+    .cloud-1,
+    .cloud-3,
+    .cloud-4 {
+      @include top-left(0rem, 0);
+    }
+    .cloud-2 {
+      @include top-left(0rem, 0);
+    }
+  }
+}
+
+@include screen-and-tablet {
+  .login {
+    .cloud-1,
+    .cloud-2,
+    .cloud-3,
+    .cloud-4 {
+        display: none;
+      }
+  }
+}
+
+// Clouds SPA
 .header {
   .cloud-1,
   .cloud-2,

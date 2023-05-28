@@ -93,93 +93,9 @@ export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
 
-///////////////////////////////////////////////////////////
 
 import { logInApp } from './js/Login';
 logInApp.init('app');
-
-//// Чтобы заработало: 
-//// закоментировать logInApp.init('app');  и  import { logInApp } from './js/Login';
-//// раскоментировать HTML и код ниже
-
-//             import { initializeApp } from 'firebase/app';
-//             import { getAnalytics } from 'firebase/analytics';
-//             import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-
-//             const firebaseConfig = {
-//               apiKey: "AIzaSyCJcFPDHK_OR1wHZuJH79VCPO0NWdLJaUY",
-//               authDomain: "platform-traveller.firebaseapp.com",
-//               projectId: "platform-traveller",
-//               storageBucket: "platform-traveller.appspot.com",
-//               messagingSenderId: "531732691588",
-//               appId: "1:531732691588:web:9772eb1de30516e1ede0d1",
-//               measurementId: "G-ZN6EW32BEQ"
-//             };
-
-//             // Init Firebase
-//             const app = initializeApp(firebaseConfig);
-//             const analytics = getAnalytics(app);
-//             const auth = getAuth();
-
-// // New Registration  
-// document.getElementById('btnRegister').addEventListener('click', function() {
-//                   const email =  document.getElementById('email').value;
-//                   const password = document.getElementById('password').value;
-//                   const errorMsgFeild = document.getElementById('errorLoginMessage');
-//                   // For new registration
-//                   createUserWithEmailAndPassword(auth, email, password)
-//                   .then((userCredential) => {
-//                     // Signed in 
-//                     const user = userCredential.user.email.split('@').slice(0, 1)[0];
-//                     errorMsgFeild.style.color = 'rgb(153, 153, 153)';
-//                     errorMsgFeild.textContent = `${user}, registration successfull! Please login.`;
-//                   })
-//                   .catch((error) => {
-//                     const errorCode = error.code;
-//                     const errorMessage = error.message;
-//                                     errorMsgFeild.style.color = 'rgb(255, 0, 0)';
-//                                     errorMsgFeild.textContent = `Registration unsuccessfull: ${errorCode}`;
-//                   });		  		  
-// });
-
-// // Login
-// document.getElementById('btnLogin').addEventListener('click', function() {
-//                       const email =  document.getElementById('email').value;
-//                       const password = document.getElementById('password').value;
-//                       const errorMsgFeild = document.getElementById('errorLoginMessage');
-//                       signInWithEmailAndPassword(auth, email, password)
-//                       .then((userCredential) => {
-//                         // Signed in 
-//                         const user = userCredential.user;
-//                         errorMsgFeild.style.color = 'rgb(153, 153, 153)';
-//                         errorMsgFeild.textContent = `${user.email.split('@').slice(0, 1)[0]}, login successfull!`;
-//                         document.getElementById('btnLogout').style.display = 'block';
-//                         document.getElementById('login').style.display = 'none';
-//                       })
-//                       .catch((error) => {
-//                                             const errorCode = error.code;
-//                                             const errorMessage = error.message;
-//                                             errorMsgFeild.style.color = 'rgb(255, 0, 0)';
-//                                             errorMsgFeild.textContent = `Login unsuccessfull: ${errorCode}`;
-//                       });		  		  
-// });
-
-// // Logout
-
-// document.getElementById('btnLogout').addEventListener('click', function() {
-//                       signOut(auth).then(() => {
-//                         // Sign-out successful.
-//                         console.log('Sign-out successful.');
-//                         alert('Sign-out successful.');
-//                         document.getElementById('btnLogout').style.display = 'none';
-//                         document.getElementById('login').style.display = 'block';
-//                       }).catch((error) => {
-//                         // An error happened.
-//                         console.log('An error happened.');
-//                       });		  		  
-// });
-
-////////////////////////////////////////////////////////////
 
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
@@ -224,32 +140,32 @@ export let initStart = true;
 // Получение значений с input type='range' volume
 const main = document.getElementById('content');
 export function setVolumeRangeHandlers() {
-  const volumeRangeSound = main.querySelector('#volume-snd');
-  const volumeRangeMusic = main.querySelector('#volume-msc');
-  if (volumeRangeSound || volumeRangeMusic) {
-    volumeRangeSound.addEventListener('change', () => {
-      for (let sound in audio) {
-        if (audio?.[sound]?.[source]
-          && (sound != 'track_1' &&
-              sound != 'track_2' &&
-              sound != 'track_3' &&
-              sound != 'track_4')) {
-          audio[sound][source].volume = volumeRangeSound.value;
-        }
-      }
-      setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
+            const volumeRangeSound = main.querySelector('#volume-snd');
+            const volumeRangeMusic = main.querySelector('#volume-msc');
+            if (volumeRangeSound || volumeRangeMusic) {
+              volumeRangeSound.addEventListener('change', () => {
+                for (let sound in audio) {
+                  if (audio?.[sound]?.[source]
+                    && (sound != 'track_1' &&
+                        sound != 'track_2' &&
+                        sound != 'track_3' &&
+                        sound != 'track_4')) {
+                    audio[sound][source].volume = volumeRangeSound.value;
+                  }
+                }
+                setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
     });
     volumeRangeMusic.addEventListener('change', () => {
-      for (let sound in audio) {
-        if (audio?.[sound]?.[source]
-          && (sound === 'track_1' ||
-              sound === 'track_2' ||
-              sound === 'track_3' ||
-              sound === 'track_4')) {
-          audio[sound][source].volume = volumeRangeMusic.value;
-        }
-      }
-      setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
+                for (let sound in audio) {
+                  if (audio?.[sound]?.[source]
+                    && (sound === 'track_1' ||
+                        sound === 'track_2' ||
+                        sound === 'track_3' ||
+                        sound === 'track_4')) {
+                    audio[sound][source].volume = volumeRangeMusic.value;
+                  }
+                }
+                setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
     });
   }
 }
@@ -269,41 +185,6 @@ main && window.addEventListener('hashchange', setVolumeRangeHandlers);
 
 
 
-
-
-
-
-
-
-
-                                  //document.getElementById('mute-btn').addEventListener('click', muteSound);
-
-
-
-
-let track = getRandomTrack(audio);
-track.pause();
-track = getRandomTrack(audio);
-
- let isInitMusicPlay = false;
- function playMusic(e) {
-  if (e.target.closest('#select-lvl')) {
-    if (!isInitMusicPlay) {
-      track.play();
-    }
-    isInitMusicPlay = true;
-  }
- }
-window.addEventListener('click', playMusic);
-
-
-
-
-
-
-track.onended = function() {
-  playNextTrack(track, audio);
-}
 
 
 function reloadGameplay() {
