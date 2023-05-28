@@ -78,7 +78,6 @@ export const logInApp = (function () {
     this.showForm = function () {
       alert('Sign-out successful.');
       logoutBtn.style.display = 'none';
-      logInApp.init('app');
       loginContainer.style.display = 'block';
     };
 
@@ -149,6 +148,7 @@ export const logInApp = (function () {
     this.logout = function () {
       signOut(auth).then(() => {
         // Sign-out successful.
+        logInApp.init('app', false);
         myView.showForm();
         this.stopAudioBeforeLeave();
       }).catch((error) => {
@@ -165,63 +165,67 @@ export const logInApp = (function () {
   function Controller() {
     let myModel = null,
         appContainer = null,
+        firstShow = null,
         form = null;
 
-    this.init = function (app, model) {
+    this.init = function (app, model, firstStart) {
       myModel = model;
       appContainer = app;
+      firstShow = firstStart;
       this.addEventListeners();
     };
 
     this.addEventListeners = function() {
-      appContainer.addEventListener('click', function(e) {
-        form = appContainer.querySelector('#login-form');
+        appContainer.addEventListener('click', function(e) {
+          form = appContainer.querySelector('#login-form');
 
-        if (e.target && e.target.id === 'btnLogin') {
-          e.preventDefault();
-          e.stopPropagation();
-          myModel.login(
-            appContainer.querySelector('#email').value,
-            appContainer.querySelector('#password').value
-          );
-        }
+          if (e.target && e.target.id === 'btnLogin') {
+            e.preventDefault();
+            e.stopPropagation();
+            myModel.login(
+              appContainer.querySelector('#email').value,
+              appContainer.querySelector('#password').value
+            );
+          }
 
-        if (e.target && e.target.id === 'btnRegister') {
-          e.preventDefault();
-          e.stopPropagation();
-          myModel.register(
-            appContainer.querySelector('#email').value,
-            appContainer.querySelector('#password').value
-          );
-        }
-      });
+          if (e.target && e.target.id === 'btnRegister') {
+            e.preventDefault();
+            e.stopPropagation();
+            myModel.register(
+              appContainer.querySelector('#email').value,
+              appContainer.querySelector('#password').value
+            );
+          }
+        });
 
-      appContainer.addEventListener('input', function(e) {
-        if (e.target && e.target.id === 'email' ||
-            e.target && e.target.id === 'password') {
-          myModel.updateUserMsg();
-        }
-      });
+        appContainer.addEventListener('input', function(e) {
+          if (e.target && e.target.id === 'email' ||
+              e.target && e.target.id === 'password') {
+            myModel.updateUserMsg();
+          }
+        });
 
-      document.addEventListener('click', function(e) {
-        if (e.target && e.target.id === 'btnLogoutImg') {
-          e.preventDefault();
-          e.stopPropagation();
-          myModel.logout();
-        }
-      });
-    };
+      if (firstShow) {
+        document.addEventListener('click', function(e) {
+          if (e.target && e.target.id === 'btnLogoutImg') {
+            e.preventDefault();
+            e.stopPropagation();
+            myModel.logout();
+          }
+        });
+      };
+    }
   }
 
   return {
-    init: function (elem) {
+    init: function (elem, firstStart) { // firstStart - is a flag when login popup shows at first time (used for: not to add handler to logoutBtn at second login popup show)
       const myView = new View();
       const myModel = new Model();
       const myController = new Controller();
 
       myView.init(document.getElementById(elem));
       myModel.init(myView);
-      myController.init(document.getElementById(elem), myModel);
+      myController.init(document.getElementById(elem), myModel, firstStart);
     },
   };
 })();

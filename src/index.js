@@ -95,7 +95,7 @@ export let completeLevel = false;
 
 
 import { logInApp } from './js/Login';
-logInApp.init('app');
+logInApp.init('app', 'firstStart');
 
 export let additionalElements = [
   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))

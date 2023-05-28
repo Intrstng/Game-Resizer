@@ -12577,7 +12577,7 @@ let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
 
-_js_Login__WEBPACK_IMPORTED_MODULE_12__.logInApp.init('app');
+_js_Login__WEBPACK_IMPORTED_MODULE_12__.logInApp.init('app', 'firstStart');
 let additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
 let level = 1;
 function increseLevel(obj) {
@@ -13389,7 +13389,6 @@ const logInApp = function () {
     this.showForm = function () {
       alert('Sign-out successful.');
       logoutBtn.style.display = 'none';
-      logInApp.init('app');
       loginContainer.style.display = 'block';
     };
     this.hideForm = function () {
@@ -13443,6 +13442,7 @@ const logInApp = function () {
     this.logout = function () {
       (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.signOut)(_Firebase__WEBPACK_IMPORTED_MODULE_4__.auth).then(() => {
         // Sign-out successful.
+        logInApp.init('app', false);
         myView.showForm();
         this.stopAudioBeforeLeave();
       }).catch(error => {
@@ -13457,10 +13457,12 @@ const logInApp = function () {
   function Controller() {
     let myModel = null,
       appContainer = null,
+      firstShow = null,
       form = null;
-    this.init = function (app, model) {
+    this.init = function (app, model, firstStart) {
       myModel = model;
       appContainer = app;
+      firstShow = firstStart;
       this.addEventListeners();
     };
     this.addEventListeners = function () {
@@ -13482,23 +13484,27 @@ const logInApp = function () {
           myModel.updateUserMsg();
         }
       });
-      document.addEventListener('click', function (e) {
-        if (e.target && e.target.id === 'btnLogoutImg') {
-          e.preventDefault();
-          e.stopPropagation();
-          myModel.logout();
-        }
-      });
+      if (firstShow) {
+        document.addEventListener('click', function (e) {
+          if (e.target && e.target.id === 'btnLogoutImg') {
+            e.preventDefault();
+            e.stopPropagation();
+            myModel.logout();
+          }
+        });
+      }
+      ;
     };
   }
   return {
-    init: function (elem) {
+    init: function (elem, firstStart) {
+      // firstStart - is a flag when login popup shows at first time (used for: not to add handler to logoutBtn at second login popup show)
       const myView = new View();
       const myModel = new Model();
       const myController = new Controller();
       myView.init(document.getElementById(elem));
       myModel.init(myView);
-      myController.init(document.getElementById(elem), myModel);
+      myController.init(document.getElementById(elem), myModel, firstStart);
     }
   };
 }();
