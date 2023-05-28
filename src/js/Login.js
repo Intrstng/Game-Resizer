@@ -9,6 +9,7 @@ import { cloud_1,
          cloud_3,
          cloud_4
         } from './Assets';
+import { audio, source } from './data/Audio';
 
 export const logInApp = (function () {
   function View() {
@@ -27,28 +28,28 @@ export const logInApp = (function () {
     };
 
     this.showLoginForm = function () {
-      content = `
-      <div id="login" class="login">
-        <img class="cloud-1" src="${cloud_1}" alt="cloud first">
-          <img class="cloud-2" src="${cloud_2}" alt="cloud second">
-            <img class="cloud-3" src="${cloud_3}" alt="cloud third">
-              <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
-                <form id="login-form">
-                  <div class="group">
-                    <label for="email">Email</label>
-                    <input id="email" class="input-login" name="email" type="email" autocomplete="on">
-                  </div>
-                    <div class="group">
-                      <label for="password">Password</label>
-                      <input id="password" class="input-login" name="password" type="password" autocomplete="off">
-                    </div>
-                      <div id="loginMessage" class="group">
-                        <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
-                      </div>
-                        <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
-                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
-                </form>
-      </div>`;
+      content = `<div id="login" class="login">
+                  <img class="cloud-1" src="${cloud_1}" alt="cloud first">
+                    <img class="cloud-2" src="${cloud_2}" alt="cloud second">
+                      <img class="cloud-3" src="${cloud_3}" alt="cloud third">
+                        <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
+                          <form id="login-form">
+                            <div class="group">
+                              <label for="email">Email</label>
+                              <input id="email" class="input-login" name="email" type="email" autocomplete="on">
+                            </div>
+                              <div class="group">
+                                <label for="password">Password</label>
+                                <input id="password" class="input-login" name="password" type="password" autocomplete="off">
+                              </div>
+                                <div id="loginMessage" class="group">
+                                  <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
+                                </div>
+                                  <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
+                                    <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
+                          </form>
+                  </div>`;
+
       appContainer.innerHTML = content;
       const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${logoutImg}" alt="logout"></button>`;
       appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
@@ -120,6 +121,18 @@ export const logInApp = (function () {
       });
     };
 
+    this.stopAudioBeforeLeave = function () {
+      for (let sound in audio) {
+        if (audio?.[sound]?.[source]
+          && (sound === 'track_1' ||
+              sound === 'track_2' ||
+              sound === 'track_3' ||
+              sound === 'track_4')) {
+          audio[sound][source].pause();
+        }
+      }
+    }
+
     this.register = function (email, pass) {
       // For new registration
       createUserWithEmailAndPassword(auth, email, pass)
@@ -137,6 +150,7 @@ export const logInApp = (function () {
       signOut(auth).then(() => {
         // Sign-out successful.
         myView.showForm();
+        this.stopAudioBeforeLeave();
       }).catch((error) => {
         // An error happened.
         myView.logoutError(error);

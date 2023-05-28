@@ -13321,6 +13321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/esm/index.esm.js");
 /* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Firebase */ "./src/js/Firebase.js");
 /* harmony import */ var _SPA__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SPA */ "./src/js/SPA.js");
+/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+
 
 
 
@@ -13343,28 +13345,27 @@ const logInApp = function () {
       loginContainer = app.querySelector('#login');
     };
     this.showLoginForm = function () {
-      content = `
-      <div id="login" class="login">
-        <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
-          <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
-            <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}" alt="cloud third">
-              <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}" alt="cloud fourth">
-                <form id="login-form">
-                  <div class="group">
-                    <label for="email">Email</label>
-                    <input id="email" class="input-login" name="email" type="email" autocomplete="on">
-                  </div>
-                    <div class="group">
-                      <label for="password">Password</label>
-                      <input id="password" class="input-login" name="password" type="password" autocomplete="off">
-                    </div>
-                      <div id="loginMessage" class="group">
-                        <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
-                      </div>
-                        <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
-                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
-                </form>
-      </div>`;
+      content = `<div id="login" class="login">
+                  <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
+                    <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
+                      <img class="cloud-3" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_3}" alt="cloud third">
+                        <img class="cloud-4" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_4}" alt="cloud fourth">
+                          <form id="login-form">
+                            <div class="group">
+                              <label for="email">Email</label>
+                              <input id="email" class="input-login" name="email" type="email" autocomplete="on">
+                            </div>
+                              <div class="group">
+                                <label for="password">Password</label>
+                                <input id="password" class="input-login" name="password" type="password" autocomplete="off">
+                              </div>
+                                <div id="loginMessage" class="group">
+                                  <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
+                                </div>
+                                  <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
+                                    <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
+                          </form>
+                  </div>`;
       appContainer.innerHTML = content;
       const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoutImg}" alt="logout"></button>`;
       appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
@@ -13422,6 +13423,13 @@ const logInApp = function () {
         myView.loginError(error.code);
       });
     };
+    this.stopAudioBeforeLeave = function () {
+      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio) {
+        if (_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_6__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
+          _data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_6__.source].pause();
+        }
+      }
+    };
     this.register = function (email, pass) {
       // For new registration
       (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.createUserWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_4__.auth, email, pass).then(userCredential => {
@@ -13436,6 +13444,7 @@ const logInApp = function () {
       (0,firebase_auth__WEBPACK_IMPORTED_MODULE_3__.signOut)(_Firebase__WEBPACK_IMPORTED_MODULE_4__.auth).then(() => {
         // Sign-out successful.
         myView.showForm();
+        this.stopAudioBeforeLeave();
       }).catch(error => {
         // An error happened.
         myView.logoutError(error);
