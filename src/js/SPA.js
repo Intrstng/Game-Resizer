@@ -51,7 +51,7 @@ import {
         logoImg_1,
         logoImg_2,
 } from './Assets';
-import { setLocalStorage, getLocalStorage } from './Utils';
+import { getLocalStorage } from './Utils';
 import { audio, source, getRandomTrack, playNextTrack } from './data/Audio';
 
 export const mySPA = (function() {

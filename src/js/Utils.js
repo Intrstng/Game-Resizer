@@ -55,26 +55,9 @@ function flamethrowerShootSoundIntervalInit() {
   }
 }
 
-function setLocalStorage(item_1, item_2) {
-  if (('localStorage' in window) && (window.localStorage !== null)) {
-    let soundSettings = {
-      soundEffects: item_1,
-      musicEffects: item_2,
-    }
-  localStorage.setItem('settings', JSON.stringify(soundSettings));
-  }
-}
-
-
 function getLocalStorage(key, value) {
   return (localStorage.length !== 0) ?
     JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
 
-/* function changeMuteIcon() {
-  const muteIcon = document.getElementById('mute-btn');
-  muteIcon.classList.toggle('mute_off');
-  muteIcon.classList.toggle('mute_on');
-} */
-
-export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, fullScreen, setLocalStorage, getLocalStorage/* , changeMuteIcon */ };
+export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, fullScreen, getLocalStorage };

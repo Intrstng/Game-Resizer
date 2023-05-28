@@ -12530,7 +12530,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "platforms": () => (/* binding */ platforms),
 /* harmony export */   "player": () => (/* binding */ player),
 /* harmony export */   "requestAnim": () => (/* binding */ requestAnim),
-/* harmony export */   "setVolumeRangeHandlers": () => (/* binding */ setVolumeRangeHandlers),
 /* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
 /* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
 /* harmony export */ });
@@ -12609,33 +12608,6 @@ function createPlayer(levelMap, platforms) {
   return player;
 }
 let initStart = true;
-
-// Получение значений с input type='range' volume
-const main = document.getElementById('content');
-function setVolumeRangeHandlers() {
-  const volumeRangeSound = main.querySelector('#volume-snd');
-  const volumeRangeMusic = main.querySelector('#volume-msc');
-  if (volumeRangeSound || volumeRangeMusic) {
-    volumeRangeSound.addEventListener('change', () => {
-      for (let sound in _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio) {
-        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source] && sound != 'track_1' && sound != 'track_2' && sound != 'track_3' && sound != 'track_4') {
-          _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound][_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source].volume = volumeRangeSound.value;
-        }
-      }
-      (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.setLocalStorage)(volumeRangeSound.value, volumeRangeMusic.value);
-    });
-    volumeRangeMusic.addEventListener('change', () => {
-      for (let sound in _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio) {
-        if (_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio?.[sound]?.[_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
-          _js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.audio[sound][_js_data_Audio__WEBPACK_IMPORTED_MODULE_5__.source].volume = volumeRangeMusic.value;
-        }
-      }
-      (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.setLocalStorage)(volumeRangeSound.value, volumeRangeMusic.value);
-    });
-  }
-}
-main && window.addEventListener('load', setVolumeRangeHandlers);
-main && window.addEventListener('hashchange', setVolumeRangeHandlers);
 function reloadGameplay() {
   additionalElements = [new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_10__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_8__.backgroundImg, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height))];
   platforms.forEach(platform => {
@@ -12835,60 +12807,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "spike": () => (/* reexport default export from named module */ _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__),
 /* harmony export */   "win": () => (/* reexport default export from named module */ _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__)
 /* harmony export */ });
-/* harmony import */ var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../assets/img/Platforms/platform.png */ "./assets/img/Platforms/platform.png");
-/* harmony import */ var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../assets/img/Hero/Idle_right.png */ "./assets/img/Hero/Idle_right.png");
-/* harmony import */ var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../assets/img/Hero/Idle_left.png */ "./assets/img/Hero/Idle_left.png");
-/* harmony import */ var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../assets/img/Hero/Run_right.png */ "./assets/img/Hero/Run_right.png");
-/* harmony import */ var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../assets/img/Hero/Run_left.png */ "./assets/img/Hero/Run_left.png");
-/* harmony import */ var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../assets/img/Hero/Jump_right.png */ "./assets/img/Hero/Jump_right.png");
-/* harmony import */ var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../assets/img/Hero/Jump_left.png */ "./assets/img/Hero/Jump_left.png");
-/* harmony import */ var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../assets/img/Hero/Fall_right.png */ "./assets/img/Hero/Fall_right.png");
-/* harmony import */ var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../assets/img/Hero/Fall_left.png */ "./assets/img/Hero/Fall_left.png");
-/* harmony import */ var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../assets/img/Hero/Player_death.png */ "./assets/img/Hero/Player_death.png");
-/* harmony import */ var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../assets/img/Background_images/bg_1.jpg */ "./assets/img/Background_images/bg_1.jpg");
-/* harmony import */ var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../assets/img/Background_images/Win_4.jpg */ "./assets/img/Background_images/Win_4.jpg");
-/* harmony import */ var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_solid.png */ "./assets/img/Platforms/Platform_solid.png");
-/* harmony import */ var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_oneStep.png */ "./assets/img/Platforms/Platform_oneStep.png");
-/* harmony import */ var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_oneStep_Explosion.png */ "./assets/img/Platforms/Platform_oneStep_Explosion.png");
-/* harmony import */ var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_jump.png */ "./assets/img/Platforms/Platform_jump.png");
-/* harmony import */ var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_jump_disabled.png */ "./assets/img/Platforms/Platform_jump_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_one.png */ "./assets/img/Platforms/Platform_one.png");
-/* harmony import */ var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_two.png */ "./assets/img/Platforms/Platform_two.png");
-/* harmony import */ var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_three.png */ "./assets/img/Platforms/Platform_three.png");
-/* harmony import */ var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_one_disabled.png */ "./assets/img/Platforms/Platform_one_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_two_disabled.png */ "./assets/img/Platforms/Platform_two_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Platform_three_disabled.png */ "./assets/img/Platforms/Platform_three_disabled.png");
-/* harmony import */ var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../../assets/img/Platforms/Finish_T_L.png */ "./assets/img/Platforms/Finish_T_L.png");
-/* harmony import */ var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../../assets/img/Platforms/brick_1.png */ "./assets/img/Platforms/brick_1.png");
-/* harmony import */ var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../../assets/img/Platforms/brick_2.png */ "./assets/img/Platforms/brick_2.png");
-/* harmony import */ var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../../assets/img/Traps/Saw.png */ "./assets/img/Traps/Saw.png");
-/* harmony import */ var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fan.png */ "./assets/img/Traps/Fan.png");
-/* harmony import */ var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../../assets/img/Traps/Platform_spikes.png */ "./assets/img/Traps/Platform_spikes.png");
-/* harmony import */ var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../../assets/img/Traps/Dead_signal_zone.png */ "./assets/img/Traps/Dead_signal_zone.png");
-/* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
-/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
-/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
-/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
-/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
-/* harmony import */ var _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../../../assets/img/SPA/arrows.png */ "./assets/img/SPA/arrows.png");
-/* harmony import */ var _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../../assets/img/SPA/space.png */ "./assets/img/SPA/space.png");
-/* harmony import */ var _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_1.png */ "./assets/img/SPA/cloud_1.png");
-/* harmony import */ var _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_2.png */ "./assets/img/SPA/cloud_2.png");
-/* harmony import */ var _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_3.png */ "./assets/img/SPA/cloud_3.png");
-/* harmony import */ var _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../../../assets/img/SPA/cloud_4.png */ "./assets/img/SPA/cloud_4.png");
-/* harmony import */ var _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../../../assets/img/SPA/f.png */ "./assets/img/SPA/f.png");
-/* harmony import */ var _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../../../assets/img/SPA/m.png */ "./assets/img/SPA/m.png");
-/* harmony import */ var _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../../../assets/img/SPA/404.png */ "./assets/img/SPA/404.png");
-/* harmony import */ var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../../../assets/img/SPA/flying.gif */ "./assets/img/SPA/flying.gif");
-/* harmony import */ var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../../../assets/img/SPA/logo.png */ "./assets/img/SPA/logo.png");
-/* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
-/* harmony import */ var _assets_img_SPA_mute_off_png__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ../../../../assets/img/SPA/mute_off.png */ "./assets/img/SPA/mute_off.png");
-/* harmony import */ var _assets_img_SPA_mute_on_png__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ../../../../assets/img/SPA/mute_on.png */ "./assets/img/SPA/mute_on.png");
-/* harmony import */ var _assets_img_SPA_logout_png__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ../../../../assets/img/SPA/logout.png */ "./assets/img/SPA/logout.png");
+/* harmony import */ var _assets_img_Platforms_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/platform.png */ "./assets/img/Platforms/platform.png");
+/* harmony import */ var _assets_img_Hero_Idle_right_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Idle_right.png */ "./assets/img/Hero/Idle_right.png");
+/* harmony import */ var _assets_img_Hero_Idle_left_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Idle_left.png */ "./assets/img/Hero/Idle_left.png");
+/* harmony import */ var _assets_img_Hero_Run_right_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Run_right.png */ "./assets/img/Hero/Run_right.png");
+/* harmony import */ var _assets_img_Hero_Run_left_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Run_left.png */ "./assets/img/Hero/Run_left.png");
+/* harmony import */ var _assets_img_Hero_Jump_right_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Jump_right.png */ "./assets/img/Hero/Jump_right.png");
+/* harmony import */ var _assets_img_Hero_Jump_left_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Jump_left.png */ "./assets/img/Hero/Jump_left.png");
+/* harmony import */ var _assets_img_Hero_Fall_right_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Fall_right.png */ "./assets/img/Hero/Fall_right.png");
+/* harmony import */ var _assets_img_Hero_Fall_left_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Fall_left.png */ "./assets/img/Hero/Fall_left.png");
+/* harmony import */ var _assets_img_Hero_Player_death_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../../../assets/img/Hero/Player_death.png */ "./assets/img/Hero/Player_death.png");
+/* harmony import */ var _assets_img_Background_images_bg_1_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../../../assets/img/Background_images/bg_1.jpg */ "./assets/img/Background_images/bg_1.jpg");
+/* harmony import */ var _assets_img_Background_images_Win_4_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../../../../assets/img/Background_images/Win_4.jpg */ "./assets/img/Background_images/Win_4.jpg");
+/* harmony import */ var _assets_img_Platforms_Platform_solid_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_solid.png */ "./assets/img/Platforms/Platform_solid.png");
+/* harmony import */ var _assets_img_Platforms_Platform_oneStep_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_oneStep.png */ "./assets/img/Platforms/Platform_oneStep.png");
+/* harmony import */ var _assets_img_Platforms_Platform_oneStep_Explosion_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_oneStep_Explosion.png */ "./assets/img/Platforms/Platform_oneStep_Explosion.png");
+/* harmony import */ var _assets_img_Platforms_Platform_jump_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_jump.png */ "./assets/img/Platforms/Platform_jump.png");
+/* harmony import */ var _assets_img_Platforms_Platform_jump_disabled_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_jump_disabled.png */ "./assets/img/Platforms/Platform_jump_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Platform_one_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_one.png */ "./assets/img/Platforms/Platform_one.png");
+/* harmony import */ var _assets_img_Platforms_Platform_two_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_two.png */ "./assets/img/Platforms/Platform_two.png");
+/* harmony import */ var _assets_img_Platforms_Platform_three_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_three.png */ "./assets/img/Platforms/Platform_three.png");
+/* harmony import */ var _assets_img_Platforms_Platform_one_disabled_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_one_disabled.png */ "./assets/img/Platforms/Platform_one_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Platform_two_disabled_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_two_disabled.png */ "./assets/img/Platforms/Platform_two_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Platform_three_disabled_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Platform_three_disabled.png */ "./assets/img/Platforms/Platform_three_disabled.png");
+/* harmony import */ var _assets_img_Platforms_Finish_T_L_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/Finish_T_L.png */ "./assets/img/Platforms/Finish_T_L.png");
+/* harmony import */ var _assets_img_Platforms_brick_1_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/brick_1.png */ "./assets/img/Platforms/brick_1.png");
+/* harmony import */ var _assets_img_Platforms_brick_2_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../../../../../assets/img/Platforms/brick_2.png */ "./assets/img/Platforms/brick_2.png");
+/* harmony import */ var _assets_img_Traps_Saw_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Saw.png */ "./assets/img/Traps/Saw.png");
+/* harmony import */ var _assets_img_Traps_Fan_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Fan.png */ "./assets/img/Traps/Fan.png");
+/* harmony import */ var _assets_img_Traps_Platform_spikes_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Platform_spikes.png */ "./assets/img/Traps/Platform_spikes.png");
+/* harmony import */ var _assets_img_Traps_Dead_signal_zone_png__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Dead_signal_zone.png */ "./assets/img/Traps/Dead_signal_zone.png");
+/* harmony import */ var _assets_img_Traps_Dead_signal_zone_hover_png__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Dead_signal_zone_hover.png */ "./assets/img/Traps/Dead_signal_zone_hover.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_left_png__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Flamethrower_left.png */ "./assets/img/Traps/Flamethrower_left.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_right_png__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Flamethrower_right.png */ "./assets/img/Traps/Flamethrower_right.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_up_png__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Flamethrower_up.png */ "./assets/img/Traps/Flamethrower_up.png");
+/* harmony import */ var _assets_img_Traps_Flamethrower_down_png__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Flamethrower_down.png */ "./assets/img/Traps/Flamethrower_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_up_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Fireball_up.png */ "./assets/img/Traps/Fireball_up.png");
+/* harmony import */ var _assets_img_Traps_Fireball_down_png__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Fireball_down.png */ "./assets/img/Traps/Fireball_down.png");
+/* harmony import */ var _assets_img_Traps_Fireball_left_png__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Fireball_left.png */ "./assets/img/Traps/Fireball_left.png");
+/* harmony import */ var _assets_img_Traps_Fireball_right_png__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../../../../../../assets/img/Traps/Fireball_right.png */ "./assets/img/Traps/Fireball_right.png");
+/* harmony import */ var _assets_img_SPA_arrows_png__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/arrows.png */ "./assets/img/SPA/arrows.png");
+/* harmony import */ var _assets_img_SPA_space_png__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/space.png */ "./assets/img/SPA/space.png");
+/* harmony import */ var _assets_img_SPA_cloud_1_png__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/cloud_1.png */ "./assets/img/SPA/cloud_1.png");
+/* harmony import */ var _assets_img_SPA_cloud_2_png__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/cloud_2.png */ "./assets/img/SPA/cloud_2.png");
+/* harmony import */ var _assets_img_SPA_cloud_3_png__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/cloud_3.png */ "./assets/img/SPA/cloud_3.png");
+/* harmony import */ var _assets_img_SPA_cloud_4_png__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/cloud_4.png */ "./assets/img/SPA/cloud_4.png");
+/* harmony import */ var _assets_img_SPA_f_png__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/f.png */ "./assets/img/SPA/f.png");
+/* harmony import */ var _assets_img_SPA_m_png__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/m.png */ "./assets/img/SPA/m.png");
+/* harmony import */ var _assets_img_SPA_404_png__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/404.png */ "./assets/img/SPA/404.png");
+/* harmony import */ var _assets_img_SPA_flying_gif__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/flying.gif */ "./assets/img/SPA/flying.gif");
+/* harmony import */ var _assets_img_SPA_logo_png__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/logo.png */ "./assets/img/SPA/logo.png");
+/* harmony import */ var _assets_img_SPA_logo_2_png__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/logo_2.png */ "./assets/img/SPA/logo_2.png");
+/* harmony import */ var _assets_img_SPA_mute_off_png__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/mute_off.png */ "./assets/img/SPA/mute_off.png");
+/* harmony import */ var _assets_img_SPA_mute_on_png__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/mute_on.png */ "./assets/img/SPA/mute_on.png");
+/* harmony import */ var _assets_img_SPA_logout_png__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ../../../../../../../assets/img/SPA/logout.png */ "./assets/img/SPA/logout.png");
 
 
 
@@ -13361,16 +13333,17 @@ const logInApp = function () {
     let appContainer = null,
       errorMsgFeild = null,
       logoutBtn = null,
-      loginContainer = null;
+      loginContainer = null,
+      content = null;
     this.init = function (app) {
       appContainer = app;
       this.showLoginForm();
       errorMsgFeild = app.querySelector('#errorLoginMessage');
-      logoutBtn = app.querySelector('#btnLogout');
+      logoutBtn = document.querySelector('#btnLogout');
       loginContainer = app.querySelector('#login');
     };
     this.showLoginForm = function () {
-      appContainer.innerHTML = `
+      content = `
       <div id="login" class="login">
         <img class="cloud-1" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_1}" alt="cloud first">
           <img class="cloud-2" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.cloud_2}" alt="cloud second">
@@ -13389,10 +13362,12 @@ const logInApp = function () {
                         <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
                       </div>
                         <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
-                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
+                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
                 </form>
-      </div>
-        <button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoutImg}" alt="logout"></button>`;
+      </div>`;
+      appContainer.innerHTML = content;
+      const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.logoutImg}" alt="logout"></button>`;
+      appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
     };
     this.loginSuccess = function (msg) {
       errorMsgFeild.style.color = 'rgb(153, 153, 153)';
@@ -13413,6 +13388,7 @@ const logInApp = function () {
     this.showForm = function () {
       alert('Sign-out successful.');
       logoutBtn.style.display = 'none';
+      logInApp.init('app');
       loginContainer.style.display = 'block';
     };
     this.hideForm = function () {
@@ -13438,8 +13414,10 @@ const logInApp = function () {
         // Signed in 
         const user = userCredential.user.email.split('@').slice(0, 1)[0];
         myView.loginSuccess(user);
-        myView.hideForm();
-        _SPA__WEBPACK_IMPORTED_MODULE_5__.mySPA.init('root', 'content');
+        setTimeout(() => {
+          myView.hideForm();
+          _SPA__WEBPACK_IMPORTED_MODULE_5__.mySPA.init('root', 'content');
+        }, 750);
       }).catch(error => {
         myView.loginError(error.code);
       });
@@ -13489,15 +13467,17 @@ const logInApp = function () {
           e.stopPropagation();
           myModel.register(appContainer.querySelector('#email').value, appContainer.querySelector('#password').value);
         }
-        if (e.target && e.target.id === 'btnLogout') {
-          e.preventDefault();
-          e.stopPropagation();
-          myModel.logout();
-        }
       });
       appContainer.addEventListener('input', function (e) {
         if (e.target && e.target.id === 'email' || e.target && e.target.id === 'password') {
           myModel.updateUserMsg();
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'btnLogoutImg') {
+          e.preventDefault();
+          e.stopPropagation();
+          myModel.logout();
         }
       });
     };
@@ -14997,8 +14977,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "flamethrowerShootSoundIntervalInit": () => (/* binding */ flamethrowerShootSoundIntervalInit),
 /* harmony export */   "fullScreen": () => (/* binding */ fullScreen),
 /* harmony export */   "getLocalStorage": () => (/* binding */ getLocalStorage),
-/* harmony export */   "randomNumber": () => (/* binding */ randomNumber),
-/* harmony export */   "setLocalStorage": () => (/* binding */ setLocalStorage)
+/* harmony export */   "randomNumber": () => (/* binding */ randomNumber)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
@@ -15050,25 +15029,9 @@ function fullScreen(e, element) {
     }
   }
 }
-function setLocalStorage(item_1, item_2) {
-  if ('localStorage' in window && window.localStorage !== null) {
-    let soundSettings = {
-      soundEffects: item_1,
-      musicEffects: item_2
-    };
-    localStorage.setItem('settings', JSON.stringify(soundSettings));
-  }
-}
 function getLocalStorage(key, value) {
   return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
-
-/* function changeMuteIcon() {
-  const muteIcon = document.getElementById('mute-btn');
-  muteIcon.classList.toggle('mute_off');
-  muteIcon.classList.toggle('mute_on');
-} */
-
 
 
 /***/ }),

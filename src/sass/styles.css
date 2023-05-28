@@ -473,6 +473,9 @@ body {
   }
 }
 @media only screen and (max-width: 640px) {
+  .settings {
+    margin-left: 5rem;
+  }
   .settings__title {
     margin-bottom: 3rem;
   }
@@ -769,6 +772,18 @@ body {
   transform: scale(1.05);
 }
 
+@media (max-width: 640px) {
+  .logout-btn {
+    width: 3rem;
+    height: 3rem;
+    top: 4rem;
+    right: 4rem;
+  }
+  .logout-btn img {
+    width: 3rem;
+    height: 3rem;
+  }
+}
 .header {
   flex-shrink: 0;
   width: 100%;
@@ -904,7 +919,7 @@ body {
   .header #mute-btn {
     width: 3rem;
     height: 3rem;
-    top: 4rem;
+    top: 8rem;
     right: 4rem;
   }
   .header__wrapper {

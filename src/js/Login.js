@@ -15,18 +15,19 @@ export const logInApp = (function () {
     let appContainer = null,
         errorMsgFeild = null,
         logoutBtn = null,
-        loginContainer = null;
+        loginContainer = null,
+        content = null;
 
     this.init = function (app) {
       appContainer = app;
       this.showLoginForm();
       errorMsgFeild = app.querySelector('#errorLoginMessage');
-      logoutBtn = app.querySelector('#btnLogout');
+      logoutBtn = document.querySelector('#btnLogout');
       loginContainer = app.querySelector('#login');
     };
 
     this.showLoginForm = function () {
-      appContainer.innerHTML = `
+      content = `
       <div id="login" class="login">
         <img class="cloud-1" src="${cloud_1}" alt="cloud first">
           <img class="cloud-2" src="${cloud_2}" alt="cloud second">
@@ -45,10 +46,12 @@ export const logInApp = (function () {
                         <div id="errorLoginMessage" class="errorlabel">Enter the data</div>
                       </div>
                         <button id="btnLogin" type="button" class="button buttonBlue">Log in</button>
-                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</button>
+                          <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
                 </form>
-      </div>
-        <button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img src="${logoutImg}" alt="logout"></button>`;
+      </div>`;
+      appContainer.innerHTML = content;
+      const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${logoutImg}" alt="logout"></button>`;
+      appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
     };
 
     this.loginSuccess = function (msg) {
@@ -74,6 +77,7 @@ export const logInApp = (function () {
     this.showForm = function () {
       alert('Sign-out successful.');
       logoutBtn.style.display = 'none';
+      logInApp.init('app');
       loginContainer.style.display = 'block';
     };
 
@@ -106,8 +110,10 @@ export const logInApp = (function () {
         // Signed in 
         const user = userCredential.user.email.split('@').slice(0, 1)[0];
         myView.loginSuccess(user);
-        myView.hideForm();
-        mySPA.init('root', 'content');     
+        setTimeout(() => {
+          myView.hideForm();
+          mySPA.init('root', 'content');
+        }, 750);  
       })
       .catch((error) => {
         myView.loginError(error.code);
@@ -154,7 +160,7 @@ export const logInApp = (function () {
     };
 
     this.addEventListeners = function() {
-      appContainer.addEventListener('click', function (e) {
+      appContainer.addEventListener('click', function(e) {
         form = appContainer.querySelector('#login-form');
 
         if (e.target && e.target.id === 'btnLogin') {
@@ -174,18 +180,20 @@ export const logInApp = (function () {
             appContainer.querySelector('#password').value
           );
         }
-
-        if (e.target && e.target.id === 'btnLogout') {
-          e.preventDefault();
-          e.stopPropagation();
-          myModel.logout();
-        }
       });
 
-      appContainer.addEventListener('input', function (e) {
+      appContainer.addEventListener('input', function(e) {
         if (e.target && e.target.id === 'email' ||
             e.target && e.target.id === 'password') {
           myModel.updateUserMsg();
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'btnLogoutImg') {
+          e.preventDefault();
+          e.stopPropagation();
+          myModel.logout();
         }
       });
     };

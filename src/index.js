@@ -137,51 +137,6 @@ function createPlayer(levelMap, platforms) {
 
 export let initStart = true;
 
-// Получение значений с input type='range' volume
-const main = document.getElementById('content');
-export function setVolumeRangeHandlers() {
-            const volumeRangeSound = main.querySelector('#volume-snd');
-            const volumeRangeMusic = main.querySelector('#volume-msc');
-            if (volumeRangeSound || volumeRangeMusic) {
-              volumeRangeSound.addEventListener('change', () => {
-                for (let sound in audio) {
-                  if (audio?.[sound]?.[source]
-                    && (sound != 'track_1' &&
-                        sound != 'track_2' &&
-                        sound != 'track_3' &&
-                        sound != 'track_4')) {
-                    audio[sound][source].volume = volumeRangeSound.value;
-                  }
-                }
-                setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
-    });
-    volumeRangeMusic.addEventListener('change', () => {
-                for (let sound in audio) {
-                  if (audio?.[sound]?.[source]
-                    && (sound === 'track_1' ||
-                        sound === 'track_2' ||
-                        sound === 'track_3' ||
-                        sound === 'track_4')) {
-                    audio[sound][source].volume = volumeRangeMusic.value;
-                  }
-                }
-                setLocalStorage(volumeRangeSound.value, volumeRangeMusic.value);
-    });
-  }
-}
-main && window.addEventListener('load', setVolumeRangeHandlers);
-main && window.addEventListener('hashchange', setVolumeRangeHandlers);
-
-
-
-
-
-
-
-
-
-
-
 
 
 

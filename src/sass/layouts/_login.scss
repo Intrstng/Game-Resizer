@@ -101,7 +101,7 @@
   border: none;
   cursor: pointer;
   img {
-    @include width-height(4rem, 4rem);
+    @include width-height(4rem);
     font-size: 0;
   }
   &_hover {
@@ -112,5 +112,12 @@
 }
 
 
-
-
+@include media-tablet {
+  .logout-btn {
+    @include width-height(3rem);
+    @include top-right(4rem);
+    img {
+      @include width-height(3rem);
+    }
+  }
+}

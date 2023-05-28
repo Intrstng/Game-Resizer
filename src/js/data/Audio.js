@@ -213,5 +213,4 @@ const playNextTrack = (currentTrack, playlist) => {
   }
 }
 
-
 export { audio, source, gameSoundEffects, getRandomTrack, playNextTrack/* , muteSound */ }
