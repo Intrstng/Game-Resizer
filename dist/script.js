@@ -12532,9 +12532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "platforms": () => (/* binding */ platforms),
 /* harmony export */   "player": () => (/* binding */ player),
 /* harmony export */   "requestAnim": () => (/* binding */ requestAnim),
-/* harmony export */   "setLevelMap": () => (/* binding */ setLevelMap),
-/* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
-/* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
+/* harmony export */   "setLevelMap": () => (/* binding */ setLevelMap)
 /* harmony export */ });
 /* harmony import */ var _js_SPA__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/SPA */ "./src/js/SPA.js");
 /* harmony import */ var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Collision */ "./src/js/Collision.js");
@@ -12570,13 +12568,14 @@ __webpack_require__.r(__webpack_exports__);
 const fontSize = _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height / 5; // 10
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.width = 1024; // 1280
 _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas.height = 576; // 720
+
 let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
   window.setTimeout(callback, 1000 / 60);
 };
 window.addEventListener('keydown', e => (0,_js_Utils__WEBPACK_IMPORTED_MODULE_3__.fullScreen)(e, _js_Canvas__WEBPACK_IMPORTED_MODULE_2__.canvas));
 let leftNeighboorBlockFromHeroArr = [];
-let timerShoot_1 = null;
-let timerShoot_2 = null;
+// export let timerShoot_1 = null;
+// export let timerShoot_2 = null;
 let leftNeighboorBlockFromHero = null;
 let completeLevel = false;
 
@@ -14466,7 +14465,7 @@ const mySPA = function () {
               <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>14</button>
               <button class="level__item level__item_hover level__item_active level__item_disabled"                       >15</button>
               <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>16</button>
-              <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>17</button>
+              <button class="level__item level__item_hover level__item_active level__item_disabled"                       >17</button>
             </div>
           </section>
         `;
@@ -15483,10 +15482,12 @@ function randomNumber() {
   let max = arguments.length > 1 ? arguments[1] : undefined;
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
+let timerShoot_1 = null;
+let timerShoot_2 = null;
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {
     timerShoot_2 = setTimeout(soundFire, delay);
-    (0,_data_Audio__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(audio.fire);
+    (0,_data_Audio__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_1__.audio.fire);
   }, delay);
 }
 function flamethrowerShootSoundIntervalInit() {

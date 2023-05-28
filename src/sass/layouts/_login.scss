@@ -112,10 +112,10 @@
 }
 
 
-@include media-tablet {
+@include media-tablet-max {
   .logout-btn {
     @include width-height(3rem);
-    @include top-right(4rem);
+    @include top-right(2rem);
     img {
       @include width-height(3rem);
     }

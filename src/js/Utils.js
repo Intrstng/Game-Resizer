@@ -1,5 +1,5 @@
 import { platforms, initStart } from '../index';
-import { gameSoundEffects } from './data/Audio';
+import { gameSoundEffects, audio } from './data/Audio';
 
 function createImage(src, width, height) {
   const image = new Image();
@@ -16,6 +16,9 @@ function createImage(src, width, height) {
 function randomNumber(min = 0, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
+
+let timerShoot_1 = null;
+let timerShoot_2 = null;
 
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {

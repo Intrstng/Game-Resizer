@@ -34,12 +34,20 @@
   @media (min-width: $desktop-width) { @content; }
 }
 
+@mixin media-greater-tablet-max {
+  @media (min-width: $tablet-max-width) { @content; }
+}
+
 @mixin media-desktop {
   @media (max-width: $desktop-width) { @content; }
 }
 
 @mixin media-small-desktop {
   @media (max-width: $small-desktop-width) { @content; }
+}
+
+@mixin media-tablet-max {
+  @media (max-width: $tablet-max-width) { @content; }
 }
 
 @mixin media-tablet {

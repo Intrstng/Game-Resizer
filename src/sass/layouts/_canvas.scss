@@ -1,9 +1,12 @@
 .game-bgnd {
-  // margin: 0 auto;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // width: 100vh;
-  // height: 100vw;
+  justify-content: center;
   background-image: none;
+  border: 0;
+}
+
+@include media-greater-tablet-max {
+  canvas {
+    width: 100vw;
+    height: 100vh;
+  }
 }

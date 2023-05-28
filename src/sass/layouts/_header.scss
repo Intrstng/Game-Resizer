@@ -231,9 +231,9 @@
   }
 }
 
-@include media-tablet {
+@include media-tablet-max {
   .mute {
     @include width-height(3rem);
-    @include top-right(8rem, 4rem);
+    @include top-right(6rem, 2rem);
   }
 }

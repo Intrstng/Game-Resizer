@@ -165,7 +165,7 @@ export const mySPA = (function() {
               <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>14</button>
               <button class="level__item level__item_hover level__item_active level__item_disabled"                       >15</button>
               <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>16</button>
-              <button class="level__item level__item_hover level__item_active level__item_disabled" disabled>17</button>
+              <button class="level__item level__item_hover level__item_active level__item_disabled"                       >17</button>
             </div>
           </section>
         `;

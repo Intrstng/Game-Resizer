@@ -75,6 +75,16 @@ import { requestLevelMap } from './js/Levels';
 const fontSize = canvas.height / 5; // 10
 canvas.width = 1024 // 1280
 canvas.height = 576 // 720
+
+
+
+
+
+
+
+
+
+
 export let requestAnim = window.requestAnimationFrame ||
                   window.webkitRequestAnimationFrame ||
                   window.mozRequestAnimationFrame ||
@@ -88,8 +98,8 @@ window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
 
 let leftNeighboorBlockFromHeroArr = [];
-export let timerShoot_1 = null;
-export let timerShoot_2 = null;
+// export let timerShoot_1 = null;
+// export let timerShoot_2 = null;
 export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
 

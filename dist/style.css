@@ -1038,12 +1038,12 @@ body {
   .logout-btn_hover:hover {
     transform: scale(1.05); }
 
-@media (max-width: 640px) {
+@media (max-width: 821px) {
   .logout-btn {
     width: 3rem;
     height: 3rem;
-    top: 4rem;
-    right: 4rem; }
+    top: 2rem;
+    right: 2rem; }
     .logout-btn img {
       width: 3rem;
       height: 3rem; } }
@@ -1240,12 +1240,12 @@ body {
   .mute_hover:hover {
     transform: scale(1.05); }
 
-@media (max-width: 640px) {
+@media (max-width: 821px) {
   .mute {
     width: 3rem;
     height: 3rem;
-    top: 8rem;
-    right: 4rem; } }
+    top: 6rem;
+    right: 2rem; } }
 
 .content {
   margin: 0 auto;
@@ -1282,7 +1282,14 @@ body {
     margin-bottom: 0; } }
 
 .game-bgnd {
-  background-image: none; }
+  justify-content: center;
+  background-image: none;
+  border: 0; }
+
+@media (min-width: 821px) {
+  canvas {
+    width: 100vw;
+    height: 100vh; } }
 
 
 /*# sourceMappingURL=style.css.map*/
