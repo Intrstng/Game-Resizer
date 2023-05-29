@@ -44,19 +44,19 @@
         }
       }
     }
-  .errorlabel {
-    font-size: 1.4rem;
-    padding: 1rem 1rem 1rem 0.5rem;
-    @include prefix (appearance, none, webkit);
-    display: block;
-    background: $color-light;
-    color: $color-label;
-    letter-spacing: 0.2rem;
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    border-bottom: 0.1rem solid $color-error;
-  }
+    .errorlabel {
+      font-size: 1.4rem;
+      padding: 1rem 1rem 1rem 0.5rem;
+      @include prefix (appearance, none, webkit);
+      display: block;
+      background: $color-light;
+      color: $color-label;
+      letter-spacing: 0.2rem;
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      border-bottom: 0.1rem solid $color-error;
+    }
   }
 }
 
@@ -94,6 +94,7 @@
 
 .logout-btn {
   position: absolute;
+  z-index: 2;
   @include width-height(4rem);
   @include top-right(5rem);
   @extend %transition-all;
@@ -103,6 +104,7 @@
   img {
     @include width-height(4rem);
     font-size: 0;
+    border: none;
   }
   &_hover {
     &:hover {

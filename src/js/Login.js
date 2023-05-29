@@ -7,7 +7,8 @@ import { mySPA } from './SPA';
 import { cloud_1,
          cloud_2,
          cloud_3,
-         cloud_4
+         cloud_4,
+         menuImg
         } from './Assets';
 import { audio, source } from './data/Audio';
 
@@ -17,6 +18,7 @@ export const logInApp = (function () {
         errorMsgFeild = null,
         logoutBtn = null,
         muteBtn = null,
+        menuBtn = null,
         firstShow = null,
         loginContainer = null,
         content = null;
@@ -29,6 +31,7 @@ export const logInApp = (function () {
       errorMsgFeild = app.querySelector('#errorLoginMessage');
       logoutBtn = document.querySelector('#btnLogout');
       loginContainer = app.querySelector('#login');
+      menuBtn = document.querySelector('#menu-btn');
     };
 
     this.showLoginForm = function () {
@@ -54,13 +57,18 @@ export const logInApp = (function () {
                                     <button id="btnRegister" type="button" class="button buttonBlue" name="register">Sign up</bsutton>
                           </form>
                   </div>`;
-
       appContainer.innerHTML = content;
-      const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${logoutImg}" alt="logout"></button>`;
-      appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
+      if (firstShow) {
+        const btnLogoutHtml = `<button id="btnLogout" type="button" class="logout-btn logout-btn_hover" style="display: none;"><img id="btnLogoutImg" src="${logoutImg}" alt="logout button"></button>`;
+        appContainer.insertAdjacentHTML('beforeBegin', btnLogoutHtml);
 
-      const btnMuteHtml = `<div id="mute-btn" class="mute mute_off mute_hover" style="display: none"></div>`;
-      appContainer.insertAdjacentHTML('beforeBegin', btnMuteHtml);    
+        const btnMuteHtml = `<div id="mute-btn" class="mute mute_off mute_hover" style="display: none"></div>`;
+        appContainer.insertAdjacentHTML('beforeBegin', btnMuteHtml);
+
+        const btnMenuHtml = `<a id="menu-btn" href="#default" class="menu menu_off menu_hover" style="display: none"><img id="btnMenuImg" src="${menuImg}" alt="menu button"></a>`;
+        appContainer.insertAdjacentHTML('beforeBegin', btnMenuHtml);
+      }
+  
     };
 
     this.loginSuccess = function (msg) {
@@ -87,6 +95,8 @@ export const logInApp = (function () {
       logoutBtn.style.display = 'none';
       loginContainer.style.display = 'block';
       muteBtn.style.display = 'none';
+      menuBtn.style.display = 'none';
+      document.body.classList.remove('game-bgnd');
     };
 
     this.hideForm = function () {
@@ -131,11 +141,7 @@ export const logInApp = (function () {
 
     this.stopAudioBeforeLeave = function () {
       for (let sound in audio) {
-        if (audio?.[sound]?.[source]
-          && (sound === 'track_1' ||
-              sound === 'track_2' ||
-              sound === 'track_3' ||
-              sound === 'track_4')) {
+        if (audio?.[sound]?.[source]) {
           audio[sound][source].pause();
         }
       }

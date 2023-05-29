@@ -1,4 +1,4 @@
-import { canvas, c } from './Canvas';
+import { canvas, c } from '../index';
 import { platforms, parsedCollisions } from '../index';
 
 import { Platform,

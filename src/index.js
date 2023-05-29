@@ -2,7 +2,7 @@
 
 import { mySPA } from './js/SPA';
 import { parseCollisitions } from './js/Collision';
-import { canvas, c } from './js/Canvas';
+// import { canvas, c } from './js/Canvas';
 import { createImage, flamethrowerShootSoundIntervalInit, fullScreen, setLocalStorage, getLocalStorage } from './js/Utils';
 import { Player } from './js/Player';
 import { bulletController } from './js/Collision';
@@ -70,12 +70,13 @@ import { requestLevelMap } from './js/Levels';
 
 //document.addEventListener('DOMContentLoaded', mySPA.init('root', 'content'));
 
+import { logInApp } from './js/Login';
+logInApp.init('app', 'firstStart');
 
+let fontSize;
 
-const fontSize = canvas.height / 5; // 10
-canvas.width = 1024 // 1280
-canvas.height = 576 // 720
-
+export let canvas;
+export let c;
 
 
 
@@ -104,12 +105,9 @@ export let leftNeighboorBlockFromHero = null;
 export let completeLevel = false;
 
 
-import { logInApp } from './js/Login';
-logInApp.init('app', 'firstStart');
 
-export let additionalElements = [
-  new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
-]
+
+export let additionalElements = [];
 
 
 export let level = 1;
@@ -123,6 +121,7 @@ export let platforms = [],
            player;
 
 
+let levelOverlay = createImage(win);
 
 
 
@@ -132,6 +131,16 @@ export let platforms = [],
 
  
 export function setLevelMap(value) {
+  canvas = document.getElementById('canvas');
+  c = canvas.getContext("2d");
+  fontSize = canvas.height / 10; // 10
+  canvas.width = 1024 // 1280
+  canvas.height = 576 // 720
+  levelOverlay.width = canvas.width;
+  levelOverlay.height = canvas.height;
+  additionalElements = [
+    new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
+  ]
   levelMap = value;
   console.log(levelMap)
   return levelMap;
@@ -156,7 +165,6 @@ export let initStart = true;
 
 
 
-
 function reloadGameplay() {
   additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
   ];
@@ -170,13 +178,13 @@ function reloadGameplay() {
     })  
 }
 
-let levelOverlay = createImage(win);
-levelOverlay.width = canvas.width;
-levelOverlay.height = canvas.height;
 
+let initCounter = 0;
 export function init() {
   flamethrowerShootSoundIntervalInit();
-  initStart = false;
+  initCounter++;
+  initCounter > 1 && (initStart = false);
+console.log(initStart)
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;

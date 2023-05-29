@@ -43,7 +43,7 @@
   font-family: "Russo One", sans-serif;
 }
 
-.mute, .logout-btn, .button, .level__item, body {
+.menu, .mute, .logout-btn, .button, .level__item, body {
   transition: all, 0.25s, ease;
 }
 
@@ -574,6 +574,7 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   border: 0.3rem solid rgba(255, 255, 255, 0.8);
   background-color: transparent;
@@ -755,6 +756,7 @@ body {
 
 .logout-btn {
   position: absolute;
+  z-index: 2;
   width: 4rem;
   height: 4rem;
   top: 5rem;
@@ -767,6 +769,7 @@ body {
   width: 4rem;
   height: 4rem;
   font-size: 0;
+  border: none;
 }
 .logout-btn_hover:hover {
   transform: scale(1.05);
@@ -896,12 +899,6 @@ body {
   }
 }
 @media (max-width: 640px) {
-  .header .mute {
-    width: 3rem;
-    height: 3rem;
-    top: 8rem;
-    right: 4rem;
-  }
   .header__wrapper {
     width: 39rem;
     padding: 1rem;
@@ -1000,6 +997,7 @@ body {
 }
 .mute {
   position: absolute;
+  z-index: 2;
   width: 4rem;
   height: 4rem;
   top: 10rem;
@@ -1072,9 +1070,41 @@ body {
   border: 0;
 }
 
-@media (min-width: 821px) {
-  canvas {
-    width: 100vw;
-    height: 100vh;
+canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+.menu {
+  position: absolute;
+  z-index: 2;
+  width: 4rem;
+  height: 4rem;
+  top: 15rem;
+  right: 5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.menu img {
+  width: 4rem;
+  height: 4rem;
+  font-size: 0;
+  border: none;
+}
+.menu_hover:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 821px) {
+  .menu {
+    width: 3rem;
+    height: 3rem;
+    top: 10rem;
+    right: 2rem;
+  }
+  .menu img {
+    width: 3rem;
+    height: 3rem;
   }
 }/*# sourceMappingURL=styles.css.map */

@@ -53,6 +53,7 @@ import logoImg_2 from '/assets/img/SPA/logo_2.png';
 import muteOff from '/assets/img/SPA/mute_off.png';
 import muteOn from '/assets/img/SPA/mute_on.png';
 import logoutImg from '/assets/img/SPA/logout.png';
+import menuImg from '/assets/img/SPA/menu.png';
 
 export { platformImgSrc300,
         heroIdleR,
@@ -107,5 +108,6 @@ export { platformImgSrc300,
         logoImg_2,
         muteOff,
         muteOn,
-        logoutImg
+        logoutImg,
+        menuImg
       }

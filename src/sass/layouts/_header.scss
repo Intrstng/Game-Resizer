@@ -109,10 +109,6 @@
 
 @include media-tablet {
   .header {
-    .mute {
-      @include width-height(3rem);
-      @include top-right(8rem, 4rem);
-    }
     &__wrapper {
       width: 39rem;
       padding: 1rem;
@@ -211,6 +207,7 @@
 
 .mute {
   position: absolute;
+  z-index: 2;
   @include width-height(4rem);
   @include top-right(10rem, 5rem);
   @extend %transition-all;

@@ -4,9 +4,46 @@
   border: 0;
 }
 
-@include media-greater-tablet-max {
+// @include media-greater-tablet-max {
+//   canvas {
+//     width: 100vw;
+//     height: 100vh;
+//   }
+// }
+
   canvas {
     width: 100vw;
     height: 100vh;
+  }
+
+
+.menu {
+  position: absolute;
+  z-index: 2;
+  @include width-height(4rem);
+  @include top-right(15rem, 5rem);
+  @extend %transition-all;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  img {
+    @include width-height(4rem);
+    font-size: 0;
+    border: none;
+  }
+  &_hover {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+@include media-tablet-max {
+  .menu {
+    @include width-height(3rem);
+    @include top-right(10rem, 2rem);
+    img {
+      @include width-height(3rem);
+    }
   }
 }

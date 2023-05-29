@@ -1,4 +1,4 @@
-import { canvas, c } from './Canvas';
+import { canvas, c } from '../index';
 import { createImage } from './Utils';
 import { init, completeLevel } from '../index';
 import { keys } from './Keys';

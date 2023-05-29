@@ -20,6 +20,7 @@
     @include flex(flex, center, center);
     @extend %transition-all;
     cursor: pointer;
+    text-decoration: none;
     color: $color-light-bg;
     border: 0.3rem solid $color-light-bg;
     background-color:transparent;
