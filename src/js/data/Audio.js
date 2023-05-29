@@ -181,6 +181,7 @@ let source = null;
 function gameSoundEffects(item) {
   item[source].currentTime = 0;
   item[source].play();
+
 }
 
 function getRandomTrack(playlist) {

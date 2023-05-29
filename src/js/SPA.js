@@ -9,7 +9,6 @@ import {
         heroFallR,
         heroFallL,
         heroDeath,
-        backgroundImg,
         win,
         platformSolid,
         platformOneStep,
@@ -50,9 +49,26 @@ import {
         birdFlyingImg,
         logoImg_1,
         logoImg_2,
-        logoutImg
-} from './Assets';
-import { getLocalStorage, fakeClick } from './Utils';
+        logoutImg,
+        levelIcon_1,
+        levelIcon_2,
+        levelIcon_3,
+        levelIcon_4,
+        levelIcon_5,
+        levelIcon_6,
+        levelIcon_7,
+        levelIcon_8,
+        levelIcon_9,
+        levelIcon_10,
+        levelIcon_11,
+        levelIcon_12,
+        levelIcon_13,
+        levelIcon_14,
+        levelIcon_15,
+        levelIcon_16,
+        levelIcon_17
+      } from './Assets';
+import { getLocalStorage } from './Utils';
 import { audio, source, getRandomTrack, playNextTrack } from './data/Audio';
 import { requestLevelMap } from './Levels';
 import { setLevelMap, createPlayer, init, animate } from '../index';
@@ -60,17 +76,17 @@ import { parseCollisitions } from './Collision';
 
 
 
-                                          import { level } from '../index';
+                                    import { level } from '../index';
 
 export const mySPA = (function() {
   function View() {
     let myContainerMain = null,
-        myContainerBtns = null,
-        myContainerShow = null,
-        muteBtn = null,
-        menuBtn = null,
-        headerBlock = null,
-        levelSelectHTML = null;
+      myContainerBtns = null,
+      myContainerShow = null,
+      muteBtn = null,
+      menuBtn = null,
+      headerBlock = null,
+      levelSelectHTML = null;
 
     const HomeComponent = {
       id: 'main',
@@ -155,23 +171,23 @@ export const mySPA = (function() {
           <section class="${className} level">
             <h2 class="level__title">Select level:</h2>
             <div class="level__list">
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="1"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="2"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="3"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="4"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="5"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="6"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="7"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="8"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="9"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="10"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="11"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="12"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="13"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="14"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="15"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="16"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${logoutImg}" alt="logout button" data-stage="17"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_1}" alt="logout button" data-stage="1"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_2}" alt="logout button" data-stage="2"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_3}" alt="logout button" data-stage="3"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_4}" alt="logout button" data-stage="4"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_5}" alt="logout button" data-stage="5"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_6}" alt="logout button" data-stage="6"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_7}" alt="logout button" data-stage="7"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_8}" alt="logout button" data-stage="8"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_9}" alt="logout button" data-stage="9"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_10}" alt="logout button" data-stage="10"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_11}" alt="logout button" data-stage="11"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_12}" alt="logout button" data-stage="12"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_13}" alt="logout button" data-stage="13"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_14}" alt="logout button" data-stage="14"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_15}" alt="logout button" data-stage="15"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_16}" alt="logout button" data-stage="16"></a>
+              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_17}" alt="logout button" data-stage="17"></a>
             </div>
           </section>
         `;
@@ -266,216 +282,215 @@ export const mySPA = (function() {
   };
 
   function Model () {
-      let myView = null,
-          track = null,
-          isInitMusicPlay = false,
-          soundSettings = {};
+    let myView = null,
+        track = null,
+        isInitMusicPlay = false,
+        soundSettings = {};
 
-      this.init = function(view) {
-        myView = view;
+    this.init = function(view) {
+      myView = view;
+    }
+
+    this.updateState = function(hashPageName) {
+      myView.renderContent(hashPageName);
+    }
+
+    this.playSound = function() {
+      if (!isInitMusicPlay) {
+        track = getRandomTrack(audio);
+        track.pause();
+        track.play();
       }
+      isInitMusicPlay = true;
+      this.playNextTrack(track);
+    }
 
-      this.updateState = function(hashPageName) {
-        myView.renderContent(hashPageName);
+    this.playNextTrack = function(src) {
+      src.onended = function() {
+        playNextTrack(src, audio);
       }
+    }
 
-      this.playSound = function() {
-        if (!isInitMusicPlay) {
-          track = getRandomTrack(audio);
-          track.pause();
-          track.play();
-        }
-        isInitMusicPlay = true;
-        this.playNextTrack(track);
-      }
-
-      this.playNextTrack = function(src) {
-        src.onended = function() {
-          playNextTrack(src, audio);
-        }
-      }
-
-      this.muteSound = function() {
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]) {
-            audio[sound][source].muted === false ?
-            audio[sound][source].muted = true :
-            audio[sound][source].muted = false;
-          }
-        }
-        myView.changeMuteIcon();
-      }
-
-      this.setLocalStorage = function (key, value) {
-        if (('localStorage' in window) && (window.localStorage !== null)) {
-          soundSettings[key] = value;
-          localStorage.setItem('settings', JSON.stringify(soundSettings));
+    this.muteSound = function() {
+      for (let sound in audio) {
+        if (audio?.[sound]?.[source]) {
+          audio[sound][source].muted === false ?
+          audio[sound][source].muted = true :
+          audio[sound][source].muted = false;
         }
       }
+      myView.changeMuteIcon();
+    }
 
-      this.setSoundsVolume = function(value) {
-        console.log(value);
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]
-            && (sound != 'track_1' &&
-                sound != 'track_2' &&
-                sound != 'track_3' &&
-                sound != 'track_4')) {
-            audio[sound][source].volume = value;
-          }
-        }
-        this.setLocalStorage('soundEffects', value);
+    this.setLocalStorage = function (key, value) {
+      if (('localStorage' in window) && (window.localStorage !== null)) {
+        soundSettings[key] = value;
+        localStorage.setItem('settings', JSON.stringify(soundSettings));
       }
+    }
 
-      this.setMusicVolume = function(value) {
-        console.log(value);
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]
-            && (sound === 'track_1' ||
-                sound === 'track_2' ||
-                sound === 'track_3' ||
-                sound === 'track_4')) {
-            audio[sound][source].volume = value;
-          }
-        }
-        this.setLocalStorage('musicEffects', value);
-      }
-
-      this.stopSoundsBeforeLeave = function () {
-        for (let sound in audio) {
-          if (audio?.[sound]?.[source]
-            && (sound !== 'track_1' &&
-                sound !== 'track_2' &&
-                sound !== 'track_3' &&
-                sound !== 'track_4')) {
-                  console.log(audio[sound][source])
-            audio[sound][source].pause();
-          }
+    this.setSoundsVolume = function(value) {
+      console.log(value);
+      for (let sound in audio) {
+        if (audio?.[sound]?.[source]
+          && (sound != 'track_1' &&
+              sound != 'track_2' &&
+              sound != 'track_3' &&
+              sound != 'track_4')) {
+          audio[sound][source].volume = value;
         }
       }
+      this.setLocalStorage('soundEffects', value);
+    }
 
-      this.startGame = function(level) {
-        myView.hideMenu();
-        requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
+    this.setMusicVolume = function(value) {
+      console.log(value);
+      for (let sound in audio) {
+        if (audio?.[sound]?.[source]
+          && (sound === 'track_1' ||
+              sound === 'track_2' ||
+              sound === 'track_3' ||
+              sound === 'track_4')) {
+          audio[sound][source].volume = value;
+        }
       }
+      this.setLocalStorage('musicEffects', value);
+    }
 
-      this.backToMenu = function() {
-        this.stopSoundsBeforeLeave();
-        myView.backToMenu();
+    this.stopSoundsBeforeLeave = function () {
+      for (let sound in audio) {
+        if (audio?.[sound]?.[source]
+          && (sound !== 'track_1' &&
+              sound !== 'track_2' &&
+              sound !== 'track_3' &&
+              sound !== 'track_4')) {
+          audio[sound][source].pause();
+        }
       }
-  }
+    }
 
-  function Controller () {
-      let myContainerNav = null,
-          myContainerMain = null,
-          myModel = null;
+    this.startGame = function(level) {
+      myView.hideMenu();
+      requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate, level);
+    }
 
-      this.init = function(container_1, container_2, model) {
-        myContainerNav = container_1;
-        myContainerMain = container_2;
-        myModel = model;
-        window.addEventListener('hashchange', this.updateState);
-        this.updateState();
-        this.addEventListeners();
-      }
+    this.backToMenu = function() {
+      this.stopSoundsBeforeLeave();
+      myView.backToMenu();
+    }
+    }
 
-      this.updateState = function() {
-        const hashPageName = location.hash.slice(1).toLowerCase();
-        myModel.updateState(hashPageName);
-      }
+    function Controller () {
+    let myContainerNav = null,
+        myContainerMain = null,
+        myModel = null;
 
-      this.addEventListeners = function() {
-        myContainerNav.addEventListener('click', function (e) {
-          if (e.target && e.target.id === 'select-lvl') {
-            myModel.playSound();
-          }
-        });
+    this.init = function(container_1, container_2, model) {
+      myContainerNav = container_1;
+      myContainerMain = container_2;
+      myModel = model;
+      window.addEventListener('hashchange', this.updateState);
+      this.updateState();
+      this.addEventListeners();
+    }
 
-        myContainerMain.addEventListener('change', function (e) {
-          if (e.target && e.target.id === 'volume-snd') { // sound effects volume
-            myModel.setSoundsVolume(e.target.value);
-          }
-          if (e.target && e.target.id === 'volume-msc') { // music volume
-            myModel.setMusicVolume(e.target.value);
-          }
-        });
+    this.updateState = function() {
+      const hashPageName = location.hash.slice(1).toLowerCase();
+      myModel.updateState(hashPageName);
+    }
 
-        document.addEventListener('click', function (e) {
-          if (e.target && e.target.classList.contains('level__img')) { // select level
-            myModel.startGame(e.target.dataset.stage);
-          }
-        });
+    this.addEventListeners = function() {
+      myContainerNav.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'select-lvl') {
+          myModel.playSound();
+        }
+      });
 
-        document.addEventListener('click', function (e) {
-          if (e.target && e.target.id === 'mute-btn') {
-            myModel.muteSound();
-          }
+      myContainerMain.addEventListener('change', function (e) {
+        if (e.target && e.target.id === 'volume-snd') { // sound effects volume
+          myModel.setSoundsVolume(e.target.value);
+        }
+        if (e.target && e.target.id === 'volume-msc') { // music volume
+          myModel.setMusicVolume(e.target.value);
+        }
+      });
 
-          if (e.target && e.target.id === 'btnMenuImg') {
-            e.preventDefault();
-            e.stopPropagation();
-            myModel.backToMenu();
-          }
-        });
-      };
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('level__img')) { // select level
+          myModel.startGame(e.target.dataset.stage);
+        }
+      });
+
+      document.addEventListener('click', function (e) {
+        if (e.target && e.target.id === 'mute-btn') {
+          myModel.muteSound();
+        }
+
+        if (e.target && e.target.id === 'btnMenuImg') {
+          e.preventDefault();
+          e.stopPropagation();
+          myModel.backToMenu();
+        }
+      });
+    };
   };
 
   /* Init */
   return {
-      init: function(container_main, container_btns, container_show) {
-        this.initBuildHtml(container_main);
-        this.main();
-        const view = new View();
-        const model = new Model();
-        const controller = new Controller();
+    init: function(container_main, container_btns, container_show) {
+      this.initBuildHtml(container_main);
+      this.main();
+      const view = new View();
+      const model = new Model();
+      const controller = new Controller();
 
-        view.init(document.getElementById(container_main), document.getElementById(container_btns), document.getElementById(container_show)); // главный контейнер с app, контейнер с <nav> и контейнер с <main>
-        model.init(view);
-        controller.init(document.getElementById(container_btns), document.getElementById(container_show), model); //  контейнер с <nav>, контейнер с <main> и модель (можно сюда еще передать mySPA, audio, source)
-      },
+      view.init(document.getElementById(container_main), document.getElementById(container_btns), document.getElementById(container_show)); // главный контейнер с app, контейнер с <nav> и контейнер с <main>
+      model.init(view);
+      controller.init(document.getElementById(container_btns), document.getElementById(container_show), model); //  контейнер с <nav>, контейнер с <main> и модель (можно сюда еще передать mySPA, audio, source)
+    },
 
-      main: function() {
-        console.log('Game "Platform traveller" initialized...');
-      },
+    main: function() {
+      console.log('Game "Platform traveller" initialized...');
+    },
 
-      initBuildHtml: function(elem) {
-        const app = document.getElementById(elem);
-        app.className = 'app';
-        app.innerHTML = `
-        <header class="header">
-          <img class="cloud-1" src="${cloud_1}" alt="cloud first">
-          <img class="cloud-2" src="${cloud_2}" alt="cloud second">
-          <img class="cloud-3" src="${cloud_3}" alt="cloud third">
-          <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
-            <div class="header__wrapper">
-              <img class="header__logo" src="${logoImg_1}" alt="logo">
-                <div class="header__logo-box">
-                  <img class="header__logo-2" src="${logoImg_2}" alt="logo small">
-                    <p class="header__title">Platform traveller</p>
+    initBuildHtml: function(elem) {
+      const app = document.getElementById(elem);
+      app.className = 'app';
+      app.innerHTML = `
+      <header class="header">
+        <img class="cloud-1" src="${cloud_1}" alt="cloud first">
+        <img class="cloud-2" src="${cloud_2}" alt="cloud second">
+        <img class="cloud-3" src="${cloud_3}" alt="cloud third">
+        <img class="cloud-4" src="${cloud_4}" alt="cloud fourth">
+          <div class="header__wrapper">
+            <img class="header__logo" src="${logoImg_1}" alt="logo">
+              <div class="header__logo-box">
+                <img class="header__logo-2" src="${logoImg_2}" alt="logo small">
+                  <p class="header__title">Platform traveller</p>
+              </div>
+                <div class="bird-container">
+                  <img class="bird" src="${birdFlyingImg}" alt="bird">
                 </div>
-                  <div class="bird-container">
-                    <img class="bird" src="${birdFlyingImg}" alt="bird">
-                  </div>
-                      <nav id="root" class="header__nav nav">
-                        <ul class="nav__list">
+                    <nav id="root" class="header__nav nav">
+                      <ul class="nav__list">
+                        <li class="nav__item">
+                          <a href="#howtoplay" class="nav__link">How to play</a>
+                        </li>
                           <li class="nav__item">
-                            <a href="#howtoplay" class="nav__link">How to play</a>
+                            <a href="#settings" id="settings-btn" class="nav__link">Settings</a>
                           </li>
                             <li class="nav__item">
-                              <a href="#settings" id="settings-btn" class="nav__link">Settings</a>
+                              <a href="#description" class="nav__link">Description</a>
                             </li>
                               <li class="nav__item">
-                                <a href="#description" class="nav__link">Description</a>
+                                <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
                               </li>
-                                <li class="nav__item">
-                                  <a href="#game" id="select-lvl" class="nav__btn nav__btn_hover nav__link">Select level</a>
-                                </li>
-                          </ul>
-                      </nav>
-            </div>
-        </header>
-          <main id="content" class="content">
-          </main>`; 
-      }
+                        </ul>
+                    </nav>
+          </div>
+      </header>
+        <main id="content" class="content">
+        </main>`; 
+    }
   };
 }());

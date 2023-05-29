@@ -8,7 +8,6 @@ import heroJumpL from '/assets/img/Hero/Jump_left.png';
 import heroFallR from '/assets/img/Hero/Fall_right.png';
 import heroFallL from '/assets/img/Hero/Fall_left.png';
 import heroDeath from '/assets/img/Hero/Player_death.png';
-import backgroundImg from '/assets/img/Background_images/bg_1.jpg';
 import win from '/assets/img/Background_images/Win_4.jpg';
 import platformSolid from '/assets/img/Platforms/Platform_solid.png';
 import platformOneStep from '/assets/img/Platforms/Platform_oneStep.png';
@@ -55,6 +54,42 @@ import muteOn from '/assets/img/SPA/mute_on.png';
 import logoutImg from '/assets/img/SPA/logout.png';
 import menuImg from '/assets/img/SPA/menu.png';
 
+import backgroundImg_1 from '/assets/img/Background_images/bg1.png';
+import backgroundImg_2 from '/assets/img/Background_images/bg2.jpg';
+import backgroundImg_3 from '/assets/img/Background_images/bg3.jpg';
+import backgroundImg_4 from '/assets/img/Background_images/bg4.jpg';
+import backgroundImg_5 from '/assets/img/Background_images/bg5.png';
+import backgroundImg_6 from '/assets/img/Background_images/bg6.jpg';
+import backgroundImg_7 from '/assets/img/Background_images/bg7.png';
+import backgroundImg_8 from '/assets/img/Background_images/bg8.png';
+import backgroundImg_9 from '/assets/img/Background_images/bg9.png';
+import backgroundImg_10 from '/assets/img/Background_images/bg10.jpg';
+import backgroundImg_11 from '/assets/img/Background_images/bg11.png';
+import backgroundImg_12 from '/assets/img/Background_images/bg12.png';
+import backgroundImg_13 from '/assets/img/Background_images/bg13.png';
+import backgroundImg_14 from '/assets/img/Background_images/bg14.png';
+import backgroundImg_15 from '/assets/img/Background_images/bg15.png';
+import backgroundImg_16 from '/assets/img/Background_images/bg16.png';
+import backgroundImg_17 from '/assets/img/Background_images/bg17.png';
+
+import levelIcon_1 from '/assets/img/Levels/01.png';
+import levelIcon_2 from '/assets/img/Levels/02.png';
+import levelIcon_3 from '/assets/img/Levels/03.png';
+import levelIcon_4 from '/assets/img/Levels/04.png';
+import levelIcon_5 from '/assets/img/Levels/05.png';
+import levelIcon_6 from '/assets/img/Levels/06.png';
+import levelIcon_7 from '/assets/img/Levels/07.png';
+import levelIcon_8 from '/assets/img/Levels/08.png';
+import levelIcon_9 from '/assets/img/Levels/09.png';
+import levelIcon_10 from '/assets/img/Levels/10.png';
+import levelIcon_11 from '/assets/img/Levels/11.png';
+import levelIcon_12 from '/assets/img/Levels/12.png';
+import levelIcon_13 from '/assets/img/Levels/13.png';
+import levelIcon_14 from '/assets/img/Levels/14.png';
+import levelIcon_15 from '/assets/img/Levels/15.png';
+import levelIcon_16 from '/assets/img/Levels/16.png';
+import levelIcon_17 from '/assets/img/Levels/17.png';
+
 export { platformImgSrc300,
         heroIdleR,
         heroIdleL,
@@ -65,7 +100,6 @@ export { platformImgSrc300,
         heroFallR,
         heroFallL,
         heroDeath,
-        backgroundImg,
         win,
         platformSolid,
         platformOneStep,
@@ -109,5 +143,39 @@ export { platformImgSrc300,
         muteOff,
         muteOn,
         logoutImg,
-        menuImg
+        menuImg,
+        backgroundImg_1,
+        backgroundImg_2,
+        backgroundImg_3,
+        backgroundImg_4,
+        backgroundImg_5,
+        backgroundImg_6,
+        backgroundImg_7,
+        backgroundImg_8,
+        backgroundImg_9,
+        backgroundImg_10,
+        backgroundImg_11,
+        backgroundImg_12,
+        backgroundImg_13,
+        backgroundImg_14,
+        backgroundImg_15,
+        backgroundImg_16,
+        backgroundImg_17,
+        levelIcon_1,
+        levelIcon_2,
+        levelIcon_3,
+        levelIcon_4,
+        levelIcon_5,
+        levelIcon_6,
+        levelIcon_7,
+        levelIcon_8,
+        levelIcon_9,
+        levelIcon_10,
+        levelIcon_11,
+        levelIcon_12,
+        levelIcon_13,
+        levelIcon_14,
+        levelIcon_15,
+        levelIcon_16,
+        levelIcon_17
       }

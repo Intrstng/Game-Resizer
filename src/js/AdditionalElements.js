@@ -46,7 +46,7 @@ export class AdditionalElements {
       y: posY,
     }
     this.sprites = {
-      idle: createImage(backgroundImg, canvas.width, canvas.height),
+      idle: image,
     }
     this.currentSprite = this.sprites.idle;
     this.type = 'backgrounds';

@@ -141,7 +141,11 @@ export const logInApp = (function () {
 
     this.stopAudioBeforeLeave = function () {
       for (let sound in audio) {
-        if (audio?.[sound]?.[source]) {
+        if (audio?.[sound]?.[source]
+          && (sound === 'track_1' ||
+              sound === 'track_2' ||
+              sound === 'track_3' ||
+              sound === 'track_4')) {
           audio[sound][source].pause();
         }
       }

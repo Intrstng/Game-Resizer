@@ -62,6 +62,23 @@ import { platformImgSrc300,
           flamethrowerDown,
           brick_1,
           brick_2,
+          backgroundImg_1,
+          backgroundImg_2,
+          backgroundImg_3,
+          backgroundImg_4,
+          backgroundImg_5,
+          backgroundImg_6,
+          backgroundImg_7,
+          backgroundImg_8,
+          backgroundImg_9,
+          backgroundImg_10,
+          backgroundImg_11,
+          backgroundImg_12,
+          backgroundImg_13,
+          backgroundImg_14,
+          backgroundImg_15,
+          backgroundImg_16,
+          backgroundImg_17
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
@@ -73,14 +90,25 @@ import { requestLevelMap } from './js/Levels';
 import { logInApp } from './js/Login';
 logInApp.init('app', 'firstStart');
 
-let fontSize;
-
-export let canvas;
-export let c;
 
 
 
 
+
+export let level = 1,
+           canvas,
+           c,
+           platforms = [],
+           levelMap,
+           parsedCollisions,
+           player,
+           completeLevel = false,
+           leftNeighboorBlockFromHero = null;
+
+let levelOverlay = createImage(win),
+           leftNeighboorBlockFromHeroArr = [],
+           backgroundCanvasImg = [],
+           fontSize;
 
 
 
@@ -98,30 +126,23 @@ window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
 
 
-let leftNeighboorBlockFromHeroArr = [];
-// export let timerShoot_1 = null;
-// export let timerShoot_2 = null;
-export let leftNeighboorBlockFromHero = null;
-export let completeLevel = false;
 
 
 
 
-export let additionalElements = [];
 
 
-export let level = 1;
-function increseLevel(obj) {
+
+
+
+
+
+
+
+  function increseLevel(obj) {
   return level >= Object.keys(obj).length ? level : ++level;
- }
+  }
 
-export let platforms = [],
-           levelMap,
-           parsedCollisions,
-           player;
-
-
-let levelOverlay = createImage(win);
 
 
 
@@ -138,8 +159,24 @@ export function setLevelMap(value) {
   canvas.height = 576 // 720
   levelOverlay.width = canvas.width;
   levelOverlay.height = canvas.height;
-  additionalElements = [
-    new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
+  backgroundCanvasImg = [ // Canvas background-image for each level
+    new AdditionalElements(0, 0, createImage(backgroundImg_1, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_2, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_3, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_4, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_5, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_6, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_7, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_8, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_9, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_10, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_11, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_12, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_13, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_14, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_15, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_16, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, createImage(backgroundImg_17, canvas.width, canvas.height)),
   ]
   levelMap = value;
   console.log(levelMap)
@@ -166,8 +203,9 @@ export let initStart = true;
 
 
 function reloadGameplay() {
-  additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
-  ];
+  // backgroundCanvasImg = [
+  //   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
+  // ];
     platforms.forEach(platform => {
       (platform.type === 'oneStep') && platform.restore();
     });
@@ -178,6 +216,10 @@ function reloadGameplay() {
     })  
 }
 
+
+export function setupStageNumber(value) {
+  level = value;
+}
 
 let initCounter = 0;
 export function init() {
@@ -214,8 +256,8 @@ return player;
 export function animate() {
   requestAnim(animate);
   console.log('animation counter');
-  additionalElements.forEach(element => element.draw());
-                
+  backgroundCanvasImg[level - 1].draw();
+             console.log(backgroundCanvasImg[level - 1])   
   platforms.forEach(platform => platform.draw());
   platforms.forEach(platform => platform.update());
   platforms.forEach(platform => {

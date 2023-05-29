@@ -383,7 +383,7 @@ html, .buttonBlue, .header__nav .nav__list, .header__nav .nav__btn {
 .greeting__text {
   font-family: 'Righteous', cursive; }
 
-.level__item, .header__title {
+.header__title {
   font-family: 'Rubik Iso', cursive; }
 
 .description__content {
@@ -861,44 +861,38 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 2rem; }
+    gap: 1.5rem; }
+  .level__img {
+    width: 5.5rem;
+    height: 5.5rem; }
   .level__item {
-    width: 8rem;
-    height: 8rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.8);
-    border: 0.3rem solid rgba(255, 255, 255, 0.8);
-    background-color: transparent;
-    border-radius: 1rem;
-    font-size: 4rem;
-    letter-spacing: 0.2rem;
     transition: transform 0.25s ease, opacity 0.25 ease; }
     .level__item_hover:hover {
       transform: scale(1.05);
       opacity: 0.9; }
     .level__item_active:active {
-      transform: scale(0.95);
-      color: rgba(59, 59, 59, 0.8);
-      border: 0.3rem solid rgba(59, 59, 59, 0.7); }
+      transform: scale(0.95); }
     .level__item_disabled:disabled {
-      transform: none;
-      color: rgba(59, 59, 59, 0.7);
-      border: 0.3rem solid rgba(255, 255, 255, 0.4); }
+      transform: none; }
 
 @media only screen and (max-width: 1140px) {
   .level__title {
     font-size: 1.6rem; }
   .level__list {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr); }
-  .level__item {
-    width: 6rem;
-    height: 6rem;
-    font-size: 3rem; } }
+    grid-template-rows: repeat(5, 1fr); } }
+
+@media (max-width: 821px) {
+  .level__list {
+    gap: 1.5rem; }
+  .level__img {
+    width: 5rem;
+    height: 5rem; } }
 
 .error__img {
   display: block;

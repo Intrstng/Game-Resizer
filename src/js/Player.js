@@ -13,7 +13,6 @@ import {
   heroFallR,
   heroFallL,
   heroDeath,
-  backgroundImg,
   platformSolid,
   platformOneStep,
   platformOneStepExplosion,

@@ -63,4 +63,9 @@ function getLocalStorage(key, value) {
     JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
 
-export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, fullScreen, getLocalStorage };
+function fakeClick (e) {
+  e.preventDefault();
+  myContainerBtns.getElementById('select-lvl').click();
+}
+
+export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, fullScreen, getLocalStorage, fakeClick };

@@ -1,6 +1,7 @@
-import { platforms, initStart } from '../index';
+import { platforms, initStart, setupStageNumber } from '../index';
 
-export function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, callback_5) {
+export function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, callback_5, stage) {
+  setupStageNumber(stage);
   fetch(url)
     .then(response => {  
       if (response.status !== 200) {
@@ -11,9 +12,9 @@ export function requestLevelMap(url, callback_1, callback_2, callback_3, callbac
       .then(map => callback_1(map, platforms))
       .then(data => callback_2(data, platforms))
       .then(player => callback_3(player, platforms))
-      .then(init => callback_4(init, platforms))
+      .then(init => callback_4(init/* , platforms */))
       .then(animate => {
-        initStart && callback_5(animate, platforms);
+        initStart && callback_5(animate/* , platforms */);
       })
       .catch(err => console.error('Fetch Error - levels map load failed', err))
     })
