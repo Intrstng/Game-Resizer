@@ -182,8 +182,7 @@ return player;
 export function animate() {
   requestAnim(animate);
   console.log('animation counter');
-  backgroundCanvasImg[level - 1].draw();
-             console.log(backgroundCanvasImg[level - 1])   
+  backgroundCanvasImg[level - 1].draw();  
   platforms.forEach(platform => platform.draw());
   platforms.forEach(platform => platform.update());
   platforms.forEach(platform => {

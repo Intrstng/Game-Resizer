@@ -22,18 +22,18 @@ class PlatformSpikes extends Platform {
   collision() {
   // Player - platform collision (player is above the spike platform)
     if (player.bottom <= this.position.y &&
-      player.bottom + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      player.right >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-      player.left <= this.position.x + this.width - player.width / 3) { 
-      player.die();
+        player.bottom + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+        // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+        player.right >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
+        player.left <= this.position.x + this.width - player.width / 3) { 
+          player.die();
     }
     // Player - platform collision (player is under the platform)
     if (player.top <= this.position.y + this.height &&
-      player.bottom + player.velocity.y >= this.position.y &&
-      player.left >= this.position.x - player.width / 2 && // можно сделать 1.75
-      player.right <= this.position.x + this.width + player.width / 2) {
-        player.die();
+        player.bottom + player.velocity.y >= this.position.y &&
+        player.left >= this.position.x - player.width / 2 && // можно сделать 1.75
+        player.right <= this.position.x + this.width + player.width / 2) {
+          player.die();
     }
   }
 }
@@ -128,20 +128,20 @@ class Flamethrower {
     this.bulletController.shoot(bullet_X, bullet_Y, delay, this.bulletFlight.x, this.bulletFlight.y, this.caliber, this.type, this.platforms);
   }
   collision() {
-    // Player - platform collision (player is above the spike platform)
-      if (player.position.y + player.height <= this.position.y &&
-        player.position.y + player.height + player.velocity.y >= this.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-        // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-        player.position.x + player.width >= this.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж погибал касаясь самого края платформы (без этого он еще погибал не доходя трети ширины спрайта героя)
-        player.position.x <= this.position.x + this.width - player.width / 3) { 
-        player.die();
+    // Player - flamethrower collision (player is above the flamethrower)
+      if (player.bottom <= this.position.y &&
+          player.bottom + player.velocity.y >= this.position.y && 
+          // Player - flamethrower collision (player on the flamethrower - inside of left and right flamethrower boundaries)
+          player.right >= this.position.x + player.width / 3 &&
+          player.left <= this.position.x + this.width - player.width / 3) { 
+            player.die();
       }
-      // Player - platform collision (player is under the platform)
-      if (player.position.y <= this.position.y + this.height &&
-        player.position.y + player.height + player.velocity.y >= this.position.y &&
-        player.position.x >= this.position.x - player.width / 2 && // можно сделать 1.75
-        player.position.x + player.width <= this.position.x + this.width + player.width / 2) {
-          player.die();
+      // Player - flamethrower collision (player is under the flamethrower)
+      if (player.top <= this.position.y + this.height &&
+          player.bottom + player.velocity.y >= this.position.y &&
+          player.left >= this.position.x - player.width / 2 && // можно сделать 1.75
+          player.right <= this.position.x + this.width + player.width / 2) {
+            player.die();
       }
     }
   update() {
@@ -214,10 +214,10 @@ class BulletController {
   collisionWithBlocks(bullet) {
     this.platforms.forEach((block) => {
       (block.statusActive &&
-      bullet.position.x + bullet.width * 0.1 <= block.right &&
-      bullet.position.x >= block.left &&
-      bullet.position.y <= block.bottom &&
-      bullet.position.y >= block.top) && this.destroy(bullet);
+       bullet.position.x + bullet.width * 0.1 <= block.right &&
+       bullet.position.x >= block.left &&
+       bullet.position.y <= block.bottom &&
+       bullet.position.y >= block.top) && this.destroy(bullet);
     })
     
   }
@@ -238,9 +238,9 @@ class BulletController {
 
   isBulletOffScreen(bullet) {
     return (bullet.position.y <= 0 ||
-      bullet.position.y >= canvas.height ||
-      bullet.position.x <= 0 ||
-      bullet.position.x >= canvas.width);
+            bullet.position.y >= canvas.height ||
+            bullet.position.x <= 0 ||
+            bullet.position.x >= canvas.width);
   }
 }
 
@@ -288,10 +288,10 @@ class Bullet {
 
   collision() {
     if (player.top + player.height * 0.3 >= this.position.y &&
-      player.top + player.height * 0.3 <= this.position.y + this.height &&
-      player.left + player.width * 0.3 >= this.position.x &&
-      player.left + player.width * 0.3 <= this.position.x + this.width) {
-        player.die();
+        player.top + player.height * 0.3 <= this.position.y + this.height &&
+        player.left + player.width * 0.3 >= this.position.x &&
+        player.left + player.width * 0.3 <= this.position.x + this.width) {
+          player.die();
       }
     }
 }

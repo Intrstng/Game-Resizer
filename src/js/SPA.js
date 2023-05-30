@@ -297,7 +297,6 @@ export const mySPA = (function() {
     }
 
     this.setSoundsVolume = function(value) {
-      console.log(value);
       for (let sound in audio) {
         if (audio?.[sound]?.[source]
           && (sound != 'track_1' &&
@@ -311,7 +310,6 @@ export const mySPA = (function() {
     }
 
     this.setMusicVolume = function(value) {
-      console.log(value);
       for (let sound in audio) {
         if (audio?.[sound]?.[source]
           && (sound === 'track_1' ||

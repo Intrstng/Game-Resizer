@@ -116,14 +116,12 @@ class Platform {
         player.top <= this.bottom &&
         player.right >= this.left) {
           player.velocity.x = 0;
-          console.log('hit!');
     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
     if (keys.right.pressed &&
         player.bottom >= this.top && 
         player.top <= this.bottom &&
         player.right >= this.right) {
           player.velocity.x = 2;
-          console.log('free!');
     }
   }
   collisionRightSide() {
@@ -134,7 +132,6 @@ class Platform {
         player.top <= leftNeighboorBlockFromHero.bottom &&
         player.left <= leftNeighboorBlockFromHero.right) {
           player.velocity.x = 0;
-          console.log('hit!');
     } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
       if (keys.left.pressed &&
           leftNeighboorBlockFromHero != undefined &&
@@ -142,7 +139,6 @@ class Platform {
           player.top >= leftNeighboorBlockFromHero.bottom) &&
           player.left <= leftNeighboorBlockFromHero.left) { // или "-" player.width ???
             player.velocity.x = -2;
-            console.log('free!');
       }
     }
   
@@ -239,7 +235,6 @@ class JumpToggleActive extends Platform {
     this.frequency = 63;
   }
   toggle() {
-    console.log(this.type, this.statusActive)
     if (keys.jumpToggleActive === true) {
       this.currentSprite = this.sprites.idle;
       this.statusActive = true;
@@ -267,7 +262,6 @@ class JumpToggleDisabled extends Platform {
     this.frequency = 63;
   }
   toggle() {
-    console.log(this.type, this.statusActive)
     if (keys.jumpToggleActive === false) {
       this.currentSprite = this.sprites.idle;
       this.statusActive = true;
@@ -330,7 +324,9 @@ class SpaceToggledPlatform extends Platform {
     this.setCount = null;
   }
   checkSpaceToggleCounter() {
-   keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter =  1 : keys.spaceToggleCounter; 
+    keys.spaceToggleCounter >= 4 ?
+    keys.spaceToggleCounter = 1 :
+    keys.spaceToggleCounter; 
   }
   collision() {
     if (keys.spaceToggleCounter === this.setCount) {
@@ -339,9 +335,9 @@ class SpaceToggledPlatform extends Platform {
       super.collisionUnder();
       super.collisionLeftSide();
       if ((leftNeighboorBlockFromHero != undefined ||
-        leftNeighboorBlockFromHero != null) &&
-        keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount) {
-          super.collisionRightSide();
+           leftNeighboorBlockFromHero != null) &&
+           keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount) {
+             super.collisionRightSide();
       }
       this.currentSprite = this.sprites.idle;
       this.checkSpaceToggleCounter();
@@ -352,19 +348,17 @@ class SpaceToggledPlatform extends Platform {
     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
     if (platforms.some((block) => {
       return (player.position.y + player.height * 0.75 >= block.top &&
-        player.position.y + player.height * 0.35 <= block.bottom &&
-        player.position.x + player.width * 0.75 >= block.left &&
-        player.position.x + player.width * 0.25 <= block.right);
-    })) {
-      keys.deadSignalZone = true;
-      player.alive && keys.space.pressed && gameSoundEffects(audio.toggleDisabled);
-      console.log('inside');
-    } else {
-      console.log('outside');
-      player.alive && keys.space.pressed && gameSoundEffects(audio.toggle);   
-      keys.deadSignalZone = false;
-    }
-    }
+              player.position.y + player.height * 0.35 <= block.bottom &&
+              player.position.x + player.width * 0.75 >= block.left &&
+              player.position.x + player.width * 0.25 <= block.right);
+        })) {
+          keys.deadSignalZone = true;
+          player.alive && keys.space.pressed && gameSoundEffects(audio.toggleDisabled);
+        } else {
+          player.alive && keys.space.pressed && gameSoundEffects(audio.toggle);   
+          keys.deadSignalZone = false;
+        }
+      }
   } 
 }
 
@@ -433,26 +427,26 @@ class DeadSignal extends SpaceToggledPlatform {
   }
 
   hover() {
-    if ((player.left <= this.right &&
-      player.right >= this.left &&
-      player.top <= this.bottom &&
-      player.bottom >= this.top) &&
-      (platforms.some((block) => {
-        return (player.position.y + player.height * 0.75 >= block.top &&
-                player.position.y + player.height * 0.35 <= block.bottom &&
-                player.position.x + player.width * 0.75 >= block.left &&
-                player.position.x + player.width * 0.25 <= block.right);
-      }))
-      ) { // Inside of the block
-      this.checkSpaceToggleCounter();
-      this.currentSprite = this.sprites.idle;
-    } else if ((platforms.some((block) => { // Outside of the block
-      return (player.position.y + player.height * 0.75 >= block.top &&
-              player.position.y + player.height * 0.35 <= block.bottom &&
-              player.position.x + player.width * 0.75 >= block.left &&
-              player.position.x + player.width * 0.25 <= block.right)}))) {
-          this.currentSprite = this.sprites.disabled;
-      }
+    if (( player.left <= this.right &&
+          player.right >= this.left &&
+          player.top <= this.bottom &&
+          player.bottom >= this.top ) &&
+          (platforms.some((block) => {
+            return (player.position.y + player.height * 0.75 >= block.top &&
+                    player.position.y + player.height * 0.35 <= block.bottom &&
+                    player.position.x + player.width * 0.75 >= block.left &&
+                    player.position.x + player.width * 0.25 <= block.right);
+          }))
+          ) { // Inside of the block
+          this.checkSpaceToggleCounter();
+          this.currentSprite = this.sprites.idle;
+        } else if ((platforms.some((block) => { // Outside of the block
+          return (player.position.y + player.height * 0.75 >= block.top &&
+                  player.position.y + player.height * 0.35 <= block.bottom &&
+                  player.position.x + player.width * 0.75 >= block.left &&
+                  player.position.x + player.width * 0.25 <= block.right)}))) {
+              this.currentSprite = this.sprites.disabled;
+          }
   }
 
   collision() {
@@ -465,11 +459,8 @@ class DeadSignal extends SpaceToggledPlatform {
                 player.position.x + player.width * 0.25 <= block.right);
       })) {
         keys.deadSignalZone = true;
-        console.log(keys.space.pressed)
         player.alive && keys.space.pressed && gameSoundEffects(audio.toggleDisabled);
-        console.log('inside')
-      } else {
-        console.log('outside')   
+      } else { 
         keys.deadSignalZone = false;
         player.alive && keys.space.pressed && gameSoundEffects(audio.toggle);
       }

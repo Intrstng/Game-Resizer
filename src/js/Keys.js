@@ -23,7 +23,6 @@ const keys = {
 };
                                                 
 const keyDownHandler = (e) => {
-  console.log(e.code)
   if (e.repeat == false) {
     switch (e.code) {
       case 'ArrowUp':
