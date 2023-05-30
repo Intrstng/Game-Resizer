@@ -4,13 +4,14 @@ import { getAnalytics } from 'firebase/analytics';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app, analytics, auth } from './Firebase';
 import { mySPA } from './SPA';
-import { cloud_1,
-         cloud_2,
-         cloud_3,
-         cloud_4,
-         menuImg
-        } from './Assets';
-import { audio, source } from './data/Audio';
+import {
+        cloud_1,
+        cloud_2,
+        cloud_3,
+        cloud_4,
+        menuImg
+      } from './Assets';
+import { audio, source } from './Audio';
 import { changeIsLeaveGameState } from '../index';
 
 export const logInApp = (function () {
@@ -33,7 +34,7 @@ export const logInApp = (function () {
       logoutBtn = document.querySelector('#btnLogout');
       loginContainer = app.querySelector('#login');
       menuBtn = document.querySelector('#menu-btn');
-    };
+    }
 
     this.showLoginForm = function () {
       const erorrMsg = firstShow ? 'Enter the data' : 'Sign-out successful.';
@@ -69,28 +70,27 @@ export const logInApp = (function () {
         const btnMenuHtml = `<a id="menu-btn" href="#default" class="menu menu_off menu_hover" style="display: none"><img id="btnMenuImg" src="${menuImg}" alt="menu button"></a>`;
         appContainer.insertAdjacentHTML('beforeBegin', btnMenuHtml);
       }
-  
-    };
+    }
 
     this.loginSuccess = function (msg) {
       errorMsgFeild.style.color = 'rgb(153, 153, 153)';
       errorMsgFeild.textContent = `${msg}, login successfull!`;
-    };
+    }
 
     this.loginError = function (error) {
       errorMsgFeild.style.color = 'rgb(255, 0, 0)';
       errorMsgFeild.textContent = `Login unsuccessfull: ${error}`;
-    };
+    }
 
     this.registerSuccess = function (msg) {
       errorMsgFeild.style.color = 'rgb(153, 153, 153)';
       errorMsgFeild.textContent = `${msg}, registration successfull! Please login.`;
-    };
+    }
 
     this.registerError = function (error) {
       errorMsgFeild.style.color = 'rgb(255, 0, 0)';
       errorMsgFeild.textContent = `Registration unsuccessfull: ${error}`;
-    };
+    }
 
     this.showForm = function () {
       logoutBtn.style.display = 'none';
@@ -98,13 +98,13 @@ export const logInApp = (function () {
       muteBtn.style.display = 'none';
       menuBtn.style.display = 'none';
       document.body.classList.remove('game-bgnd');
-    };
+    }
 
     this.hideForm = function () {
       logoutBtn.style.display = 'block';
       loginContainer.style.display = 'none';
       muteBtn.style.display = 'block';
-    };
+    }
 
     this.logoutError = function (err) {
       console.log('An error happened.');
@@ -121,7 +121,7 @@ export const logInApp = (function () {
 
     this.init = function (view) {
       myView = view;
-    };
+    }
 
     this.login = function (email, pass) {
       // Login
@@ -138,7 +138,7 @@ export const logInApp = (function () {
       .catch((error) => {
         myView.loginError(error.code);
       });
-    };
+    }
 
     this.stopAudioBeforeLeave = function () {
       for (let sound in audio) {
@@ -163,7 +163,7 @@ export const logInApp = (function () {
       .catch((error) => {
         myView.registerError(error.code);
       });
-    };
+    }
 
     this.logout = function () {
       signOut(auth).then(() => {
@@ -176,11 +176,11 @@ export const logInApp = (function () {
         // An error happened.
         myView.logoutError(error);
       });		  	
-    };
+    }
 
     this.updateUserMsg = function () {
       myView.updateUserMsg();
-    };
+    }
   }
 
   function Controller() {
@@ -194,7 +194,7 @@ export const logInApp = (function () {
       appContainer = app;
       firstShow = firstStart;
       this.addEventListeners();
-    };
+    }
 
     this.addEventListeners = function() {
         appContainer.addEventListener('click', function(e) {

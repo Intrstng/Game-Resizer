@@ -1,51 +1,24 @@
-import { canvas, c } from '../index';
+import { c } from '../index';
 import { createImage } from './Utils';
-import { init, completeLevel } from '../index';
+import { init } from '../index';
 import { keys } from './Keys';
 import { 
-  platformImgSrc300,
-  heroIdleR,
-  heroIdleL,
-  heroRunR,
-  heroRunL,
-  heroJumpR,
-  heroJumpL,
-  heroFallR,
-  heroFallL,
-  heroDeath,
-  platformSolid,
-  platformOneStep,
-  platformOneStepExplosion,
-  platformJump,
-  platformJumpDisabled,
-  platformOne,
-  platformTwo,
-  platformThree,
-  platformOneDisabled,
-  platformTwoDisabled,
-  platformThreeDisabled,
-  saw,
-  fan,
-  spike,
-  deadSignalZone,
-  deadSignalZoneHover,
-  flamethrowerLeft,
-  flamethrowerRight,
-  flamethrowerUp,
-  flamethrowerDown,
-  brick_1,
-  brick_2,
+        heroIdleR,
+        heroIdleL,
+        heroRunR,
+        heroRunL,
+        heroJumpR,
+        heroJumpL,
+        heroFallR,
+        heroFallL,
+        heroDeath
       } from './Assets';
-import { platforms, intersection, level, gameSoundEffects } from '../index';
-import { audio, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from '../js/data/Audio';
+import { gameSoundEffects } from '../index';
+import { audio } from '../js/Audio';
 
 export class Player {
   constructor({ platforms = [] }, posX, posY, marginLeft = 0, marginTop = 0) {
     this.platforms = platforms;
-    // this.margin = {
-    //   left: ,
-    //   right: ,
-    // }
     this.position = {
       x: posX + marginLeft,
       y: posY + marginTop,
@@ -137,9 +110,9 @@ export class Player {
         case 'brick_1':
         case 'brick_2':
           if (this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom &&
-            this.bottom >= platform.top) {
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
               if (this.velocity.x < 0) { // moving left       // <= -2
                 this.left = platform.right + 0.1;
                 break;
@@ -152,28 +125,11 @@ export class Player {
           break;
 
         case 'jumpToggleActive':
-        if (keys.jumpToggleActive &&
-          this.left <= platform.right &&
-          this.right >= platform.left &&
-          this.top <= platform.bottom &&
-          this.bottom >= platform.top) {
-            if (this.velocity.x < 0) { // moving left       // <= -2
-              this.left = platform.right + 0.1;
-              break;
-            }
-            if (this.velocity.x > 0) { // moving right      // <= 2
-              this.left = platform.left - this.width - 0.1;
-              break;
-            }
-          }
-          break;
-
-        case 'jumpToggleDisabled':
-          if (!keys.jumpToggleActive &&
-            this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom &&
-            this.bottom >= platform.top) {
+          if (keys.jumpToggleActive &&
+              this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
               if (this.velocity.x < 0) { // moving left       // <= -2
                 this.left = platform.right + 0.1;
                 break;
@@ -182,36 +138,51 @@ export class Player {
                 this.left = platform.left - this.width - 0.1;
                 break;
               }
-            }
+          }
+          break;
+
+        case 'jumpToggleDisabled':
+          if (!keys.jumpToggleActive &&
+              this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
+                if (this.velocity.x < 0) { // moving left       // <= -2
+                  this.left = platform.right + 0.1;
+                  break;
+                }
+                if (this.velocity.x > 0) { // moving right      // <= 2
+                  this.left = platform.left - this.width - 0.1;
+                  break;
+                }
+          }
           break;
 
         case 'spikes':
         case 'saw':
           // Hero - platform collision (player is above the spike platform)
           if (this.bottom <= platform.top + this.height / 3 &&
-            this.bottom + this.velocity.y >= platform.top + this.height / 3 &&   
-            this.right >= platform.left + this.width / 3 && 
-            this.left <= platform.right - this.width / 3
-            ) {
-              //debugger
-              this.die();
-          }
+              this.bottom + this.velocity.y >= platform.top + this.height / 3 &&   
+              this.right >= platform.left + this.width / 3 && 
+              this.left <= platform.right - this.width / 3
+              ) {
+                this.die();
+            }
           // Hero - platform collision (player is under the platform)
           if (this.top <= platform.bottom - Math.abs(this.velocity.y) &&
-            this.bottom + this.velocity.y >= platform.top + this.height / 3 && // + this.velocity.y // оставить!!
-            this.left >= platform.left - this.width / 1.5 &&
-            this.right <= platform.right + this.width / 1.5) {
-              //debugger
-              this.die();
+              this.bottom + this.velocity.y >= platform.top + this.height / 3 && // + this.velocity.y // оставить!!
+              this.left >= platform.left - this.width / 1.5 &&
+              this.right <= platform.right + this.width / 1.5) {
+                this.die();
           }
           break;
 
         case 'oneStep':
           if (platform.hits === 0 &&
-            this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom &&
-            this.bottom >= platform.top) {
+              this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
               if (this.velocity.x < 0) { // moves left       // <= -2
                 this.left = platform.right + 0.1;
                 keys.left.pressed = false;   
@@ -228,8 +199,9 @@ export class Player {
               }
           }
           break;
-          case 'finish':
-            if (this.left <= platform.right &&
+
+        case 'finish':
+          if (this.left <= platform.right &&
               this.right >= platform.left &&
               this.top <= platform.bottom &&
               this.bottom >= platform.top) {
@@ -247,7 +219,7 @@ export class Player {
                 this.completeLevel = true;
                                                                       
                 init();
-            }
+          }
           break;
       }
     }
@@ -264,9 +236,9 @@ export class Player {
         case 'brick_1':
         case 'brick_2':
           if (this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom &&
-            this.bottom >= platform.top) {
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
               if (this.velocity.y < 0) { // moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
@@ -283,10 +255,10 @@ export class Player {
           
         case 'jumpToggleActive':
           if (keys.jumpToggleActive &&
-            this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom - this.height / 4 && // - this.height / 4 (поправка на прозрачность спрайта героя)
-            this.bottom >= platform.top) {
+              this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom - this.height / 4 && // - this.height / 4 (поправка на прозрачность спрайта героя)
+              this.bottom >= platform.top) {
               if (this.velocity.y < 0) { // moving up  // -0.25
                 this.velocity.y = 0;
                 this.top = platform.bottom + 0.1;
@@ -304,70 +276,70 @@ export class Player {
 
         case 'jumpToggleDisabled':
           if (!keys.jumpToggleActive &&
-            this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom &&
-            this.bottom >= platform.top) {
-              if (this.velocity.y < 0) { // moving up  // -0.25
-                this.velocity.y = 0;
-                this.top = platform.bottom + 0.1;
-                break;
-              }
-              if (this.velocity.y > 0) { // falling down  // 0.25
-                this.velocity.y = 0;
-                this.top = platform.top - this.height - 0.1;
-                break;
-              }
-          }
-          break;
-
-
-        case 'oneStep':
-          if (platform.hits === 0 &&
-            this.left <= platform.right &&
-            this.right >= platform.left &&
-            this.top <= platform.bottom &&
-            this.bottom >= platform.top) {
-              if (this.velocity.y < 0) { // moving up  // -0.25
-                this.velocity.y = 0;
-                this.top = platform.bottom + 0.1;
-                keys.up.pressed = false;      
-                platform.hits++;
-                platform.destroy();
-                break;
-              }
-              if (this.velocity.y > 0) { // falling down  // 0.25
-                this.velocity.y = -this.jumpHeight; // 0
-                keys.up.pressed = false;      
-                platform.hits++;
-                platform.destroy();
-                this.top = platform.top - this.height - 0.1;
-                break;
-              }
-          }
-          break;
-          case 'finish':
-            if (this.left <= platform.right &&
+              this.left <= platform.right &&
               this.right >= platform.left &&
               this.top <= platform.bottom &&
               this.bottom >= platform.top) {
-                // if (this.velocity.y < 0) {// moving up  // -0.25
-                //   this.velocity.y = 0;
-                //   this.top = platform.bottom + 0.1;
-                //   this.alive && gameSoundEffects(audio.nextLevel);
-                //   break;
-                // }
-                // if (this.velocity.y > 0) {// falling down  // 0.25
-                //   this.velocity.y = 0;
-                //   this.top = platform.top - this.height - 0.1;
-                //   this.alive && gameSoundEffects(audio.nextLevel);
-                //   break;
-                // }
+                if (this.velocity.y < 0) { // moving up  // -0.25
+                  this.velocity.y = 0;
+                  this.top = platform.bottom + 0.1;
+                  break;
+                }
+                if (this.velocity.y > 0) { // falling down  // 0.25
+                  this.velocity.y = 0;
+                  this.top = platform.top - this.height - 0.1;
+                  break;
+                }
+          }
+          break;
 
-                this.alive && gameSoundEffects(audio.nextLevel);
-                this.completeLevel = true;
-                init();
-            }
+        case 'oneStep':
+          if (platform.hits === 0 &&
+              this.left <= platform.right &&
+              this.right >= platform.left &&
+              this.top <= platform.bottom &&
+              this.bottom >= platform.top) {
+                if (this.velocity.y < 0) { // moving up  // -0.25
+                  this.velocity.y = 0;
+                  this.top = platform.bottom + 0.1;
+                  keys.up.pressed = false;      
+                  platform.hits++;
+                  platform.destroy();
+                  break;
+                }
+                if (this.velocity.y > 0) { // falling down  // 0.25
+                  this.velocity.y = -this.jumpHeight; // 0
+                  keys.up.pressed = false;      
+                  platform.hits++;
+                  platform.destroy();
+                  this.top = platform.top - this.height - 0.1;
+                  break;
+                }
+          }
+          break;
+
+          case 'finish':
+            if (this.left <= platform.right &&
+                this.right >= platform.left &&
+                this.top <= platform.bottom &&
+                this.bottom >= platform.top) {
+                  // if (this.velocity.y < 0) {// moving up  // -0.25
+                  //   this.velocity.y = 0;
+                  //   this.top = platform.bottom + 0.1;
+                  //   this.alive && gameSoundEffects(audio.nextLevel);
+                  //   break;
+                  // }
+                  // if (this.velocity.y > 0) {// falling down  // 0.25
+                  //   this.velocity.y = 0;
+                  //   this.top = platform.top - this.height - 0.1;
+                  //   this.alive && gameSoundEffects(audio.nextLevel);
+                  //   break;
+                  // }
+
+                  this.alive && gameSoundEffects(audio.nextLevel);
+                  this.completeLevel = true;
+                  init();
+          }
           break;
         }
     }

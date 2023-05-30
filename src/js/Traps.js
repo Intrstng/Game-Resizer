@@ -1,55 +1,13 @@
 import { canvas, c } from '../index';
-import { platforms } from '../index';
 import { player } from '../index';
 import { createImage } from './Utils';
-import { Platform,
-  OneStep,
-  Fan,
-  JumpToggleActive,
-  JumpToggleDisabled,
-  PlatformOne,
-  PlatformTwo,
-  PlatformThree,
-  DeadSignal,
-} from './Platform';
-import { platformImgSrc300,
-  heroIdleR,
-  heroIdleL,
-  heroRunR,
-  heroRunL,
-  heroJumpR,
-  heroJumpL,
-  heroFallR,
-  heroFallL,
-  heroDeath,
-  platformSolid,
-  platformOneStep,
-  platformOneStepExplosion,
-  platformJump,
-  platformJumpDisabled,
-  platformOne,
-  platformTwo,
-  platformThree,
-  platformOneDisabled,
-  platformTwoDisabled,
-  platformThreeDisabled,
-  saw,
-  fan,
-  spike,
-  deadSignalZone,
-  deadSignalZoneHover,
-  flamethrowerLeft,
-  flamethrowerRight,
-  flamethrowerUp,
-  flamethrowerDown,
-  fireballUp,
-  fireballDown,
-  fireballLeft,
-  fireballRight,
-  brick_1,
-  brick_2,
+import { Platform } from './Platform';
+import { 
+        fireballUp,
+        fireballDown,
+        fireballLeft,
+        fireballRight
       } from './Assets';
-import { audio } from '../js/data/Audio';
 
 class PlatformSpikes extends Platform {
   constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
@@ -106,7 +64,7 @@ class Flamethrower {
     }
     this.width = 36;
     this.height = 36;
-    this.bulletSpeed = 2; //2
+    this.bulletSpeed = 2;
     this.caliber = 36; // Bullet size
     this.delay = 200;
     this.bulletController = bulletController;
@@ -131,9 +89,9 @@ class Flamethrower {
     let bullet_X, bullet_Y;
     // Bullet position x/y axes
     switch(this.type) {
-  case 'flamethrowerLeft': bullet_X = this.position.x - this.caliber / 3; // bullet_X = this.position.x - this.caliber;
+      case 'flamethrowerLeft': bullet_X = this.position.x - this.caliber / 3; // bullet_X = this.position.x - this.caliber;
         break;
-  case 'flamethrowerRight': bullet_X = this.position.x + this.width - this.caliber * 0.7; // bullet_X = this.position.x + this.width;
+      case 'flamethrowerRight': bullet_X = this.position.x + this.width - this.caliber * 0.7; // bullet_X = this.position.x + this.width;
         break;
       case 'flamethrowerUp':
       case 'flamethrowerDown': bullet_X = this.position.x + this.width / 2 - this.caliber / 2;
@@ -339,11 +297,11 @@ class Bullet {
 }
 
 export {
-  PlatformSpikes,
-  Saw,
-  FlamethrowerLeft,
-  FlamethrowerRight,
-  FlamethrowerUp,
-  FlamethrowerDown,
-  BulletController,
-}
+          PlatformSpikes,
+          Saw,
+          FlamethrowerLeft,
+          FlamethrowerRight,
+          FlamethrowerUp,
+          FlamethrowerDown,
+          BulletController
+        }

@@ -12540,35 +12540,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "setLevelMap": () => (/* binding */ setLevelMap),
 /* harmony export */   "setupStageNumber": () => (/* binding */ setupStageNumber)
 /* harmony export */ });
-/* harmony import */ var _js_SPA__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/SPA */ "./src/js/SPA.js");
-/* harmony import */ var _js_Collision__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Collision */ "./src/js/Collision.js");
-/* harmony import */ var _js_Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Utils */ "./src/js/Utils.js");
-/* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
-/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/data/Audio */ "./src/js/data/Audio.js");
-/* harmony import */ var _js_Platform__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/Platform */ "./src/js/Platform.js");
-/* harmony import */ var _js_Traps__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Traps */ "./src/js/Traps.js");
-/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
-/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
-/* harmony import */ var _js_Levels__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/Levels */ "./src/js/Levels.js");
-/* harmony import */ var _js_Login__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/Login */ "./src/js/Login.js");
+/* harmony import */ var _js_Utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/Utils */ "./src/js/Utils.js");
+/* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
+/* harmony import */ var _js_Audio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/Audio */ "./src/js/Audio.js");
+/* harmony import */ var _js_Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_Keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/Keys */ "./src/js/Keys.js");
+/* harmony import */ var _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/AdditionalElements */ "./src/js/AdditionalElements.js");
+/* harmony import */ var _js_Levels__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/Levels */ "./src/js/Levels.js");
+/* harmony import */ var _js_Login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/Login */ "./src/js/Login.js");
 //import './sass/styles.scss';  // прописано в Webpack entry points
 
 
 
-// import { canvas, c } from './js/Canvas';
 
 
 
 
 
 
-
-
-
-
-
-_js_Login__WEBPACK_IMPORTED_MODULE_11__.logInApp.init('app', 'firstStart');
+_js_Login__WEBPACK_IMPORTED_MODULE_7__.logInApp.init('app', 'firstStart');
 let level = 1,
   canvas,
   c,
@@ -12580,22 +12570,22 @@ let level = 1,
   completeLevel = false,
   isLeaveGame = false,
   leftNeighboorBlockFromHero = null;
-let levelOverlay = (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.win),
+let levelOverlay = (0,_js_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_3__.win),
   leftNeighboorBlockFromHeroArr = [],
   backgroundCanvasImg = [],
   fontSize;
 
-// Turn on sounds (not music) in game, and turn off when player leaves the game 
+// Turn on sounds (not music) in game, and turn off it when player leaves the game 
 function gameSoundEffects(item) {
   if (!isLeaveGame) {
-    item[_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.source].currentTime = 0;
-    item[_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.source].play();
+    item[_js_Audio__WEBPACK_IMPORTED_MODULE_2__.source].currentTime = 0;
+    item[_js_Audio__WEBPACK_IMPORTED_MODULE_2__.source].play();
   }
 }
 let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
   window.setTimeout(callback, 1000 / 60);
 };
-window.addEventListener('keydown', e => (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.fullScreen)(e, canvas));
+window.addEventListener('keydown', e => (0,_js_Utils__WEBPACK_IMPORTED_MODULE_0__.fullScreen)(e, canvas));
 function increseLevel(obj) {
   return level >= Object.keys(obj).length ? level : ++level;
 }
@@ -12610,18 +12600,19 @@ function setLevelMap(value) {
   canvas.height = 576; // 720
   levelOverlay.width = canvas.width;
   levelOverlay.height = canvas.height;
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
   backgroundCanvasImg = [
   // Canvas background-image for each level
-  new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_1, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_2, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_3, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_4, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_5, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_6, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_7, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_8, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_9, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_10, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_11, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_12, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_13, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_14, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_15, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_16, canvas.width, canvas.height)), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_9__.AdditionalElements(0, 0, (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_Assets__WEBPACK_IMPORTED_MODULE_7__.backgroundImg_17, canvas.width, canvas.height))];
+  new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_1, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_2, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_3, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_4, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_5, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_6, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_7, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_8, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_9, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_10, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_11, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_12, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_13, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_14, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_15, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_16, canvasWidth, canvasHeight), new _js_AdditionalElements__WEBPACK_IMPORTED_MODULE_5__.AdditionalElements(0, 0, _js_Assets__WEBPACK_IMPORTED_MODULE_3__.backgroundImg_17, canvasWidth, canvasHeight)];
   levelMap = value;
-  console.log(levelMap);
   return levelMap;
 }
 function createPlayer(levelMap, platforms) {
   levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       if (cell === 'st') {
-        player = new _js_Player__WEBPACK_IMPORTED_MODULE_3__.Player({
+        player = new _js_Player__WEBPACK_IMPORTED_MODULE_1__.Player({
           platforms
         }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top);
       }
@@ -12642,7 +12633,7 @@ function reloadGameplay() {
   });
   levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
-      cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_3__.Player({
+      cell === 'st' && (player = new _js_Player__WEBPACK_IMPORTED_MODULE_1__.Player({
         platforms
       }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top));
     });
@@ -12656,13 +12647,13 @@ function changeIsLeaveGameState(value) {
 }
 let initCounter = 0;
 function init() {
-  (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.flamethrowerShootSoundIntervalInit)();
+  (0,_js_Utils__WEBPACK_IMPORTED_MODULE_0__.flamethrowerShootSoundIntervalInit)();
   initCounter++;
   initCounter > 1 && (initStart = false);
   console.log(initStart);
   player.velocity.y = 1;
   player.alive = true;
-  _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.spaceToggleCounter = 1;
+  _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1;
   if (player.completeLevel) {
     c.save();
     c.fillStyle = 'rgb(247, 251, 254)';
@@ -12703,35 +12694,35 @@ function animate() {
   });
   leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
   player.update();
-  if (_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.right.pressed && player.position.x + player.width <= canvas.width) {
+  if (_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && player.position.x + player.width <= canvas.width) {
     // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.left.pressed && player.position.x >= 0) {
+  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && player.position.x >= 0) {
     // упор персонажа в левый край экрана
     player.velocity.x = -2;
   } else {
     player.velocity.x = 0;
   }
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.lastPressed === 'right') {
+  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.lastPressed === 'left') {
+  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.lastPressed === 'left') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.left;
   }
 
   // Падение в пропасть (см. комментарии в player.update())
   if (player.position.y > canvas.height) {
-    gameSoundEffects(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.fallingInDepth2);
-    _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_8__.keys.jumpToggleActive;
+    gameSoundEffects(_js_Audio__WEBPACK_IMPORTED_MODULE_2__.audio.fallingInDepth2);
+    _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive;
     init();
   }
 }
 // init();
 // animate();
 
-window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keyDownHandler);
-window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keyUpHandler);
+window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keyDownHandler);
+window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keyUpHandler);
 
 // window.onbeforeunload = function () {
 //   return false;
@@ -12751,24 +12742,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
-/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-
 
 
 class AdditionalElements {
-  constructor(posX, posY, image) {
+  constructor(posX, posY, image, width, height) {
     this.position = {
       x: posX,
       y: posY
     };
     this.sprites = {
-      idle: image
+      idle: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(image, width, height)
     };
     this.currentSprite = this.sprites.idle;
     this.type = 'backgrounds';
-    this.image = image;
-    this.width = image.width;
-    this.height = image.height;
   }
   draw() {
     if (!this.currentSprite.loaded) return;
@@ -13055,6 +13041,271 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/Audio.js":
+/*!*************************!*\
+  !*** ./src/js/Audio.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "audio": () => (/* binding */ audio),
+/* harmony export */   "getRandomTrack": () => (/* binding */ getRandomTrack),
+/* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack),
+/* harmony export */   "source": () => (/* binding */ source),
+/* harmony export */   "volumeEffects": () => (/* binding */ volumeEffects),
+/* harmony export */   "volumeMusic": () => (/* binding */ volumeMusic)
+/* harmony export */ });
+/* harmony import */ var _assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/block_hit.mp3 */ "./assets/sounds/effects/mp3/block_hit.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/block_hit.ogg */ "./assets/sounds/effects/ogg/block_hit.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/bottom_hit.mp3 */ "./assets/sounds/effects/mp3/bottom_hit.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/bottom_hit.ogg */ "./assets/sounds/effects/ogg/bottom_hit.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/choose.mp3 */ "./assets/sounds/effects/mp3/choose.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/choose.ogg */ "./assets/sounds/effects/ogg/choose.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/explosion_block.mp3 */ "./assets/sounds/effects/mp3/explosion_block.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/explosion_block.ogg */ "./assets/sounds/effects/ogg/explosion_block.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/falling_in_depth.mp3 */ "./assets/sounds/effects/mp3/falling_in_depth.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/falling_in_depth.ogg */ "./assets/sounds/effects/ogg/falling_in_depth.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/falling_in_depth_2.mp3 */ "./assets/sounds/effects/mp3/falling_in_depth_2.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/falling_in_depth_2.ogg */ "./assets/sounds/effects/ogg/falling_in_depth_2.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/fire.mp3 */ "./assets/sounds/effects/mp3/fire.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/fire.ogg */ "./assets/sounds/effects/ogg/fire.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/hero_death.mp3 */ "./assets/sounds/effects/mp3/hero_death.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/hero_death.ogg */ "./assets/sounds/effects/ogg/hero_death.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/jump.mp3 */ "./assets/sounds/effects/mp3/jump.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/jump.ogg */ "./assets/sounds/effects/ogg/jump.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3 */ "./assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg */ "./assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/next_level.mp3 */ "./assets/sounds/effects/mp3/next_level.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/next_level.ogg */ "./assets/sounds/effects/ogg/next_level.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/ok.mp3 */ "./assets/sounds/effects/mp3/ok.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/ok.ogg */ "./assets/sounds/effects/ogg/ok.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/select.mp3 */ "./assets/sounds/effects/mp3/select.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/select.ogg */ "./assets/sounds/effects/ogg/select.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/teleport.mp3 */ "./assets/sounds/effects/mp3/teleport.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/teleport.ogg */ "./assets/sounds/effects/ogg/teleport.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/toggle.mp3 */ "./assets/sounds/effects/mp3/toggle.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/toggle.ogg */ "./assets/sounds/effects/ogg/toggle.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/toggle_disabled.mp3 */ "./assets/sounds/effects/mp3/toggle_disabled.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/toggle_disabled.ogg */ "./assets/sounds/effects/ogg/toggle_disabled.ogg");
+/* harmony import */ var _assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../assets/sounds/effects/mp3/error.mp3 */ "./assets/sounds/effects/mp3/error.mp3");
+/* harmony import */ var _assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../assets/sounds/effects/ogg/error.ogg */ "./assets/sounds/effects/ogg/error.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../assets/sounds/music/mp3/track_1.mp3 */ "./assets/sounds/music/mp3/track_1.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../assets/sounds/music/ogg/track_1.ogg */ "./assets/sounds/music/ogg/track_1.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../assets/sounds/music/mp3/track_2.mp3 */ "./assets/sounds/music/mp3/track_2.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../assets/sounds/music/ogg/track_2.ogg */ "./assets/sounds/music/ogg/track_2.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../assets/sounds/music/mp3/track_3.mp3 */ "./assets/sounds/music/mp3/track_3.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../assets/sounds/music/ogg/track_3.ogg */ "./assets/sounds/music/ogg/track_3.ogg");
+/* harmony import */ var _assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../assets/sounds/music/mp3/track_4.mp3 */ "./assets/sounds/music/mp3/track_4.mp3");
+/* harmony import */ var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../assets/sounds/music/ogg/track_4.ogg */ "./assets/sounds/music/ogg/track_4.ogg");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let volumeEffects = (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.getLocalStorage)('settings', 'soundEffects');
+let volumeMusic = (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.getLocalStorage)('settings', 'musicEffects');
+const audio = {
+  isCanPlay: new Audio(),
+  blockHit: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__),
+    volume: volumeEffects
+  },
+  bottomHit: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__),
+    volume: volumeEffects
+  },
+  choose: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__),
+    volume: volumeEffects
+  },
+  explosionBlock: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__),
+    volume: volumeEffects
+  },
+  fallingInDepth: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__),
+    volume: volumeEffects
+  },
+  fallingInDepth2: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__),
+    volume: volumeEffects
+  },
+  fire: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__),
+    volume: volumeEffects
+  },
+  heroDeath: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__),
+    volume: volumeEffects
+  },
+  jump: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__),
+    volume: volumeEffects
+  },
+  jumpOnSpaceToggledPlatform: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__),
+    volume: volumeEffects / 2
+  },
+  nextLevel: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__),
+    volume: volumeEffects
+  },
+  ok: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__),
+    volume: volumeEffects
+  },
+  select: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__),
+    volume: volumeEffects
+  },
+  teleport: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__),
+    volume: volumeEffects
+  },
+  toggle: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__),
+    volume: volumeEffects
+  },
+  toggleDisabled: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__),
+    volume: volumeEffects
+  },
+  error: {
+    src_MP3: new Audio(_assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__),
+    src_OGG: new Audio(_assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__),
+    volume: volumeEffects
+  },
+  track_1: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__),
+    volume: volumeMusic
+  },
+  track_2: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__),
+    volume: volumeMusic
+  },
+  track_3: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__),
+    volume: volumeMusic
+  },
+  track_4: {
+    src_MP3: new Audio(_assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__),
+    src_OGG: new Audio(_assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__),
+    volume: volumeMusic
+  }
+};
+let source = null;
+// Choose supported source and preload
+;
+(function () {
+  if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
+    source = 'src_MP3';
+  } else {
+    source = 'src_OGG';
+  }
+  for (let sound in audio) {
+    if (audio?.[sound]?.[source]) {
+      let {
+        src_MP3: mp3,
+        src_OGG: ogg
+      } = audio[sound];
+      mp3.play();
+      mp3.pause();
+      ogg.play();
+      ogg.pause();
+    }
+  }
+})();
+function getRandomTrack(playlist) {
+  let tracksList = [];
+  let track;
+  for (let sound in playlist) {
+    sound.includes('track') && tracksList.push(playlist[sound]);
+  }
+  track = tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
+  track.currentTime = 0;
+  track.volume = volumeMusic;
+  return track;
+}
+const playNextTrack = (currentTrack, playlist) => {
+  let tracksList = [];
+  let currentTrackNumber = null;
+  for (let sound in playlist) {
+    sound.includes('track') && tracksList.push(playlist[sound]);
+  }
+  tracksList.forEach((track, index) => {
+    track[source] === currentTrack && (currentTrackNumber = index);
+  });
+  currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
+  tracksList[currentTrackNumber][source].currentTime = 0;
+  tracksList[currentTrackNumber][source].volume = volumeMusic;
+  tracksList[currentTrackNumber][source].play();
+  tracksList[currentTrackNumber][source].onended = function () {
+    playNextTrack(tracksList[currentTrackNumber][source], audio);
+  };
+};
+
+
+/***/ }),
+
 /***/ "./src/js/Collision.js":
 /*!*****************************!*\
   !*** ./src/js/Collision.js ***!
@@ -13072,9 +13323,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Traps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Traps */ "./src/js/Traps.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
-/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Player */ "./src/js/Player.js");
-
-
 
 
 
@@ -13164,78 +13412,6 @@ function parseCollisitions(levelMap, platforms) {
   return levelMap;
 }
 
-// const parsedCollisions = collisionsLevel_1.map.forEach((row, index_Y) => {
-//   row.forEach((cell, index_X) => {
-//     switch(cell) {
-//       case '1p': // Space toggled platform (One)
-//         platforms.push(new PlatformOne(index_X * 36, index_Y * 36, createImage(platformOne, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case '2p': // Space toggled platform (Two)
-//         platforms.push(new PlatformTwo(index_X * 36, index_Y * 36, createImage(platformTwo, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case '3p': // Space toggled platform (Three)
-//         platforms.push(new PlatformThree(index_X * 36, index_Y * 36, createImage(platformThree, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case '1s': // One-Step platform
-//         platforms.push(new OneStep(index_X * 36, index_Y * 36, createImage(platformOneStep, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'sl': // Solid platform
-//         platforms.push(new Platform( // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//           index_X * 36, index_Y * 36, createImage(platformSolid, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'ja': // Jump-toggled platform (active)
-//         platforms.push(new JumpToggleActive(index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'jd': // Jump-toggled platform (disabled)
-//         platforms.push(new JumpToggleDisabled(index_X * 36, index_Y * 36, createImage(platformJump, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'sk': // Saw trap platform
-//         platforms.push(new PlatformSpikes(index_X * 36, index_Y * 36, createImage(spike, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'sw': // Spikes trap platform
-//         platforms.push(new Saw(index_X * 36, index_Y * 36, createImage(saw, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'dz': // Dead signal zone
-//         platforms.push(new DeadSignal(
-//           index_X * 36, index_Y * 36, createImage(deadSignalZone, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//           break;
-//       case 'fl': // Flamethrower (left)
-//       platforms.push(new FlamethrowerLeft(
-//         index_X * 36, index_Y * 36, createImage(flamethrowerLeft, 36, 36), platforms, new BulletController(), collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'fr': // Flamethrower (right)
-//       platforms.push(new FlamethrowerRight(
-//         index_X * 36, index_Y * 36, createImage(flamethrowerRight, 36, 36), platforms, new BulletController(), collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'fu': // Flamethrower (up)
-//       platforms.push(new FlamethrowerUp(
-//         index_X * 36, index_Y * 36, createImage(flamethrowerUp, 36, 36), platforms, new BulletController(), collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'fd': // Flamethrower (down)
-//       platforms.push(new FlamethrowerDown(
-//         index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms, new BulletController(), collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'fn': // Fan (decoration)
-//       platforms.push(new Fan(
-//         index_X * 36, index_Y * 36, createImage(flamethrowerDown, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'b1': // Fan (decoration)
-//       platforms.push(new Brick_1(
-//         index_X * 36, index_Y * 36, createImage(brick_1, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'b2': // Fan (decoration)
-//       platforms.push(new Brick_2(
-//         index_X * 36, index_Y * 36, createImage(brick_2, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//       case 'fp': // Finish point
-//       platforms.push(new Finish(
-//         index_X * 36, index_Y * 36, createImage(brick_2, 36, 36), platforms, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-//         break;
-//     }
-//   })
-// })
-
-
 
 /***/ }),
 
@@ -13288,9 +13464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "keys": () => (/* binding */ keys)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
-/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
-
-
+/* harmony import */ var _Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Audio */ "./src/js/Audio.js");
 
 
 
@@ -13314,8 +13488,6 @@ const keys = {
   // Platform One type is active
   deadSignalZone: false
 };
-// let hiddenPlatformsArr = []
-
 const keyDownHandler = e => {
   console.log(e.code);
   if (e.repeat == false) {
@@ -13323,16 +13495,13 @@ const keyDownHandler = e => {
       case 'ArrowUp':
         keys.up.pressed = true;
         if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y <= 0 && _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y >= -3.5) {
-          //(player.velocity.y === 0) или (player.velocity.y <= 0 && player.velocity.y >= -3.5)
           keys.jumpToggleActive ? keys.jumpToggleActive = false : keys.jumpToggleActive = true;
-          (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_1__.audio.jump);
+          (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_1__.audio.jump);
         }
         if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0 && keys.lastPressed === 'right') {
-          // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y -= _index__WEBPACK_IMPORTED_MODULE_0__.player.jumpHeight; // -20 is higher
           _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.jump.right;
         } else if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y === 0 && keys.lastPressed === 'left') {
-          // player.velocity.y === 0 - только один прыжок при нескольких нажатиях на UP
           _index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y -= _index__WEBPACK_IMPORTED_MODULE_0__.player.jumpHeight; // -20 is higher
           _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.jump.left;
         }
@@ -13364,17 +13533,13 @@ const keyUpHandler = e => {
   if (e.repeat == false) {
     switch (e.code) {
       case 'ArrowUp':
-        // player.velocity.y = 0;
         keys.up.pressed = false;
-        // keys.up.pressed = true;
         if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y !== 0 && keys.lastPressed === 'right') {
           _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.fall.right;
         } else if (_index__WEBPACK_IMPORTED_MODULE_0__.player.velocity.y !== 0 && keys.lastPressed === 'left') {
           _index__WEBPACK_IMPORTED_MODULE_0__.player.currentSprite = _index__WEBPACK_IMPORTED_MODULE_0__.player.sprites.fall.left;
         }
         break;
-      // case 'ArrowDown': player.velocity.y = 0
-      //   break;
       case 'ArrowRight':
         {
           keys.right.pressed = false;
@@ -13424,27 +13589,6 @@ function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, ca
   });
 }
 
-// import { platforms, initStart } from '../index';
-
-// export function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, callback_5) {
-//   fetch(url)
-//     .then(response => {  
-//       if (response.status !== 200) {
-//         console.log(`Возникла проблема. Код ошибки: ${response.status}`);
-//         return;
-//       }
-//       response.json()
-//       .then(map => callback_1(map))
-//       .then(data => callback_2(data, platforms))
-//       .then(player => callback_3(player, platforms))
-//       .then(init => callback_4())
-//       .then(animate => {
-//         initStart && callback_5();
-//       })
-//       .catch(err => console.error('Fetch Error - levels map load failed', err))
-//     })
-// }
-
 /***/ }),
 
 /***/ "./src/js/Login.js":
@@ -13463,7 +13607,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/esm/index.esm.js");
 /* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Firebase */ "./src/js/Firebase.js");
 /* harmony import */ var _SPA__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SPA */ "./src/js/SPA.js");
-/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _Audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Audio */ "./src/js/Audio.js");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../index */ "./src/index.js");
 
 
@@ -13583,9 +13727,9 @@ const logInApp = function () {
       });
     };
     this.stopAudioBeforeLeave = function () {
-      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio) {
-        if (_data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_6__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
-          _data_Audio__WEBPACK_IMPORTED_MODULE_6__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_6__.source].pause();
+      for (let sound in _Audio__WEBPACK_IMPORTED_MODULE_6__.audio) {
+        if (_Audio__WEBPACK_IMPORTED_MODULE_6__.audio?.[sound]?.[_Audio__WEBPACK_IMPORTED_MODULE_6__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
+          _Audio__WEBPACK_IMPORTED_MODULE_6__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_6__.source].pause();
         }
       }
     };
@@ -13700,7 +13844,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Audio */ "./src/js/Audio.js");
 /* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
 
 
@@ -13776,7 +13920,7 @@ class Platform {
     // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
     _index__WEBPACK_IMPORTED_MODULE_1__.player.left <= this.right - _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 4) {
       _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y = -3.5; // если касается земли // -3.5
-      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.jumpOnSpaceToggledPlatform);
+      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.jumpOnSpaceToggledPlatform);
       if (_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.right.pressed || _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.up.pressed && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.left.pressed) {
         _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y = -_index__WEBPACK_IMPORTED_MODULE_1__.player.jumpHeight;
         _index__WEBPACK_IMPORTED_MODULE_1__.player.gravity = 0.25;
@@ -13791,7 +13935,7 @@ class Platform {
     // можно сделать 1.75
     _index__WEBPACK_IMPORTED_MODULE_1__.player.right <= this.right + _index__WEBPACK_IMPORTED_MODULE_1__.player.width / 1.25) {
       _index__WEBPACK_IMPORTED_MODULE_1__.player.velocity.y = 1; /* player.currentSprite = player.sprites.idle.right */
-      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
     }
   }
   collisionLeftSide() {
@@ -13976,7 +14120,7 @@ class OneStep extends Platform {
     this.statusActive = true;
   }
   destroy() {
-    _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.explosionBlock);
+    _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.explosionBlock);
     this.currentSprite = this.sprites.explosion;
     setTimeout(() => {
       this.position.x = -9999;
@@ -14032,11 +14176,11 @@ class SpaceToggledPlatform extends Platform {
         return _index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height * 0.75 >= block.top && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.y + _index__WEBPACK_IMPORTED_MODULE_1__.player.height * 0.35 <= block.bottom && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width * 0.75 >= block.left && _index__WEBPACK_IMPORTED_MODULE_1__.player.position.x + _index__WEBPACK_IMPORTED_MODULE_1__.player.width * 0.25 <= block.right;
       })) {
         _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
-        _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
+        _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
         console.log('inside');
       } else {
         console.log('outside');
-        _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
+        _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
         _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
       }
     }
@@ -14132,12 +14276,12 @@ class DeadSignal extends SpaceToggledPlatform {
     })) {
       _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = true;
       console.log(_Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed);
-      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
+      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggleDisabled);
       console.log('inside');
     } else {
       console.log('outside');
       _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.deadSignalZone = false;
-      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
+      _index__WEBPACK_IMPORTED_MODULE_1__.player.alive && _Keys__WEBPACK_IMPORTED_MODULE_5__.keys.space.pressed && (0,_index__WEBPACK_IMPORTED_MODULE_1__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.toggle);
     }
   }
 }
@@ -14159,7 +14303,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _js_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/Audio */ "./src/js/Audio.js");
 
 
 
@@ -14175,10 +14319,6 @@ class Player {
     let marginLeft = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
     let marginTop = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
     this.platforms = platforms;
-    // this.margin = {
-    //   left: ,
-    //   right: ,
-    // }
     this.position = {
       x: posX + marginLeft,
       y: posY + marginTop
@@ -14251,7 +14391,7 @@ class Player {
     this.velocity.y = -2;
     this.gravity = 0;
     this.currentSprite = this.sprites.death;
-    this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.heroDeath);
+    this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.heroDeath);
     this.alive = false;
     setTimeout(_index__WEBPACK_IMPORTED_MODULE_0__.init, 550);
   }
@@ -14310,14 +14450,12 @@ class Player {
         case 'saw':
           // Hero - platform collision (player is above the spike platform)
           if (this.bottom <= platform.top + this.height / 3 && this.bottom + this.velocity.y >= platform.top + this.height / 3 && this.right >= platform.left + this.width / 3 && this.left <= platform.right - this.width / 3) {
-            //debugger
             this.die();
           }
           // Hero - platform collision (player is under the platform)
           if (this.top <= platform.bottom - Math.abs(this.velocity.y) && this.bottom + this.velocity.y >= platform.top + this.height / 3 &&
           // + this.velocity.y // оставить!!
           this.left >= platform.left - this.width / 1.5 && this.right <= platform.right + this.width / 1.5) {
-            //debugger
             this.die();
           }
           break;
@@ -14353,7 +14491,7 @@ class Player {
             //   this.alive && gameSoundEffects(audio.nextLevel);
             //   break;
             // }
-            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.nextLevel);
+            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.nextLevel);
             this.completeLevel = true;
             (0,_index__WEBPACK_IMPORTED_MODULE_0__.init)();
           }
@@ -14376,7 +14514,7 @@ class Player {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
-              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
               break;
             }
             if (this.velocity.y > 0) {
@@ -14395,14 +14533,14 @@ class Player {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
-              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
               break;
             }
             if (this.velocity.y > 0) {
               // falling down  // 0.25
               this.velocity.y = 0;
               this.top = platform.top - this.height - 0.1;
-              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
               break;
             }
           }
@@ -14460,7 +14598,7 @@ class Player {
             //   break;
             // }
 
-            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.nextLevel);
+            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.nextLevel);
             this.completeLevel = true;
             (0,_index__WEBPACK_IMPORTED_MODULE_0__.init)();
           }
@@ -14497,7 +14635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
-/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _Audio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Audio */ "./src/js/Audio.js");
 /* harmony import */ var _Levels__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Levels */ "./src/js/Levels.js");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Collision__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Collision */ "./src/js/Collision.js");
@@ -14699,7 +14837,6 @@ const mySPA = function () {
       document.body.classList.remove('game-bgnd');
     };
   }
-  ;
   function Model() {
     let myView = null,
       track = null,
@@ -14713,7 +14850,7 @@ const mySPA = function () {
     };
     this.playSound = function () {
       if (!isInitMusicPlay) {
-        track = (0,_data_Audio__WEBPACK_IMPORTED_MODULE_2__.getRandomTrack)(_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio);
+        track = (0,_Audio__WEBPACK_IMPORTED_MODULE_2__.getRandomTrack)(_Audio__WEBPACK_IMPORTED_MODULE_2__.audio);
         track.pause();
         track.play();
       }
@@ -14722,13 +14859,13 @@ const mySPA = function () {
     };
     this.playNextTrack = function (src) {
       src.onended = function () {
-        (0,_data_Audio__WEBPACK_IMPORTED_MODULE_2__.playNextTrack)(src, _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio);
+        (0,_Audio__WEBPACK_IMPORTED_MODULE_2__.playNextTrack)(src, _Audio__WEBPACK_IMPORTED_MODULE_2__.audio);
       };
     };
     this.muteSound = function () {
-      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
-        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source]) {
-          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted === false ? _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted = true : _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted = false;
+      for (let sound in _Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_Audio__WEBPACK_IMPORTED_MODULE_2__.source]) {
+          _Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted === false ? _Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted = true : _Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_2__.source].muted = false;
         }
       }
       myView.changeMuteIcon();
@@ -14741,26 +14878,26 @@ const mySPA = function () {
     };
     this.setSoundsVolume = function (value) {
       console.log(value);
-      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
-        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && sound != 'track_1' && sound != 'track_2' && sound != 'track_3' && sound != 'track_4') {
-          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].volume = value;
+      for (let sound in _Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && sound != 'track_1' && sound != 'track_2' && sound != 'track_3' && sound != 'track_4') {
+          _Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_2__.source].volume = value;
         }
       }
       this.setLocalStorage('soundEffects', value);
     };
     this.setMusicVolume = function (value) {
       console.log(value);
-      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
-        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
-          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].volume = value;
+      for (let sound in _Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && (sound === 'track_1' || sound === 'track_2' || sound === 'track_3' || sound === 'track_4')) {
+          _Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_2__.source].volume = value;
         }
       }
       this.setLocalStorage('musicEffects', value);
     };
     this.stopSoundsBeforeLeave = function () {
-      for (let sound in _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
-        if (_data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && sound !== 'track_1' && sound !== 'track_2' && sound !== 'track_3' && sound !== 'track_4') {
-          _data_Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_data_Audio__WEBPACK_IMPORTED_MODULE_2__.source].pause();
+      for (let sound in _Audio__WEBPACK_IMPORTED_MODULE_2__.audio) {
+        if (_Audio__WEBPACK_IMPORTED_MODULE_2__.audio?.[sound]?.[_Audio__WEBPACK_IMPORTED_MODULE_2__.source] && sound !== 'track_1' && sound !== 'track_2' && sound !== 'track_3' && sound !== 'track_4') {
+          _Audio__WEBPACK_IMPORTED_MODULE_2__.audio[sound][_Audio__WEBPACK_IMPORTED_MODULE_2__.source].pause();
         }
       }
     };
@@ -14772,6 +14909,7 @@ const mySPA = function () {
     };
     this.backToMenu = function () {
       this.stopSoundsBeforeLeave();
+      // stopFireSoundInterval();
       (0,_index__WEBPACK_IMPORTED_MODULE_4__.changeIsLeaveGameState)(true);
       myView.backToMenu();
     };
@@ -14826,7 +14964,6 @@ const mySPA = function () {
       });
     };
   }
-  ;
 
   /* Init */
   return {
@@ -14908,9 +15045,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
 /* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Platform */ "./src/js/Platform.js");
 /* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_data_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/data/Audio */ "./src/js/data/Audio.js");
-
-
 
 
 
@@ -14976,7 +15110,7 @@ class Flamethrower {
     };
     this.width = 36;
     this.height = 36;
-    this.bulletSpeed = 2; //2
+    this.bulletSpeed = 2;
     this.caliber = 36; // Bullet size
     this.delay = 200;
     this.bulletController = bulletController;
@@ -15221,16 +15355,16 @@ class Bullet {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createImage": () => (/* binding */ createImage),
-/* harmony export */   "fakeClick": () => (/* binding */ fakeClick),
 /* harmony export */   "flamethrowerShootSoundIntervalInit": () => (/* binding */ flamethrowerShootSoundIntervalInit),
 /* harmony export */   "fullScreen": () => (/* binding */ fullScreen),
 /* harmony export */   "getLocalStorage": () => (/* binding */ getLocalStorage),
 /* harmony export */   "randomNumber": () => (/* binding */ randomNumber),
+/* harmony export */   "stopFireSoundInterval": () => (/* binding */ stopFireSoundInterval),
 /* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
 /* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
-/* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");
+/* harmony import */ var _Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Audio */ "./src/js/Audio.js");
 
 
 function createImage(src, width, height) {
@@ -15254,8 +15388,11 @@ let timerShoot_2 = null;
 function fireSoundInterval(delay) {
   timerShoot_1 = setTimeout(function soundFire() {
     timerShoot_2 = setTimeout(soundFire, delay);
-    (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_data_Audio__WEBPACK_IMPORTED_MODULE_1__.audio.fire);
+    (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_Audio__WEBPACK_IMPORTED_MODULE_1__.audio.fire);
   }, delay);
+}
+function stopFireSoundInterval() {
+  clearTimeout(timerShoot_2);
 }
 function flamethrowerShootSoundIntervalInit() {
   if (_index__WEBPACK_IMPORTED_MODULE_0__.initStart) {
@@ -15284,284 +15421,6 @@ function fullScreen(e, element) {
 function getLocalStorage(key, value) {
   return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
-function fakeClick(e) {
-  e.preventDefault();
-  myContainerBtns.getElementById('select-lvl').click();
-}
-
-
-/***/ }),
-
-/***/ "./src/js/data/Audio.js":
-/*!******************************!*\
-  !*** ./src/js/data/Audio.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "audio": () => (/* binding */ audio),
-/* harmony export */   "getRandomTrack": () => (/* binding */ getRandomTrack),
-/* harmony export */   "playNextTrack": () => (/* binding */ playNextTrack),
-/* harmony export */   "source": () => (/* binding */ source),
-/* harmony export */   "volumeEffects": () => (/* binding */ volumeEffects),
-/* harmony export */   "volumeMusic": () => (/* binding */ volumeMusic)
-/* harmony export */ });
-/* harmony import */ var _assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/block_hit.mp3 */ "./assets/sounds/effects/mp3/block_hit.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/block_hit.ogg */ "./assets/sounds/effects/ogg/block_hit.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/bottom_hit.mp3 */ "./assets/sounds/effects/mp3/bottom_hit.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/bottom_hit.ogg */ "./assets/sounds/effects/ogg/bottom_hit.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/choose.mp3 */ "./assets/sounds/effects/mp3/choose.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/choose.ogg */ "./assets/sounds/effects/ogg/choose.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/explosion_block.mp3 */ "./assets/sounds/effects/mp3/explosion_block.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/explosion_block.ogg */ "./assets/sounds/effects/ogg/explosion_block.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/falling_in_depth.mp3 */ "./assets/sounds/effects/mp3/falling_in_depth.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/falling_in_depth.ogg */ "./assets/sounds/effects/ogg/falling_in_depth.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/falling_in_depth_2.mp3 */ "./assets/sounds/effects/mp3/falling_in_depth_2.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/falling_in_depth_2.ogg */ "./assets/sounds/effects/ogg/falling_in_depth_2.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/fire.mp3 */ "./assets/sounds/effects/mp3/fire.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/fire.ogg */ "./assets/sounds/effects/ogg/fire.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/hero_death.mp3 */ "./assets/sounds/effects/mp3/hero_death.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/hero_death.ogg */ "./assets/sounds/effects/ogg/hero_death.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/jump.mp3 */ "./assets/sounds/effects/mp3/jump.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/jump.ogg */ "./assets/sounds/effects/ogg/jump.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3 */ "./assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg */ "./assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/next_level.mp3 */ "./assets/sounds/effects/mp3/next_level.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/next_level.ogg */ "./assets/sounds/effects/ogg/next_level.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/ok.mp3 */ "./assets/sounds/effects/mp3/ok.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/ok.ogg */ "./assets/sounds/effects/ogg/ok.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/select.mp3 */ "./assets/sounds/effects/mp3/select.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/select.ogg */ "./assets/sounds/effects/ogg/select.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/teleport.mp3 */ "./assets/sounds/effects/mp3/teleport.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/teleport.ogg */ "./assets/sounds/effects/ogg/teleport.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/toggle.mp3 */ "./assets/sounds/effects/mp3/toggle.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/toggle.ogg */ "./assets/sounds/effects/ogg/toggle.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/toggle_disabled.mp3 */ "./assets/sounds/effects/mp3/toggle_disabled.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/toggle_disabled.ogg */ "./assets/sounds/effects/ogg/toggle_disabled.ogg");
-/* harmony import */ var _assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../../assets/sounds/effects/mp3/error.mp3 */ "./assets/sounds/effects/mp3/error.mp3");
-/* harmony import */ var _assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../../assets/sounds/effects/ogg/error.ogg */ "./assets/sounds/effects/ogg/error.ogg");
-/* harmony import */ var _assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_1.mp3 */ "./assets/sounds/music/mp3/track_1.mp3");
-/* harmony import */ var _assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_1.ogg */ "./assets/sounds/music/ogg/track_1.ogg");
-/* harmony import */ var _assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_2.mp3 */ "./assets/sounds/music/mp3/track_2.mp3");
-/* harmony import */ var _assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_2.ogg */ "./assets/sounds/music/ogg/track_2.ogg");
-/* harmony import */ var _assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_3.mp3 */ "./assets/sounds/music/mp3/track_3.mp3");
-/* harmony import */ var _assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_3.ogg */ "./assets/sounds/music/ogg/track_3.ogg");
-/* harmony import */ var _assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../../assets/sounds/music/mp3/track_4.mp3 */ "./assets/sounds/music/mp3/track_4.mp3");
-/* harmony import */ var _assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../../assets/sounds/music/ogg/track_4.ogg */ "./assets/sounds/music/ogg/track_4.ogg");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../Utils */ "./src/js/Utils.js");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../index */ "./src/index.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let volumeEffects = (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.getLocalStorage)('settings', 'soundEffects');
-let volumeMusic = (0,_Utils__WEBPACK_IMPORTED_MODULE_42__.getLocalStorage)('settings', 'musicEffects');
-const audio = {
-  isCanPlay: new Audio(),
-  blockHit: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_block_hit_mp3__WEBPACK_IMPORTED_MODULE_0__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_block_hit_ogg__WEBPACK_IMPORTED_MODULE_1__),
-    volume: volumeEffects
-  },
-  bottomHit: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_bottom_hit_mp3__WEBPACK_IMPORTED_MODULE_2__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_bottom_hit_ogg__WEBPACK_IMPORTED_MODULE_3__),
-    volume: volumeEffects
-  },
-  choose: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_choose_mp3__WEBPACK_IMPORTED_MODULE_4__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_choose_ogg__WEBPACK_IMPORTED_MODULE_5__),
-    volume: volumeEffects
-  },
-  explosionBlock: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_explosion_block_mp3__WEBPACK_IMPORTED_MODULE_6__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_explosion_block_ogg__WEBPACK_IMPORTED_MODULE_7__),
-    volume: volumeEffects
-  },
-  fallingInDepth: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_mp3__WEBPACK_IMPORTED_MODULE_8__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_ogg__WEBPACK_IMPORTED_MODULE_9__),
-    volume: volumeEffects
-  },
-  fallingInDepth2: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_falling_in_depth_2_mp3__WEBPACK_IMPORTED_MODULE_10__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_falling_in_depth_2_ogg__WEBPACK_IMPORTED_MODULE_11__),
-    volume: volumeEffects
-  },
-  fire: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_fire_mp3__WEBPACK_IMPORTED_MODULE_12__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_fire_ogg__WEBPACK_IMPORTED_MODULE_13__),
-    volume: volumeEffects
-  },
-  heroDeath: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_hero_death_mp3__WEBPACK_IMPORTED_MODULE_14__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_hero_death_ogg__WEBPACK_IMPORTED_MODULE_15__),
-    volume: volumeEffects
-  },
-  jump: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_jump_mp3__WEBPACK_IMPORTED_MODULE_16__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_jump_ogg__WEBPACK_IMPORTED_MODULE_17__),
-    volume: volumeEffects
-  },
-  jumpOnSpaceToggledPlatform: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_jump_on_space_toggled_platform_mp3__WEBPACK_IMPORTED_MODULE_18__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_jump_on_space_toggled_platform_ogg__WEBPACK_IMPORTED_MODULE_19__),
-    volume: volumeEffects / 2
-  },
-  nextLevel: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_next_level_mp3__WEBPACK_IMPORTED_MODULE_20__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_next_level_ogg__WEBPACK_IMPORTED_MODULE_21__),
-    volume: volumeEffects
-  },
-  ok: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_ok_mp3__WEBPACK_IMPORTED_MODULE_22__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_ok_ogg__WEBPACK_IMPORTED_MODULE_23__),
-    volume: volumeEffects
-  },
-  select: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_select_mp3__WEBPACK_IMPORTED_MODULE_24__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_select_ogg__WEBPACK_IMPORTED_MODULE_25__),
-    volume: volumeEffects
-  },
-  teleport: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_teleport_mp3__WEBPACK_IMPORTED_MODULE_26__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_teleport_ogg__WEBPACK_IMPORTED_MODULE_27__),
-    volume: volumeEffects
-  },
-  toggle: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_mp3__WEBPACK_IMPORTED_MODULE_28__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_ogg__WEBPACK_IMPORTED_MODULE_29__),
-    volume: volumeEffects
-  },
-  toggleDisabled: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_toggle_disabled_mp3__WEBPACK_IMPORTED_MODULE_30__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_toggle_disabled_ogg__WEBPACK_IMPORTED_MODULE_31__),
-    volume: volumeEffects
-  },
-  error: {
-    src_MP3: new Audio(_assets_sounds_effects_mp3_error_mp3__WEBPACK_IMPORTED_MODULE_32__),
-    src_OGG: new Audio(_assets_sounds_effects_ogg_error_ogg__WEBPACK_IMPORTED_MODULE_33__),
-    volume: volumeEffects
-  },
-  track_1: {
-    src_MP3: new Audio(_assets_sounds_music_mp3_track_1_mp3__WEBPACK_IMPORTED_MODULE_34__),
-    src_OGG: new Audio(_assets_sounds_music_ogg_track_1_ogg__WEBPACK_IMPORTED_MODULE_35__),
-    volume: volumeMusic
-  },
-  track_2: {
-    src_MP3: new Audio(_assets_sounds_music_mp3_track_2_mp3__WEBPACK_IMPORTED_MODULE_36__),
-    src_OGG: new Audio(_assets_sounds_music_ogg_track_2_ogg__WEBPACK_IMPORTED_MODULE_37__),
-    volume: volumeMusic
-  },
-  track_3: {
-    src_MP3: new Audio(_assets_sounds_music_mp3_track_3_mp3__WEBPACK_IMPORTED_MODULE_38__),
-    src_OGG: new Audio(_assets_sounds_music_ogg_track_3_ogg__WEBPACK_IMPORTED_MODULE_39__),
-    volume: volumeMusic
-  },
-  track_4: {
-    src_MP3: new Audio(_assets_sounds_music_mp3_track_4_mp3__WEBPACK_IMPORTED_MODULE_40__),
-    src_OGG: new Audio(_assets_sounds_music_ogg_track_4_ogg__WEBPACK_IMPORTED_MODULE_41__),
-    volume: volumeMusic
-  }
-};
-let source = null;
-// Choose supported source and preload
-;
-(function () {
-  if (audio.isCanPlay.canPlayType('audio/mpeg') === 'probably') {
-    source = 'src_MP3';
-  } else {
-    source = 'src_OGG';
-  }
-  for (let sound in audio) {
-    if (audio?.[sound]?.[source]) {
-      let {
-        src_MP3: mp3,
-        src_OGG: ogg
-      } = audio[sound];
-      mp3.play();
-      mp3.pause();
-      ogg.play();
-      ogg.pause();
-    }
-  }
-})();
-
-// function gameSoundEffects(item) {
-//     item[source].currentTime = 0;
-//     item[source].play();
-// }
-
-function getRandomTrack(playlist) {
-  let tracksList = [];
-  let track;
-  for (let sound in playlist) {
-    sound.includes('track') && tracksList.push(playlist[sound]);
-  }
-  track = tracksList[(0,_Utils__WEBPACK_IMPORTED_MODULE_42__.randomNumber)(0, tracksList.length - 1)][source];
-  track.currentTime = 0;
-  track.volume = volumeMusic;
-  return track;
-}
-const playNextTrack = (currentTrack, playlist) => {
-  let tracksList = [];
-  let currentTrackNumber = null;
-  for (let sound in playlist) {
-    sound.includes('track') && tracksList.push(playlist[sound]);
-  }
-  tracksList.forEach((track, index) => {
-    track[source] === currentTrack && (currentTrackNumber = index);
-  });
-  currentTrackNumber < tracksList.length - 1 ? currentTrackNumber++ : currentTrackNumber = 0;
-  tracksList[currentTrackNumber][source].currentTime = 0;
-  tracksList[currentTrackNumber][source].volume = volumeMusic;
-  tracksList[currentTrackNumber][source].play();
-  tracksList[currentTrackNumber][source].onended = function () {
-    playNextTrack(tracksList[currentTrackNumber][source], audio);
-  };
-};
 
 
 /***/ }),

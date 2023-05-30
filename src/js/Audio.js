@@ -1,50 +1,48 @@
-import blockHit_MP3 from '../../../assets/sounds/effects/mp3/block_hit.mp3';
-import blockHit_OGG from '../../../assets/sounds/effects/ogg/block_hit.ogg';
-import bottomHit_MP3 from '../../../assets/sounds/effects/mp3/bottom_hit.mp3';
-import bottomHit_OGG from '../../../assets/sounds/effects/ogg/bottom_hit.ogg';
-import choose_MP3 from '../../../assets/sounds/effects/mp3/choose.mp3';
-import choose_OGG from '../../../assets/sounds/effects/ogg/choose.ogg';
-import explosionBlock_MP3 from '../../../assets/sounds/effects/mp3/explosion_block.mp3';
-import explosionBlock_OGG from '../../../assets/sounds/effects/ogg/explosion_block.ogg';
-import fallingInDepth_MP3 from '../../../assets/sounds/effects/mp3/falling_in_depth.mp3';
-import fallingInDepth_OGG from '../../../assets/sounds/effects/ogg/falling_in_depth.ogg';
-import fallingInDepth2_MP3 from '../../../assets/sounds/effects/mp3/falling_in_depth_2.mp3';
-import fallingInDepth2_OGG from '../../../assets/sounds/effects/ogg/falling_in_depth_2.ogg';
-import fire_MP3 from '../../../assets/sounds/effects/mp3/fire.mp3';
-import fire_OGG from '../../../assets/sounds/effects/ogg/fire.ogg';
-import heroDeath_MP3 from '../../../assets/sounds/effects/mp3/hero_death.mp3';
-import heroDeath_OGG from '../../../assets/sounds/effects/ogg/hero_death.ogg';
-import jump_MP3 from '../../../assets/sounds/effects/mp3/jump.mp3';
-import jump_OGG from '../../../assets/sounds/effects/ogg/jump.ogg';
-import jumpOnSpaceToggledPlatform_MP3 from '../../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3';
-import jumpOnSpaceToggledPlatform_OGG from '../../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg';
-import nextLevel_MP3 from '../../../assets/sounds/effects/mp3/next_level.mp3';
-import nextLevel_OGG from '../../../assets/sounds/effects/ogg/next_level.ogg';
-import ok_MP3 from '../../../assets/sounds/effects/mp3/ok.mp3';
-import ok_OGG from '../../../assets/sounds/effects/ogg/ok.ogg';
-import select_MP3 from '../../../assets/sounds/effects/mp3/select.mp3';
-import select_OGG from '../../../assets/sounds/effects/ogg/select.ogg';
-import teleport_MP3 from '../../../assets/sounds/effects/mp3/teleport.mp3';
-import teleport_OGG from '../../../assets/sounds/effects/ogg/teleport.ogg';
-import toggle_MP3 from '../../../assets/sounds/effects/mp3/toggle.mp3';
-import toggle_OGG from '../../../assets/sounds/effects/ogg/toggle.ogg';
-import toggleDisabled_MP3 from '../../../assets/sounds/effects/mp3/toggle_disabled.mp3';
-import toggleDisabled_OGG from '../../../assets/sounds/effects/ogg/toggle_disabled.ogg';
-import error_MP3 from '../../../assets/sounds/effects/mp3/error.mp3';
-import error_OGG from '../../../assets/sounds/effects/ogg/error.ogg';
+import blockHit_MP3 from '../../assets/sounds/effects/mp3/block_hit.mp3';
+import blockHit_OGG from '../../assets/sounds/effects/ogg/block_hit.ogg';
+import bottomHit_MP3 from '../../assets/sounds/effects/mp3/bottom_hit.mp3';
+import bottomHit_OGG from '../../assets/sounds/effects/ogg/bottom_hit.ogg';
+import choose_MP3 from '../../assets/sounds/effects/mp3/choose.mp3';
+import choose_OGG from '../../assets/sounds/effects/ogg/choose.ogg';
+import explosionBlock_MP3 from '../../assets/sounds/effects/mp3/explosion_block.mp3';
+import explosionBlock_OGG from '../../assets/sounds/effects/ogg/explosion_block.ogg';
+import fallingInDepth_MP3 from '../../assets/sounds/effects/mp3/falling_in_depth.mp3';
+import fallingInDepth_OGG from '../../assets/sounds/effects/ogg/falling_in_depth.ogg';
+import fallingInDepth2_MP3 from '../../assets/sounds/effects/mp3/falling_in_depth_2.mp3';
+import fallingInDepth2_OGG from '../../assets/sounds/effects/ogg/falling_in_depth_2.ogg';
+import fire_MP3 from '../../assets/sounds/effects/mp3/fire.mp3';
+import fire_OGG from '../../assets/sounds/effects/ogg/fire.ogg';
+import heroDeath_MP3 from '../../assets/sounds/effects/mp3/hero_death.mp3';
+import heroDeath_OGG from '../../assets/sounds/effects/ogg/hero_death.ogg';
+import jump_MP3 from '../../assets/sounds/effects/mp3/jump.mp3';
+import jump_OGG from '../../assets/sounds/effects/ogg/jump.ogg';
+import jumpOnSpaceToggledPlatform_MP3 from '../../assets/sounds/effects/mp3/jump_on_space_toggled_platform.mp3';
+import jumpOnSpaceToggledPlatform_OGG from '../../assets/sounds/effects/ogg/jump_on_space_toggled_platform.ogg';
+import nextLevel_MP3 from '../../assets/sounds/effects/mp3/next_level.mp3';
+import nextLevel_OGG from '../../assets/sounds/effects/ogg/next_level.ogg';
+import ok_MP3 from '../../assets/sounds/effects/mp3/ok.mp3';
+import ok_OGG from '../../assets/sounds/effects/ogg/ok.ogg';
+import select_MP3 from '../../assets/sounds/effects/mp3/select.mp3';
+import select_OGG from '../../assets/sounds/effects/ogg/select.ogg';
+import teleport_MP3 from '../../assets/sounds/effects/mp3/teleport.mp3';
+import teleport_OGG from '../../assets/sounds/effects/ogg/teleport.ogg';
+import toggle_MP3 from '../../assets/sounds/effects/mp3/toggle.mp3';
+import toggle_OGG from '../../assets/sounds/effects/ogg/toggle.ogg';
+import toggleDisabled_MP3 from '../../assets/sounds/effects/mp3/toggle_disabled.mp3';
+import toggleDisabled_OGG from '../../assets/sounds/effects/ogg/toggle_disabled.ogg';
+import error_MP3 from '../../assets/sounds/effects/mp3/error.mp3';
+import error_OGG from '../../assets/sounds/effects/ogg/error.ogg';
 
-import track_1_MP3 from '../../../assets/sounds/music/mp3/track_1.mp3';
-import track_1_OGG from '../../../assets/sounds/music/ogg/track_1.ogg';
-import track_2_MP3 from '../../../assets/sounds/music/mp3/track_2.mp3';
-import track_2_OGG from '../../../assets/sounds/music/ogg/track_2.ogg';
-import track_3_MP3 from '../../../assets/sounds/music/mp3/track_3.mp3';
-import track_3_OGG from '../../../assets/sounds/music/ogg/track_3.ogg';
-import track_4_MP3 from '../../../assets/sounds/music/mp3/track_4.mp3';
-import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
+import track_1_MP3 from '../../assets/sounds/music/mp3/track_1.mp3';
+import track_1_OGG from '../../assets/sounds/music/ogg/track_1.ogg';
+import track_2_MP3 from '../../assets/sounds/music/mp3/track_2.mp3';
+import track_2_OGG from '../../assets/sounds/music/ogg/track_2.ogg';
+import track_3_MP3 from '../../assets/sounds/music/mp3/track_3.mp3';
+import track_3_OGG from '../../assets/sounds/music/ogg/track_3.ogg';
+import track_4_MP3 from '../../assets/sounds/music/mp3/track_4.mp3';
+import track_4_OGG from '../../assets/sounds/music/ogg/track_4.ogg';
 
-import { createImage, randomNumber } from '../Utils';
-import { getLocalStorage, changeMuteIcon } from '../Utils';
-import { isLeaveGame } from '../../index';
+import { getLocalStorage, randomNumber } from './Utils';
 
 export let volumeEffects = getLocalStorage('settings', 'soundEffects');
 export let volumeMusic = getLocalStorage('settings', 'musicEffects');
@@ -178,12 +176,6 @@ let source = null;
     }
 })();
 
-
-// function gameSoundEffects(item) {
-//     item[source].currentTime = 0;
-//     item[source].play();
-// }
-
 function getRandomTrack(playlist) {
   let tracksList = [];
   let track;
@@ -214,4 +206,4 @@ const playNextTrack = (currentTrack, playlist) => {
   }
 }
 
-export { audio, source,  getRandomTrack, playNextTrack/* , muteSound */ }
+export { audio, source,  getRandomTrack, playNextTrack }

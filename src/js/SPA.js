@@ -1,42 +1,4 @@
 import {
-        platformImgSrc300,
-        heroIdleR,
-        heroIdleL,
-        heroRunR,
-        heroRunL,
-        heroJumpR,
-        heroJumpL,
-        heroFallR,
-        heroFallL,
-        heroDeath,
-        win,
-        platformSolid,
-        platformOneStep,
-        platformOneStepExplosion,
-        platformJump,
-        platformJumpDisabled,
-        platformOne,
-        platformTwo,
-        platformThree,
-        platformOneDisabled,
-        platformTwoDisabled,
-        platformThreeDisabled,
-        saw,
-        fan,
-        spike,
-        deadSignalZone,
-        deadSignalZoneHover,
-        flamethrowerLeft,
-        flamethrowerRight,
-        flamethrowerUp,
-        flamethrowerDown,
-        fireballUp,
-        fireballDown,
-        fireballLeft,
-        fireballRight,
-        brick_1,
-        brick_2,
-        finish,
         arrows,
         spaceImg,
         cloud_1,
@@ -49,7 +11,6 @@ import {
         birdFlyingImg,
         logoImg_1,
         logoImg_2,
-        logoutImg,
         levelIcon_1,
         levelIcon_2,
         levelIcon_3,
@@ -69,9 +30,16 @@ import {
         levelIcon_17
       } from './Assets';
 import { getLocalStorage } from './Utils';
-import { audio, source, getRandomTrack, playNextTrack } from './data/Audio';
+import { audio, source, getRandomTrack, playNextTrack } from './Audio';
 import { requestLevelMap } from './Levels';
-import { setLevelMap, createPlayer, init, animate, changeIsLeaveGameState, blankGameplayBetweenGames } from '../index';
+import {
+        setLevelMap,
+        createPlayer,
+        init,
+        animate,
+        changeIsLeaveGameState,
+        blankGameplayBetweenGames
+      } from '../index';
 import { parseCollisitions } from './Collision';
 
 
@@ -81,12 +49,12 @@ import { parseCollisitions } from './Collision';
 export const mySPA = (function() {
   function View() {
     let myContainerMain = null,
-      myContainerBtns = null,
-      myContainerShow = null,
-      muteBtn = null,
-      menuBtn = null,
-      headerBlock = null,
-      levelSelectHTML = null;
+        myContainerBtns = null,
+        myContainerShow = null,
+        muteBtn = null,
+        menuBtn = null,
+        headerBlock = null,
+        levelSelectHTML = null;
 
     const HomeComponent = {
       id: 'main',
@@ -278,7 +246,7 @@ export const mySPA = (function() {
       menuBtn.style.display = 'none';
       document.body.classList.remove('game-bgnd');
     }
-  };
+  }
 
   function Model () {
     let myView = null,
@@ -377,10 +345,11 @@ export const mySPA = (function() {
 
     this.backToMenu = function() {
       this.stopSoundsBeforeLeave();
+      // stopFireSoundInterval();
       changeIsLeaveGameState(true);
       myView.backToMenu();
     }
-    }
+  }
 
     function Controller () {
     let myContainerNav = null,
@@ -434,8 +403,8 @@ export const mySPA = (function() {
           myModel.backToMenu();
         }
       });
-    };
-  };
+    }
+  }
 
   /* Init */
   return {
@@ -494,5 +463,5 @@ export const mySPA = (function() {
         <main id="content" class="content">
         </main>`; 
     }
-  };
+  }
 }());

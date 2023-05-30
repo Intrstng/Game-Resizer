@@ -1,98 +1,33 @@
 //import './sass/styles.scss';  // прописано в Webpack entry points
 
-import { mySPA } from './js/SPA';
-import { parseCollisitions } from './js/Collision';
-// import { canvas, c } from './js/Canvas';
-import { createImage, flamethrowerShootSoundIntervalInit, fullScreen, setLocalStorage, getLocalStorage } from './js/Utils';
+import { createImage, flamethrowerShootSoundIntervalInit, fullScreen } from './js/Utils';
 import { Player } from './js/Player';
-import { bulletController } from './js/Collision';
-import { audio, source,  getRandomTrack, playNextTrack, volumeEffects, volumeMusic, muteSound } from './js/data/Audio';
-import { Platform,
-  OneStep,
-  Fan,
-  JumpToggleActive,
-  JumpToggleDisabled,
-  PlatformOne,
-  PlatformTwo,
-  PlatformThree,
-  DeadSignal,
-} from './js/Platform';
-
-import {
-  PlatformSpikes,
-  Saw,
-  FlamethrowerLeft,
-  FlamethrowerRight,
-  FlamethrowerUp,
-  FlamethrowerDown,
-  BulletController,
-  Flamethrower
-} from './js/Traps';
-import { platformImgSrc300,
-          heroIdleR,
-          heroIdleL,
-          heroRunR,
-          heroRunL,
-          heroJumpR,
-          heroJumpL,
-          heroFallR,
-          heroFallL,
-          heroDeath,
-          backgroundImg,
-          win,
-          platformSolid,
-          platformOneStep,
-          platformOneStepExplosion,
-          platformJump,
-          platformJumpDisabled,
-          platformOne,
-          platformTwo,
-          platformThree,
-          platformOneDisabled,
-          platformTwoDisabled,
-          platformThreeDisabled,
-          saw,
-          fan,
-          spike,
-          deadSignalZone,
-          deadSignalZoneHover,
-          flamethrowerLeft,
-          flamethrowerRight,
-          flamethrowerUp,
-          flamethrowerDown,
-          brick_1,
-          brick_2,
-          backgroundImg_1,
-          backgroundImg_2,
-          backgroundImg_3,
-          backgroundImg_4,
-          backgroundImg_5,
-          backgroundImg_6,
-          backgroundImg_7,
-          backgroundImg_8,
-          backgroundImg_9,
-          backgroundImg_10,
-          backgroundImg_11,
-          backgroundImg_12,
-          backgroundImg_13,
-          backgroundImg_14,
-          backgroundImg_15,
-          backgroundImg_16,
-          backgroundImg_17
+import { audio, source } from './js/Audio';
+import { win,
+         backgroundImg_1,
+         backgroundImg_2,
+         backgroundImg_3,
+         backgroundImg_4,
+         backgroundImg_5,
+         backgroundImg_6,
+         backgroundImg_7,
+         backgroundImg_8,
+         backgroundImg_9,
+         backgroundImg_10,
+         backgroundImg_11,
+         backgroundImg_12,
+         backgroundImg_13,
+         backgroundImg_14,
+         backgroundImg_15,
+         backgroundImg_16,
+         backgroundImg_17
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
 import { requestLevelMap } from './js/Levels';
-
-
 import { logInApp } from './js/Login';
+
 logInApp.init('app', 'firstStart');
-
-
-
-
-
-
 export let level = 1,
            canvas,
            c,
@@ -110,8 +45,7 @@ let levelOverlay = createImage(win),
            backgroundCanvasImg = [],
            fontSize;
 
-
-// Turn on sounds (not music) in game, and turn off when player leaves the game 
+// Turn on sounds (not music) in game, and turn off it when player leaves the game 
 export function gameSoundEffects(item) {
   if (!isLeaveGame) {
     item[source].currentTime = 0;
@@ -120,41 +54,19 @@ export function gameSoundEffects(item) {
 }
 
 export let requestAnim = window.requestAnimationFrame ||
-                  window.webkitRequestAnimationFrame ||
-                  window.mozRequestAnimationFrame ||
-                  window.oRequestAnimationFrame ||
-                  window.msRequestAnimationFrame ||
-                  function(callback) { window.setTimeout(callback, 1000 / 60); }
+                         window.webkitRequestAnimationFrame ||
+                         window.mozRequestAnimationFrame ||
+                         window.oRequestAnimationFrame ||
+                         window.msRequestAnimationFrame ||
+                         function(callback) { window.setTimeout(callback, 1000 / 60); }
 
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  function increseLevel(obj) {
-    return level >= Object.keys(obj).length ? level : ++level;
-  }
-
-
-
-
-
-           
+function increseLevel(obj) {
+  return level >= Object.keys(obj).length ? level : ++level;
+}
+        
 //requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
-
  
 export function setLevelMap(value) {
   canvas = document.getElementById('canvas');
@@ -164,27 +76,28 @@ export function setLevelMap(value) {
   canvas.height = 576 // 720
   levelOverlay.width = canvas.width;
   levelOverlay.height = canvas.height;
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
   backgroundCanvasImg = [ // Canvas background-image for each level
-    new AdditionalElements(0, 0, createImage(backgroundImg_1, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_2, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_3, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_4, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_5, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_6, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_7, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_8, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_9, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_10, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_11, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_12, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_13, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_14, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_15, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_16, canvas.width, canvas.height)),
-    new AdditionalElements(0, 0, createImage(backgroundImg_17, canvas.width, canvas.height)),
+    new AdditionalElements(0, 0, backgroundImg_1, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_2, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_3, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_4, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_5, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_6, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_7, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_8, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_9, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_10, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_11, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_12, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_13, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_14, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_15, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_16, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_17, canvasWidth, canvasHeight),
   ]
   levelMap = value;
-  console.log(levelMap)
   return levelMap;
 }
 
@@ -198,7 +111,6 @@ export function createPlayer(levelMap, platforms) {
   })
   return player;
 }
-
 
 export function blankGameplayBetweenGames() {
   player = null;

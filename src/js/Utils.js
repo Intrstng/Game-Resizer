@@ -1,5 +1,10 @@
-import { platforms, initStart, gameSoundEffects, isLeaveGame } from '../index';
-import {  audio } from './data/Audio'
+import {
+        platforms,
+        initStart,
+        gameSoundEffects,
+        isLeaveGame
+      } from '../index';
+import { audio } from './Audio';
 
 function createImage(src, width, height) {
   const image = new Image();
@@ -27,6 +32,10 @@ function fireSoundInterval(delay) {
   }, delay); 
 }
 
+function stopFireSoundInterval() {
+  clearTimeout(timerShoot_2);
+}
+
 function flamethrowerShootSoundIntervalInit() {
   if (initStart) {
     let flamethrowerShootDelay = null;
@@ -34,15 +43,15 @@ function flamethrowerShootSoundIntervalInit() {
       ( platform.type === 'flamethrowerLeft' ||
         platform.type === 'flamethrowerRight' ||
         platform.type === 'flamethrowerUp' ||
-        platform.type === 'flamethrowerDown') && (flamethrowerShootDelay = platform.delay);
+        platform.type === 'flamethrowerDown' ) && (flamethrowerShootDelay = platform.delay);
     })
     if (platforms.some(platform => {
       return (platform.type === 'flamethrowerLeft' ||
-      platform.type === 'flamethrowerRight' ||
-      platform.type === 'flamethrowerUp' ||
-      platform.type === 'flamethrowerDown')})) {
-        fireSoundInterval(flamethrowerShootDelay * 8);
-    }
+              platform.type === 'flamethrowerRight' ||
+              platform.type === 'flamethrowerUp' ||
+              platform.type === 'flamethrowerDown')})) {
+                fireSoundInterval(flamethrowerShootDelay * 8);
+            }
   }
  }
 
@@ -63,9 +72,9 @@ function getLocalStorage(key, value) {
     JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
 
-function fakeClick (e) {
-  e.preventDefault();
-  myContainerBtns.getElementById('select-lvl').click();
-}
-
-export { createImage, randomNumber, flamethrowerShootSoundIntervalInit, fullScreen, getLocalStorage, fakeClick };
+export { createImage,
+         randomNumber,
+         flamethrowerShootSoundIntervalInit,
+         fullScreen,
+         getLocalStorage,
+         stopFireSoundInterval };
