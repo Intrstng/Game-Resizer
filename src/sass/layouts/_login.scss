@@ -91,35 +91,3 @@
     background: $color-form-btn;
   }
 }
-
-.logout-btn {
-  position: absolute;
-  z-index: 2;
-  @include width-height(4rem);
-  @include top-right(5rem);
-  @extend %transition-all;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  img {
-    @include width-height(4rem);
-    font-size: 0;
-    border: none;
-  }
-  &_hover {
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-
-
-@include media-tablet-max {
-  .logout-btn {
-    @include width-height(3rem);
-    @include top-right(2rem);
-    img {
-      @include width-height(3rem);
-    }
-  }
-}

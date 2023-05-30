@@ -12520,6 +12520,7 @@ function getModularInstance(service) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "animate": () => (/* binding */ animate),
+/* harmony export */   "blankGameplayBetweenGames": () => (/* binding */ blankGameplayBetweenGames),
 /* harmony export */   "c": () => (/* binding */ c),
 /* harmony export */   "canvas": () => (/* binding */ canvas),
 /* harmony export */   "changeIsLeaveGameState": () => (/* binding */ changeIsLeaveGameState),
@@ -12567,9 +12568,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//document.addEventListener('DOMContentLoaded', mySPA.init('root', 'content'));
-
-
 _js_Login__WEBPACK_IMPORTED_MODULE_11__.logInApp.init('app', 'firstStart');
 let level = 1,
   canvas,
@@ -12586,6 +12584,8 @@ let levelOverlay = (0,_js_Utils__WEBPACK_IMPORTED_MODULE_2__.createImage)(_js_As
   leftNeighboorBlockFromHeroArr = [],
   backgroundCanvasImg = [],
   fontSize;
+
+// Turn on sounds (not music) in game, and turn off when player leaves the game 
 function gameSoundEffects(item) {
   if (!isLeaveGame) {
     item[_js_data_Audio__WEBPACK_IMPORTED_MODULE_4__.source].currentTime = 0;
@@ -12628,6 +12628,10 @@ function createPlayer(levelMap, platforms) {
     });
   });
   return player;
+}
+function blankGameplayBetweenGames() {
+  player = null;
+  platforms = [];
 }
 function reloadGameplay() {
   // backgroundCanvasImg = [
@@ -12730,7 +12734,7 @@ window.addEventListener('keydown', _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keyDown
 window.addEventListener('keyup', _js_Keys__WEBPACK_IMPORTED_MODULE_8__.keyUpHandler);
 
 // window.onbeforeunload = function () {
-//   return "Вы точно хотите покинуть страницу?";
+//   return false;
 // };
 
 /***/ }),
@@ -14763,6 +14767,7 @@ const mySPA = function () {
     this.startGame = function (level) {
       myView.hideMenu();
       (0,_index__WEBPACK_IMPORTED_MODULE_4__.changeIsLeaveGameState)(false);
+      (0,_index__WEBPACK_IMPORTED_MODULE_4__.blankGameplayBetweenGames)();
       (0,_Levels__WEBPACK_IMPORTED_MODULE_3__.requestLevelMap)(`../src/js/json/levelMap_${level}.json`, _index__WEBPACK_IMPORTED_MODULE_4__.setLevelMap, _Collision__WEBPACK_IMPORTED_MODULE_5__.parseCollisitions, _index__WEBPACK_IMPORTED_MODULE_4__.createPlayer, _index__WEBPACK_IMPORTED_MODULE_4__.init, _index__WEBPACK_IMPORTED_MODULE_4__.animate, level);
     };
     this.backToMenu = function () {
@@ -15220,7 +15225,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "flamethrowerShootSoundIntervalInit": () => (/* binding */ flamethrowerShootSoundIntervalInit),
 /* harmony export */   "fullScreen": () => (/* binding */ fullScreen),
 /* harmony export */   "getLocalStorage": () => (/* binding */ getLocalStorage),
-/* harmony export */   "randomNumber": () => (/* binding */ randomNumber)
+/* harmony export */   "randomNumber": () => (/* binding */ randomNumber),
+/* harmony export */   "timerShoot_1": () => (/* binding */ timerShoot_1),
+/* harmony export */   "timerShoot_2": () => (/* binding */ timerShoot_2)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _data_Audio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/Audio */ "./src/js/data/Audio.js");

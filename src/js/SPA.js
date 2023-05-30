@@ -71,7 +71,7 @@ import {
 import { getLocalStorage } from './Utils';
 import { audio, source, getRandomTrack, playNextTrack } from './data/Audio';
 import { requestLevelMap } from './Levels';
-import { setLevelMap, createPlayer, init, animate, changeIsLeaveGameState } from '../index';
+import { setLevelMap, createPlayer, init, animate, changeIsLeaveGameState, blankGameplayBetweenGames } from '../index';
 import { parseCollisitions } from './Collision';
 
 
@@ -371,6 +371,7 @@ export const mySPA = (function() {
     this.startGame = function(level) {
       myView.hideMenu();
       changeIsLeaveGameState(false);
+      blankGameplayBetweenGames();
       requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate, level);
     }
 

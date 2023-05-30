@@ -204,33 +204,3 @@
     }
   }
 }
-
-.mute {
-  position: absolute;
-  z-index: 2;
-  @include width-height(4rem);
-  @include top-right(10rem, 5rem);
-  @extend %transition-all;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-  &_off {
-    @include background-img('mute_off.png');
-  }
-  &_on {
-    @include background-img('mute_on.png');
-  }
-  &_hover {
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-
-@include media-tablet-max {
-  .mute {
-    @include width-height(3rem);
-    @include top-right(6rem, 2rem);
-  }
-}

@@ -392,7 +392,7 @@ html, .buttonBlue, .header__nav .nav__list, .header__nav .nav__btn {
 .controls__title, .controls__text, .settings__title, .settings__slider-box label, .description__title, .level__title {
   font-family: 'Russo One', sans-serif; }
 
-body, .level__item, .button, .logout-btn, .mute, .menu {
+body, .level__item, .button {
   transition: all, 0.25s, ease; }
 
 html {
@@ -642,6 +642,80 @@ body {
   .header .cloud-3,
   .header .cloud-4 {
     display: none; } }
+
+.logout-btn,
+.mute,
+.menu {
+  position: absolute;
+  z-index: 2;
+  width: 4rem;
+  height: 4rem;
+  transition: transform 0.25s ease 0s, opacity 0.25s ease 0.1s;
+  background-color: transparent;
+  border: none;
+  opacity: 0.8;
+  cursor: pointer; }
+  .logout-btn_hover:hover,
+  .mute_hover:hover,
+  .menu_hover:hover {
+    transform: scale(1.05);
+    opacity: 1; }
+
+.logout-btn {
+  top: 5rem;
+  right: 5rem; }
+  .logout-btn img {
+    width: 4rem;
+    height: 4rem;
+    font-size: 0;
+    border: none; }
+
+.mute {
+  top: 10rem;
+  right: 5rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  .mute_off {
+    background-image: url(84acc7ea18786d322299.png); }
+  .mute_on {
+    background-image: url(cf701a267920e02b7a95.png); }
+
+.menu {
+  top: 15rem;
+  right: 5rem; }
+  .menu img {
+    width: 4rem;
+    height: 4rem;
+    font-size: 0;
+    border: none; }
+
+@media (max-width: 821px) {
+  .logout-btn {
+    width: 3rem;
+    height: 3rem;
+    top: 2rem;
+    right: 2rem; }
+    .logout-btn img {
+      width: 3rem;
+      height: 3rem; } }
+
+@media (max-width: 821px) {
+  .mute {
+    width: 3rem;
+    height: 3rem;
+    top: 6rem;
+    right: 2rem; } }
+
+@media (max-width: 821px) {
+  .menu {
+    width: 3rem;
+    height: 3rem;
+    top: 10rem;
+    right: 2rem; }
+    .menu img {
+      width: 3rem;
+      height: 3rem; } }
 
 .greeting__text {
   margin: 0 0 7rem;
@@ -1023,34 +1097,6 @@ body {
   .buttonBlue:hover {
     background: #3160b6; }
 
-.logout-btn {
-  position: absolute;
-  z-index: 2;
-  width: 4rem;
-  height: 4rem;
-  top: 5rem;
-  right: 5rem;
-  background-color: transparent;
-  border: none;
-  cursor: pointer; }
-  .logout-btn img {
-    width: 4rem;
-    height: 4rem;
-    font-size: 0;
-    border: none; }
-  .logout-btn_hover:hover {
-    transform: scale(1.05); }
-
-@media (max-width: 821px) {
-  .logout-btn {
-    width: 3rem;
-    height: 3rem;
-    top: 2rem;
-    right: 2rem; }
-    .logout-btn img {
-      width: 3rem;
-      height: 3rem; } }
-
 .header {
   flex-shrink: 0;
   width: 100%;
@@ -1221,31 +1267,6 @@ body {
       padding: 0.8rem;
       font-size: 1.4rem; } }
 
-.mute {
-  position: absolute;
-  z-index: 2;
-  width: 4rem;
-  height: 4rem;
-  top: 10rem;
-  right: 5rem;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer; }
-  .mute_off {
-    background-image: url(84acc7ea18786d322299.png); }
-  .mute_on {
-    background-image: url(cf701a267920e02b7a95.png); }
-  .mute_hover:hover {
-    transform: scale(1.05); }
-
-@media (max-width: 821px) {
-  .mute {
-    width: 3rem;
-    height: 3rem;
-    top: 6rem;
-    right: 2rem; } }
-
 .content {
   margin: 0 auto;
   padding: 0 15rem;
@@ -1288,34 +1309,6 @@ body {
 canvas {
   width: 100vw;
   height: 100vh; }
-
-.menu {
-  position: absolute;
-  z-index: 2;
-  width: 4rem;
-  height: 4rem;
-  top: 15rem;
-  right: 5rem;
-  background-color: transparent;
-  border: none;
-  cursor: pointer; }
-  .menu img {
-    width: 4rem;
-    height: 4rem;
-    font-size: 0;
-    border: none; }
-  .menu_hover:hover {
-    transform: scale(1.05); }
-
-@media (max-width: 821px) {
-  .menu {
-    width: 3rem;
-    height: 3rem;
-    top: 10rem;
-    right: 2rem; }
-    .menu img {
-      width: 3rem;
-      height: 3rem; } }
 
 
 /*# sourceMappingURL=style.css.map*/

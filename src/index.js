@@ -85,8 +85,6 @@ import { AdditionalElements } from './js/AdditionalElements';
 import { requestLevelMap } from './js/Levels';
 
 
-//document.addEventListener('DOMContentLoaded', mySPA.init('root', 'content'));
-
 import { logInApp } from './js/Login';
 logInApp.init('app', 'firstStart');
 
@@ -113,7 +111,7 @@ let levelOverlay = createImage(win),
            fontSize;
 
 
-
+// Turn on sounds (not music) in game, and turn off when player leaves the game 
 export function gameSoundEffects(item) {
   if (!isLeaveGame) {
     item[source].currentTime = 0;
@@ -202,7 +200,10 @@ export function createPlayer(levelMap, platforms) {
 }
 
 
-
+export function blankGameplayBetweenGames() {
+  player = null;
+  platforms = [];
+}
 
 
 
@@ -234,6 +235,7 @@ export function changeIsLeaveGameState(value) {
 
 
 let initCounter = 0;
+
 export function init() {
   flamethrowerShootSoundIntervalInit();
   initCounter++;
@@ -331,5 +333,5 @@ window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
 
 // window.onbeforeunload = function () {
-//   return "Вы точно хотите покинуть страницу?";
+//   return false;
 // };
