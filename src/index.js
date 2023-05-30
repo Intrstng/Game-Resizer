@@ -63,11 +63,9 @@ export let requestAnim = window.requestAnimationFrame ||
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
 export function increaseLevel() {
-  level = level >= 17 ? 1 : ++level; // 17 - total qty of levels
+  level = level >= 17 ? 1 : ++level; // 17 - total quantity of levels
 }
 
-//requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
- 
 export function setLevelMap(value) {
   canvas = document.getElementById('canvas');
   c = canvas.getContext("2d");
@@ -117,15 +115,7 @@ export function blankGameplayBetweenGames() {
   platforms = [];
 }
 
-
-
-
-
-
 export function reloadGameplay() {
-  // backgroundCanvasImg = [
-  //   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
-  // ];
     platforms.forEach(platform => {
       (platform.type === 'oneStep') && platform.restore();
     });
@@ -136,7 +126,6 @@ export function reloadGameplay() {
     })  
 }
 
-
 export function setupStageNumber(value) {
   level = value;
 }
@@ -144,7 +133,6 @@ export function setupStageNumber(value) {
 export function changeIsLeaveGameState(value) {
   isLeaveGame = value;
 }
-
 
 let initCounter = 0;
 
@@ -156,26 +144,8 @@ console.log(initStart)
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;
-  
-  // if (player.completeLevel) {
-  //   c.save();
-  //   c.fillStyle = 'rgb(247, 251, 254)';
-  //   c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
-  //   c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
-    
-  //   c.fillStyle = 'rgb(21, 173, 188)';
-  //   c.font = `normal ${fontSize}px Rubik Iso`;
-  //   c.textBaseline = 'middle';
-  //   c.textAlign = 'center';
-  //   canvas.style.letterSpacing = `${fontSize / 20}px`;
-  //   c.fillText('Next level', canvas.width / 2, canvas.height / 2)
-  //   c.restore();
-  //   setTimeout(() => reloadGameplay(), 1250);
-  //   player.completeLevel = false;
-  // } else {
-                                    reloadGameplay();
-//} 
-return player;
+  reloadGameplay();
+  return player;
 }
 
 export function nextLevelInit() {
@@ -186,6 +156,7 @@ console.log(initStart)
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;
+  return player;
 }
 
 export function showOverlayBetweenStages() {
@@ -288,12 +259,10 @@ export function animate() {
         init();
   }
 }
-// init();
-// animate();
 
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
 
-// window.onbeforeunload = function () {
-//   return false;
-// };
+window.onbeforeunload = function () {
+  return false;
+};
