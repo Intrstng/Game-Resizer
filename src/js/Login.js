@@ -11,6 +11,7 @@ import { cloud_1,
          menuImg
         } from './Assets';
 import { audio, source } from './data/Audio';
+import { changeIsLeaveGameState } from '../index';
 
 export const logInApp = (function () {
   function View() {
@@ -169,7 +170,8 @@ export const logInApp = (function () {
         // Sign-out successful.
         logInApp.init('app', false);
         myView.showForm();
-        this.stopAudioBeforeLeave();
+        this.stopAudioBeforeLeave(); // stop music
+        changeIsLeaveGameState(true); // stop sounds
       }).catch((error) => {
         // An error happened.
         myView.logoutError(error);

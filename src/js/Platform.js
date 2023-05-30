@@ -1,5 +1,5 @@
 import { CollisionBlock, platforms, parsedCollisions } from './Collision';
-import { canvas, c } from '../index';
+import { canvas, c, gameSoundEffects } from '../index';
 import { createImage } from './Utils';
 import { platformImgSrc300,
   heroIdleR,
@@ -39,7 +39,7 @@ import { platformImgSrc300,
      
       
 
-import { audio, gameSoundEffects } from './data/Audio';
+import { audio} from './data/Audio';
 import { keys } from './Keys';
 import { player } from '../index';
 import { leftNeighboorBlockFromHero } from '../index';

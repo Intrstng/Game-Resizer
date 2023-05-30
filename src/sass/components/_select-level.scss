@@ -1,7 +1,7 @@
 .level {
   margin-bottom: 4rem;
   &__title {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     @extend %font-notes;
     font-size: 2rem;
     font-weight: normal;
@@ -13,10 +13,10 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: 2rem;
   }
   &__img {
-    @include width-height(5.5rem);
+    @include width-height(5.7rem);
   }
   &__item {
     // @include width-height(8rem);
@@ -35,12 +35,13 @@
                 opacity 0.25 ease;
     &_hover {
       &:hover {
-        transform: scale(1.05);
-        opacity: 0.9;
+        transform: scale(1.07);
+        opacity: 0.7;
       }
     }
     &_active {
       &:active {
+        opacity: 0.5;
         transform: scale(0.95);
        // color: $color-link-light;
        // border: 0.3rem solid $color-slider;
@@ -73,6 +74,9 @@
 
 @include media-tablet-max {
   .level {
+    &__title {
+      margin-bottom: 3rem;
+    }
     &__list {
       gap: 1.5rem;
     }

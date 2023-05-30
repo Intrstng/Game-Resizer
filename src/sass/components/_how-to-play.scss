@@ -28,6 +28,10 @@
     letter-spacing: 0.2rem;
     font-weight: normal;
     color: $color-light-bg;
+    span {
+      color: $color-line-light;
+      font-weight: bold;
+    }
   }
 }
 

@@ -1,8 +1,8 @@
 import { player } from '../index';
 import { platforms } from '../index';
 import { sawTrap, sawTrap2 } from '../index';
-import { jump } from '../index';
-import { audio, gameSoundEffects } from './data/Audio';
+import { jump, gameSoundEffects } from '../index';
+import { audio} from './data/Audio';
 
 
 

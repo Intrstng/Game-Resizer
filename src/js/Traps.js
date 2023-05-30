@@ -49,7 +49,7 @@ import { platformImgSrc300,
   brick_1,
   brick_2,
       } from './Assets';
-import { audio, gameSoundEffects } from '../js/data/Audio';
+import { audio } from '../js/data/Audio';
 
 class PlatformSpikes extends Platform {
   constructor(posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {

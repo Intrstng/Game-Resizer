@@ -1,5 +1,5 @@
-import { platforms, initStart } from '../index';
-import { gameSoundEffects, audio } from './data/Audio';
+import { platforms, initStart, gameSoundEffects } from '../index';
+import {  audio } from './data/Audio'
 
 function createImage(src, width, height) {
   const image = new Image();

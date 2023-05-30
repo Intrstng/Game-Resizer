@@ -6,7 +6,7 @@ import { parseCollisitions } from './js/Collision';
 import { createImage, flamethrowerShootSoundIntervalInit, fullScreen, setLocalStorage, getLocalStorage } from './js/Utils';
 import { Player } from './js/Player';
 import { bulletController } from './js/Collision';
-import { audio, source, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic, muteSound } from './js/data/Audio';
+import { audio, source,  getRandomTrack, playNextTrack, volumeEffects, volumeMusic, muteSound } from './js/data/Audio';
 import { Platform,
   OneStep,
   Fan,
@@ -102,7 +102,9 @@ export let level = 1,
            levelMap,
            parsedCollisions,
            player,
+           initStart = true,
            completeLevel = false,
+           isLeaveGame = false,
            leftNeighboorBlockFromHero = null;
 
 let levelOverlay = createImage(win),
@@ -112,7 +114,12 @@ let levelOverlay = createImage(win),
 
 
 
-
+export function gameSoundEffects(item) {
+  if (!isLeaveGame) {
+    item[source].currentTime = 0;
+    item[source].play();
+  }   
+}
 
 export let requestAnim = window.requestAnimationFrame ||
                   window.webkitRequestAnimationFrame ||
@@ -140,7 +147,7 @@ window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
 
   function increseLevel(obj) {
-  return level >= Object.keys(obj).length ? level : ++level;
+    return level >= Object.keys(obj).length ? level : ++level;
   }
 
 
@@ -196,7 +203,7 @@ export function createPlayer(levelMap, platforms) {
 
 
 
-export let initStart = true;
+
 
 
 
@@ -220,6 +227,11 @@ function reloadGameplay() {
 export function setupStageNumber(value) {
   level = value;
 }
+
+export function changeIsLeaveGameState(value) {
+  isLeaveGame = value;
+}
+
 
 let initCounter = 0;
 export function init() {

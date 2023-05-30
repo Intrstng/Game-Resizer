@@ -44,6 +44,7 @@ import track_4_OGG from '../../../assets/sounds/music/ogg/track_4.ogg';
 
 import { createImage, randomNumber } from '../Utils';
 import { getLocalStorage, changeMuteIcon } from '../Utils';
+import { isLeaveGame } from '../../index';
 
 export let volumeEffects = getLocalStorage('settings', 'soundEffects');
 export let volumeMusic = getLocalStorage('settings', 'musicEffects');
@@ -178,11 +179,10 @@ let source = null;
 })();
 
 
-function gameSoundEffects(item) {
-  item[source].currentTime = 0;
-  item[source].play();
-
-}
+// function gameSoundEffects(item) {
+//     item[source].currentTime = 0;
+//     item[source].play();
+// }
 
 function getRandomTrack(playlist) {
   let tracksList = [];
@@ -214,4 +214,4 @@ const playNextTrack = (currentTrack, playlist) => {
   }
 }
 
-export { audio, source, gameSoundEffects, getRandomTrack, playNextTrack/* , muteSound */ }
+export { audio, source,  getRandomTrack, playNextTrack/* , muteSound */ }

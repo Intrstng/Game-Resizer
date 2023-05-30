@@ -36,8 +36,8 @@ import {
   brick_1,
   brick_2,
       } from './Assets';
-import { platforms, intersection, level } from '../index';
-import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from '../js/data/Audio';
+import { platforms, intersection, level, gameSoundEffects } from '../index';
+import { audio, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from '../js/data/Audio';
 
 export class Player {
   constructor({ platforms = [] }, posX, posY, marginLeft = 0, marginTop = 0) {

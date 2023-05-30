@@ -44,7 +44,7 @@ import {
         cloud_3,
         cloud_4,
         fKeyImg,
-        mKeyImg,
+        escKeyImg,
         errorImg,
         birdFlyingImg,
         logoImg_1,
@@ -71,7 +71,7 @@ import {
 import { getLocalStorage } from './Utils';
 import { audio, source, getRandomTrack, playNextTrack } from './data/Audio';
 import { requestLevelMap } from './Levels';
-import { setLevelMap, createPlayer, init, animate } from '../index';
+import { setLevelMap, createPlayer, init, animate, changeIsLeaveGameState } from '../index';
 import { parseCollisitions } from './Collision';
 
 
@@ -109,13 +109,13 @@ export const mySPA = (function() {
             <h2 class="controls__title">Controls:</h2>
             <div class="controls__container">
               <img class="controls__img-key" src="${arrows}" alt="control arrows">
-                <p class="controls__text">Press Left and Right arrows to control character movement.<br>Press press Up arrow to jump.</p>
+                <p class="controls__text">Press <span>Left</span> and <span>Right</span> arrows to control character movement.<br>Press <span>Up</span> arrow to jump.</p>
                   <img class="controls__img-key" src="${spaceImg}" alt="space key">
-                    <p class="controls__text">Press Space to toggle the active and inactive state of the platform <span>One / Two / Three</span></p>
-                      <img class="controls__img-letter" src="${mKeyImg}" alt="m key">
-                        <p class="controls__text">Press <span>M</span> to return to the menu</p>
-                          <img class="controls__img-letter" src="${fKeyImg}" alt="m key">
-                            <p class="controls__text">Press <span>F</span> to open the game in full screen</p>      
+                    <p class="controls__text">Press <span>Space</span> to toggle the active and inactive state of the platform One / Two / Three.</p>
+                      <img class="controls__img-letter" src="${fKeyImg}" alt="f key">
+                        <p class="controls__text">Press <span>F</span> to open the game in full screen.</p>
+                          <img class="controls__img-letter" src="${escKeyImg}" alt="escape key">
+                            <p class="controls__text">To exit full screen mode, press the <span>Escape</span> button.</p>
             </div>
           </section>
         `;
@@ -262,7 +262,6 @@ export const mySPA = (function() {
     }
 
     this.changeMuteIcon = function() {
-      console.log(muteBtn.classList)
       muteBtn.classList.toggle('mute_off');
       muteBtn.classList.toggle('mute_on');
     }
@@ -371,11 +370,13 @@ export const mySPA = (function() {
 
     this.startGame = function(level) {
       myView.hideMenu();
+      changeIsLeaveGameState(false);
       requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate, level);
     }
 
     this.backToMenu = function() {
       this.stopSoundsBeforeLeave();
+      changeIsLeaveGameState(true);
       myView.backToMenu();
     }
     }

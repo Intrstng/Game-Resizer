@@ -44,7 +44,7 @@ import cloud_2 from '/assets/img/SPA/cloud_2.png';
 import cloud_3 from '/assets/img/SPA/cloud_3.png';
 import cloud_4 from '/assets/img/SPA/cloud_4.png';
 import fKeyImg from '/assets/img/SPA/f.png';
-import mKeyImg from '/assets/img/SPA/m.png';
+import escKeyImg from '/assets/img/SPA/esc.png';
 import errorImg from '/assets/img/SPA/404.png';
 import birdFlyingImg from '/assets/img/SPA/flying.gif';
 import logoImg_1 from '/assets/img/SPA/logo.png';
@@ -62,14 +62,14 @@ import backgroundImg_5 from '/assets/img/Background_images/bg5.png';
 import backgroundImg_6 from '/assets/img/Background_images/bg6.jpg';
 import backgroundImg_7 from '/assets/img/Background_images/bg7.png';
 import backgroundImg_8 from '/assets/img/Background_images/bg8.png';
-import backgroundImg_9 from '/assets/img/Background_images/bg9.png';
+import backgroundImg_9 from '/assets/img/Background_images/bg9.jpg';
 import backgroundImg_10 from '/assets/img/Background_images/bg10.jpg';
 import backgroundImg_11 from '/assets/img/Background_images/bg11.png';
-import backgroundImg_12 from '/assets/img/Background_images/bg12.png';
+import backgroundImg_12 from '/assets/img/Background_images/bg12.jpg';
 import backgroundImg_13 from '/assets/img/Background_images/bg13.png';
 import backgroundImg_14 from '/assets/img/Background_images/bg14.png';
 import backgroundImg_15 from '/assets/img/Background_images/bg15.png';
-import backgroundImg_16 from '/assets/img/Background_images/bg16.png';
+import backgroundImg_16 from '/assets/img/Background_images/bg16.jpg';
 import backgroundImg_17 from '/assets/img/Background_images/bg17.png';
 
 import levelIcon_1 from '/assets/img/Levels/01.png';
@@ -135,7 +135,7 @@ export { platformImgSrc300,
         cloud_3,
         cloud_4,
         fKeyImg,
-        mKeyImg,
+        escKeyImg,
         errorImg,
         birdFlyingImg,
         logoImg_1,
