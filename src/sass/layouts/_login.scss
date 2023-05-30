@@ -1,0 +1,93 @@
+#login {
+  background-color: $color-slider;
+  @include width-height(100vw, 100vh);
+  overflow: hidden;
+	@extend %font-standart;
+  @include prefix (font-smoothing, antialiased, webkit);
+  z-index: 15;
+  form {
+    text-align: center;
+    width: 38rem;
+    margin: 30vh auto 0;
+    padding: 4rem 2rem 2rem 2rem;
+    border: 0.1rem solid $color-light;
+    border-radius: 1.5rem;
+    box-shadow: $color-shadow-from 0 0.1rem 0.1rem 0, $color-shadow-to 0 0.1rem 0.2rem 0;  
+    .group {
+      position: relative; 
+      margin-bottom: 4rem;
+      label {
+        color: $color-light-bg; 
+        font-size: 1.6rem;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 0.5rem;
+        top: -2.5rem;
+        transition: all 0.2s ease;
+      } 
+      .input-login {
+        font-size: 1.6rem;
+        padding: 1rem 1rem 1rem 1.5rem;
+        @include prefix (appearance, none, webkit);
+        display: block;
+        background: $color-light;
+        color: $color-form;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        border-bottom: 0.1rem solid $color-form-border;
+        opacity: 0.7;
+        font-style: italic;
+        &_:focus {
+          outline: none;
+        }
+      }
+    }
+    .errorlabel {
+      font-size: 1.4rem;
+      padding: 1rem 1rem 1rem 0.5rem;
+      @include prefix (appearance, none, webkit);
+      display: block;
+      background: $color-light;
+      color: $color-label;
+      letter-spacing: 0.2rem;
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      border-bottom: 0.1rem solid $color-error;
+    }
+  }
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  margin: 0.3rem 0 1rem 0;
+  width: 100%;
+  vertical-align: middle;
+  color: $color-light;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  @include prefix (font-smoothing, antialiased, webkit);
+  text-align: center;
+  letter-spacing: 0.1rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 0.2rem solid $color-form-btn;
+  cursor: pointer;
+  @extend %transition-all;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.buttonBlue {
+  background: $color-form-btn-light;
+  @extend %font-primary;
+  text-shadow: 0.1rem 0.1rem 0 $color-text-shadow;
+  &:hover {
+    background: $color-form-btn;
+  }
+}

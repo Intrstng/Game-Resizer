@@ -1,0 +1,38 @@
+.content {
+  margin: 0 auto;
+  padding: 0 15rem;
+  position: relative;
+  @include flex(flex, flex-start, center);
+  flex-direction: column;
+  flex: 1 0 auto;
+  @include width-height(140rem, auto);
+  z-index: 1;
+}
+
+@include media-small-desktop {
+  .content {
+    width: 70rem;
+  }
+}
+@include media-tablet {
+  .content {
+    width: 32rem;
+    margin: 0 auto;
+  }
+}
+
+@include screen-and-small-desktop {
+  .content {
+    padding: 0;
+    min-height: 10rem;
+  }
+}
+
+@include screen-and-tablet {
+  .content {
+    margin-top: 0;
+    width: 34rem;
+    padding: 0;
+    margin-bottom: 0;
+  }
+}

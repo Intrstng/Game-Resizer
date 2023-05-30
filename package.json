@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Intrstng/Game-Resizer#readme",
   "dependencies": {
+    "firebase": "^9.22.1",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {

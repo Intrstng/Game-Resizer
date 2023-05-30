@@ -1,0 +1,25 @@
+{
+  "id": 16,
+  "margin": {
+    "left": 72,
+    "top": 0
+  },
+  "map": [     
+    ["ee", "ee", "b2", "fd", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "fd", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"],
+    ["ee", "ee", "b2", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "b2", "ee", "ee", "ee", "ee", "fl", "b2"],
+    ["ee", "ee", "1s", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "ee", "1p", "ee", "ee", "ee", "b2", "ee", "1p", "1p", "ee", "ee", "b1", "b2"],
+    ["ee", "ee", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "ee", "1p", "ee", "b2", "ee", "ee", "3p", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "2p", "ee", "ee", "ee", "3p", "ee", "sk", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "sw", "ee", "ee", "ee", "sk", "ee", "ee", "ee", "sw", "ee", "ee", "b1", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "fl", "b2"],
+    ["ee", "ee", "ee", "b2", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1", "b2", "b2", "b2", "ee", "ee", "b2", "ee", "ee", "2p", "ee", "ee", "b1", "b2"],
+    ["jd", "jd", "jd", "b2", "ja", "ja", "ja", "b2", "1s", "1s", "1s", "b2", "ee", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fp", "ee", "ee", "ee", "ee", "b2", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "2p", "2p", "2p", "b2", "ee", "ee", "1p", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "fr", "ee", "ee", "ee", "ee", "ee", "ee", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b1", "ee", "ee", "st", "ee", "ee", "ee", "ee"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee"]
+  ]
+}

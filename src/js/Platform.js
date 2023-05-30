@@ -1,50 +1,28 @@
-import { CollisionBlock, platforms, parsedCollisions } from './Collision';
-import { canvas, c } from './Canvas';
+import { platforms } from './Collision';
+import { c, gameSoundEffects } from '../index';
 import { createImage } from './Utils';
-import { platformImgSrc300,
-  heroIdleR,
-  heroIdleL,
-  heroRunR,
-  heroRunL,
-  heroJumpR,
-  heroJumpL,
-  heroFallR,
-  heroFallL,
-  heroDeath,
-  backgroundImg,
-  platformSolid,
-  platformOneStep,
-  platformOneStepExplosion,
-  platformJump,
-  platformJumpDisabled,
-  platformOne,
-  platformTwo,
-  platformThree,
-  platformOneDisabled,
-  platformTwoDisabled,
-  platformThreeDisabled,
-  saw,
-  fan,
-  spike,
-  deadSignalZone,
-  deadSignalZoneHover,
-  flamethrowerLeft,
-  flamethrowerRight,
-  flamethrowerUp,
-  flamethrowerDown,
-  brick_1,
-  brick_2,
-  finish,
+import { 
+        platformOneStep,
+        platformOneStepExplosion,
+        platformJump,
+        platformJumpDisabled,
+        platformOne,
+        platformTwo,
+        platformThree,
+        platformOneDisabled,
+        platformTwoDisabled,
+        platformThreeDisabled,
+        fan,
+        deadSignalZone,
+        deadSignalZoneHover,
+        brick_1,
+        brick_2,
+        finish,
       } from './Assets';
-
-     
-      
-
-import { audio, gameSoundEffects } from './data/Audio';
+import { audio } from './Audio';
 import { keys } from './Keys';
 import { player } from '../index';
 import { leftNeighboorBlockFromHero } from '../index';
-
 
 class Platform {
   constructor (posX, posY, image, platforms, marginLeft = 0, marginTop = 0) {
@@ -96,6 +74,7 @@ class Platform {
     return this.type;
   }
   draw() {
+    if (!this.currentSprite.loaded) return;
     c.drawImage(this.currentSprite, 36 * this.frames, 0, 36, 36, this.position.x, this.position.y, this.width, this.height) // 48, 0, 48, 48 - player sprite crop (x, y, w, h) // 36 размер кадра в спрайте
   }
   update() {
@@ -106,64 +85,60 @@ class Platform {
   collisionAbove() {
   // Player - platform collision (player is above the platform)
     if (player.bottom <= this.position.y &&
-      player.bottom + player.velocity.y >= this.top && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-      // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-      player.right - player.width / 4 >= this.left  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-      player.left <= this.right - player.width / 4) { 
-      player.velocity.y = -3.5; // если касается земли // -3.5
-      player.alive && gameSoundEffects(audio.jumpOnSpaceToggledPlatform);
-      if (keys.up.pressed ||
-      keys.up.pressed && keys.right.pressed ||
-      keys.up.pressed && keys.left.pressed) {
-        player.velocity.y = -player.jumpHeight;
-        player.gravity = 0.25;
-      } 
+        player.bottom + player.velocity.y >= this.top && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
+        // Player - platform collision (player on the platform - inside of left and right platform boundaries)
+        player.right - player.width / 4 >= this.left  && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
+        player.left <= this.right - player.width / 4) { 
+        player.velocity.y = -3.5; // если касается земли // -3.5
+        player.alive && gameSoundEffects(audio.jumpOnSpaceToggledPlatform);
+        if (keys.up.pressed ||
+        keys.up.pressed && keys.right.pressed ||
+        keys.up.pressed && keys.left.pressed) {
+          player.velocity.y = -player.jumpHeight;
+          player.gravity = 0.25;
+        } 
     }
   }
   collisionUnder() {
   // Player - platform collision (player is under the platform)
     if (player.top <= this.bottom && // player.position.y - player.velocity.y * 0.5
-      player.bottom + player.velocity.y >= this.top &&
-      player.left >= this.left - player.width / 1.25 && // можно сделать 1.75
-      player.right <= this.right + player.width / 1.25) {
-        player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-        player.alive && gameSoundEffects(audio.bottomHit);
-      }
+        player.bottom + player.velocity.y >= this.top &&
+        player.left >= this.left - player.width / 1.25 && // можно сделать 1.75
+        player.right <= this.right + player.width / 1.25) {
+          player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
+          player.alive && gameSoundEffects(audio.bottomHit);
+        }
   }
   collisionLeftSide() {
   // Player - platform collision (player is left from the platform and moves right)
     if (keys.right.pressed &&
-      player.bottom >= this.top && 
-      player.top <= this.bottom &&
-      player.right >= this.left) {
-        player.velocity.x = 0;
-        console.log('hit!');
+        player.bottom >= this.top && 
+        player.top <= this.bottom &&
+        player.right >= this.left) {
+          player.velocity.x = 0;
     } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
     if (keys.right.pressed &&
-      player.bottom >= this.top && 
-      player.top <= this.bottom &&
-      player.right >= this.right) {
-        player.velocity.x = 2;
-        console.log('free!');
+        player.bottom >= this.top && 
+        player.top <= this.bottom &&
+        player.right >= this.right) {
+          player.velocity.x = 2;
     }
   }
   collisionRightSide() {
   // Player - platform collision (player is right from the platform and moves left)
     if (keys.left.pressed &&
-      (leftNeighboorBlockFromHero != undefined || leftNeighboorBlockFromHero != null) &&
-      player.bottom >= leftNeighboorBlockFromHero.top && 
-      player.top <= leftNeighboorBlockFromHero.bottom &&
-      player.left <= leftNeighboorBlockFromHero.right) {
-        player.velocity.x = 0;
-        console.log('hit!');
+        (leftNeighboorBlockFromHero != undefined || leftNeighboorBlockFromHero != null) &&
+        player.bottom >= leftNeighboorBlockFromHero.top && 
+        player.top <= leftNeighboorBlockFromHero.bottom &&
+        player.left <= leftNeighboorBlockFromHero.right) {
+          player.velocity.x = 0;
     } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
       if (keys.left.pressed &&
-        leftNeighboorBlockFromHero != undefined &&
-        (player.bottom <= leftNeighboorBlockFromHero.top || 
-        player.top >= leftNeighboorBlockFromHero.bottom) &&
-        player.left <= leftNeighboorBlockFromHero.left) { // или "-" player.width ???
-          player.velocity.x = -2;
-          console.log('free!');
+          leftNeighboorBlockFromHero != undefined &&
+          (player.bottom <= leftNeighboorBlockFromHero.top || 
+          player.top >= leftNeighboorBlockFromHero.bottom) &&
+          player.left <= leftNeighboorBlockFromHero.left) { // или "-" player.width ???
+            player.velocity.x = -2;
       }
     }
   
@@ -260,7 +235,6 @@ class JumpToggleActive extends Platform {
     this.frequency = 63;
   }
   toggle() {
-    console.log(this.type, this.statusActive)
     if (keys.jumpToggleActive === true) {
       this.currentSprite = this.sprites.idle;
       this.statusActive = true;
@@ -288,7 +262,6 @@ class JumpToggleDisabled extends Platform {
     this.frequency = 63;
   }
   toggle() {
-    console.log(this.type, this.statusActive)
     if (keys.jumpToggleActive === false) {
       this.currentSprite = this.sprites.idle;
       this.statusActive = true;
@@ -351,7 +324,9 @@ class SpaceToggledPlatform extends Platform {
     this.setCount = null;
   }
   checkSpaceToggleCounter() {
-   keys.spaceToggleCounter >= 4 ? keys.spaceToggleCounter =  1 : keys.spaceToggleCounter; 
+    keys.spaceToggleCounter >= 4 ?
+    keys.spaceToggleCounter = 1 :
+    keys.spaceToggleCounter; 
   }
   collision() {
     if (keys.spaceToggleCounter === this.setCount) {
@@ -360,9 +335,9 @@ class SpaceToggledPlatform extends Platform {
       super.collisionUnder();
       super.collisionLeftSide();
       if ((leftNeighboorBlockFromHero != undefined ||
-        leftNeighboorBlockFromHero != null) &&
-        keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount) {
-          super.collisionRightSide();
+           leftNeighboorBlockFromHero != null) &&
+           keys.spaceToggleCounter === leftNeighboorBlockFromHero.setCount) {
+             super.collisionRightSide();
       }
       this.currentSprite = this.sprites.idle;
       this.checkSpaceToggleCounter();
@@ -373,17 +348,17 @@ class SpaceToggledPlatform extends Platform {
     // Hero is inside or outside of Platform (for toggled by space platformes and deadSignal zone platforms)   
     if (platforms.some((block) => {
       return (player.position.y + player.height * 0.75 >= block.top &&
-        player.position.y + player.height * 0.35 <= block.bottom &&
-        player.position.x + player.width * 0.75 >= block.left &&
-        player.position.x + player.width * 0.25 <= block.right);
-    })) {
-      keys.deadSignalZone = true;
-      console.log('inside')
-    } else {
-      console.log('outside')   
-      keys.deadSignalZone = false;
-    }
-    }
+              player.position.y + player.height * 0.35 <= block.bottom &&
+              player.position.x + player.width * 0.75 >= block.left &&
+              player.position.x + player.width * 0.25 <= block.right);
+        })) {
+          keys.deadSignalZone = true;
+          player.alive && keys.space.pressed && gameSoundEffects(audio.toggleDisabled);
+        } else {
+          player.alive && keys.space.pressed && gameSoundEffects(audio.toggle);   
+          keys.deadSignalZone = false;
+        }
+      }
   } 
 }
 
@@ -452,26 +427,26 @@ class DeadSignal extends SpaceToggledPlatform {
   }
 
   hover() {
-    if ((player.left <= this.right &&
-      player.right >= this.left &&
-      player.top <= this.bottom &&
-      player.bottom >= this.top) &&
-      (platforms.some((block) => {
-        return (player.position.y + player.height * 0.75 >= block.top &&
-          player.position.y + player.height * 0.35 <= block.bottom &&
-          player.position.x + player.width * 0.75 >= block.left &&
-          player.position.x + player.width * 0.25 <= block.right);
-      }))
-      ) { // Inside of the block
-      this.checkSpaceToggleCounter();
-      this.currentSprite = this.sprites.idle;
-    } else if ((platforms.some((block) => { // Outside of the block
-      return (player.position.y + player.height * 0.75 >= block.top &&
-        player.position.y + player.height * 0.35 <= block.bottom &&
-        player.position.x + player.width * 0.75 >= block.left &&
-        player.position.x + player.width * 0.25 <= block.right)}))) {
-          this.currentSprite = this.sprites.disabled;
-      }
+    if (( player.left <= this.right &&
+          player.right >= this.left &&
+          player.top <= this.bottom &&
+          player.bottom >= this.top ) &&
+          (platforms.some((block) => {
+            return (player.position.y + player.height * 0.75 >= block.top &&
+                    player.position.y + player.height * 0.35 <= block.bottom &&
+                    player.position.x + player.width * 0.75 >= block.left &&
+                    player.position.x + player.width * 0.25 <= block.right);
+          }))
+          ) { // Inside of the block
+          this.checkSpaceToggleCounter();
+          this.currentSprite = this.sprites.idle;
+        } else if ((platforms.some((block) => { // Outside of the block
+          return (player.position.y + player.height * 0.75 >= block.top &&
+                  player.position.y + player.height * 0.35 <= block.bottom &&
+                  player.position.x + player.width * 0.75 >= block.left &&
+                  player.position.x + player.width * 0.25 <= block.right)}))) {
+              this.currentSprite = this.sprites.disabled;
+          }
   }
 
   collision() {
@@ -479,16 +454,13 @@ class DeadSignal extends SpaceToggledPlatform {
       // Hero is inside or outside of block (for toggled by space platformes and deadSignal zone platforms)   
       if (platforms.some((block) => {
         return (player.position.y + player.height * 0.75 >= block.top &&
-          player.position.y + player.height * 0.35 <= block.bottom &&
-          player.position.x + player.width * 0.75 >= block.left &&
-          player.position.x + player.width * 0.25 <= block.right);
+                player.position.y + player.height * 0.35 <= block.bottom &&
+                player.position.x + player.width * 0.75 >= block.left &&
+                player.position.x + player.width * 0.25 <= block.right);
       })) {
         keys.deadSignalZone = true;
-        console.log(keys.space.pressed)
         player.alive && keys.space.pressed && gameSoundEffects(audio.toggleDisabled);
-        console.log('inside')
-      } else {
-        console.log('outside')   
+      } else { 
         keys.deadSignalZone = false;
         player.alive && keys.space.pressed && gameSoundEffects(audio.toggle);
       }
@@ -506,5 +478,5 @@ export { Platform,
         DeadSignal,
         Brick_1,
         Brick_2,
-        Finish,
+        Finish
       }

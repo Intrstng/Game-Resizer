@@ -1,5 +1,26 @@
-// @import '../../node_modules/normalize.scss/normalize.scss';
 @import '../../node_modules/normalize.css/normalize.css';
 
+// Abstracts
+@import './abstracts/fonts';
 @import './abstracts/constants';
+@import './abstracts/placeholders';
+@import './abstracts/mixins';
+
+// Base
 @import './base/base';
+@import './base/animated';
+@import './base/buttons';
+
+// Components
+@import './components/greeting';
+@import './components/how-to-play';
+@import './components/settings';
+@import './components/description';
+@import './components/select-level';
+@import './components/error';
+
+// Layouts
+@import './layouts/login';
+@import './layouts/header';
+@import './layouts/main';
+@import './layouts/canvas';
