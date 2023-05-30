@@ -263,6 +263,6 @@ export function animate() {
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
 
-window.onbeforeunload = function () {
-  return false;
-};
+// window.onbeforeunload = function () {
+//   return false;
+// };

@@ -1,7 +1,7 @@
 # Platform traveller
 
 Platform traveller is a SPA game.
-It uses: OOP ES6, modules, MVC, Firebase, Webpack 5, AJAX, Web Storage API (localStorage), SCSS, CSS and javascript animations, canvas, fullscreen API.
+It uses: OOP ES6, modules, MVC, Firebase, Webpack 5, AJAX, Web Storage API (localStorage), BEM, SCSS, CSS and javascript animations, canvas, fullscreen API.
 
 ## Building and running on localhost
 
