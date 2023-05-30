@@ -1,0 +1,27 @@
+{
+  "id": 17,
+  "margin": {
+    "left": 72,
+    "top": -72
+  },
+  "map": [
+    ["st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["dz", "dz", "dz", "dz", "sk", "sk", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],  
+    ["dz", "dz", "dz", "b2", "b2", "b2", "b2", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "ee"],
+    ["dz", "dz", "dz", "fd", "fd", "fd", "fd", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"],
+    ["dz", "dz", "dz", "dz", "dz", "ee", "2p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"],
+    ["dz", "dz", "dz", "ee", "1p", "2p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "ee"],
+    ["b1", "b1", "b1", "b1", "b1", "b1", "b1", "3p", "3p", "3p", "3p", "1s", "1s", "1p", "1s", "1s", "2p", "1s", "1s", "3p", "3p", "b1", "ee", "b1", "ee"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "sk", "sk", "sk", "sk", "b1", "ee", "b1", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "1p", "3p", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fl", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1", "ee", "b1", "b1", "b1", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "fd", "fd", "b1", "3p", "b1", "fd", "fd", "b1", "2p", "b1", "fd", "fd", "b1", "1p", "b1", "ee", "ee", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "ee", "ee", "sw", "ee", "ee", "fp", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "fn", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+    ["ee", "ee", "ee", "ee", "b1", "b1", "b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "b1"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "b1", "1p", "1p", "1p", "b1", "2p", "2p", "2p", "2p", "b1", "3p", "3p", "3p", "3p", "b1", "ee", "1s", "ee", "b1"]
+  ]
+}

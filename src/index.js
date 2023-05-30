@@ -1,371 +1,268 @@
-import './sass/styles.scss';
+//import './sass/styles.scss';  // прописано в Webpack entry points
 
-// imagePlatform.onload = function getSizes () {
-//   imagePlatform.width = imagePlatform.naturalWidth;
-//   imagePlatform.height = imagePlatform.naturalHeight;
-//}
-import { CollisionBlock, platforms, parsedCollisions } from './js/Collision';
-import { canvas, c } from './js/Canvas';
-import { createImage, Sprite } from './js/Utils';
+import { createImage, flamethrowerShootSoundIntervalInit, fullScreen } from './js/Utils';
 import { Player } from './js/Player';
-import { collisionsLevel_1 } from './js/data/Collisions';
-import { bulletController } from './js/Collision';
-import { audio, gameSoundEffects, getRandomTrack, playNextTrack, volumeEffects, volumeMusic } from './js/data/Audio';
-
-import { Platform,
-  OneStep,
-  Fan,
-  JumpToggleActive,
-  JumpToggleDisabled,
-  PlatformOne,
-  PlatformTwo,
-  PlatformThree,
-  DeadSignal,
-} from './js/Platform';
-
-import {
-  PlatformSpikes,
-  Saw,
-  FlamethrowerLeft,
-  FlamethrowerRight,
-  FlamethrowerUp,
-  FlamethrowerDown,
-  BulletController,
-
-
-  Flamethrower
-} from './js/Traps';
-import { platformImgSrc300,
-          heroIdleR,
-          heroIdleL,
-          heroRunR,
-          heroRunL,
-          heroJumpR,
-          heroJumpL,
-          heroFallR,
-          heroFallL,
-          heroDeath,
-          backgroundImg,
-          platformSolid,
-          platformOneStep,
-          platformOneStepExplosion,
-          platformJump,
-          platformJumpDisabled,
-          platformOne,
-          platformTwo,
-          platformThree,
-          platformOneDisabled,
-          platformTwoDisabled,
-          platformThreeDisabled,
-          saw,
-          fan,
-          spike,
-          deadSignalZone,
-          deadSignalZoneHover,
-          flamethrowerLeft,
-          flamethrowerRight,
-          flamethrowerUp,
-          flamethrowerDown,
-          brick_1,
-          brick_2,
+import { audio, source } from './js/Audio';
+import { win,
+         backgroundImg_1,
+         backgroundImg_2,
+         backgroundImg_3,
+         backgroundImg_4,
+         backgroundImg_5,
+         backgroundImg_6,
+         backgroundImg_7,
+         backgroundImg_8,
+         backgroundImg_9,
+         backgroundImg_10,
+         backgroundImg_11,
+         backgroundImg_12,
+         backgroundImg_13,
+         backgroundImg_14,
+         backgroundImg_15,
+         backgroundImg_16,
+         backgroundImg_17
         } from './js/Assets';
 import { keys, keyDownHandler, keyUpHandler } from './js/Keys';
 import { AdditionalElements } from './js/AdditionalElements';
+import { requestLevelMap } from './js/Levels';
+import { logInApp } from './js/Login';
 
+logInApp.init('app', 'firstStart');
+export let level = 1,
+           canvas,
+           c,
+           platforms = [],
+           levelMap,
+           parsedCollisions,
+           player,
+           initStart = true,
+           completeLevel = false,
+           isLeaveGame = false,
+           leftNeighboorBlockFromHero = null;
 
+let levelOverlay = createImage(win),
+           leftNeighboorBlockFromHeroArr = [],
+           backgroundCanvasImg = [],
+           fontSize;
 
-canvas.width = document.documentElement.clientWidth;
-canvas.height = document.documentElement.clientHeight;
+// Turn on sounds (not music) in game, and turn off it when player leaves the game 
+export function gameSoundEffects(item) {
+  if (!isLeaveGame) {
+    item[source].currentTime = 0;
+    item[source].play();
+  }   
+}
 
-                      // window.addEventListener('resize', () => {
-                      //   canvas.width = document.documentElement.clientWidth;
-                      //   canvas.height = document.documentElement.clientHeight;
-                      // });
-
-                      // function onResize( element, callback ){
-                      //   var elementHeight = element.height,
-                      //       elementWidth = element.width;
-                      //   setInterval(function(){
-                      //       if( element.height !== elementHeight || element.width !== elementWidth ){
-                      //         elementHeight = element.height;
-                      //         elementWidth = element.width;
-                      //         callback();
-                      //       }
-                      //   }, 300);
-                      // }
-
-                      // onResize(canvas, function(){ alert('Resized!');
-                      // canvas.width = document.documentElement.clientWidth;
-                      // canvas.height = document.documentElement.clientHeight;
-                      // } );
-
-canvas.width = 1024 // 1280 //window.innerWidth; // canvas.width = innerWidth;
-canvas.height = 576 // 720 //window.innerHeight;
-let requestAnim = window.requestAnimationFrame ||
-                  window.webkitRequestAnimationFrame ||
-                  window.mozRequestAnimationFrame ||
-                  window.oRequestAnimationFrame ||
-                  window.msRequestAnimationFrame ||
-                  function(callback) { window.setTimeout(callback, 1000 / 60); }
+export let requestAnim = window.requestAnimationFrame ||
+                         window.webkitRequestAnimationFrame ||
+                         window.mozRequestAnimationFrame ||
+                         window.oRequestAnimationFrame ||
+                         window.msRequestAnimationFrame ||
+                         function(callback) { window.setTimeout(callback, 1000 / 60); }
 
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
-
-function fullScreen(e, element) {
-  if (e.code === 'KeyF') {
-    if(element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if(element.webkitrequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if(element.mozRequestFullscreen) {
-      element.mozRequestFullScreen();
-    }
-  }
+export function increaseLevel() {
+  level = level >= 17 ? 1 : ++level; // 17 - total quantity of levels
 }
 
-// function fullScreenCancel(e) {
-//   if (e.code === 'KeyS') {
-//     if(document.documentElement.requestFullscreen) {
-//       document.documentElement.requestFullscreen();
-//     } else if(document.documentElement.webkitRequestFullscreen ) {
-//       document.documentElement.webkitRequestFullscreen();
-//     } else if(document.documentElement.mozRequestFullscreen) {
-//       document.documentElement.mozRequestFullScreen();
-//     }
-//   }
-// }
+export function setLevelMap(value) {
+  canvas = document.getElementById('canvas');
+  c = canvas.getContext("2d");
+  fontSize = canvas.height / 10; // 10
+  canvas.width = 1024 // 1280
+  canvas.height = 576 // 720
+  levelOverlay.width = canvas.width;
+  levelOverlay.height = canvas.height;
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+  backgroundCanvasImg = [ // Canvas background-image for each level
+    new AdditionalElements(0, 0, backgroundImg_1, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_2, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_3, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_4, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_5, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_6, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_7, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_8, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_9, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_10, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_11, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_12, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_13, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_14, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_15, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_16, canvasWidth, canvasHeight),
+    new AdditionalElements(0, 0, backgroundImg_17, canvasWidth, canvasHeight),
+  ]
+  levelMap = value;
+  return levelMap;
+}
 
-
-
-let leftNeighboorBlockFromHeroArr = [];
-export let timerShoot_1 = null;
-export let timerShoot_2 = null;
-export let leftNeighboorBlockFromHero = null;
-
-export let additionalElements = [
-  new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
-]
-
-
-
-export let player;
-  collisionsLevel_1.map.forEach((row, index_Y) => {
+export function createPlayer(levelMap, platforms) {
+  levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
+    if (cell === 'st') {
+      player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top);
+    } 
     })
   })
+  return player;
+}
 
+export function blankGameplayBetweenGames() {
+  player = null;
+  platforms = [];
+}
 
-// new Player({
-//   platforms
-// }); //platforms: platforms
+export function reloadGameplay() {
+    platforms.forEach(platform => {
+      (platform.type === 'oneStep') && platform.restore();
+    });
+    levelMap.map.forEach((row, index_Y) => {
+      row.forEach((cell, index_X) => {
+       cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, levelMap.margin.left, levelMap.margin.top));
+      })
+    })  
+}
 
+export function setupStageNumber(value) {
+  level = value;
+}
 
+export function changeIsLeaveGameState(value) {
+  isLeaveGame = value;
+}
 
-
-
-
-            
-                                                platforms.forEach(platform => {
-                                                if (platform.type === 'flamethrowerLeft' ||
-                                                platform.type === 'flamethrowerRight' ||
-                                                platform.type === 'flamethrowerUp' ||
-                                                platform.type === 'flamethrowerDown') {
-                                                // setInterval(() => gameSoundEffects(audio.fire), 1000);
-                                                timerShoot_1 = setTimeout(function soundFire() {
-                                                    timerShoot_2 = setTimeout(soundFire, platform.delay * 8);
-                                                    gameSoundEffects(audio.fire);
-                                                  }, platform.delay * 8);                          
-                                                }
-                                              });
-
-
-
-
-
-                                        let track = getRandomTrack(audio);
-                                        track.pause();
-                                        track = getRandomTrack(audio)
-                                        //track.play();
-                                        track.onended = function() {
-                                          playNextTrack(track, audio);
-                                        }
+let initCounter = 0;
 
 export function init() {
-
+  flamethrowerShootSoundIntervalInit();
+  initCounter++;
+  initCounter > 1 && (initStart = false);
+console.log(initStart)
   player.velocity.y = 1;
   player.alive = true;
   keys.spaceToggleCounter = 1;
-  additionalElements = [new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
-];
-   
-                                         // player = new Player({ platforms });
+  reloadGameplay();
+  return player;
+}
 
+export function nextLevelInit() {
+  flamethrowerShootSoundIntervalInit();
+  initCounter++;
+  initCounter > 1 && (initStart = false);
+console.log(initStart)
+  player.velocity.y = 1;
+  player.alive = true;
+  keys.spaceToggleCounter = 1;
+  return player;
+}
 
-  platforms.forEach(platform => {
-    (platform.type === 'oneStep') && platform.restore();
-  });
+export function showOverlayBetweenStages() {
+    flamethrowerShootSoundIntervalInit();
+    initCounter++;
+    initCounter > 1 && (initStart = false);
+  console.log(initStart)
+    player.velocity.y = 1;
+    player.alive = true;
+    keys.spaceToggleCounter = 1;
+    c.save();
+    c.fillStyle = 'rgb(247, 251, 254)';
+    c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
+    c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
+    
+    c.fillStyle = 'rgb(21, 173, 188)';
+    c.font = `normal ${fontSize}px Rubik Iso`;
+    c.textBaseline = 'middle';
+    c.textAlign = 'center';
+    canvas.style.letterSpacing = `${fontSize / 20}px`;
+    c.fillText('Next level', canvas.width / 2, canvas.height / 2)
+    c.restore();
+    setTimeout(() => {
+      reloadGameplay();
+      player.completeLevel = false;
+    }
+      , 1250);
+    return player;
+}
 
-  collisionsLevel_1.map.forEach((row, index_Y) => {
-    row.forEach((cell, index_X) => {
-     cell === 'st' && (player = new Player({ platforms }, index_X * 36, index_Y * 36, collisionsLevel_1.margin.left, collisionsLevel_1.margin.top));
-    })
-  })
-   
-}                      
+export function animate() {
 
-
-function animate() {
-
-  requestAnim(animate);
-  //c.clearRect(0, 0, canvas.width, canvas.height);
-                            c.fillStyle = ('white');
-                            c.fillRect(0, 0, canvas.width, canvas.height);
+  player && !player.completeLevel && requestAnim(animate);
   console.log('animation counter');
-
-  additionalElements.forEach(element => element.draw());
-
- // !!!!!!!!!! переделать под обработку массива если у element есть element.type === 'jumpToggle'                      
-           
-                                                   
-                          
-                          platforms.forEach(platform => platform.draw());
-                          platforms.forEach(platform => platform.update()); // рисуем платформы
-                          platforms.forEach(platform => {
-                            (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
-                          
-                          
-                          if (platform.type === 'platformOne' ||
-                          platform.type === 'platformTwo' ||
-                          platform.type === 'platformThree' ||
-                          platform.type === 'deadSignalZone' ||
-                          platform.type === 'flamethrowerLeft' ||
-                          platform.type === 'flamethrowerRight' ||
-                          platform.type === 'flamethrowerUp' ||
-                          platform.type === 'flamethrowerDown'
-                          ) {
-                            platform.collision();
-                          }
-                          
-
-                          if (platform.type === 'flamethrowerLeft' ||
-                          platform.type === 'flamethrowerRight' ||
-                          platform.type === 'flamethrowerUp' ||
-                          platform.type === 'flamethrowerDown') {
-                            platform.shoot();                      
-                          }
-                          
-                          });
-                          //flamethrower.shootPressed = true
-                          // bulletController.draw();
-                          
-
-
-
-
-
-                          
-leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
-  return (platform.left <= player.left &&
-    (platform.top <= player.top &&
-    platform.bottom >= player.bottom)
-    );
-})
-leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1]
-
-
-                          player.update();
-
-
-  if (keys.right.pressed && (player.position.x + player.width) <= canvas.width) { // упор персонажа в правый край экрана
-    player.velocity.x = 2;
-  } else if (keys.left.pressed && player.position.x >= 0) { // упор персонажа в левый край экрана
-    player.velocity.x = -2;
-  } else {
-    player.velocity.x = 0;
+  backgroundCanvasImg[level - 1].draw();  
+  platforms.forEach(platform => platform.draw());
+  platforms.forEach(platform => platform.update());
+  platforms.forEach(platform => {
+    (platform.type === 'jumpToggleActive' || platform.type === 'jumpToggleDisabled') && platform.toggle();
+  
+  if (platform.type === 'platformOne' ||
+      platform.type === 'platformTwo' ||
+      platform.type === 'platformThree' ||
+      platform.type === 'deadSignalZone' ||
+      platform.type === 'flamethrowerLeft' ||
+      platform.type === 'flamethrowerRight' ||
+      platform.type === 'flamethrowerUp' ||
+      platform.type === 'flamethrowerDown') {
+        platform.collision();
   }
 
-  
-  // platforms.forEach(platform => {
-  //   platform.collision();
-  //   // // Player - platform collision (player is above the platform)
-  //   // if (player.position.y + player.height <= platform.position.y &&
-  //   //     player.position.y + player.height + player.velocity.y >= platform.position.y && // без && player.position.y + player.height + player.velocity.y >= platform.position.y персонаж перестает двигаться когда над платформой
-  //   //     // Player - platform collision (player on the platform - inside of left and right platform boundaries)
-  //   //     player.position.x + player.width >= platform.position.x + player.width / 3 && // + player.width / 3 - поправка чтобы персонаж падал прямо с самого края платформы (без этого он еще выступал на ширину трети спрайта героя)
-  //   //     player.position.x <= platform.position.x + platform.width - player.width / 3) { 
-  //   //       player.velocity.y = 0; // если касается земли
-  //   // }
-  //   // // Player - platform collision (player is under the platform)
-  //   // if (player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.y + player.height + player.velocity.y >= platform.position.y &&
-  //   //     player.position.x >= platform.position.x - player.width / 2 && // можно сделать 1.75
-  //   //     player.position.x + player.width <= platform.position.x + platform.width + player.width / 2) {
-  //   //       player.velocity.y = 1;/* player.currentSprite = player.sprites.idle.right */
-  //   // }
-  //   // // Player - platform collision (player is left from the platform and moves right)
-  //   // if (keys.right.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width >= platform.position.x) {
-  //   //       player.velocity.x = 0;
-  //   //       console.log('hit!');
-  //   // } // Continue: Player - platform collision (player holds right and is right from the platform - so he cans move)
-  //   //   if (keys.right.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width >= platform.position.x + platform.width) {
-  //   //       player.velocity.x = 2;
-  //   //       console.log('free!');
-  //   //   }
-  //   // // Player - platform collision (player is right from the platform and moves left)
-  //   // if (keys.left.pressed &&
-  //   //   player.position.y + player.height >= platform.position.y && 
-  //   //   player.position.y <= platform.position.y + platform.height &&
-  //   //   player.position.x <= platform.position.x + platform.width) {
-  //   //     player.velocity.x = 0;
-  //   //     console.log('hit!');
-  //   // } // Continue: Player - platform collision (player holds left and is left from the platform - so he cans move)
-  //   //   if (keys.left.pressed &&
-  //   //     player.position.y + player.height >= platform.position.y && 
-  //   //     player.position.y <= platform.position.y + platform.height &&
-  //   //     player.position.x + player.width <= platform.position.x) { // или "-" player.width ???
-  //   //       player.velocity.x = -2;
-  //   //       console.log('free!');
-  //   //   }
-  // })
-        
-        
-if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
-  player.currentSprite = player.sprites.idle.right;
-} else if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'left') { // 10 - когда персонаж на земле
-  player.currentSprite = player.sprites.idle.left;
-}
+  if (platform.type === 'flamethrowerLeft' ||
+      platform.type === 'flamethrowerRight' ||
+      platform.type === 'flamethrowerUp' ||
+      platform.type === 'flamethrowerDown') {
+        platform.shoot();                      
+  }
+  });
+                          
+  leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
+    return (platform.left <= player.left &&
+            (platform.top <= player.top &&
+            platform.bottom >= player.bottom)
+      );
+  })
+  leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
+  player && player.update();
 
+  if (player &&
+      keys.right.pressed &&
+      (player.position.x + player.width) <= canvas.width) { // упор персонажа в правый край экрана
+    player.velocity.x = 2;
+  } else if (player &&
+             keys.left.pressed &&
+             player.position.x >= 0) { // упор персонажа в левый край экрана
+               player.velocity.x = -2;
+    } else if (player) {
+        player.velocity.x = 0;
+    }
+ 
+  if (player &&
+      player.velocity.y >= player.jumpHeight - player.gravity &&
+      !keys.right.pressed &&
+      !keys.left.pressed &&
+      keys.lastPressed === 'right') { // 10 - когда персонаж на земле
+        player.currentSprite = player.sprites.idle.right;
+  } else if (player && 
+             player.velocity.y >= player.jumpHeight - player.gravity &&
+             !keys.right.pressed &&
+             !keys.left.pressed &&
+             keys.lastPressed === 'left') { // 10 - когда персонаж на земле
+               player.currentSprite = player.sprites.idle.left;
+  }
 
-    // Падение в пропасть (см. комментарии в player.update())
-      if (player.position.y > canvas.height) {
-// sawTrap.restore();
-                             //sawTrap2.restore(); // !!!!!!!!!!!!
-gameSoundEffects(audio.fallingInDepth2);
-keys.jumpToggleActive = !keys.jumpToggleActive;
+  // Падение в пропасть (см. комментарии в player.update())
+  if (player &&
+      player.position.y > canvas.height) {
+        gameSoundEffects(audio.fallingInDepth2);
+        keys.jumpToggleActive = !keys.jumpToggleActive;
         init();
-        console.log('you lose')
-
-        // сюда вставить звук проигрыша
-      }
-
-
+  }
 }
-init();
-animate();
 
 window.addEventListener('keydown', keyDownHandler);
 window.addEventListener('keyup', keyUpHandler);
 
-
-
-window.addEventListener('click', (e) => {
-  console.log(e.clientX, e.clientY)
-   // debugger
-})
+window.onbeforeunload = function () {
+  return false;
+};

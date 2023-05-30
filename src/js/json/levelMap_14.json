@@ -1,0 +1,23 @@
+{
+  "id": 14,
+  "margin": {
+    "left": 72,
+    "top": 36
+  },
+  "map": [
+    ["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "b2"],
+    ["b1", "3p", "ee", "ee", "ee", "ja", "ja", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1s", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "1p", "1p", "ee", "ee", "ee", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "3p", "3p", "3p", "b2"],
+    ["b1", "b1", "b1", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "fn", "fn", "b2"],
+    ["ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "1p", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "dz", "dz", "1p", "dz", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "1p", "st", "dz", "b2"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b2", "b2", "b2", "b2"]
+  ]
+}

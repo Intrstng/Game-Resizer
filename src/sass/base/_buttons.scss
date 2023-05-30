@@ -1,0 +1,77 @@
+.logout-btn,
+.mute,
+.menu {
+  position: absolute;
+  z-index: 2;
+  @include width-height(4rem);
+  transition: transform 0.25s ease 0s,
+              opacity 0.25s ease 0.1s;
+  background-color: transparent;
+  border: none;
+  opacity: 0.8;
+  cursor: pointer;
+  &_hover {
+    &:hover {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+  }
+}
+
+.logout-btn {
+  @include top-right(5rem);
+  img {
+    @include width-height(4rem);
+    font-size: 0;
+    border: none;
+  }
+}
+
+.mute {
+  @include top-right(10rem, 5rem);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &_off {
+    @include background-img('mute_off.png');
+  }
+  &_on {
+    @include background-img('mute_on.png');
+  }
+}
+
+.menu {
+  @include top-right(15rem, 5rem);
+  img {
+    @include width-height(4rem);
+    font-size: 0;
+    border: none;
+  }
+}
+
+@include media-tablet-max {
+  .logout-btn {
+    @include width-height(3rem);
+    @include top-right(2rem);
+    img {
+      @include width-height(3rem);
+    }
+  }
+}
+
+@include media-tablet-max {
+  .mute {
+    @include width-height(3rem);
+    @include top-right(6rem, 2rem);
+  }
+}
+
+@include media-tablet-max {
+  .menu {
+    @include width-height(3rem);
+    @include top-right(10rem, 2rem);
+    img {
+      @include width-height(3rem);
+    }
+  }
+}
