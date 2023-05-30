@@ -44,7 +44,7 @@ import {
       } from './Assets';
 import { createImage } from './Utils';
 
-export function parseCollisitions(levelMap, platforms) {
+export function parseCollisions(levelMap, platforms) {
   levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       switch(cell) {

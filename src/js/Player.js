@@ -1,6 +1,4 @@
-import { c } from '../index';
 import { createImage } from './Utils';
-import { init } from '../index';
 import { keys } from './Keys';
 import { 
         heroIdleR,
@@ -13,8 +11,21 @@ import {
         heroFallL,
         heroDeath
       } from './Assets';
-import { gameSoundEffects } from '../index';
 import { audio } from '../js/Audio';
+import { requestNextLevelMap } from './Levels';
+import {
+        c,
+        setLevelMap,
+        createPlayer,
+        init,
+        animate,
+        blankGameplayBetweenGames,
+        increaseLevel,
+        level,
+        nextLevelInit,
+        gameSoundEffects
+      } from '../index';
+import { parseCollisions } from './Collision';
 
 export class Player {
   constructor({ platforms = [] }, posX, posY, marginLeft = 0, marginTop = 0) {
@@ -205,20 +216,11 @@ export class Player {
               this.right >= platform.left &&
               this.top <= platform.bottom &&
               this.bottom >= platform.top) {
-                // if (this.velocity.x < 0) {// moving left       // <= -2
-                //   this.left = platform.right + 0.1;
-                //   this.alive && gameSoundEffects(audio.nextLevel);
-                //   break;
-                // }
-                // if (this.velocity.x > 0) {// moving right      // <= 2
-                //   this.left = platform.left - this.width - 0.1;
-                //   this.alive && gameSoundEffects(audio.nextLevel);
-                //   break;
-                // }
                 this.alive && gameSoundEffects(audio.nextLevel);
-                this.completeLevel = true;
-                                                                      
-                init();
+                this.completeLevel = true;                                                                      
+                increaseLevel();
+                blankGameplayBetweenGames();
+                requestNextLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisions, createPlayer, nextLevelInit, animate);
           }
           break;
       }
@@ -323,23 +325,8 @@ export class Player {
                 this.right >= platform.left &&
                 this.top <= platform.bottom &&
                 this.bottom >= platform.top) {
-                  // if (this.velocity.y < 0) {// moving up  // -0.25
-                  //   this.velocity.y = 0;
-                  //   this.top = platform.bottom + 0.1;
-                  //   this.alive && gameSoundEffects(audio.nextLevel);
-                  //   break;
-                  // }
-                  // if (this.velocity.y > 0) {// falling down  // 0.25
-                  //   this.velocity.y = 0;
-                  //   this.top = platform.top - this.height - 0.1;
-                  //   this.alive && gameSoundEffects(audio.nextLevel);
-                  //   break;
-                  // }
-
                   this.alive && gameSoundEffects(audio.nextLevel);
-                  this.completeLevel = true;
-                  init();
-          }
+        }
           break;
         }
     }

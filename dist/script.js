@@ -12527,18 +12527,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "completeLevel": () => (/* binding */ completeLevel),
 /* harmony export */   "createPlayer": () => (/* binding */ createPlayer),
 /* harmony export */   "gameSoundEffects": () => (/* binding */ gameSoundEffects),
+/* harmony export */   "increaseLevel": () => (/* binding */ increaseLevel),
 /* harmony export */   "init": () => (/* binding */ init),
 /* harmony export */   "initStart": () => (/* binding */ initStart),
 /* harmony export */   "isLeaveGame": () => (/* binding */ isLeaveGame),
 /* harmony export */   "leftNeighboorBlockFromHero": () => (/* binding */ leftNeighboorBlockFromHero),
 /* harmony export */   "level": () => (/* binding */ level),
 /* harmony export */   "levelMap": () => (/* binding */ levelMap),
+/* harmony export */   "nextLevelInit": () => (/* binding */ nextLevelInit),
 /* harmony export */   "parsedCollisions": () => (/* binding */ parsedCollisions),
 /* harmony export */   "platforms": () => (/* binding */ platforms),
 /* harmony export */   "player": () => (/* binding */ player),
+/* harmony export */   "reloadGameplay": () => (/* binding */ reloadGameplay),
 /* harmony export */   "requestAnim": () => (/* binding */ requestAnim),
 /* harmony export */   "setLevelMap": () => (/* binding */ setLevelMap),
-/* harmony export */   "setupStageNumber": () => (/* binding */ setupStageNumber)
+/* harmony export */   "setupStageNumber": () => (/* binding */ setupStageNumber),
+/* harmony export */   "showOverlayBetweenStages": () => (/* binding */ showOverlayBetweenStages)
 /* harmony export */ });
 /* harmony import */ var _js_Utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/Utils */ "./src/js/Utils.js");
 /* harmony import */ var _js_Player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/Player */ "./src/js/Player.js");
@@ -12586,8 +12590,8 @@ let requestAnim = window.requestAnimationFrame || window.webkitRequestAnimationF
   window.setTimeout(callback, 1000 / 60);
 };
 window.addEventListener('keydown', e => (0,_js_Utils__WEBPACK_IMPORTED_MODULE_0__.fullScreen)(e, canvas));
-function increseLevel(obj) {
-  return level >= Object.keys(obj).length ? level : ++level;
+function increaseLevel() {
+  level = level >= 17 ? 1 : ++level; // 17 - total qty of levels
 }
 
 //requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
@@ -12654,27 +12658,63 @@ function init() {
   player.velocity.y = 1;
   player.alive = true;
   _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1;
-  if (player.completeLevel) {
-    c.save();
-    c.fillStyle = 'rgb(247, 251, 254)';
-    c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
-    c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
-    c.fillStyle = 'rgb(21, 173, 188)';
-    c.font = `normal ${fontSize}px Rubik Iso`;
-    c.textBaseline = 'middle';
-    c.textAlign = 'center';
-    canvas.style.letterSpacing = `${fontSize / 20}px`;
-    c.fillText('Next level', canvas.width / 2, canvas.height / 2);
-    c.restore();
-    setTimeout(() => reloadGameplay(), 1250);
-    player.completeLevel = false;
-  } else {
+
+  // if (player.completeLevel) {
+  //   c.save();
+  //   c.fillStyle = 'rgb(247, 251, 254)';
+  //   c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
+  //   c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
+
+  //   c.fillStyle = 'rgb(21, 173, 188)';
+  //   c.font = `normal ${fontSize}px Rubik Iso`;
+  //   c.textBaseline = 'middle';
+  //   c.textAlign = 'center';
+  //   canvas.style.letterSpacing = `${fontSize / 20}px`;
+  //   c.fillText('Next level', canvas.width / 2, canvas.height / 2)
+  //   c.restore();
+  //   setTimeout(() => reloadGameplay(), 1250);
+  //   player.completeLevel = false;
+  // } else {
+  reloadGameplay();
+  //} 
+  return player;
+}
+function nextLevelInit() {
+  (0,_js_Utils__WEBPACK_IMPORTED_MODULE_0__.flamethrowerShootSoundIntervalInit)();
+  initCounter++;
+  initCounter > 1 && (initStart = false);
+  console.log(initStart);
+  player.velocity.y = 1;
+  player.alive = true;
+  _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1;
+}
+function showOverlayBetweenStages() {
+  (0,_js_Utils__WEBPACK_IMPORTED_MODULE_0__.flamethrowerShootSoundIntervalInit)();
+  initCounter++;
+  initCounter > 1 && (initStart = false);
+  console.log(initStart);
+  player.velocity.y = 1;
+  player.alive = true;
+  _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.spaceToggleCounter = 1;
+  c.save();
+  c.fillStyle = 'rgb(247, 251, 254)';
+  c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
+  c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
+  c.fillStyle = 'rgb(21, 173, 188)';
+  c.font = `normal ${fontSize}px Rubik Iso`;
+  c.textBaseline = 'middle';
+  c.textAlign = 'center';
+  canvas.style.letterSpacing = `${fontSize / 20}px`;
+  c.fillText('Next level', canvas.width / 2, canvas.height / 2);
+  c.restore();
+  setTimeout(() => {
     reloadGameplay();
-  }
+    player.completeLevel = false;
+  }, 1250);
   return player;
 }
 function animate() {
-  requestAnim(animate);
+  player && !player.completeLevel && requestAnim(animate);
   console.log('animation counter');
   backgroundCanvasImg[level - 1].draw();
   platforms.forEach(platform => platform.draw());
@@ -12692,26 +12732,26 @@ function animate() {
     return platform.left <= player.left && platform.top <= player.top && platform.bottom >= player.bottom;
   });
   leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
-  player.update();
-  if (_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && player.position.x + player.width <= canvas.width) {
+  player && player.update();
+  if (player && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && player.position.x + player.width <= canvas.width) {
     // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && player.position.x >= 0) {
+  } else if (player && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && player.position.x >= 0) {
     // упор персонажа в левый край экрана
     player.velocity.x = -2;
-  } else {
+  } else if (player) {
     player.velocity.x = 0;
   }
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.lastPressed === 'right') {
+  if (player && player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.lastPressed === 'right') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.lastPressed === 'left') {
+  } else if (player && player.velocity.y >= player.jumpHeight - player.gravity && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.right.pressed && !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.left.pressed && _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.lastPressed === 'left') {
     // 10 - когда персонаж на земле
     player.currentSprite = player.sprites.idle.left;
   }
 
   // Падение в пропасть (см. комментарии в player.update())
-  if (player.position.y > canvas.height) {
+  if (player && player.position.y > canvas.height) {
     gameSoundEffects(_js_Audio__WEBPACK_IMPORTED_MODULE_2__.audio.fallingInDepth2);
     _js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive = !_js_Keys__WEBPACK_IMPORTED_MODULE_4__.keys.jumpToggleActive;
     init();
@@ -13313,7 +13353,7 @@ const playNextTrack = (currentTrack, playlist) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "parseCollisitions": () => (/* binding */ parseCollisitions),
+/* harmony export */   "parseCollisions": () => (/* binding */ parseCollisions),
 /* harmony export */   "parsedCollisions": () => (/* reexport safe */ _index__WEBPACK_IMPORTED_MODULE_0__.parsedCollisions),
 /* harmony export */   "platforms": () => (/* reexport safe */ _index__WEBPACK_IMPORTED_MODULE_0__.platforms)
 /* harmony export */ });
@@ -13327,7 +13367,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function parseCollisitions(levelMap, platforms) {
+function parseCollisions(levelMap, platforms) {
   levelMap.map.forEach((row, index_Y) => {
     row.forEach((cell, index_X) => {
       switch (cell) {
@@ -13570,7 +13610,8 @@ const keyUpHandler = e => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "requestLevelMap": () => (/* binding */ requestLevelMap)
+/* harmony export */   "requestLevelMap": () => (/* binding */ requestLevelMap),
+/* harmony export */   "requestNextLevelMap": () => (/* binding */ requestNextLevelMap)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 
@@ -13581,8 +13622,20 @@ function requestLevelMap(url, callback_1, callback_2, callback_3, callback_4, ca
       console.log(`Возникла проблема. Код ошибки: ${response.status}`);
       return;
     }
-    response.json().then(map => callback_1(map, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(data => callback_2(data, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(player => callback_3(player, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(init => callback_4(init /* , platforms */)).then(animate => {
-      _index__WEBPACK_IMPORTED_MODULE_0__.initStart && callback_5(animate /* , platforms */);
+    response.json().then(map => callback_1(map, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(data => callback_2(data, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(player => callback_3(player, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(init => callback_4(init)).then(animate => {
+      _index__WEBPACK_IMPORTED_MODULE_0__.initStart && callback_5(animate);
+    }).catch(err => console.error('Fetch Error - levels map load failed', err));
+  });
+}
+function requestNextLevelMap(url, callback_1, callback_2, callback_3, callback_4, callback_5, stage) {
+  fetch(url).then(response => {
+    if (response.status !== 200) {
+      console.log(`Возникла проблема. Код ошибки: ${response.status}`);
+      return;
+    }
+    response.json().then(map => callback_1(map, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(data => callback_2(data, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(player => callback_3(player, _index__WEBPACK_IMPORTED_MODULE_0__.platforms)).then(init => callback_4(init)).then(animate => {
+      _index__WEBPACK_IMPORTED_MODULE_0__.player.completeLevel = false;
+      _index__WEBPACK_IMPORTED_MODULE_0__.initStart && callback_5(animate);
     }).catch(err => console.error('Fetch Error - levels map load failed', err));
   });
 }
@@ -14286,11 +14339,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Player": () => (/* binding */ Player)
 /* harmony export */ });
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
-/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
-/* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
-/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
-/* harmony import */ var _js_Audio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/Audio */ "./src/js/Audio.js");
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Utils */ "./src/js/Utils.js");
+/* harmony import */ var _Keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Keys */ "./src/js/Keys.js");
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Assets */ "./src/js/Assets.js");
+/* harmony import */ var _js_Audio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../js/Audio */ "./src/js/Audio.js");
+/* harmony import */ var _Levels__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Levels */ "./src/js/Levels.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../index */ "./src/index.js");
+/* harmony import */ var _Collision__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Collision */ "./src/js/Collision.js");
 
 
 
@@ -14325,22 +14380,22 @@ class Player {
     this.completeLevel = false;
     this.sprites = {
       idle: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroIdleR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroIdleL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroIdleR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroIdleL, 32, 32)
       },
       run: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroRunR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroRunL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroRunR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroRunL, 32, 32)
       },
       jump: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroJumpR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroJumpL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroJumpR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroJumpL, 32, 32)
       },
       fall: {
-        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroFallR, 32, 32),
-        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroFallL, 32, 32)
+        right: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroFallR, 32, 32),
+        left: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroFallL, 32, 32)
       },
-      death: (0,_Utils__WEBPACK_IMPORTED_MODULE_1__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_3__.heroDeath, 32, 32)
+      death: (0,_Utils__WEBPACK_IMPORTED_MODULE_0__.createImage)(_Assets__WEBPACK_IMPORTED_MODULE_2__.heroDeath, 32, 32)
     };
     this.currentSprite = this.sprites.idle.right;
   }
@@ -14370,7 +14425,7 @@ class Player {
   }
   draw() {
     if (!this.currentSprite.loaded) return;
-    _index__WEBPACK_IMPORTED_MODULE_0__.c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.left, this.top, this.width, this.height); // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
+    _index__WEBPACK_IMPORTED_MODULE_5__.c.drawImage(this.currentSprite, 32 * this.frames, 0, 32, 32, this.left, this.top, this.width, this.height); // 32, 0, 32, 32 - player sprite crop (x, y, w, h)
   }
 
   die() {
@@ -14378,9 +14433,9 @@ class Player {
     this.velocity.y = -2;
     this.gravity = 0;
     this.currentSprite = this.sprites.death;
-    this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.heroDeath);
+    this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_3__.audio.heroDeath);
     this.alive = false;
-    setTimeout(_index__WEBPACK_IMPORTED_MODULE_0__.init, 550);
+    setTimeout(_index__WEBPACK_IMPORTED_MODULE_5__.init, 550);
   }
   checkCollisionsAxes_X() {
     // X-axes collision
@@ -14406,7 +14461,7 @@ class Player {
           }
           break;
         case 'jumpToggleActive':
-          if (_Keys__WEBPACK_IMPORTED_MODULE_2__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+          if (_Keys__WEBPACK_IMPORTED_MODULE_1__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
             if (this.velocity.x < 0) {
               // moving left       // <= -2
               this.left = platform.right + 0.1;
@@ -14420,7 +14475,7 @@ class Player {
           }
           break;
         case 'jumpToggleDisabled':
-          if (!_Keys__WEBPACK_IMPORTED_MODULE_2__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+          if (!_Keys__WEBPACK_IMPORTED_MODULE_1__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
             if (this.velocity.x < 0) {
               // moving left       // <= -2
               this.left = platform.right + 0.1;
@@ -14451,7 +14506,7 @@ class Player {
             if (this.velocity.x < 0) {
               // moves left       // <= -2
               this.left = platform.right + 0.1;
-              _Keys__WEBPACK_IMPORTED_MODULE_2__.keys.left.pressed = false;
+              _Keys__WEBPACK_IMPORTED_MODULE_1__.keys.left.pressed = false;
               platform.hits++;
               platform.destroy();
               break;
@@ -14459,7 +14514,7 @@ class Player {
             if (this.velocity.x > 0) {
               // moves right      // <= 2
               this.left = platform.left - this.width - 0.1;
-              _Keys__WEBPACK_IMPORTED_MODULE_2__.keys.right.pressed = false;
+              _Keys__WEBPACK_IMPORTED_MODULE_1__.keys.right.pressed = false;
               platform.hits++;
               platform.destroy();
               break;
@@ -14468,19 +14523,11 @@ class Player {
           break;
         case 'finish':
           if (this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
-            // if (this.velocity.x < 0) {// moving left       // <= -2
-            //   this.left = platform.right + 0.1;
-            //   this.alive && gameSoundEffects(audio.nextLevel);
-            //   break;
-            // }
-            // if (this.velocity.x > 0) {// moving right      // <= 2
-            //   this.left = platform.left - this.width - 0.1;
-            //   this.alive && gameSoundEffects(audio.nextLevel);
-            //   break;
-            // }
-            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.nextLevel);
+            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_3__.audio.nextLevel);
             this.completeLevel = true;
-            (0,_index__WEBPACK_IMPORTED_MODULE_0__.init)();
+            (0,_index__WEBPACK_IMPORTED_MODULE_5__.increaseLevel)();
+            (0,_index__WEBPACK_IMPORTED_MODULE_5__.blankGameplayBetweenGames)();
+            (0,_Levels__WEBPACK_IMPORTED_MODULE_4__.requestNextLevelMap)(`../src/js/json/levelMap_${_index__WEBPACK_IMPORTED_MODULE_5__.level}.json`, _index__WEBPACK_IMPORTED_MODULE_5__.setLevelMap, _Collision__WEBPACK_IMPORTED_MODULE_6__.parseCollisions, _index__WEBPACK_IMPORTED_MODULE_5__.createPlayer, _index__WEBPACK_IMPORTED_MODULE_5__.nextLevelInit, _index__WEBPACK_IMPORTED_MODULE_5__.animate);
           }
           break;
       }
@@ -14501,7 +14548,7 @@ class Player {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
-              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_3__.audio.bottomHit);
               break;
             }
             if (this.velocity.y > 0) {
@@ -14513,27 +14560,27 @@ class Player {
           }
           break;
         case 'jumpToggleActive':
-          if (_Keys__WEBPACK_IMPORTED_MODULE_2__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom - this.height / 4 &&
+          if (_Keys__WEBPACK_IMPORTED_MODULE_1__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom - this.height / 4 &&
           // - this.height / 4 (поправка на прозрачность спрайта героя)
           this.bottom >= platform.top) {
             if (this.velocity.y < 0) {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
-              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_3__.audio.bottomHit);
               break;
             }
             if (this.velocity.y > 0) {
               // falling down  // 0.25
               this.velocity.y = 0;
               this.top = platform.top - this.height - 0.1;
-              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.bottomHit);
+              this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_3__.audio.bottomHit);
               break;
             }
           }
           break;
         case 'jumpToggleDisabled':
-          if (!_Keys__WEBPACK_IMPORTED_MODULE_2__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
+          if (!_Keys__WEBPACK_IMPORTED_MODULE_1__.keys.jumpToggleActive && this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
             if (this.velocity.y < 0) {
               // moving up  // -0.25
               this.velocity.y = 0;
@@ -14554,7 +14601,7 @@ class Player {
               // moving up  // -0.25
               this.velocity.y = 0;
               this.top = platform.bottom + 0.1;
-              _Keys__WEBPACK_IMPORTED_MODULE_2__.keys.up.pressed = false;
+              _Keys__WEBPACK_IMPORTED_MODULE_1__.keys.up.pressed = false;
               platform.hits++;
               platform.destroy();
               break;
@@ -14562,7 +14609,7 @@ class Player {
             if (this.velocity.y > 0) {
               // falling down  // 0.25
               this.velocity.y = -this.jumpHeight; // 0
-              _Keys__WEBPACK_IMPORTED_MODULE_2__.keys.up.pressed = false;
+              _Keys__WEBPACK_IMPORTED_MODULE_1__.keys.up.pressed = false;
               platform.hits++;
               platform.destroy();
               this.top = platform.top - this.height - 0.1;
@@ -14572,22 +14619,7 @@ class Player {
           break;
         case 'finish':
           if (this.left <= platform.right && this.right >= platform.left && this.top <= platform.bottom && this.bottom >= platform.top) {
-            // if (this.velocity.y < 0) {// moving up  // -0.25
-            //   this.velocity.y = 0;
-            //   this.top = platform.bottom + 0.1;
-            //   this.alive && gameSoundEffects(audio.nextLevel);
-            //   break;
-            // }
-            // if (this.velocity.y > 0) {// falling down  // 0.25
-            //   this.velocity.y = 0;
-            //   this.top = platform.top - this.height - 0.1;
-            //   this.alive && gameSoundEffects(audio.nextLevel);
-            //   break;
-            // }
-
-            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_0__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_4__.audio.nextLevel);
-            this.completeLevel = true;
-            (0,_index__WEBPACK_IMPORTED_MODULE_0__.init)();
+            this.alive && (0,_index__WEBPACK_IMPORTED_MODULE_5__.gameSoundEffects)(_js_Audio__WEBPACK_IMPORTED_MODULE_3__.audio.nextLevel);
           }
           break;
       }
@@ -14626,6 +14658,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Levels__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Levels */ "./src/js/Levels.js");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _Collision__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Collision */ "./src/js/Collision.js");
+/* harmony import */ var _components_AppHome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AppHome */ "./src/js/components/AppHome.js");
+/* harmony import */ var _components_AppHowToPlay__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/AppHowToPlay */ "./src/js/components/AppHowToPlay.js");
+/* harmony import */ var _components_AppSettings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/AppSettings */ "./src/js/components/AppSettings.js");
+/* harmony import */ var _components_AppDescription__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/AppDescription */ "./src/js/components/AppDescription.js");
+/* harmony import */ var _components_AppStart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/AppStart */ "./src/js/components/AppStart.js");
+/* harmony import */ var _components_AppError__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/AppError */ "./src/js/components/AppError.js");
+/* harmony import */ var _components_AppCanvas__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/AppCanvas */ "./src/js/components/AppCanvas.js");
+
+
+
+
+
+
 
 
 
@@ -14640,149 +14685,150 @@ const mySPA = function () {
       myContainerShow = null,
       muteBtn = null,
       menuBtn = null,
-      headerBlock = null,
-      levelSelectHTML = null;
-    const HomeComponent = {
-      id: 'main',
-      title: 'Greeting',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'content__text';
-        return `
-        <section class="${className} greeting">
-          <h2 class="greeting__text">
-          Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
-        </section>`;
-      }
-    };
-    const HowToPlayComponent = {
-      id: 'howtoplay',
-      title: 'How to play',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
-        return `
-          <section class="${className} controls">
-            <h2 class="controls__title">Controls:</h2>
-            <div class="controls__container">
-              <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.arrows}" alt="control arrows">
-                <p class="controls__text">Press <span>Left</span> and <span>Right</span> arrows to control character movement.<br>Press <span>Up</span> arrow to jump.</p>
-                  <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.spaceImg}" alt="space key">
-                    <p class="controls__text">Press <span>Space</span> to toggle the active and inactive state of the platform One / Two / Three.</p>
-                      <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.fKeyImg}" alt="f key">
-                        <p class="controls__text">Press <span>F</span> to open the game in full screen.</p>
-                          <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.escKeyImg}" alt="escape key">
-                            <p class="controls__text">To exit full screen mode, press the <span>Escape</span> button.</p>
-            </div>
-          </section>
-        `;
-      }
-    };
-    const SettingsComponent = {
-      id: 'settings',
-      title: 'Settings',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
-        return `
-          <section class="${className} settings">
-            <h2 class="settings__title">Audio settings:</h2>
-              <div class="settings__slider-box">
-                <label for="volume-sounds">Sound effects</label>
-                <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
-                  min="0" max="1" value="${(0,_Utils__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'soundEffects')}" step="0.1">   
-                    <label for="volume-music">Music</label>
-                    <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
-                      min="0" max="1" value="${(0,_Utils__WEBPACK_IMPORTED_MODULE_1__.getLocalStorage)('settings', 'musicEffects')}" step="0.1">
-              </div>
-          </section>
-        `;
-      }
-    };
-    const DescriptionComponent = {
-      id: 'description',
-      title: 'Description',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
-        return `
-          <section class="${className} description">
-            <h2 class="description__title">Tutorial:</h2>
-              <div class="description__content">
-                <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
-                <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
-                <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
-                <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
-                <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
-                <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
-                <p>Are you ready to take on the challenge?</p>
-              </div>
-          </section>
-        `;
-      }
-    };
-    const StartComponent = {
-      id: 'game',
-      title: 'Start game',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "container";
-        levelSelectHTML = `
-          <section class="${className} level">
-            <h2 class="level__title">Select level:</h2>
-            <div class="level__list">
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_1}" alt="logout button" data-stage="1"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_2}" alt="logout button" data-stage="2"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_3}" alt="logout button" data-stage="3"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_4}" alt="logout button" data-stage="4"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_5}" alt="logout button" data-stage="5"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_6}" alt="logout button" data-stage="6"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_7}" alt="logout button" data-stage="7"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_8}" alt="logout button" data-stage="8"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_9}" alt="logout button" data-stage="9"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_10}" alt="logout button" data-stage="10"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_11}" alt="logout button" data-stage="11"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_12}" alt="logout button" data-stage="12"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_13}" alt="logout button" data-stage="13"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_14}" alt="logout button" data-stage="14"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_15}" alt="logout button" data-stage="15"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_16}" alt="logout button" data-stage="16"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_17}" alt="logout button" data-stage="17"></a>
-            </div>
-          </section>
-        `;
-        return levelSelectHTML;
-      }
-    };
-    const ErrorComponent = {
-      id: 'error',
-      title: '404',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
-        return `
-          <section class="${className} error">
-            <img class="error__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.errorImg}" alt="error 404">
-            <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
-          </section>
-        `;
-      }
-    };
-    const CanvasComponent = {
-      id: 'canvas',
-      title: 'Canvas',
-      render: function () {
-        let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
-        return `
-        <section class="${className} error">
-          <canvas id="canvas" class="${className} width="1024" height="576"></canvas>
-        </section>
-        `;
-      }
-    };
+      headerBlock = null;
+    //    levelSelectHTML = null;
+
+    // const HomeComponent = {
+    //   id: 'main',
+    //   title: 'Greeting',
+    //   render: (className = 'content__text') => {
+    //     return `
+    //     <section class="${className} greeting">
+    //       <h2 class="greeting__text">
+    //       Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
+    //     </section>`
+    //   }
+    // };
+
+    // const HowToPlayComponent = {
+    //   id: 'howtoplay',
+    //   title: 'How to play',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} controls">
+    //         <h2 class="controls__title">Controls:</h2>
+    //         <div class="controls__container">
+    //           <img class="controls__img-key" src="${arrows}" alt="control arrows">
+    //             <p class="controls__text">Press <span>Left</span> and <span>Right</span> arrows to control character movement.<br>Press <span>Up</span> arrow to jump.</p>
+    //               <img class="controls__img-key" src="${spaceImg}" alt="space key">
+    //                 <p class="controls__text">Press <span>Space</span> to toggle the active and inactive state of the platform One / Two / Three.</p>
+    //                   <img class="controls__img-letter" src="${fKeyImg}" alt="f key">
+    //                     <p class="controls__text">Press <span>F</span> to open the game in full screen.</p>
+    //                       <img class="controls__img-letter" src="${escKeyImg}" alt="escape key">
+    //                         <p class="controls__text">To exit full screen mode, press the <span>Escape</span> button.</p>
+    //         </div>
+    //       </section>
+    //     `;
+    //   }
+    // };
+
+    // const SettingsComponent = {
+    //   id: 'settings',
+    //   title: 'Settings',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} settings">
+    //         <h2 class="settings__title">Audio settings:</h2>
+    //           <div class="settings__slider-box">
+    //             <label for="volume-sounds">Sound effects</label>
+    //             <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
+    //               min="0" max="1" value="${getLocalStorage('settings', 'soundEffects')}" step="0.1">   
+    //                 <label for="volume-music">Music</label>
+    //                 <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
+    //                   min="0" max="1" value="${getLocalStorage('settings', 'musicEffects')}" step="0.1">
+    //           </div>
+    //       </section>
+    //     `;
+    //   }
+    // };
+
+    // const DescriptionComponent = {
+    //   id: 'description',
+    //   title: 'Description',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} description">
+    //         <h2 class="description__title">Tutorial:</h2>
+    //           <div class="description__content">
+    //             <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
+    //             <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
+    //             <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
+    //             <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
+    //             <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
+    //             <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
+    //             <p>Are you ready to take on the challenge?</p>
+    //           </div>
+    //       </section>
+    //     `;
+    //   }
+    // };
+
+    // const StartComponent = {
+    //   id: 'game',
+    //   title: 'Start game',
+    //   render: (className = "container") => {
+    //     levelSelectHTML = `
+    //       <section class="${className} level">
+    //         <h2 class="level__title">Select level:</h2>
+    //         <div class="level__list">
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_1}" alt="logout button" data-stage="1"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_2}" alt="logout button" data-stage="2"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_3}" alt="logout button" data-stage="3"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_4}" alt="logout button" data-stage="4"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_5}" alt="logout button" data-stage="5"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_6}" alt="logout button" data-stage="6"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_7}" alt="logout button" data-stage="7"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_8}" alt="logout button" data-stage="8"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_9}" alt="logout button" data-stage="9"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_10}" alt="logout button" data-stage="10"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_11}" alt="logout button" data-stage="11"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_12}" alt="logout button" data-stage="12"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_13}" alt="logout button" data-stage="13"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_14}" alt="logout button" data-stage="14"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_15}" alt="logout button" data-stage="15"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_16}" alt="logout button" data-stage="16"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_17}" alt="logout button" data-stage="17"></a>
+    //         </div>
+    //       </section>
+    //     `;
+    //     return levelSelectHTML;
+    //   }
+    // };
+
+    // const ErrorComponent = {
+    //   id: 'error',
+    //   title: '404',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} error">
+    //         <img class="error__img" src="${errorImg}" alt="error 404">
+    //         <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
+    //       </section>
+    //     `;
+    //   }
+    // };
+
+    // const CanvasComponent = {
+    //   id: 'canvas',
+    //   title: 'Canvas',
+    //   render: (className = 'container') => {
+    //     return `
+    //     <section class="${className} error">
+    //       <canvas id="canvas" class="${className} width="1024" height="576"></canvas>
+    //     </section>
+    //     `;
+    //   }
+    // };
+
     const router = {
-      main: HomeComponent,
-      howtoplay: HowToPlayComponent,
-      settings: SettingsComponent,
-      description: DescriptionComponent,
-      game: StartComponent,
-      default: HomeComponent,
-      error: ErrorComponent,
-      canvas: CanvasComponent
+      main: _components_AppHome__WEBPACK_IMPORTED_MODULE_6__.HomeComponent,
+      howtoplay: _components_AppHowToPlay__WEBPACK_IMPORTED_MODULE_7__.HowToPlayComponent,
+      settings: _components_AppSettings__WEBPACK_IMPORTED_MODULE_8__.SettingsComponent,
+      description: _components_AppDescription__WEBPACK_IMPORTED_MODULE_9__.DescriptionComponent,
+      game: _components_AppStart__WEBPACK_IMPORTED_MODULE_10__.StartComponent,
+      default: _components_AppHome__WEBPACK_IMPORTED_MODULE_6__.HomeComponent,
+      error: _components_AppError__WEBPACK_IMPORTED_MODULE_11__.ErrorComponent,
+      canvas: _components_AppCanvas__WEBPACK_IMPORTED_MODULE_12__.CanvasComponent
     };
     this.init = function (container_main, container_btns, container_show) {
       myContainerMain = container_main;
@@ -14890,7 +14936,7 @@ const mySPA = function () {
       myView.hideMenu();
       (0,_index__WEBPACK_IMPORTED_MODULE_4__.changeIsLeaveGameState)(false);
       (0,_index__WEBPACK_IMPORTED_MODULE_4__.blankGameplayBetweenGames)();
-      (0,_Levels__WEBPACK_IMPORTED_MODULE_3__.requestLevelMap)(`../src/js/json/levelMap_${level}.json`, _index__WEBPACK_IMPORTED_MODULE_4__.setLevelMap, _Collision__WEBPACK_IMPORTED_MODULE_5__.parseCollisitions, _index__WEBPACK_IMPORTED_MODULE_4__.createPlayer, _index__WEBPACK_IMPORTED_MODULE_4__.init, _index__WEBPACK_IMPORTED_MODULE_4__.animate, level);
+      (0,_Levels__WEBPACK_IMPORTED_MODULE_3__.requestLevelMap)(`../src/js/json/levelMap_${level}.json`, _index__WEBPACK_IMPORTED_MODULE_4__.setLevelMap, _Collision__WEBPACK_IMPORTED_MODULE_5__.parseCollisions, _index__WEBPACK_IMPORTED_MODULE_4__.createPlayer, _index__WEBPACK_IMPORTED_MODULE_4__.init, _index__WEBPACK_IMPORTED_MODULE_4__.animate, level);
     };
     this.backToMenu = function () {
       this.stopSoundsBeforeLeave();
@@ -15404,6 +15450,236 @@ function getLocalStorage(key, value) {
   return localStorage.length !== 0 ? JSON.parse(localStorage.getItem(key))[value] : 0.8;
 }
 
+
+/***/ }),
+
+/***/ "./src/js/components/AppCanvas.js":
+/*!****************************************!*\
+  !*** ./src/js/components/AppCanvas.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CanvasComponent": () => (/* binding */ CanvasComponent)
+/* harmony export */ });
+const CanvasComponent = {
+  id: 'canvas',
+  title: 'Canvas',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
+    return `
+    <section class="${className} error">
+      <canvas id="canvas" class="${className} width="1024" height="576"></canvas>
+    </section>
+    `;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/js/components/AppDescription.js":
+/*!*********************************************!*\
+  !*** ./src/js/components/AppDescription.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DescriptionComponent": () => (/* binding */ DescriptionComponent)
+/* harmony export */ });
+const DescriptionComponent = {
+  id: 'description',
+  title: 'Description',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
+    return `
+      <section class="${className} description">
+        <h2 class="description__title">Tutorial:</h2>
+          <div class="description__content">
+            <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
+            <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
+            <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
+            <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
+            <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
+            <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
+            <p>Are you ready to take on the challenge?</p>
+          </div>
+      </section>
+    `;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/js/components/AppError.js":
+/*!***************************************!*\
+  !*** ./src/js/components/AppError.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ErrorComponent": () => (/* binding */ ErrorComponent)
+/* harmony export */ });
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Assets */ "./src/js/Assets.js");
+
+const ErrorComponent = {
+  id: 'error',
+  title: '404',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
+    return `
+      <section class="${className} error">
+        <img class="error__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.errorImg}" alt="error 404">
+        <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
+      </section>
+    `;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/js/components/AppHome.js":
+/*!**************************************!*\
+  !*** ./src/js/components/AppHome.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "HomeComponent": () => (/* binding */ HomeComponent)
+/* harmony export */ });
+const HomeComponent = {
+  id: 'main',
+  title: 'Greeting',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'content__text';
+    return `
+    <section class="${className} greeting">
+      <h2 class="greeting__text">
+      Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
+    </section>`;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/js/components/AppHowToPlay.js":
+/*!*******************************************!*\
+  !*** ./src/js/components/AppHowToPlay.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "HowToPlayComponent": () => (/* binding */ HowToPlayComponent)
+/* harmony export */ });
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Assets */ "./src/js/Assets.js");
+
+const HowToPlayComponent = {
+  id: 'howtoplay',
+  title: 'How to play',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
+    return `
+      <section class="${className} controls">
+        <h2 class="controls__title">Controls:</h2>
+        <div class="controls__container">
+          <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.arrows}" alt="control arrows">
+            <p class="controls__text">Press <span>Left</span> and <span>Right</span> arrows to control character movement.<br>Press <span>Up</span> arrow to jump.</p>
+              <img class="controls__img-key" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.spaceImg}" alt="space key">
+                <p class="controls__text">Press <span>Space</span> to toggle the active and inactive state of the platform One / Two / Three.</p>
+                  <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.fKeyImg}" alt="f key">
+                    <p class="controls__text">Press <span>F</span> to open the game in full screen.</p>
+                      <img class="controls__img-letter" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.escKeyImg}" alt="escape key">
+                        <p class="controls__text">To exit full screen mode, press the <span>Escape</span> button.</p>
+        </div>
+      </section>
+    `;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/js/components/AppSettings.js":
+/*!******************************************!*\
+  !*** ./src/js/components/AppSettings.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SettingsComponent": () => (/* binding */ SettingsComponent)
+/* harmony export */ });
+/* harmony import */ var _Utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utils */ "./src/js/Utils.js");
+
+const SettingsComponent = {
+  id: 'settings',
+  title: 'Settings',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'container';
+    return `
+      <section class="${className} settings">
+        <h2 class="settings__title">Audio settings:</h2>
+          <div class="settings__slider-box">
+            <label for="volume-sounds">Sound effects</label>
+            <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
+              min="0" max="1" value="${(0,_Utils__WEBPACK_IMPORTED_MODULE_0__.getLocalStorage)('settings', 'soundEffects')}" step="0.1">   
+                <label for="volume-music">Music</label>
+                <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
+                  min="0" max="1" value="${(0,_Utils__WEBPACK_IMPORTED_MODULE_0__.getLocalStorage)('settings', 'musicEffects')}" step="0.1">
+          </div>
+      </section>
+    `;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/js/components/AppStart.js":
+/*!***************************************!*\
+  !*** ./src/js/components/AppStart.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "StartComponent": () => (/* binding */ StartComponent)
+/* harmony export */ });
+/* harmony import */ var _Assets__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Assets */ "./src/js/Assets.js");
+
+const StartComponent = {
+  id: 'game',
+  title: 'Start game',
+  render: function () {
+    let className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "container";
+    return `
+      <section class="${className} level">
+        <h2 class="level__title">Select level:</h2>
+        <div class="level__list">
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_1}" alt="logout button" data-stage="1"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_2}" alt="logout button" data-stage="2"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_3}" alt="logout button" data-stage="3"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_4}" alt="logout button" data-stage="4"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_5}" alt="logout button" data-stage="5"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_6}" alt="logout button" data-stage="6"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_7}" alt="logout button" data-stage="7"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_8}" alt="logout button" data-stage="8"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_9}" alt="logout button" data-stage="9"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_10}" alt="logout button" data-stage="10"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_11}" alt="logout button" data-stage="11"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_12}" alt="logout button" data-stage="12"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_13}" alt="logout button" data-stage="13"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_14}" alt="logout button" data-stage="14"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_15}" alt="logout button" data-stage="15"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_16}" alt="logout button" data-stage="16"></a>
+          <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${_Assets__WEBPACK_IMPORTED_MODULE_0__.levelIcon_17}" alt="logout button" data-stage="17"></a>
+        </div>
+      </section>
+    `;
+  }
+};
 
 /***/ }),
 

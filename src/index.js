@@ -62,10 +62,10 @@ export let requestAnim = window.requestAnimationFrame ||
 
 window.addEventListener('keydown', (e) => fullScreen(e, canvas));
 
-function increseLevel(obj) {
-  return level >= Object.keys(obj).length ? level : ++level;
+export function increaseLevel() {
+  level = level >= 17 ? 1 : ++level; // 17 - total qty of levels
 }
-        
+
 //requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate);
  
 export function setLevelMap(value) {
@@ -122,7 +122,7 @@ export function blankGameplayBetweenGames() {
 
 
 
-function reloadGameplay() {
+export function reloadGameplay() {
   // backgroundCanvasImg = [
   //   new AdditionalElements(0, 0, createImage(backgroundImg, canvas.width, canvas.height))
   // ];
@@ -157,7 +157,45 @@ console.log(initStart)
   player.alive = true;
   keys.spaceToggleCounter = 1;
   
-  if (player.completeLevel) {
+  // if (player.completeLevel) {
+  //   c.save();
+  //   c.fillStyle = 'rgb(247, 251, 254)';
+  //   c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
+  //   c.drawImage(levelOverlay, 0, 0, canvas.width, canvas.height);
+    
+  //   c.fillStyle = 'rgb(21, 173, 188)';
+  //   c.font = `normal ${fontSize}px Rubik Iso`;
+  //   c.textBaseline = 'middle';
+  //   c.textAlign = 'center';
+  //   canvas.style.letterSpacing = `${fontSize / 20}px`;
+  //   c.fillText('Next level', canvas.width / 2, canvas.height / 2)
+  //   c.restore();
+  //   setTimeout(() => reloadGameplay(), 1250);
+  //   player.completeLevel = false;
+  // } else {
+                                    reloadGameplay();
+//} 
+return player;
+}
+
+export function nextLevelInit() {
+  flamethrowerShootSoundIntervalInit();
+  initCounter++;
+  initCounter > 1 && (initStart = false);
+console.log(initStart)
+  player.velocity.y = 1;
+  player.alive = true;
+  keys.spaceToggleCounter = 1;
+}
+
+export function showOverlayBetweenStages() {
+    flamethrowerShootSoundIntervalInit();
+    initCounter++;
+    initCounter > 1 && (initStart = false);
+  console.log(initStart)
+    player.velocity.y = 1;
+    player.alive = true;
+    keys.spaceToggleCounter = 1;
     c.save();
     c.fillStyle = 'rgb(247, 251, 254)';
     c.fillRect(0, 0, canvas.width, canvas.height, canvas.width / 2, canvas.height / 2);
@@ -170,17 +208,17 @@ console.log(initStart)
     canvas.style.letterSpacing = `${fontSize / 20}px`;
     c.fillText('Next level', canvas.width / 2, canvas.height / 2)
     c.restore();
-    setTimeout(() => reloadGameplay(), 1250);
-    player.completeLevel = false;
-  } else {
-    reloadGameplay();
-} 
-return player;
-}                      
-
+    setTimeout(() => {
+      reloadGameplay();
+      player.completeLevel = false;
+    }
+      , 1250);
+    return player;
+}
 
 export function animate() {
-  requestAnim(animate);
+
+  player && !player.completeLevel && requestAnim(animate);
   console.log('animation counter');
   backgroundCanvasImg[level - 1].draw();  
   platforms.forEach(platform => platform.draw());
@@ -209,32 +247,45 @@ export function animate() {
                           
   leftNeighboorBlockFromHeroArr = platforms.filter(platform => {
     return (platform.left <= player.left &&
-      (platform.top <= player.top &&
-      platform.bottom >= player.bottom)
+            (platform.top <= player.top &&
+            platform.bottom >= player.bottom)
       );
   })
   leftNeighboorBlockFromHero = leftNeighboorBlockFromHeroArr[leftNeighboorBlockFromHeroArr.length - 1];
-  player.update();
+  player && player.update();
 
-  if (keys.right.pressed && (player.position.x + player.width) <= canvas.width) { // упор персонажа в правый край экрана
+  if (player &&
+      keys.right.pressed &&
+      (player.position.x + player.width) <= canvas.width) { // упор персонажа в правый край экрана
     player.velocity.x = 2;
-  } else if (keys.left.pressed && player.position.x >= 0) { // упор персонажа в левый край экрана
-    player.velocity.x = -2;
-  } else {
-    player.velocity.x = 0;
-  }
+  } else if (player &&
+             keys.left.pressed &&
+             player.position.x >= 0) { // упор персонажа в левый край экрана
+               player.velocity.x = -2;
+    } else if (player) {
+        player.velocity.x = 0;
+    }
  
-  if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'right') { // 10 - когда персонаж на земле
-    player.currentSprite = player.sprites.idle.right;
-  } else if (player.velocity.y >= player.jumpHeight - player.gravity && !keys.right.pressed && !keys.left.pressed && keys.lastPressed === 'left') { // 10 - когда персонаж на земле
-    player.currentSprite = player.sprites.idle.left;
+  if (player &&
+      player.velocity.y >= player.jumpHeight - player.gravity &&
+      !keys.right.pressed &&
+      !keys.left.pressed &&
+      keys.lastPressed === 'right') { // 10 - когда персонаж на земле
+        player.currentSprite = player.sprites.idle.right;
+  } else if (player && 
+             player.velocity.y >= player.jumpHeight - player.gravity &&
+             !keys.right.pressed &&
+             !keys.left.pressed &&
+             keys.lastPressed === 'left') { // 10 - когда персонаж на земле
+               player.currentSprite = player.sprites.idle.left;
   }
 
   // Падение в пропасть (см. комментарии в player.update())
-  if (player.position.y > canvas.height) {
-    gameSoundEffects(audio.fallingInDepth2);
-    keys.jumpToggleActive = !keys.jumpToggleActive;
-    init();
+  if (player &&
+      player.position.y > canvas.height) {
+        gameSoundEffects(audio.fallingInDepth2);
+        keys.jumpToggleActive = !keys.jumpToggleActive;
+        init();
   }
 }
 // init();

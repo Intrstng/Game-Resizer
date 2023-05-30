@@ -40,11 +40,14 @@ import {
         changeIsLeaveGameState,
         blankGameplayBetweenGames
       } from '../index';
-import { parseCollisitions } from './Collision';
-
-
-
-                                    import { level } from '../index';
+import { parseCollisions } from './Collision';
+import { HomeComponent } from './components/AppHome';
+import { HowToPlayComponent } from './components/AppHowToPlay';
+import { SettingsComponent } from './components/AppSettings';
+import { DescriptionComponent } from './components/AppDescription';
+import { StartComponent } from './components/AppStart';
+import { ErrorComponent } from './components/AppError';
+import { CanvasComponent } from './components/AppCanvas';
 
 export const mySPA = (function() {
   function View() {
@@ -53,140 +56,140 @@ export const mySPA = (function() {
         myContainerShow = null,
         muteBtn = null,
         menuBtn = null,
-        headerBlock = null,
-        levelSelectHTML = null;
+        headerBlock = null;
+    //    levelSelectHTML = null;
 
-    const HomeComponent = {
-      id: 'main',
-      title: 'Greeting',
-      render: (className = 'content__text') => {
-        return `
-        <section class="${className} greeting">
-          <h2 class="greeting__text">
-          Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
-        </section>`
-      }
-    };
+    // const HomeComponent = {
+    //   id: 'main',
+    //   title: 'Greeting',
+    //   render: (className = 'content__text') => {
+    //     return `
+    //     <section class="${className} greeting">
+    //       <h2 class="greeting__text">
+    //       Welcome to the wonderful world of Platform world! The young adventurer Virtual Boy sets off on a journey, help him overcome all the dangers and obstacles on his way...</p>
+    //     </section>`
+    //   }
+    // };
 
-    const HowToPlayComponent = {
-      id: 'howtoplay',
-      title: 'How to play',
-      render: (className = 'container') => {
-        return `
-          <section class="${className} controls">
-            <h2 class="controls__title">Controls:</h2>
-            <div class="controls__container">
-              <img class="controls__img-key" src="${arrows}" alt="control arrows">
-                <p class="controls__text">Press <span>Left</span> and <span>Right</span> arrows to control character movement.<br>Press <span>Up</span> arrow to jump.</p>
-                  <img class="controls__img-key" src="${spaceImg}" alt="space key">
-                    <p class="controls__text">Press <span>Space</span> to toggle the active and inactive state of the platform One / Two / Three.</p>
-                      <img class="controls__img-letter" src="${fKeyImg}" alt="f key">
-                        <p class="controls__text">Press <span>F</span> to open the game in full screen.</p>
-                          <img class="controls__img-letter" src="${escKeyImg}" alt="escape key">
-                            <p class="controls__text">To exit full screen mode, press the <span>Escape</span> button.</p>
-            </div>
-          </section>
-        `;
-      }
-    };
+    // const HowToPlayComponent = {
+    //   id: 'howtoplay',
+    //   title: 'How to play',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} controls">
+    //         <h2 class="controls__title">Controls:</h2>
+    //         <div class="controls__container">
+    //           <img class="controls__img-key" src="${arrows}" alt="control arrows">
+    //             <p class="controls__text">Press <span>Left</span> and <span>Right</span> arrows to control character movement.<br>Press <span>Up</span> arrow to jump.</p>
+    //               <img class="controls__img-key" src="${spaceImg}" alt="space key">
+    //                 <p class="controls__text">Press <span>Space</span> to toggle the active and inactive state of the platform One / Two / Three.</p>
+    //                   <img class="controls__img-letter" src="${fKeyImg}" alt="f key">
+    //                     <p class="controls__text">Press <span>F</span> to open the game in full screen.</p>
+    //                       <img class="controls__img-letter" src="${escKeyImg}" alt="escape key">
+    //                         <p class="controls__text">To exit full screen mode, press the <span>Escape</span> button.</p>
+    //         </div>
+    //       </section>
+    //     `;
+    //   }
+    // };
 
-    const SettingsComponent = {
-      id: 'settings',
-      title: 'Settings',
-      render: (className = 'container') => {
-        return `
-          <section class="${className} settings">
-            <h2 class="settings__title">Audio settings:</h2>
-              <div class="settings__slider-box">
-                <label for="volume-sounds">Sound effects</label>
-                <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
-                  min="0" max="1" value="${getLocalStorage('settings', 'soundEffects')}" step="0.1">   
-                    <label for="volume-music">Music</label>
-                    <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
-                      min="0" max="1" value="${getLocalStorage('settings', 'musicEffects')}" step="0.1">
-              </div>
-          </section>
-        `;
-      }
-    };
+    // const SettingsComponent = {
+    //   id: 'settings',
+    //   title: 'Settings',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} settings">
+    //         <h2 class="settings__title">Audio settings:</h2>
+    //           <div class="settings__slider-box">
+    //             <label for="volume-sounds">Sound effects</label>
+    //             <input type="range" id="volume-snd" class="settings__slider settings__slider_hover" name="volume-sounds"
+    //               min="0" max="1" value="${getLocalStorage('settings', 'soundEffects')}" step="0.1">   
+    //                 <label for="volume-music">Music</label>
+    //                 <input type="range" id="volume-msc" class="settings__slider settings__slider_hover" name="volume-music" 
+    //                   min="0" max="1" value="${getLocalStorage('settings', 'musicEffects')}" step="0.1">
+    //           </div>
+    //       </section>
+    //     `;
+    //   }
+    // };
 
-    const DescriptionComponent = {
-      id: 'description',
-      title: 'Description',
-      render: (className = 'container') => {
-        return `
-          <section class="${className} description">
-            <h2 class="description__title">Tutorial:</h2>
-              <div class="description__content">
-                <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
-                <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
-                <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
-                <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
-                <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
-                <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
-                <p>Are you ready to take on the challenge?</p>
-              </div>
-          </section>
-        `;
-      }
-    };
+    // const DescriptionComponent = {
+    //   id: 'description',
+    //   title: 'Description',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} description">
+    //         <h2 class="description__title">Tutorial:</h2>
+    //           <div class="description__content">
+    //             <p>Jump on platforms avoiding spikes and circular saws as you gradually move towards the finish line.</p>
+    //             <p><span>Platforms One / Two / Three</span> can be active or inactive (switch their state with the <span>Space</span> key).</p>
+    //             <p>The <span>Jump-Toggle-Switch</span> platform also changes its state every time the character jumps. Being on platforms <span>One / Two / Three</span>, be careful, you need to catch the right moment of switching during the jump.</p>
+    //             <p><span>One-Step platform</span> - allows only a single presence of a character. After leaving this platform by the character or his collision with it, it is destroyed.<p/>
+    //             <p>When encountering <span>dragons</span>, be careful, their fireballs are deadly.</p>
+    //             <p>You can also encounter <span>Signal-Suppressor-Zones</span> in which the character cannot control the switching of states of <span>One / Two / Three</span> platforms.<p/>
+    //             <p>Are you ready to take on the challenge?</p>
+    //           </div>
+    //       </section>
+    //     `;
+    //   }
+    // };
 
-    const StartComponent = {
-      id: 'game',
-      title: 'Start game',
-      render: (className = "container") => {
-        levelSelectHTML = `
-          <section class="${className} level">
-            <h2 class="level__title">Select level:</h2>
-            <div class="level__list">
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_1}" alt="logout button" data-stage="1"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_2}" alt="logout button" data-stage="2"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_3}" alt="logout button" data-stage="3"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_4}" alt="logout button" data-stage="4"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_5}" alt="logout button" data-stage="5"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_6}" alt="logout button" data-stage="6"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_7}" alt="logout button" data-stage="7"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_8}" alt="logout button" data-stage="8"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_9}" alt="logout button" data-stage="9"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_10}" alt="logout button" data-stage="10"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_11}" alt="logout button" data-stage="11"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_12}" alt="logout button" data-stage="12"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_13}" alt="logout button" data-stage="13"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_14}" alt="logout button" data-stage="14"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_15}" alt="logout button" data-stage="15"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_16}" alt="logout button" data-stage="16"></a>
-              <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_17}" alt="logout button" data-stage="17"></a>
-            </div>
-          </section>
-        `;
-        return levelSelectHTML;
-      }
-    };
+    // const StartComponent = {
+    //   id: 'game',
+    //   title: 'Start game',
+    //   render: (className = "container") => {
+    //     levelSelectHTML = `
+    //       <section class="${className} level">
+    //         <h2 class="level__title">Select level:</h2>
+    //         <div class="level__list">
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_1}" alt="logout button" data-stage="1"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_2}" alt="logout button" data-stage="2"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_3}" alt="logout button" data-stage="3"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_4}" alt="logout button" data-stage="4"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_5}" alt="logout button" data-stage="5"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_6}" alt="logout button" data-stage="6"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_7}" alt="logout button" data-stage="7"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_8}" alt="logout button" data-stage="8"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_9}" alt="logout button" data-stage="9"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_10}" alt="logout button" data-stage="10"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_11}" alt="logout button" data-stage="11"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_12}" alt="logout button" data-stage="12"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_13}" alt="logout button" data-stage="13"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_14}" alt="logout button" data-stage="14"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_15}" alt="logout button" data-stage="15"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_16}" alt="logout button" data-stage="16"></a>
+    //           <a href="#canvas" class="level__item level__item_hover level__item_active level__item_disabled"><img class="level__img" src="${levelIcon_17}" alt="logout button" data-stage="17"></a>
+    //         </div>
+    //       </section>
+    //     `;
+    //     return levelSelectHTML;
+    //   }
+    // };
 
-    const ErrorComponent = {
-      id: 'error',
-      title: '404',
-      render: (className = 'container') => {
-        return `
-          <section class="${className} error">
-            <img class="error__img" src="${errorImg}" alt="error 404">
-            <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
-          </section>
-        `;
-      }
-    };
+    // const ErrorComponent = {
+    //   id: 'error',
+    //   title: '404',
+    //   render: (className = 'container') => {
+    //     return `
+    //       <section class="${className} error">
+    //         <img class="error__img" src="${errorImg}" alt="error 404">
+    //         <p class="error__msg">Page not found (<span>404</span> error), please try to return to the <a href="#main">main page</a>.</p>
+    //       </section>
+    //     `;
+    //   }
+    // };
 
-    const CanvasComponent = {
-      id: 'canvas',
-      title: 'Canvas',
-      render: (className = 'container') => {
-        return `
-        <section class="${className} error">
-          <canvas id="canvas" class="${className} width="1024" height="576"></canvas>
-        </section>
-        `;
-      }
-    };
+    // const CanvasComponent = {
+    //   id: 'canvas',
+    //   title: 'Canvas',
+    //   render: (className = 'container') => {
+    //     return `
+    //     <section class="${className} error">
+    //       <canvas id="canvas" class="${className} width="1024" height="576"></canvas>
+    //     </section>
+    //     `;
+    //   }
+    // };
 
     const router = {
       main: HomeComponent,
@@ -338,7 +341,7 @@ export const mySPA = (function() {
       myView.hideMenu();
       changeIsLeaveGameState(false);
       blankGameplayBetweenGames();
-      requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisitions, createPlayer, init, animate, level);
+      requestLevelMap(`../src/js/json/levelMap_${level}.json`, setLevelMap, parseCollisions, createPlayer, init, animate, level);
     }
 
     this.backToMenu = function() {
