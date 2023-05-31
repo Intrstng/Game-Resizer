@@ -1,0 +1,24 @@
+{
+  "id": 13,
+  "margin": {
+    "left": 240,
+    "top": 0
+  },
+  "map": [
+    ["fp", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+    ["fn", "fn", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1"],
+    ["ee", "ee", "ee", "1s", "1s", "1s", "ee", "ee", "ee", "1s", "1s", "ee", "ee", "ee", "eef", "1s", "1s", "b1"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee", "ee", "ee"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "b1", "b1", "ee"],
+    ["ee", "ee", "st", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "ee", "ee", "ee", "b1", "b1", "1s", "1s", "1s", "1s", "1s", "1s", "1s", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "ee", "ee", "ee", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"],
+    ["b1", "b1", "b1", "b1", "b1", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee"]
+  ]
+}

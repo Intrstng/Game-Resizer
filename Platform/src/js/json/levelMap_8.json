@@ -1,0 +1,17 @@
+{
+  "id": 8,
+  "margin": {
+    "left": 144,
+    "top": 180
+  },
+  "map": [
+    ["sl", "sl", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz"],
+    ["sl", "fp", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+    ["sl", "ee", "sl", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "st"],
+    ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+    ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+    ["dz", "dz", "dz", "ee", "ee", "ee", "ee", "ee", "ee", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+    ["2p", "2p", "2p", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz", "dz"],
+    ["ee", "ee", "ee", "ee", "ee", "1p", "1p", "1p", "ee", "ee", "ee", "3p", "3p", "3p", "ee", "ee", "ee", "ee", "sl", "sl", "sl", "sl"]
+  ]
+}
