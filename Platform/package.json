@@ -1,0 +1,41 @@
+{
+  "name": "platform_traveller",
+  "version": "1.0.0",
+  "description": "Platform game",
+  "main": "index.js",
+  "scripts": {
+    "style": "sass --watch src/sass/styles.scss:src/sass/styles.css",
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Intrstng/Game-Resizer.git"
+  },
+  "author": "Babich Andrey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Intrstng/Game-Resizer/issues"
+  },
+  "homepage": "https://github.com/Intrstng/Game-Resizer#readme",
+  "dependencies": {
+    "firebase": "^9.22.1",
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.5",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.0"
+  }
+}
